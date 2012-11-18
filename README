@@ -1,0 +1,60 @@
+ovirt-host-deploy -- oVirt host deploy tool
+===========================================
+
+A tool to deploy ovirt hypervisor. Used by ovirt-engine when a new host
+is deployed, and can be used manually.
+
+USAGE
+-----
+
+ovirt-host-deploy [variables]
+
+FILES
+-----
+
+Configuration file
+
+    Default: /etc/ovirt-host-deploy.conf
+    System Environment: OTOPI_CONFIG
+
+    Config files to be read:
+        @configFileName@
+        @configFileName@.d/*.conf (sorted)
+
+vdsm hooks
+
+    vdsm hooks available at the following directory are copied to
+    host during bootstrap.
+
+     /usr/share/otopi/plugins/ovirt-host-deploy/vdsmhooks/hooks.d/
+
+    Packages can be installed using files at:
+
+     /usr/share/otopi/plugins/ovirt-host-deploy/vdsmhooks/packages.d/
+
+    Each file contains a package per line.
+
+    Only files with matching distribution suffix are process. Distrubution
+    is read via python's platform.linux_distribution().
+
+DEVELOPMENT AND TEST
+--------------------
+
+FAKEQEMU
+
+Construct approperate /etc/vdsm/vdsm.conf.
+
+Create:
+
+/etc/ovirt-host-deploy.conf.d/50-fake.conf
+ [environment:override]
+ VDSM/checkVirtHardware=bool:False
+ VDSM/configOverride=bool:False
+
+DEVELOPMENT
+
+In order to avoid override of vdsm.conf, create:
+
+/etc/ovirt-host-deploy.conf.d/50-development.conf
+ [environment:override]
+ VDSM/configOverride=bool:False

@@ -1,0 +1,63 @@
+ovirt-host-deploy -- oVirt host deploy
+
+????-??-?? - Version 0.0.0
+
+Alon Bar-Lev <alonbl@redhat.com>
+
+ * offline packager feature.
+
+ * tuned is installed with virtual-host profile.
+
+ * initial implementation based on otpoi.
+
+ * implementation is based on legacy vdsm-bootstrap pacakge functionality.
+
+ * legacy-removed: legacy VDSM (<3.0) config upgrade.
+
+ * legacy-removed: change machine width core file
+  # echo /var/lib/vdsm/core > /proc/sys/kernel/core_pattern
+
+ * legacy-removed: kernel version test, package dependency is sufficient.
+
+ * legacy-removed: do not add kernel parameter processor.max_cstate=1
+   warn if not have constant_tsc
+   https://bugzilla.redhat.com/show_bug.cgi?id=770153
+
+ * legacy-change: io elevator scheduler set in kernel command-line
+   use either udev rule in vdsm package or tuned.
+
+ * legacy-change: vdsm libvirt reconfigure
+   vdsm is reconfigured with file based trigger instead unsupported systemd
+   init.d parameter.
+
+ * legacy-change: distribution checks are simpler based on Python platform,
+   minimum:
+   - rhel-6.2
+   - fedora-17
+
+ * legacy-change: minimum vdsm version is taken from engine not hard coded.
+
+ * legacy-change: pki is now using m2crypto to generate certificate request
+   and parse certificates.
+
+ * legacy-change: use iproute2 instead of python ethtool to avoid another
+   dependency for host name validation.
+
+ * legacy-change: use iproute2 instead of reading /proc/net/route for route
+   information and interface information.
+
+ * legacy-change: do not use vdsm.netinfo for vlan and bonding as it requires
+   /usr/share/vdsm modules, and it is trivial anyway.
+
+ * legacy-change: use vdsm-store-net-config script to commit network config
+   instead of internal duplicate implementation.
+
+ * legacy-change: /etc/vdsm/vdsm.conf is overridden unless VDSM/configOverride
+   environment is set to True
+
+ * legacy-change: /etc/vdsm/vdsm.conf is not read of fake_qemu.
+   set VDSM/checkVirtHardware environment to False to avoid hardware detection.
+
+ * legacy-change: following gluster packages not installed:
+   - glusterfs-rdma
+   - glusterfs-geo-replication

@@ -1,0 +1,60 @@
+#
+# ovirt-host-deploy -- ovirt host deployer
+# Copyright (C) 2012 Red Hat, Inc.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#
+
+
+"""ovirt-node peristance."""
+
+
+import gettext
+_ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
+
+
+from otopi import constants as otopicons
+from otopi import util
+from otopi import plugin
+
+
+from ovirt_host_deploy import constants as odeploycons
+
+
+@util.export
+class Plugin(plugin.PluginBase):
+    """ovirt-node persistance."""
+
+    def __init__(self, context):
+        super(Plugin, self).__init__(context=context)
+
+    @plugin.event(
+        stage=plugin.Stages.STAGE_CLOSEUP,
+        priority=plugin.Stages.PRIORITY_LAST,
+        condition=lambda self: self.environment[
+            odeploycons.VdsmEnv.OVIRT_NODE
+        ],
+    )
+    def _closeup(self):
+        from ovirtnode import ovirtfunctions
+
+        # always persist id, as user
+        # may change this manually
+        ovirtfunctions.ovirt_store_config(odeploycons.Const.VDSM_ID_FILE)
+        self.logger.debug('persisting: %s' % odeploycons.Const.VDSM_ID_FILE)
+
+        for f in self.environment[otopicons.CoreEnv.MODIFIED_FILES]:
+            self.logger.debug('persisting: %s' % f)
+            ovirtfunctions.ovirt_store_config(f)

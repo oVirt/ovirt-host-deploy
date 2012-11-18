@@ -1,0 +1,56 @@
+ovirt-host-deploy -- Environment
+================================
+
+INSTALLER ENVIRONMENT
+---------------------
+
+ODEPLOY/installIncomplete(bool)
+    Marks incomplete installation.
+    Incomplete installation is not a failure.
+    It may be required to perform manual operation or another
+    iteration with more details.
+
+ODEPLOY/installIncompleteReasons(multi-str)
+    Incomplete reasons.
+
+ODEPLOY/forceReboot
+    Force reboot after installation.
+
+ODEPLOY/offlinePackager
+    Force offline packager, assume everything is installed.
+
+VDSM/keySize(int) [2048]
+    RSA key size.
+
+VDSM/certificateEnrollment(bool) [True]
+    Enable certificate enrollment.
+
+VDSM/vdsmId(str)
+    VDSM id.
+    Current available at customiztion stage.
+
+VDSM/vdsmMinimumVersion(str) [4.9.6]
+    Minimum version allowed to be installed (version component only).
+
+VDSM/engineHost(str)
+    Engine host name for connectivity check.
+
+VDSM/enginePort(int)
+    Engine port for connectivity check.
+
+VDSM/managementBridgeName(str)
+    Managment bridge name.
+
+VDSM/checkVirtHardware(bool) [True]
+    Check hardware virtualization support.
+
+VDSM/configOverride(bool) [True]
+    Override vdsm configuration file.
+
+VDSM_CONFIG/section/key(str)
+    Set vdsm configuration option. If set vdsm configuration is
+    overridden unless there is bootstra_keep_config = True in
+    section debug.
+
+GLUSTER/enable(str) [False]
+    Instal gluster support.
