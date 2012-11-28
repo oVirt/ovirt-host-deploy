@@ -53,7 +53,7 @@ Alon Bar-Lev <alonbl@redhat.com>
    instead of internal duplicate implementation.
 
  * legacy-change: /etc/vdsm/vdsm.conf is overridden unless VDSM/configOverride
-   environment is set to True
+   environment is set to False
 
  * legacy-change: /etc/vdsm/vdsm.conf is not read of fake_qemu.
    set VDSM/checkVirtHardware environment to False to avoid hardware detection.
