@@ -494,6 +494,12 @@ class Plugin(plugin.PluginBase):
                 ovirtfunctions.ovirt_safe_delete_config(ifcfg)
 
     def _createBridge(self, name, interface, parameters):
+        # WORKAROUND-BEGIN
+        # firewalld conflicts with addNetwork causes to hang
+        if self.services.exists('firewalld'):
+            self.services.state('firewalld', False)
+        # WORKAROUND-END
+
         interface, vlanid = self._getVlanMasterDevice(name=interface)
         parameters = parameters[:] + ['blockingdhcp=true']
         self.execute(
