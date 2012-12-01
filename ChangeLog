@@ -23,12 +23,21 @@ Alon Bar-Lev <alonbl@redhat.com>
    warn if not have constant_tsc
    https://bugzilla.redhat.com/show_bug.cgi?id=770153
 
+ * legacy-removed: do not use mac address for vdsm id.
+
+ * legacy-change: use optional /etc/vdsm/vdsm.id for vdsm id, for use by
+   >=vdsm-4.9.6.
+
+ * legacy-change: logs are stored at /tmp/ovirt-host-deploy-*.log.
+
  * legacy-change: io elevator scheduler set in kernel command-line
    use either udev rule in vdsm package or tuned.
 
  * legacy-change: vdsm libvirt reconfigure
    vdsm is reconfigured with file based trigger instead unsupported systemd
    init.d parameter.
+
+ * legacy-change: use yum api to install packages instead of yum utility.
 
  * legacy-change: distribution checks are simpler based on Python platform,
    minimum:
