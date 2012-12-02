@@ -13,10 +13,10 @@ ODEPLOY/installIncomplete(bool)
 ODEPLOY/installIncompleteReasons(multi-str)
     Incomplete reasons.
 
-ODEPLOY/forceReboot
+ODEPLOY/forceReboot(bool) [False]
     Force reboot after installation.
 
-ODEPLOY/offlinePackager
+ODEPLOY/offlinePackager(bool) [False]
     Force offline packager, assume everything is installed.
 
 VDSM/keySize(int) [2048]
