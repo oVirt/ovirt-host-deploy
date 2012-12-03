@@ -9,6 +9,8 @@
 ./src/plugins/ovirt-host-deploy/node/__init__.py
 ./src/plugins/ovirt-host-deploy/node/persist.py
 ./src/plugins/ovirt-host-deploy/node/vdsm_reg.py
+./src/plugins/ovirt-host-deploy/tune/__init__.py
+./src/plugins/ovirt-host-deploy/tune/tuned.py
 ./src/plugins/ovirt-host-deploy/vdsm/bridge.py
 ./src/plugins/ovirt-host-deploy/vdsm/hardware.py
 ./src/plugins/ovirt-host-deploy/vdsmhooks/hooks.py
@@ -17,5 +19,4 @@
 ./src/plugins/ovirt-host-deploy/vdsm/packages.py
 ./src/plugins/ovirt-host-deploy/vdsm/pki.py
 ./src/plugins/ovirt-host-deploy/vdsm/software.py
-./src/plugins/ovirt-host-deploy/vdsm/tuned.py
 ./src/plugins/ovirt-host-deploy/vdsm/vdsmid.py

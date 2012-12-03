@@ -165,6 +165,7 @@ AC_CONFIG_FILES([
 	src/plugins/ovirt-host-deploy/core/Makefile
 	src/plugins/ovirt-host-deploy/vdsm/Makefile
 	src/plugins/ovirt-host-deploy/vdsmhooks/Makefile
+	src/plugins/ovirt-host-deploy/tune/Makefile
 	src/plugins/ovirt-host-deploy/node/Makefile
 	src/plugins/ovirt-host-deploy/gluster/Makefile
 	src/java/Makefile

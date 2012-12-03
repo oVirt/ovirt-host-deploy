@@ -24,21 +24,9 @@
 from otopi import util
 
 
-from . import vdsmid
-from . import pki
-from . import hardware
-from . import software
-from . import packages
-from . import config
-from . import bridge
+from . import tuned
 
 
 @util.export
 def createPlugins(context):
-    vdsmid.Plugin(context=context)
-    pki.Plugin(context=context)
-    hardware.Plugin(context=context)
-    software.Plugin(context=context)
-    packages.Plugin(context=context)
-    config.Plugin(context=context)
-    bridge.Plugin(context=context)
+    tuned.Plugin(context=context)

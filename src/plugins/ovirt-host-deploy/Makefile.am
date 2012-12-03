@@ -24,6 +24,7 @@ SUBDIRS = \
 	core \
 	vdsm \
 	vdsmhooks \
+	tune \
 	node \
 	gluster
 

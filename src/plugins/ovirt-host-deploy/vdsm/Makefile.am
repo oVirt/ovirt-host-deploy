@@ -30,7 +30,6 @@ dist_my_PYTHON = \
 	hardware.py \
 	software.py \
 	packages.py \
-	tuned.py \
 	config.py \
 	bridge.py
 

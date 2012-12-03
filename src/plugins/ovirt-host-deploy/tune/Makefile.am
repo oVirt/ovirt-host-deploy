@@ -17,28 +17,18 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+include $(top_srcdir)/build/python.inc
 
-"""vdsm plugin."""
+MAINTAINERCLEANFILES = \
+	$(srcdir)/Makefile.in
 
+mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/tune
+dist_my_PYTHON = \
+	__init__.py \
+	tuned.py
 
-from otopi import util
+clean-local: \
+	python-clean
 
-
-from . import vdsmid
-from . import pki
-from . import hardware
-from . import software
-from . import packages
-from . import config
-from . import bridge
-
-
-@util.export
-def createPlugins(context):
-    vdsmid.Plugin(context=context)
-    pki.Plugin(context=context)
-    hardware.Plugin(context=context)
-    software.Plugin(context=context)
-    packages.Plugin(context=context)
-    config.Plugin(context=context)
-    bridge.Plugin(context=context)
+all-local: \
+	python-syntax-check
