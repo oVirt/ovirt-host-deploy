@@ -1,6 +1,6 @@
 #!/bin/sh
 
-HOST="${HOST:-root@10.35.1.113}"
+HOST="${HOST:-root@10.35.0.73}"
 
 mytmp="$(mktemp -d)"
 cleanup() {
