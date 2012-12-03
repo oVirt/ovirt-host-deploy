@@ -68,7 +68,7 @@ class Plugin(plugin.PluginBase):
             name=odeploycons.Confirms.DEPLOY_PROCEED,
             description='Proceed with ovirt-host-deploy',
             note=_(
-                'Continuing will configure this host for serving as hypervior.'
+                'Continuing will configure this host for serving as hypervior. '
                 'Are you sure you want to continue? (yes/no) '
             ),
             prompt=True,
