@@ -22,6 +22,7 @@
 
 
 from distutils.version import LooseVersion
+import os
 import gettext
 _ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
@@ -115,6 +116,25 @@ class Plugin(plugin.PluginBase):
                 self.services.startup('libvirtd', True)
             if self.services.exists('messagebus'):
                 self.services.startup('messagebus', True)
+
+    # WORKAROUND-BEGIN
+    # old vdsm does not support the reconfigure trigger.
+    # we need to manually locate and reconfigure the init.d script.
+    # can be removed while vdsm-4.9.6 (no fix) is gone.
+    @plugin.event(
+        stage=plugin.Stages.STAGE_CLOSEUP,
+    )
+    def _reconfigure(self):
+        for script in ('/etc/init.d/vdsmd', '/lib/systemd/systemd-vdsmd'):
+            if os.path.exists(script):
+                rc, stdout, stderr = self.execute(
+                    [script, 'reconfigure'],
+                    raiseOnError=False
+                )
+                if rc != 0:
+                    self.logger.warning('Cannot reconfigure vdsm')
+                break
+    # WORKAROUND-END
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
