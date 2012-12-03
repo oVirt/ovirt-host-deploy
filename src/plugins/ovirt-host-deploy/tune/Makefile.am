@@ -25,7 +25,11 @@ MAINTAINERCLEANFILES = \
 mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/tune
 dist_my_PYTHON = \
 	__init__.py \
+	iosched.py \
 	tuned.py
+
+dist_my_DATA = \
+	ovirt-iosched.rules
 
 clean-local: \
 	python-clean

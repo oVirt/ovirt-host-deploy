@@ -30,8 +30,8 @@ Alon Bar-Lev <alonbl@redhat.com>
 
  * legacy-change: logs are stored at /tmp/ovirt-host-deploy-*.log.
 
- * legacy-change: io elevator scheduler set in kernel command-line
-   use either udev rule in vdsm package or tuned.
+ * legacy-change: io elevator scheduler is using udev instead of using
+   kernel command-line.
 
  * legacy-change: vdsm libvirt reconfigure
    vdsm is reconfigured with file based trigger instead unsupported systemd

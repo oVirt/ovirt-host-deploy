@@ -157,6 +157,7 @@ install -pm 644 conf.d/50-offline-packager.conf "%{buildroot}%{_sysconfdir}/%{na
 %{python_sitelib}/ovirt_host_deploy/*.py*
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/plugins/%{name}/*/*.py*
+%{_datadir}/%{name}/plugins/%{name}/*/*.rules
 %{_datadir}/%{name}/plugins/%{name}/*/*/.keep
 %{_datadir}/otopi/plugins/%{name}
 #%{_datadir}/locale/*/*/%{name}.mo

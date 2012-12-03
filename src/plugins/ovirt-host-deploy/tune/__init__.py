@@ -24,9 +24,11 @@
 from otopi import util
 
 
+from . import iosched
 from . import tuned
 
 
 @util.export
 def createPlugins(context):
+    iosched.Plugin(context=context)
     tuned.Plugin(context=context)
