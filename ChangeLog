@@ -4,6 +4,10 @@ ovirt-host-deploy -- oVirt host deploy
 
 Alon Bar-Lev <alonbl@redhat.com>
 
+ * support vdsm hooks by copying hooks from engine machine to host or by
+   specifying a list of packages to be installed at host, refer to README for
+   farther information.
+
  * offline packager feature.
 
  * tuned is installed with virtual-host profile.
