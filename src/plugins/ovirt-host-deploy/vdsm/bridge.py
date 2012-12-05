@@ -282,6 +282,21 @@ class Plugin(plugin.PluginBase):
             )
         )
 
+    def _interfacesOfBonding(self, name):
+        interfaces = []
+        with open(
+            os.path.join(
+                '/sys/class/net',
+                name,
+                'bonding/slaves',
+            ),
+            'r'
+        ) as f:
+            s = f.read().strip()
+            if s:
+                interfaces = s.split(' ')
+        return interfaces
+
     def _getInterfaceForDestination(self, address):
 
         self.logger.debug('determine interface for %s', address)
@@ -500,7 +515,18 @@ class Plugin(plugin.PluginBase):
             self.services.state('firewalld', False)
         # WORKAROUND-END
 
+        bond = None
+
+        # resolve master vlan interface
         interface, vlanid = self._getVlanMasterDevice(name=interface)
+
+        # resolve bond interface
+        if self._interfaceIsBonding(name=interface):
+            bond = interface
+            interface = ','.join(
+                self._interfacesOfBonding(name=interface)
+            )
+
         parameters = parameters[:] + ['blockingdhcp=true']
         self.execute(
             (
@@ -511,7 +537,7 @@ class Plugin(plugin.PluginBase):
                     ),
                     name,
                     util.getDefault(vlanid, ''),
-                    '',     # bonding is not supported
+                    util.getDefault(bond, ''),
                     util.getDefault(interface, ''),
                 ] +
                 parameters
@@ -711,25 +737,11 @@ class Plugin(plugin.PluginBase):
                     install = False
 
             if install:
-                if self._interfaceIsBonding(name=interface):
-                    self._setIncomplete(
-                        _(
-                            'Management channel interface {interface} '
-                            'is bonding interface. Please configure manually '
-                            'bridge on this device with name {bridge}'
-                        ).format(
-                            interface=interface,
-                            bridge=self.environment[
-                                odeploycons.VdsmEnv.MANAGEMENT_BRIDGE_NAME
-                            ],
-                        )
-                    )
-                else:
-                    # this is here to raise exception
-                    # if any error we stop before performing change
-                    self._getVlanMasterDevice(name=interface)
+                # this is here to raise exception
+                # if any error we stop before performing change
+                self._getVlanMasterDevice(name=interface)
 
-                    self._active = True
+                self._active = True
 
     @plugin.event(
         stage=plugin.Stages.STAGE_MISC,

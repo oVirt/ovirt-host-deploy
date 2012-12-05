@@ -29,6 +29,8 @@ Alon Bar-Lev <alonbl@redhat.com>
 
  * legacy-removed: do not use mac address for vdsm id.
 
+ * legacy-change: support for management bridge creation over bond.
+
  * legacy-change: use optional /etc/vdsm/vdsm.id for vdsm id, for use by
    >=vdsm-4.9.6.
 
