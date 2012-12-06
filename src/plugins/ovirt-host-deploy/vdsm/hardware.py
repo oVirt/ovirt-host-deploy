@@ -111,7 +111,7 @@ class Plugin(plugin.PluginBase):
         MSR_VM_CR = 0xc0010114
 
         vm_cr = self._prdmsr(0, MSR_VM_CR)
-        return (vm_cr & (1 << SVM_VM_CR_SVM_DISABLE)) != 0
+        return (vm_cr & (1 << SVM_VM_CR_SVM_DISABLE)) == 0
 
     def _check_kvm_support_on_power(self):
         with open('/proc/cpuinfo', 'r') as f:
