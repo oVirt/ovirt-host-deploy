@@ -21,6 +21,10 @@
 %global		package_maven_version @PACKAGE_MAVEN_VERSION@
 %global		ovirt_host_deploy_root %{_datadir}/%{name}/interface-@INTERFACE_VERSION@
 
+%if 0%{?rhel:1}
+%global		maven2brewrepodir %{_javadir}/repository.jboss.com/maven2-brew/dummy
+%endif
+
 Summary:	oVirt host deploy tool
 Name:		@PACKAGE_NAME@
 Version:	@PACKAGE_RPM_VERSION@
@@ -88,6 +92,13 @@ Requires:	vdsm-cli
 %description offline
 meta package for offline setup
 
+%if 0%{?rhel:1}
+%package repolib
+Summary:	%{name} maven repo
+%description repolib
+%{name} maven repo
+%endif
+
 %prep
 %setup -q -n %{name}-%{package_version}
 
@@ -130,6 +141,12 @@ ln -s %{name}-%{package_maven_version}.jar %{buildroot}%{_javadir}/%{name}/%{nam
 
 install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 install -pm 644 conf.d/50-offline-packager.conf "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
+
+%if 0%{?rhel:1}
+install -d "%{buildroot}%{maven2brewrepodir}"
+cp "%{buildroot}%{_javadir}/%{name}/%{name}.jar" "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_version}.jar"
+cp src/java/pom.xml "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_version}.pom"
+%endif
 
 %post java
 %if 0%{?fedora:1}
@@ -178,6 +195,11 @@ install -pm 644 conf.d/50-offline-packager.conf "%{buildroot}%{_sysconfdir}/%{na
 
 %files offline
 %{_sysconfdir}/%{name}.conf.d/50-offline-packager.conf
+
+%if 0%{?rhel:1}
+%files repolib
+%{maven2brewrepodir}/*
+%endif
 
 %changelog
 * Tue Oct 13 2012 Alon Bar-Lev <alonbl@redhat.com> - 0.0.0-0
