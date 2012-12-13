@@ -36,6 +36,7 @@ class Const(object):
     VDSM_CA_FILE = 'certs/cacert.pem'
     VDSM_CERT_FILE = 'certs/vdsmcert.pem'
     VDSM_KEY_FILE = 'keys/vdsmkey.pem'
+    VDSM_KEY_PENDING_FILE = 'keys/vdsmkey.pending.pem'
     VDSM_ID_FILE = '/etc/vdsm/vdsm.id'
 
     VDSM_DATA_DIR = '/usr/share/vdsm'

@@ -198,6 +198,13 @@ class Plugin(plugin.PluginBase):
         ] != odeploycons.Const.CERTIFICATE_ENROLLMENT_NONE,
     )
     def _validation(self):
+        if (
+            self.environment[
+                odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT
+            ] == odeploycons.Const.CERTIFICATE_ENROLLMENT_ACCEPT and
+            not os.path.exists(odeploycons.Const.VDSM_KEY_PENDING_FILE)
+        ):
+            raise RuntimeError(_('PKI accept mode while no pending request'))
         self._enabled = True
 
     @plugin.event(
@@ -229,16 +236,10 @@ class Plugin(plugin.PluginBase):
             odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT
         ]
 
-        if enrollment == odeploycons.Const.CERTIFICATE_ENROLLMENT_REQUEST:
-            self.environment[odeploycons.CoreEnv.INSTALL_INCOMPLETE] = True
-            self.environment[
-                odeploycons.CoreEnv.INSTALL_INCOMPLETE_REASONS
-            ].append(_('Certificate enrollment required'))
-
-        if enrollment in (
-            odeploycons.Const.CERTIFICATE_ENROLLMENT_REQUEST,
-            odeploycons.Const.CERTIFICATE_ENROLLMENT_INLINE,
-        ):
+        if enrollment == odeploycons.Const.CERTIFICATE_ENROLLMENT_ACCEPT:
+            with open(odeploycons.Const.VDSM_KEY_PENDING_FILE, 'r') as f:
+                vdsmkey = f.read()
+        else:
             if useM2Crypto:
                 vdsmkey, req = self._genReqM2Crypto()
             else:
@@ -253,18 +254,23 @@ class Plugin(plugin.PluginBase):
                 ),
             )
 
+        if enrollment == odeploycons.Const.CERTIFICATE_ENROLLMENT_REQUEST:
+            self.environment[odeploycons.CoreEnv.INSTALL_INCOMPLETE] = True
+            self.environment[
+                odeploycons.CoreEnv.INSTALL_INCOMPLETE_REASONS
+            ].append(_('Certificate enrollment required'))
+
             self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
                 filetransaction.FileTransaction(
                     name=os.path.join(
                         vdsmTrustStore,
-                        odeploycons.Const.VDSM_KEY_FILE,
+                        odeploycons.Const.VDSM_KEY_PENDING_FILE,
                     ),
-                    owner='vdsm',
-                    group='kvm',
+                    owner='root',
                     downer='vdsm',
                     dgroup='kvm',
-                    mode=0o440,
-                    dmode=0o750,
+                    mode=0o400,
+                    dmode=0o700,
                     enforcePermissions=True,
                     content=vdsmkey,
                     modifiedList=self.environment[
@@ -272,11 +278,7 @@ class Plugin(plugin.PluginBase):
                     ],
                 )
             )
-
-        if enrollment in (
-            odeploycons.Const.CERTIFICATE_ENROLLMENT_ACCEPT,
-            odeploycons.Const.CERTIFICATE_ENROLLMENT_INLINE,
-        ):
+        else:
             chain = self.environment[
                 odeploycons.VdsmEnv.CERTIFICATE_CHAIN
             ]
@@ -324,3 +326,34 @@ class Plugin(plugin.PluginBase):
                     ],
                 )
             )
+
+            self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
+                filetransaction.FileTransaction(
+                    name=os.path.join(
+                        vdsmTrustStore,
+                        odeploycons.Const.VDSM_KEY_FILE,
+                    ),
+                    owner='vdsm',
+                    group='kvm',
+                    downer='vdsm',
+                    dgroup='kvm',
+                    mode=0o440,
+                    dmode=0o750,
+                    enforcePermissions=True,
+                    content=vdsmkey,
+                    modifiedList=self.environment[
+                        otopicons.CoreEnv.MODIFIED_FILES
+                    ],
+                )
+            )
+
+    @plugin.event(
+        stage=plugin.Stages.STAGE_CLOSEUP,
+        condition=lambda self: self._enabled,
+    )
+    def _closeup(self):
+        if self.environment[
+            odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT
+        ] != odeploycons.Const.CERTIFICATE_ENROLLMENT_REQUEST:
+            if os.path.exists(odeploycons.Const.VDSM_KEY_PENDING_FILE):
+                os.unlink(odeploycons.Const.VDSM_KEY_PENDING_FILE)
