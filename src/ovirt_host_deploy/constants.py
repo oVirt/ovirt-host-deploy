@@ -37,6 +37,9 @@ class Const(object):
     VDSM_CERT_FILE = 'certs/vdsmcert.pem'
     VDSM_KEY_FILE = 'keys/vdsmkey.pem'
     VDSM_KEY_PENDING_FILE = 'keys/vdsmkey.pending.pem'
+    VDSM_SPICE_CA_FILE = 'libvirt-spice/ca-cert.pem'
+    VDSM_SPICE_CERT_FILE = 'libvirt-spice/server-cert.pem'
+    VDSM_SPICE_KEY_FILE = 'libvirt-spice/server-key.pem'
     VDSM_ID_FILE = '/etc/vdsm/vdsm.id'
 
     VDSM_DATA_DIR = '/usr/share/vdsm'

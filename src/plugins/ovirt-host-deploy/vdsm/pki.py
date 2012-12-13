@@ -297,55 +297,76 @@ class Plugin(plugin.PluginBase):
                 else:
                     cacert, vdsmchain = self._getChainOpenSSL(chain)
 
-            self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
-                filetransaction.FileTransaction(
-                    name=os.path.join(
-                        vdsmTrustStore,
-                        odeploycons.Const.VDSM_CA_FILE,
-                    ),
-                    owner='root',
-                    enforcePermissions=True,
-                    content=cacert,
-                    modifiedList=self.environment[
-                        otopicons.CoreEnv.MODIFIED_FILES
-                    ],
+            for f in (
+                os.path.join(
+                    vdsmTrustStore,
+                    odeploycons.Const.VDSM_CA_FILE,
+                ),
+                os.path.join(
+                    vdsmTrustStore,
+                    odeploycons.Const.VDSM_SPICE_CA_FILE,
+                ),
+            ):
+                self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
+                    filetransaction.FileTransaction(
+                        name=f,
+                        owner='root',
+                        enforcePermissions=True,
+                        content=cacert,
+                        modifiedList=self.environment[
+                            otopicons.CoreEnv.MODIFIED_FILES
+                        ],
+                    )
                 )
-            )
 
-            self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
-                filetransaction.FileTransaction(
-                    name=os.path.join(
-                        vdsmTrustStore,
-                        odeploycons.Const.VDSM_CERT_FILE,
-                    ),
-                    owner='root',
-                    enforcePermissions=True,
-                    content=vdsmchain,
-                    modifiedList=self.environment[
-                        otopicons.CoreEnv.MODIFIED_FILES
-                    ],
+            for f in (
+                os.path.join(
+                    vdsmTrustStore,
+                    odeploycons.Const.VDSM_CERT_FILE,
+                ),
+                os.path.join(
+                    vdsmTrustStore,
+                    odeploycons.Const.VDSM_SPICE_CERT_FILE,
+                ),
+            ):
+                self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
+                    filetransaction.FileTransaction(
+                        name=f,
+                        owner='root',
+                        enforcePermissions=True,
+                        content=vdsmchain,
+                        modifiedList=self.environment[
+                            otopicons.CoreEnv.MODIFIED_FILES
+                        ],
+                    )
                 )
-            )
 
-            self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
-                filetransaction.FileTransaction(
-                    name=os.path.join(
-                        vdsmTrustStore,
-                        odeploycons.Const.VDSM_KEY_FILE,
-                    ),
-                    owner='vdsm',
-                    group='kvm',
-                    downer='vdsm',
-                    dgroup='kvm',
-                    mode=0o440,
-                    dmode=0o750,
-                    enforcePermissions=True,
-                    content=vdsmkey,
-                    modifiedList=self.environment[
-                        otopicons.CoreEnv.MODIFIED_FILES
-                    ],
+            for f in (
+                os.path.join(
+                    vdsmTrustStore,
+                    odeploycons.Const.VDSM_KEY_FILE,
+                ),
+                os.path.join(
+                    vdsmTrustStore,
+                    odeploycons.Const.VDSM_SPICE_KEY_FILE,
+                ),
+            ):
+                self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
+                    filetransaction.FileTransaction(
+                        name=f,
+                        owner='vdsm',
+                        group='kvm',
+                        downer='vdsm',
+                        dgroup='kvm',
+                        mode=0o440,
+                        dmode=0o750,
+                        enforcePermissions=True,
+                        content=vdsmkey,
+                        modifiedList=self.environment[
+                            otopicons.CoreEnv.MODIFIED_FILES
+                        ],
+                    )
                 )
-            )
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
