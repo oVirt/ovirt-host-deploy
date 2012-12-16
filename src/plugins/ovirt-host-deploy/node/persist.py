@@ -50,11 +50,9 @@ class Plugin(plugin.PluginBase):
     def _closeup(self):
         from ovirtnode import ovirtfunctions
 
-        # always persist id, as user
-        # may change this manually
-        ovirtfunctions.ovirt_store_config(odeploycons.Const.VDSM_ID_FILE)
-        self.logger.debug('persisting: %s' % odeploycons.Const.VDSM_ID_FILE)
-
-        for f in self.environment[otopicons.CoreEnv.MODIFIED_FILES]:
+        for f in (
+            [odeploycons.Const.VDSM_ID_FILE] +
+            self.environment[otopicons.CoreEnv.MODIFIED_FILES]
+        ):
             self.logger.debug('persisting: %s' % f)
             ovirtfunctions.ovirt_store_config(f)
