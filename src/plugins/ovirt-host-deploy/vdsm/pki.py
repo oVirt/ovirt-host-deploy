@@ -306,6 +306,10 @@ class Plugin(plugin.PluginBase):
                     vdsmTrustStore,
                     odeploycons.Const.VDSM_SPICE_CA_FILE,
                 ),
+                os.path.join(
+                    odeploycons.Const.LIBVIRT_DEFAULT_TRUST_STORE,
+                    odeploycons.Const.LIBVIRT_DEFAULT_CLIENT_CA_FILE,
+                ),
             ):
                 self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
                     filetransaction.FileTransaction(
@@ -328,6 +332,10 @@ class Plugin(plugin.PluginBase):
                     vdsmTrustStore,
                     odeploycons.Const.VDSM_SPICE_CERT_FILE,
                 ),
+                os.path.join(
+                    odeploycons.Const.LIBVIRT_DEFAULT_TRUST_STORE,
+                    odeploycons.Const.LIBVIRT_DEFAULT_CLIENT_CERT_FILE,
+                ),
             ):
                 self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
                     filetransaction.FileTransaction(
@@ -349,6 +357,10 @@ class Plugin(plugin.PluginBase):
                 os.path.join(
                     vdsmTrustStore,
                     odeploycons.Const.VDSM_SPICE_KEY_FILE,
+                ),
+                os.path.join(
+                    odeploycons.Const.LIBVIRT_DEFAULT_TRUST_STORE,
+                    odeploycons.Const.LIBVIRT_DEFAULT_CLIENT_KEY_FILE,
                 ),
             ):
                 self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(

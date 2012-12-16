@@ -42,6 +42,13 @@ class Const(object):
     VDSM_SPICE_KEY_FILE = 'libvirt-spice/server-key.pem'
     VDSM_ID_FILE = '/etc/vdsm/vdsm.id'
 
+    # vdsm does not configure libvirt client
+    # so libvirt client accesses the default locations.
+    LIBVIRT_DEFAULT_TRUST_STORE = '/etc/pki/libvirt'
+    LIBVIRT_DEFAULT_CLIENT_CA_FILE = '../CA/cacert.pem'
+    LIBVIRT_DEFAULT_CLIENT_CERT_FILE = 'clientcert.pem'
+    LIBVIRT_DEFAULT_CLIENT_KEY_FILE = 'private/clientkey.pem'
+
     VDSM_DATA_DIR = '/usr/share/vdsm'
 
     KEY_SIZE = 2048
