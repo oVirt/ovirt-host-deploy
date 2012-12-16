@@ -65,8 +65,8 @@ class Plugin(plugin.PluginBase):
     )
     def _setup(self):
         self.command.detect('dmidecode')
-        if os.path.exists(odeploycons.Const.VDSM_ID_FILE):
-            with open(odeploycons.Const.VDSM_ID_FILE, 'r') as f:
+        if os.path.exists(odeploycons.FileLocations.VDSM_ID_FILE):
+            with open(odeploycons.FileLocations.VDSM_ID_FILE, 'r') as f:
                 self._vdsmId = f.readline().rstrip('\n')
             self.environment[odeploycons.VdsmEnv.VDSM_ID] = self._vdsmId
 
@@ -127,7 +127,7 @@ class Plugin(plugin.PluginBase):
     def _store_id(self):
         self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
             filetransaction.FileTransaction(
-                name=odeploycons.Const.VDSM_ID_FILE,
+                name=odeploycons.FileLocations.VDSM_ID_FILE,
                 owner='root',
                 enforcePermissions=True,
                 content=self.environment[

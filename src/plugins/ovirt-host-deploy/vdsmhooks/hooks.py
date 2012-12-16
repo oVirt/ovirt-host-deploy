@@ -48,7 +48,7 @@ class Plugin(plugin.PluginBase):
     def _hooks(self):
         pluginhooksdir = os.path.join(
             os.path.dirname(__file__),
-            odeploycons.Const.HOOKS_PLUGIN_HOOKS_DIR,
+            odeploycons.FileLocations.HOOKS_PLUGIN_HOOKS_DIR,
         )
         if os.path.exists(pluginhooksdir):
             for (pathname, __, files) in os.walk(pluginhooksdir):
@@ -74,7 +74,7 @@ class Plugin(plugin.PluginBase):
                     ].append(
                         filetransaction.FileTransaction(
                             name=os.path.join(
-                                odeploycons.Const.HOOKS_DIR,
+                                odeploycons.FileLocations.HOOKS_DIR,
                                 rel,
                                 name,
                             ),
@@ -93,7 +93,7 @@ class Plugin(plugin.PluginBase):
     def _packages(self):
         pluginpackagesdir = os.path.join(
             os.path.dirname(__file__),
-            odeploycons.Const.HOOKS_PLUGIN_PACKAGES_DIR,
+            odeploycons.FileLocations.HOOKS_PLUGIN_PACKAGES_DIR,
         )
         if os.path.exists(pluginpackagesdir):
             for name in sorted(os.listdir(pluginpackagesdir)):

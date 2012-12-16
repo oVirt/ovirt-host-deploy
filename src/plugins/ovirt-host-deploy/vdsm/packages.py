@@ -102,7 +102,7 @@ class Plugin(plugin.PluginBase):
     )
     def _closeup(self):
 
-        with open(odeploycons.Const.VDSM_FORCE_RECONFIGURE, 'w'):
+        with open(odeploycons.FileLocations.VDSM_FORCE_RECONFIGURE, 'w'):
             pass
 
         # libvirt-guests is a conflict

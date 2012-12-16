@@ -483,7 +483,7 @@ class Plugin(plugin.PluginBase):
         self.execute(
             (
                 os.path.join(
-                    odeploycons.Const.VDSM_DATA_DIR,
+                    odeploycons.FileLocations.VDSM_DATA_DIR,
                     'delNetwork',
                 ),
                 name,
@@ -532,7 +532,7 @@ class Plugin(plugin.PluginBase):
             (
                 [
                     os.path.join(
-                        odeploycons.Const.VDSM_DATA_DIR,
+                        odeploycons.FileLocations.VDSM_DATA_DIR,
                         'addNetwork',
                     ),
                     name,
@@ -795,7 +795,7 @@ class Plugin(plugin.PluginBase):
         self.execute(
             (
                 os.path.join(
-                    odeploycons.Const.VDSM_DATA_DIR,
+                    odeploycons.FileLocations.VDSM_DATA_DIR,
                     'vdsm-store-net-config',
                 ),
             ),

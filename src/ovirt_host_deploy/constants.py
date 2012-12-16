@@ -25,8 +25,7 @@ from otopi import util
 
 
 @util.export
-@util.codegen
-class Const(object):
+class FileLocations(object):
     OVIRT_HOST_DEPLOY_CONFIG_FILE = '/etc/ovirt-host-deploy.conf'
 
     OVIRT_HOST_DEPLOY_LOG_PREFIX = 'ovirt-host-deploy'
@@ -51,15 +50,23 @@ class Const(object):
 
     VDSM_DATA_DIR = '/usr/share/vdsm'
 
-    KEY_SIZE = 2048
+    HOOKS_DIR = '/usr/libexec/vdsm/hooks'
+    HOOKS_PLUGIN_HOOKS_DIR = 'hooks.d'
+    HOOKS_PLUGIN_PACKAGES_DIR = 'packages.d'
+
+
+@util.export
+class Defaults(object):
+    DEFAULT_KEY_SIZE = 2048
+
+
+@util.export
+@util.codegen
+class Const(object):
     CERTIFICATE_ENROLLMENT_NONE = 'none'
     CERTIFICATE_ENROLLMENT_INLINE = 'inline'
     CERTIFICATE_ENROLLMENT_REQUEST = 'request'
     CERTIFICATE_ENROLLMENT_ACCEPT = 'accept'
-
-    HOOKS_DIR = '/usr/libexec/vdsm/hooks'
-    HOOKS_PLUGIN_HOOKS_DIR = 'hooks.d'
-    HOOKS_PLUGIN_PACKAGES_DIR = 'packages.d'
 
 
 @util.export

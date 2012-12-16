@@ -51,7 +51,7 @@ class Plugin(plugin.PluginBase):
         from ovirtnode import ovirtfunctions
 
         for f in (
-            [odeploycons.Const.VDSM_ID_FILE] +
+            [odeploycons.FileLocations.VDSM_ID_FILE] +
             self.environment[otopicons.CoreEnv.MODIFIED_FILES]
         ):
             self.logger.debug('persisting: %s' % f)

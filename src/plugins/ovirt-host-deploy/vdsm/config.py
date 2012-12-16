@@ -97,7 +97,7 @@ class Plugin(plugin.PluginBase):
         if b.content:
             self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
                 filetransaction.FileTransaction(
-                    name=odeploycons.Const.VDSM_CONFIG_FILE,
+                    name=odeploycons.FileLocations.VDSM_CONFIG_FILE,
                     owner='root',
                     enforcePermissions=True,
                     content=b.content,

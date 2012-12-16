@@ -49,11 +49,11 @@ class Plugin(plugin.PluginBase):
     def _preinit(self):
         self.environment.setdefault(
             otopicons.CoreEnv.LOG_FILE_NAME_PREFIX,
-            odeploycons.Const.OVIRT_HOST_DEPLOY_LOG_PREFIX
+            odeploycons.FileLocations.OVIRT_HOST_DEPLOY_LOG_PREFIX
         )
         self.environment.setdefault(
             otopicons.CoreEnv.CONFIG_FILE_NAME,
-            odeploycons.Const.OVIRT_HOST_DEPLOY_CONFIG_FILE
+            odeploycons.FileLocations.OVIRT_HOST_DEPLOY_CONFIG_FILE
         )
         self.environment[
             odeploycons.CoreEnv.INTERFACE_VERSION

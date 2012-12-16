@@ -180,7 +180,7 @@ class Plugin(plugin.PluginBase):
         )
         self.environment.setdefault(
             odeploycons.VdsmEnv.KEY_SIZE,
-            odeploycons.Const.KEY_SIZE
+            odeploycons.Defaults.DEFAULT_KEY_SIZE
         )
 
     @plugin.event(
@@ -202,7 +202,7 @@ class Plugin(plugin.PluginBase):
             self.environment[
                 odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT
             ] == odeploycons.Const.CERTIFICATE_ENROLLMENT_ACCEPT and
-            not os.path.exists(odeploycons.Const.VDSM_KEY_PENDING_FILE)
+            not os.path.exists(odeploycons.FileLocations.VDSM_KEY_PENDING_FILE)
         ):
             raise RuntimeError(_('PKI accept mode while no pending request'))
         self._enabled = True
@@ -222,10 +222,10 @@ class Plugin(plugin.PluginBase):
     def _misc(self):
         self.dialog.note(_('Setting up PKI'))
 
-        vdsmTrustStore = odeploycons.Const.VDSM_TRUST_STORE
-        if os.path.exists(odeploycons.Const.VDSM_CONFIG_FILE):
+        vdsmTrustStore = odeploycons.FileLocations.VDSM_TRUST_STORE
+        if os.path.exists(odeploycons.FileLocations.VDSM_CONFIG_FILE):
             config = configparser.ConfigParser()
-            config.read([odeploycons.Const.VDSM_CONFIG_FILE])
+            config.read([odeploycons.FileLocations.VDSM_CONFIG_FILE])
             try:
                 vdsmTrustStore = config.get('vars', 'trust_store_path')
             except:
@@ -237,7 +237,10 @@ class Plugin(plugin.PluginBase):
         ]
 
         if enrollment == odeploycons.Const.CERTIFICATE_ENROLLMENT_ACCEPT:
-            with open(odeploycons.Const.VDSM_KEY_PENDING_FILE, 'r') as f:
+            with open(
+                odeploycons.FileLocations.VDSM_KEY_PENDING_FILE,
+                'r'
+            ) as f:
                 vdsmkey = f.read()
         else:
             if useM2Crypto:
@@ -264,7 +267,7 @@ class Plugin(plugin.PluginBase):
                 filetransaction.FileTransaction(
                     name=os.path.join(
                         vdsmTrustStore,
-                        odeploycons.Const.VDSM_KEY_PENDING_FILE,
+                        odeploycons.FileLocations.VDSM_KEY_PENDING_FILE,
                     ),
                     owner='root',
                     downer='vdsm',
@@ -300,15 +303,15 @@ class Plugin(plugin.PluginBase):
             for f in (
                 os.path.join(
                     vdsmTrustStore,
-                    odeploycons.Const.VDSM_CA_FILE,
+                    odeploycons.FileLocations.VDSM_CA_FILE,
                 ),
                 os.path.join(
                     vdsmTrustStore,
-                    odeploycons.Const.VDSM_SPICE_CA_FILE,
+                    odeploycons.FileLocations.VDSM_SPICE_CA_FILE,
                 ),
                 os.path.join(
-                    odeploycons.Const.LIBVIRT_DEFAULT_TRUST_STORE,
-                    odeploycons.Const.LIBVIRT_DEFAULT_CLIENT_CA_FILE,
+                    odeploycons.FileLocations.LIBVIRT_DEFAULT_TRUST_STORE,
+                    odeploycons.FileLocations.LIBVIRT_DEFAULT_CLIENT_CA_FILE,
                 ),
             ):
                 self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
@@ -326,15 +329,15 @@ class Plugin(plugin.PluginBase):
             for f in (
                 os.path.join(
                     vdsmTrustStore,
-                    odeploycons.Const.VDSM_CERT_FILE,
+                    odeploycons.FileLocations.VDSM_CERT_FILE,
                 ),
                 os.path.join(
                     vdsmTrustStore,
-                    odeploycons.Const.VDSM_SPICE_CERT_FILE,
+                    odeploycons.FileLocations.VDSM_SPICE_CERT_FILE,
                 ),
                 os.path.join(
-                    odeploycons.Const.LIBVIRT_DEFAULT_TRUST_STORE,
-                    odeploycons.Const.LIBVIRT_DEFAULT_CLIENT_CERT_FILE,
+                    odeploycons.FileLocations.LIBVIRT_DEFAULT_TRUST_STORE,
+                    odeploycons.FileLocations.LIBVIRT_DEFAULT_CLIENT_CERT_FILE,
                 ),
             ):
                 self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
@@ -352,15 +355,15 @@ class Plugin(plugin.PluginBase):
             for f in (
                 os.path.join(
                     vdsmTrustStore,
-                    odeploycons.Const.VDSM_KEY_FILE,
+                    odeploycons.FileLocations.VDSM_KEY_FILE,
                 ),
                 os.path.join(
                     vdsmTrustStore,
-                    odeploycons.Const.VDSM_SPICE_KEY_FILE,
+                    odeploycons.FileLocations.VDSM_SPICE_KEY_FILE,
                 ),
                 os.path.join(
-                    odeploycons.Const.LIBVIRT_DEFAULT_TRUST_STORE,
-                    odeploycons.Const.LIBVIRT_DEFAULT_CLIENT_KEY_FILE,
+                    odeploycons.FileLocations.LIBVIRT_DEFAULT_TRUST_STORE,
+                    odeploycons.FileLocations.LIBVIRT_DEFAULT_CLIENT_KEY_FILE,
                 ),
             ):
                 self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
@@ -388,5 +391,5 @@ class Plugin(plugin.PluginBase):
         if self.environment[
             odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT
         ] != odeploycons.Const.CERTIFICATE_ENROLLMENT_REQUEST:
-            if os.path.exists(odeploycons.Const.VDSM_KEY_PENDING_FILE):
-                os.unlink(odeploycons.Const.VDSM_KEY_PENDING_FILE)
+            if os.path.exists(odeploycons.FileLocations.VDSM_KEY_PENDING_FILE):
+                os.unlink(odeploycons.FileLocations.VDSM_KEY_PENDING_FILE)
