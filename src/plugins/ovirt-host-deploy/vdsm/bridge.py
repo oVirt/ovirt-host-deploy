@@ -58,33 +58,6 @@ class Plugin(plugin.PluginBase):
     """
 
     """
-    3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP...
-        link/ether 00:0e:bf:44:0d:1f brd ff:ff:ff:ff:ff:ff
-            inet 192.168.0.104/24 brd 192.168.0.255 scope global wlan0
-    """
-    _RE_IPROUTE_ADDR_SHOW = re.compile(
-        flags=re.VERBOSE,
-        pattern=r"""
-            ^
-            \s+
-            (inet|inet6)
-            \s+
-            ([0-9a-f.:]+)/[0-9]+
-            .*
-            scope
-            \s+
-            global
-            \s+
-            (\S+)
-        """
-    )
-    (
-        _RE_IPROUTE_ADDR_SHOW_TYPE,
-        _RE_IPROUTE_ADDR_SHOW_ADDRESS,
-        _RE_IPROUTE_ADDR_SHOW_INTERFACE
-    ) = range(1, 4)
-
-    """
     Remote:
         192.168.1.1 via 192.168.0.1 dev wlan0  src 192.168.0.104
             cache
@@ -337,33 +310,6 @@ class Plugin(plugin.PluginBase):
         self.logger.debug('interface for %s is %s', address, interface)
         return interface
 
-    def _getInterfaceToInstallBasedOnDestination(self, address):
-        interface = self._getInterfaceForDestination(
-            address=address
-        )
-
-        # this is required for all-in-one
-        # we need to guess which interface to
-        # bridge
-        if interface == self._INTERFACE_LOOPBACK:
-            rc, stdout, stderr = self.execute(
-                (
-                    self.command.get('ip'),
-                    'addr', 'show',
-                ),
-            )
-            for line in stdout:
-                m = self._RE_IPROUTE_ADDR_SHOW.match(line)
-                if (
-                    m is not None and
-                    m.group(self._RE_IPROUTE_ADDR_SHOW_ADDRESS) == address
-                ):
-                    interface = m.group(
-                        self._RE_IPROUTE_ADDR_SHOW_INTERFACE
-                    )
-
-        return interface
-
     def _getVlanMasterDevice(self, name):
         interface = None
         vlanid = None
@@ -527,6 +473,9 @@ class Plugin(plugin.PluginBase):
                 self._interfacesOfBonding(name=interface)
             )
 
+        if interface == self._INTERFACE_LOOPBACK:
+            interface = ''
+
         parameters = parameters[:] + ['blockingdhcp=true']
         self.execute(
             (
@@ -677,7 +626,7 @@ class Plugin(plugin.PluginBase):
             ] = engineAddress
 
             install = True
-            interface = self._getInterfaceToInstallBasedOnDestination(
+            interface = self._getInterfaceForDestination(
                 address=engineAddress
             )
             if self._interfaceIsBridge(name=interface):
@@ -753,10 +702,19 @@ class Plugin(plugin.PluginBase):
                 self.services.state('messagebus', True)
             self.services.state('libvirtd', True)
 
-        interface = self._getInterfaceToInstallBasedOnDestination(
+        interface = self._getInterfaceForDestination(
             address=self.environment[odeploycons.VdsmEnv.ENGINE_ADDRESS]
         )
-        parameters = self._rhel_getInterfaceConfigParameters(name=interface)
+        if interface == self._INTERFACE_LOOPBACK:
+            parameters = [
+                'IPADDR=127.0.0.2',
+                'NETMASK=255.0.0.0',
+                'ONBOOT=yes',
+            ]
+        else:
+            parameters = self._rhel_getInterfaceConfigParameters(
+                name=interface
+            )
 
         # The followin can be executed
         # only at node as we won't reach here

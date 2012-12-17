@@ -4,6 +4,9 @@ ovirt-host-deploy -- oVirt host deploy
 
 Alon Bar-Lev <alonbl@redhat.com>
 
+ * When engine address is local, create empty bridge with loopback address,
+   useful for all-in-one configuration.
+
  * support vdsm hooks by copying hooks from engine machine to host or by
    specifying a list of packages to be installed at host, refer to README for
    farther information.
