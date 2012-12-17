@@ -26,23 +26,23 @@ vdsm hooks
     vdsm hooks available at the following directory are copied to
     host during bootstrap.
 
-     /usr/share/otopi/plugins/ovirt-host-deploy/vdsmhooks/hooks.d/
+     /usr/share/ovirt-host-deploy/plugins/ovirt-host-deploy/vdsmhooks/hooks.d/
 
     Packages can be installed using files at:
 
-     /usr/share/otopi/plugins/ovirt-host-deploy/vdsmhooks/packages.d/
+     /usr/share/ovirt-host-deploy/plugins/ovirt-host-deploy/vdsmhooks/packages.d/
 
     Each file contains a package per line.
 
-    Only files with matching distribution suffix are process. Distrubution
-    is read via python's platform.linux_distribution().
+    Files are selected based on their suffix, which should match distribution name.
+    Distribution name is acquired using python's platform.linux_distribution().
 
 DEVELOPMENT AND TEST
 --------------------
 
 FAKEQEMU
 
-Construct approperate /etc/vdsm/vdsm.conf.
+Construct appropriate /etc/vdsm/vdsm.conf.
 
 Create:
 

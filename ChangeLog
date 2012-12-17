@@ -40,8 +40,9 @@ Alon Bar-Lev <alonbl@redhat.com>
    kernel command-line.
 
  * legacy-change: vdsm libvirt reconfigure
-   vdsm is reconfigured with file based trigger instead unsupported systemd
-   init.d parameter.
+   vdsm is reconfigured with file based trigger in-addition to unsupported
+   systemd init.d parameter. This will enable us to remove the non standard
+   approach in future.
 
  * legacy-change: use yum api to install packages instead of yum utility.
 

@@ -49,8 +49,7 @@ VDSM/configOverride(bool) [True]
 
 VDSM_CONFIG/section/key(str)
     Set vdsm configuration option. If set vdsm configuration is
-    overridden unless there is bootstra_keep_config = True in
-    section debug.
+    overridden unless there is VDSM/configOverride = False.
 
 GLUSTER/enable(str) [False]
     Instal gluster support.
