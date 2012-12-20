@@ -74,4 +74,4 @@ class Plugin(plugin.PluginBase):
         condition=lambda self: self._enabled,
     )
     def _packages(self):
-        self.packager.installUpdate(('vdsm-gluster'))
+        self.packager.installUpdate(('vdsm-gluster',))
