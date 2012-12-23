@@ -505,7 +505,6 @@ class Plugin(plugin.PluginBase):
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
         self._enabled = False
-        self._active = False
 
     @plugin.event(
         stage=plugin.Stages.STAGE_INIT,
@@ -524,14 +523,7 @@ class Plugin(plugin.PluginBase):
         self.command.detect('nmcli')
 
     @plugin.event(
-        stage=plugin.Stages.STAGE_SETUP,
-    )
-    def _setup(self):
-        self._enabled = True
-
-    @plugin.event(
         stage=plugin.Stages.STAGE_INTERNAL_PACKAGES,
-        condition=lambda self: self._enabled,
     )
     def _internal_packages(self):
         self.packager.install(packages=['iproute'])
@@ -540,7 +532,6 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_VALIDATION,
         condition=(
             lambda self: (
-                self._enabled and
                 self.environment[
                     odeploycons.VdsmEnv.MANAGEMENT_BRIDGE_NAME
                 ] is not None
@@ -690,11 +681,11 @@ class Plugin(plugin.PluginBase):
                 # if any error we stop before performing change
                 self._getVlanMasterDevice(name=interface)
 
-                self._active = True
+                self._enabled = True
 
     @plugin.event(
         stage=plugin.Stages.STAGE_MISC,
-        condition=lambda self: self._active,
+        condition=lambda self: self._enabled,
     )
     def _misc(self):
         if self.services.exists('libvirtd'):
@@ -747,7 +738,7 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(
         stage=plugin.Stages.STAGE_TRANSACTION_END,
-        condition=lambda self: self._active,
+        condition=lambda self: self._enabled,
     )
     def _transaction_end(self):
         self.execute(
@@ -761,7 +752,7 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
-        condition=lambda self: self._active,
+        condition=lambda self: self._enabled,
     )
     def _closeup(self):
         self.services.startup('network', True)
