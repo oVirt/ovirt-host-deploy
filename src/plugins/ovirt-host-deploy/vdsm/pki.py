@@ -295,10 +295,10 @@ class Plugin(plugin.PluginBase):
                     ),
                 )
 
-                if useM2Crypto:
-                    cacert, vdsmchain = self._getChainM2Crypto(chain)
-                else:
-                    cacert, vdsmchain = self._getChainOpenSSL(chain)
+            if useM2Crypto:
+                cacert, vdsmchain = self._getChainM2Crypto(chain)
+            else:
+                cacert, vdsmchain = self._getChainOpenSSL(chain)
 
             for f in (
                 os.path.join(
