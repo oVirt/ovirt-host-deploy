@@ -165,6 +165,7 @@ class Plugin(plugin.PluginBase):
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
         self._enabled = False
+        self._cleanupFiles = []
 
     @plugin.event(
         stage=plugin.Stages.STAGE_INIT,
@@ -198,13 +199,6 @@ class Plugin(plugin.PluginBase):
         ] != odeploycons.Const.CERTIFICATE_ENROLLMENT_NONE,
     )
     def _validation(self):
-        if (
-            self.environment[
-                odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT
-            ] == odeploycons.Const.CERTIFICATE_ENROLLMENT_ACCEPT and
-            not os.path.exists(odeploycons.FileLocations.VDSM_KEY_PENDING_FILE)
-        ):
-            raise RuntimeError(_('PKI accept mode while no pending request'))
         self._enabled = True
 
     @plugin.event(
@@ -236,11 +230,19 @@ class Plugin(plugin.PluginBase):
             odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT
         ]
 
+        pendingKey = os.path.join(
+            vdsmTrustStore,
+            odeploycons.FileLocations.VDSM_KEY_PENDING_FILE,
+        )
+
         if enrollment == odeploycons.Const.CERTIFICATE_ENROLLMENT_ACCEPT:
-            with open(
-                odeploycons.FileLocations.VDSM_KEY_PENDING_FILE,
-                'r'
-            ) as f:
+            # we cannot perform the following
+            # in validation stage, as we do not have
+            # the trust store location.
+            if not os.path.exists(pendingKey):
+                raise RuntimeError(_('PKI accept mode while no pending request'))
+
+            with open(pendingKey, 'r') as f:
                 vdsmkey = f.read()
         else:
             if useM2Crypto:
@@ -265,10 +267,7 @@ class Plugin(plugin.PluginBase):
 
             self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
                 filetransaction.FileTransaction(
-                    name=os.path.join(
-                        vdsmTrustStore,
-                        odeploycons.FileLocations.VDSM_KEY_PENDING_FILE,
-                    ),
+                    name=pendingKey,
                     owner='root',
                     downer='vdsm',
                     dgroup='kvm',
@@ -282,6 +281,8 @@ class Plugin(plugin.PluginBase):
                 )
             )
         else:
+            self._cleanupFiles.append(pendingKey)
+
             chain = self.environment[
                 odeploycons.VdsmEnv.CERTIFICATE_CHAIN
             ]
@@ -388,8 +389,14 @@ class Plugin(plugin.PluginBase):
         condition=lambda self: self._enabled,
     )
     def _closeup(self):
-        if self.environment[
-            odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT
-        ] != odeploycons.Const.CERTIFICATE_ENROLLMENT_REQUEST:
-            if os.path.exists(odeploycons.FileLocations.VDSM_KEY_PENDING_FILE):
-                os.unlink(odeploycons.FileLocations.VDSM_KEY_PENDING_FILE)
+        for f in self._cleanupFiles:
+            if os.path.exists(f):
+                try:
+                    os.unlink(f)
+                except OSError:
+                    self.logger.warning(
+                        _("Cannot remove file '{name}'.").format(
+                            name=f,
+                        )
+                    )
+                    self.logger.debug(exc_info=True)
