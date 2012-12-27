@@ -240,7 +240,9 @@ class Plugin(plugin.PluginBase):
             # in validation stage, as we do not have
             # the trust store location.
             if not os.path.exists(pendingKey):
-                raise RuntimeError(_('PKI accept mode while no pending request'))
+                raise RuntimeError(
+                    _('PKI accept mode while no pending request')
+                )
 
             with open(pendingKey, 'r') as f:
                 vdsmkey = f.read()
