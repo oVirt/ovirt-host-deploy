@@ -64,11 +64,15 @@ class Plugin(plugin.PluginBase):
     def _misc(self):
         # tuned-adm does not work if daemon is down!
         self.services.state('tuned', True)
-        self.execute(
+        rc, stdout, stderr = self.execute(
             (
                 self.command.get('tuned-adm'),
                 'profile',
                 'virtual-host',
             ),
+            raiseOnError=False,
         )
-        self.services.startup('tuned', True)
+        if rc != 0:
+            self.logger.warning(_('Cannot set tuned profile'))
+        else:
+            self.services.startup('tuned', True)
