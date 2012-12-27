@@ -63,7 +63,7 @@ class Plugin(plugin.PluginBase):
         if not self.packager.queryPackages(patterns=['vdsm-gluster']):
             raise RuntimeError(
                 _(
-                    'Cannot locate glusther packages, '
+                    'Cannot locate gluster packages, '
                     'possible cause is incorrect channels'
                 )
             )
