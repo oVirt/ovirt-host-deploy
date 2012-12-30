@@ -42,9 +42,14 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(
         stage=plugin.Stages.STAGE_SETUP,
-        condition=lambda self: not self.environment[
-            odeploycons.VdsmEnv.OVIRT_NODE
-        ],
+        condition=lambda self: (
+            not self.environment[
+                odeploycons.VdsmEnv.OVIRT_NODE
+            ] and
+            not self.environment[
+                odeploycons.GlusterEnv.ENABLE
+            ]
+        )
     )
     def _setup(self):
         self.command.detect('tuned-adm')
