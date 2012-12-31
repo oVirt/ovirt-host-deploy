@@ -103,3 +103,6 @@ class Plugin(plugin.PluginBase):
                     with open(name, 'r') as f:
                         for package in f:
                             self.packager.installUpdate(package)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

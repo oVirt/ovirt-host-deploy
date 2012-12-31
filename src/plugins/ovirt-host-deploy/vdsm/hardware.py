@@ -192,3 +192,6 @@ class Plugin(plugin.PluginBase):
                             'timestamp counter, this may effect performance'
                         )
                     )
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

@@ -63,3 +63,6 @@ class Plugin(plugin.PluginBase):
                 odeploycons.VdsmEnv.OVIRT_NODE
             ]
         )
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

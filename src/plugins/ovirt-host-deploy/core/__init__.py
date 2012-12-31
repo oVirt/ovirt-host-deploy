@@ -32,3 +32,6 @@ from . import offlinepackager
 def createPlugins(context):
     misc.Plugin(context=context)
     offlinepackager.Plugin(context=context)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

@@ -151,3 +151,6 @@ class Plugin(plugin.PluginBase):
             if self.services.exists('libvirtd'):
                 self.services.state('libvirtd', True)
         self.services.state('vdsmd', True)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

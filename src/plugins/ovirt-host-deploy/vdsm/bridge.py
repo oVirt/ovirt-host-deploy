@@ -756,3 +756,6 @@ class Plugin(plugin.PluginBase):
     )
     def _closeup(self):
         self.services.startup('network', True)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

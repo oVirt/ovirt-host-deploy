@@ -76,3 +76,6 @@ class Plugin(plugin.PluginBase):
             self.logger.warning(_('Cannot set tuned profile'))
         else:
             self.services.startup('tuned', True)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

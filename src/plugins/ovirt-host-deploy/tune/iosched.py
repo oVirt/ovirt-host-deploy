@@ -91,3 +91,6 @@ class Plugin(plugin.PluginBase):
             ],
             raiseOnError=False,
         )
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

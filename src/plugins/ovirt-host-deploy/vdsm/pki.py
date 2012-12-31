@@ -402,3 +402,6 @@ class Plugin(plugin.PluginBase):
                         )
                     )
                     self.logger.debug(exc_info=True)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

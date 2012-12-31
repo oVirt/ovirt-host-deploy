@@ -30,3 +30,6 @@ from . import hooks
 @util.export
 def createPlugins(context):
     hooks.Plugin(context=context)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

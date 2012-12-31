@@ -32,3 +32,6 @@ from . import tuned
 def createPlugins(context):
     iosched.Plugin(context=context)
     tuned.Plugin(context=context)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

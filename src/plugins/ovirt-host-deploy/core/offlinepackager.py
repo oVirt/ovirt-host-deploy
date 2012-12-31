@@ -72,3 +72,6 @@ class Plugin(plugin.PluginBase, packager.PackagerBase):
         ):
             self.logger.debug('Registering offline packager')
             self.context.registerPackager(packager=self)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

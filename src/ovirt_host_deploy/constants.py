@@ -121,3 +121,6 @@ class Displays(object):
 @util.codegen
 class Confirms(object):
     DEPLOY_PROCEED = 'DEPLOY_PROCEED'
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

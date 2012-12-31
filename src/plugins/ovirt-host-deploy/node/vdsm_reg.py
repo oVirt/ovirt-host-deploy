@@ -111,3 +111,6 @@ class Plugin(plugin.PluginBase):
     def _closeup(self):
         if self.services.exists('vdsm-reg'):
             self.services.state('vdsm-reg', False)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

@@ -42,3 +42,6 @@ def createPlugins(context):
     packages.Plugin(context=context)
     config.Plugin(context=context)
     bridge.Plugin(context=context)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

@@ -56,3 +56,6 @@ class Plugin(plugin.PluginBase):
         ):
             self.logger.debug('persisting: %s' % f)
             ovirtfunctions.ovirt_store_config(f)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

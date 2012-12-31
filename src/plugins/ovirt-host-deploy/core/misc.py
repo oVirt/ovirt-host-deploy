@@ -122,3 +122,6 @@ class Plugin(plugin.PluginBase):
     )
     def _closeup(self):
         self.environment[otopicons.SysEnv.REBOOT] = True
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

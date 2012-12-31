@@ -75,3 +75,6 @@ class Plugin(plugin.PluginBase):
     )
     def _packages(self):
         self.packager.installUpdate(('vdsm-gluster',))
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

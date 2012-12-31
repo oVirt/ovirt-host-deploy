@@ -34,3 +34,6 @@ def createPlugins(context):
     detect.Plugin(context=context)
     persist.Plugin(context=context)
     vdsm_reg.Plugin(context=context)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

@@ -71,3 +71,6 @@ class Plugin(plugin.PluginBase):
                     distribution=dist,
                 )
             )
+
+
+# vim: expandtab tabstop=4 shiftwidth=4
