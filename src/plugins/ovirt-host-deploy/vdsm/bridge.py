@@ -487,9 +487,9 @@ class Plugin(plugin.PluginBase):
                     'delNetwork',
                 ),
                 name,
-                util.getDefault(vlanid, ''),
+                vlanid if vlanid is not None else '',
                 '',     # bonding is not supported
-                util.getDefault(interface, ''),
+                interface if interface is not None else '',
             ),
         )
 
@@ -536,9 +536,9 @@ class Plugin(plugin.PluginBase):
                         'addNetwork',
                     ),
                     name,
-                    util.getDefault(vlanid, ''),
-                    util.getDefault(bond, ''),
-                    util.getDefault(interface, ''),
+                    vlanid if vlanid is not None else '',
+                    bond if bond is not None else '',
+                    interface if interface is not None else '',
                 ] +
                 parameters
             ),
