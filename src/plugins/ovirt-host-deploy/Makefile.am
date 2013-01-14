@@ -18,7 +18,8 @@
 #
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 
 SUBDIRS = \
 	core \
@@ -26,7 +27,8 @@ SUBDIRS = \
 	vdsmhooks \
 	tune \
 	node \
-	gluster
+	gluster \
+	$(NULL)
 
 install-data-local:
 	$(MKDIR_P) "$(DESTDIR)$(otopiplugindir)"

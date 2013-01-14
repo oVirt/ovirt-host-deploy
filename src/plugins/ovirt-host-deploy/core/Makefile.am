@@ -20,16 +20,20 @@
 include $(top_srcdir)/build/python.inc
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 
 mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/core
 dist_my_PYTHON = \
 	__init__.py \
 	offlinepackager.py \
-	misc.py
+	misc.py \
+	$(NULL)
 
 clean-local: \
-	python-clean
+	python-clean \
+	$(NULL)
 
 all-local: \
-	python-syntax-check
+	python-syntax-check \
+	$(NULL)

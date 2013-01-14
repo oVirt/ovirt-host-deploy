@@ -20,17 +20,21 @@
 include $(top_srcdir)/build/python.inc
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 
 mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/node
 dist_my_PYTHON = \
 	__init__.py \
 	detect.py \
 	persist.py \
-	vdsm_reg.py
+	vdsm_reg.py \
+	$(NULL)
 
 clean-local: \
-	python-clean
+	python-clean \
+	$(NULL)
 
 all-local: \
-	python-syntax-check
+	python-syntax-check \
+	$(NULL)

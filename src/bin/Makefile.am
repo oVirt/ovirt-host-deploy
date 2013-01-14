@@ -18,10 +18,13 @@
 #
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 
 EXTRA_DIST = \
-	.source
+	.source \
+	$(NULL)
 
 dist_sbin_SCRIPTS = \
-	ovirt-host-deploy
+	ovirt-host-deploy \
+	$(NULL)

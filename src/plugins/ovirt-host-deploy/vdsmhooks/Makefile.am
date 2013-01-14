@@ -20,27 +20,34 @@
 include $(top_srcdir)/build/python.inc
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 CLEANFILES = \
-	.keep
+	.keep \
+	$(NULL)
 
 mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/vdsmhooks
 dist_my_PYTHON = \
 	__init__.py \
-	hooks.py
+	hooks.py \
+	$(NULL)
 
 pluginhooksdir=$(mydir)/hooks.d
 pluginhooks_DATA = \
-	.keep
+	.keep \
+	$(NULL)
 pluginpackagesdir=$(mydir)/packages.d
 pluginpackages_DATA = \
-	.keep
+	.keep \
+	$(NULL)
 
 clean-local: \
-	python-clean
+	python-clean \
+	$(NULL)
 
 all-local: \
-	python-syntax-check
+	python-syntax-check \
+	$(NULL)
 
 .keep:
 	touch .keep

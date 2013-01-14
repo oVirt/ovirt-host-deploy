@@ -30,27 +30,34 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/config.rpath \
 	$(srcdir)/ABOUT-NLS \
 	$(srcdir)/aclocal.m4 \
-	$(srcdir)/ln-sr
-CLEANFILES = POTFILES.in.tmp
+	$(srcdir)/ln-sr \
+	$(NULL)
+CLEANFILES = \
+	POTFILES.in.tmp \
+	$(NULL)
 
 EXTRA_DIST = \
-	.gitignore
+	.gitignore \
+	$(NULL)
 
 SUBDIRS = \
 	build \
 	po \
 	src \
 	conf.d \
-	tests
+	tests \
+	$(NULL)
 
 dist_noinst_DATA = \
 	MAINTAINERS \
 	README.environment \
 	README.localization \
-	ovirt-host-deploy.spec
+	ovirt-host-deploy.spec \
+	$(NULL)
 
 dist_noinst_SCRIPTS = \
-	autogen.sh
+	autogen.sh \
+	$(NULL)
 
 TMPREPOS = tmp.repos
 srpm:	dist

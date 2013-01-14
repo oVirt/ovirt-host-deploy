@@ -18,7 +18,9 @@
 #
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 
 dist_noinst_DATA = \
-	50-offline-packager.conf
+	50-offline-packager.conf \
+	$(NULL)

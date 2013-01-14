@@ -20,23 +20,30 @@
 include $(top_srcdir)/build/python.inc
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
-
+	$(srcdir)/Makefile.in \
+	$(NULL)
 CLEANFILES = \
-	config.py
+	config.py \
+	$(NULL)
 
 dist_ovirthostdeploylib_PYTHON = \
 	__init__.py \
-	constants.py
+	constants.py \
+	$(NULL)
 
 ovirthostdeploylib_PYTHON = \
-	config.py
+	config.py \
+	$(NULL)
 
-config.py:	$(top_srcdir)/configure.ac
+config.py:	\
+	$(top_srcdir)/configure.ac \
+	$(NULL)
 
 clean-local: \
-	python-clean
+	python-clean \
+	$(NULL)
 
 all-local: \
 	$(DISTFILES) \
-	python-syntax-check
+	python-syntax-check \
+	$(NULL)

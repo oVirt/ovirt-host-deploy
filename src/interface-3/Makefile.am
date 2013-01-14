@@ -18,7 +18,8 @@
 #
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 
 install-data-hook:
 	$(SHELL) "$(OTOPI_BUNDLE)"  \

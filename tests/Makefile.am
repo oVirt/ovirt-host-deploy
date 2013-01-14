@@ -18,7 +18,9 @@
 #
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 
 dist_noinst_SCRIPTS = \
-	test-bundle.sh
+	test-bundle.sh \
+	$(NULL)

@@ -20,19 +20,24 @@
 include $(top_srcdir)/build/python.inc
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 
 mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/tune
 dist_my_PYTHON = \
 	__init__.py \
 	iosched.py \
-	tuned.py
+	tuned.py \
+	$(NULL)
 
 dist_my_DATA = \
-	ovirt-iosched.rules
+	ovirt-iosched.rules \
+	$(NULL)
 
 clean-local: \
-	python-clean
+	python-clean \
+	$(NULL)
 
 all-local: \
-	python-syntax-check
+	python-syntax-check \
+	$(NULL)

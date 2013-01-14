@@ -20,7 +20,8 @@
 include $(top_srcdir)/build/python.inc
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 
 mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/vdsm
 dist_my_PYTHON = \
@@ -31,10 +32,13 @@ dist_my_PYTHON = \
 	software.py \
 	packages.py \
 	config.py \
-	bridge.py
+	bridge.py \
+	$(NULL)
 
 clean-local: \
-	python-clean
+	python-clean \
+	$(NULL)
 
 all-local: \
-	python-syntax-check
+	python-syntax-check \
+	$(NULL)

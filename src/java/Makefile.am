@@ -25,25 +25,31 @@ jarname=$(artifact)-$(PACKAGE_MAVEN_VERSION).jar
 targetjar=$(targetdir)/$(jarname)
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 CLEANFILES = \
 	tmp.generated \
-	$(targetjar)
+	$(targetjar) \
+	$(NULL)
 
 EXTRA_DIST = \
-	.gitignore
+	.gitignore \
+	$(NULL)
 
 dist_noinst_DATA = \
-	MANIFEST.MF
+	MANIFEST.MF \
+	$(NULL)
 
 if JAVA_SDK
 
 if JAVA_SDK_COMPILE
 all-local:	\
-		$(targetjar)
+		$(targetjar) \
+		$(NULL)
 else
 all-local:	\
-		sources
+		sources \
+		$(NULL)
 endif
 
 clean-local:
@@ -53,7 +59,8 @@ if WITH_MAVEN
 
 $(targetjar):	\
 		sources \
-		pom.xml
+		pom.xml \
+		$(NULL)
 	rm -f "$(targetjar)"
 	$(MKDIR_P) "$(targetdir)"
 	$(MVN) \
@@ -64,7 +71,8 @@ $(targetjar):	\
 else
 
 $(targetjar):	\
-		sources
+		sources \
+		$(NULL)
 	rm -f "$(targetjar)"
 	$(MKDIR_P) "$(targetdir)"
 	$(MKDIR_P) target
@@ -74,7 +82,8 @@ $(targetjar):	\
 endif
 
 sources: \
-	tmp.generated
+		tmp.generated \
+		$(NULL)
 
 # TODO: kill __main__ when python-2.6 gone
 tmp.generated:

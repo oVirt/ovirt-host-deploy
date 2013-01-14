@@ -18,6 +18,9 @@
 #
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 
-SUBDIRS = ovirt-host-deploy
+SUBDIRS = \
+	ovirt-host-deploy \
+	$(NULL)

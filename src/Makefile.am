@@ -18,11 +18,13 @@
 #
 
 MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in
+	$(srcdir)/Makefile.in \
+	$(NULL)
 
 SUBDIRS = \
 	bin \
 	ovirt_host_deploy \
 	plugins \
 	java \
-	interface-3
+	interface-3 \
+	$(NULL)
