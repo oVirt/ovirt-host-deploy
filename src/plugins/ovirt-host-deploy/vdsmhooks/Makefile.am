@@ -26,6 +26,10 @@ CLEANFILES = \
 	.keep \
 	$(NULL)
 
+EXTRA_DIST = \
+	.gitignore \
+	$(NULL)
+
 mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/vdsmhooks
 dist_my_PYTHON = \
 	__init__.py \
