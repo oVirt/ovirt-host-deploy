@@ -21,6 +21,7 @@
 """Misc plugin."""
 
 
+import os
 import gettext
 _ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
@@ -53,7 +54,14 @@ class Plugin(plugin.PluginBase):
         )
         self.environment.setdefault(
             otopicons.CoreEnv.CONFIG_FILE_NAME,
-            odeploycons.FileLocations.OVIRT_HOST_DEPLOY_CONFIG_FILE
+            self.resolveFile(
+                os.environ.get(
+                    otopicons.SystemEnvironment.CONFIG,
+                    self.resolveFile(
+                        odeploycons.FileLocations.OVIRT_HOST_DEPLOY_CONFIG_FILE
+                    )
+                )
+            )
         )
         self.environment[
             odeploycons.CoreEnv.INTERFACE_VERSION
