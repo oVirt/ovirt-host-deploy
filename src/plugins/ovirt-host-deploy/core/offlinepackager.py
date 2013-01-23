@@ -18,7 +18,7 @@
 #
 
 
-"""Fake packager for ovirt-node"""
+"""Fake packager for offline mode"""
 
 
 import gettext
