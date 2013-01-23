@@ -28,7 +28,7 @@ if [ -f "${scriptdir}/.source" ]; then
 	else
 		otopidir="${OTOPI_SOURCES}/src/bin"
 	fi
-	export PYTHONPATH="${scriptdir}/..:${PYTHONPATH}"
+	export PYTHONPATH="$(cd "${scriptdir}" && pwd)/..:${PYTHONPATH}"
 	extraenv="APPEND:BASE/pluginPath=str:${scriptdir}/../plugins"
 fi
 exec "${otopidir}/otopi" "${extraenv} APPEND:BASE/pluginGroups=str:ovirt-host-deploy $*"
