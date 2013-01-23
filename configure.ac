@@ -1,6 +1,6 @@
 dnl
 dnl ovirt-host-deploy -- ovirt host deployer
-dnl Copyright (C) 2012 Red Hat, Inc.
+dnl Copyright (C) 2012-2013 Red Hat, Inc.
 dnl
 dnl This library is free software; you can redistribute it and/or
 dnl modify it under the terms of the GNU Lesser General Public
