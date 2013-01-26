@@ -21,13 +21,17 @@
 scriptdir="$(dirname "$0")"
 otopidir="${scriptdir}"
 extraenv=""
-if [ -f "${scriptdir}/.source" ]; then
-	OTOPI_SOURCES="@OTOPI_SOURCES@"
-	if [ -z "${OTOPI_SOURCES}" ]; then
-		otopidir="/usr/sbin"
+OTOPI_SOURCES="${OTOPI_SOURCES:-@OTOPI_SOURCES@}"
+if [ -z "${OTOPI_SOURCES}" ]; then
+	if [ -x "${scriptdir}/otopi" ]; then
+		otopidir="${scriptdir}"
 	else
-		otopidir="${OTOPI_SOURCES}/src/bin"
+		otopidir="/usr/sbin"
 	fi
+else
+	otopidir="${OTOPI_SOURCES}/src/bin"
+fi
+if [ -f "${scriptdir}/.source" ]; then
 	export PYTHONPATH="$(cd "${scriptdir}" && pwd)/..:${PYTHONPATH}"
 	extraenv="APPEND:BASE/pluginPath=str:${scriptdir}/../plugins"
 fi
