@@ -43,7 +43,7 @@ class Plugin(plugin.PluginBase):
     )
     def _validation(self):
         dist, ver = platform.linux_distribution(full_distribution_name=0)[:2]
-        if dist == 'redhat':
+        if dist in ('redhat', 'centos'):
             if LooseVersion(ver) < LooseVersion('6.2'):
                 raise RuntimeError(
                     _(
