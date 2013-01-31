@@ -52,7 +52,7 @@ class Plugin(plugin.PluginBase):
 
         with open('/proc/cpuinfo', 'r') as f:
             for line in f.readlines():
-                self.logger.debug('cpuinfo: %s', line)
+                self.logger.debug('cpuinfo: %s', line.strip())
 
                 if ':' in line:
                     k, v = line.split(':', 1)
