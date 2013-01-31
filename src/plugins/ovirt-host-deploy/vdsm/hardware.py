@@ -48,8 +48,12 @@ class Plugin(plugin.PluginBase):
     CPU_POWR = 'IBM_POWER'
 
     def _getCPUVendor(self):
+        ret = None
+
         with open('/proc/cpuinfo', 'r') as f:
             for line in f.readlines():
+                self.logger.debug('cpuinfo: %s', line)
+
                 if ':' in line:
                     k, v = line.split(':', 1)
                     k = k.strip()
@@ -58,10 +62,14 @@ class Plugin(plugin.PluginBase):
                         k == 'vendor_id' and
                         v in (self.CPU_INTEL, self.CPU_AMD)
                     ):
-                        return v
+                        ret = v
                     if k == 'cpu' and 'power' in v.lower():
-                        return self.CPU_POWER
-        raise RuntimeError(_('Architecture is unsupported'))
+                        ret = self.CPU_POWER
+
+        if ret is None:
+            raise RuntimeError(_('Architecture is unsupported'))
+
+        return ret
 
     def _cpuid(self, func):
         cpuid = '/dev/cpu/0/cpuid'
@@ -69,34 +77,46 @@ class Plugin(plugin.PluginBase):
             raise AttributeError('No %s' % cpuid)
         with open('/dev/cpu/0/cpuid') as f:
             f.seek(func)
-            return struct.unpack('IIII', f.read(16))
+            ret = struct.unpack('IIII', f.read(16))
+        self.logger.debug('cpuid: %s', ret)
+        return ret
 
     def _cpu_has_vmx_support(self):
         eax, ebx, ecx, edx = self._cpuid(1)
         # CPUID.1:ECX.VMX[bit 5] -> VT
-        return ecx & (1 << 5) != 0
+        ret = ecx & (1 << 5) != 0
+        self.logger.debug('vmx support: %s', ret)
+        return ret
 
     def _cpu_has_svm_support(self):
         SVM_CPUID_FEATURE_SHIFT = 2
         SVM_CPUID_FUNC = 0x8000000a
 
-        eax, ebx, ecx, edx = self._cpuid(0x80000000)
-        if eax < SVM_CPUID_FUNC:
-            return False
+        ret = False
 
-        eax, ebx, ecx, edx = self._cpuid(0x80000001)
-        return (ecx & (1 << SVM_CPUID_FEATURE_SHIFT)) != 0
+        eax, ebx, ecx, edx = self._cpuid(0x80000000)
+        if eax >= SVM_CPUID_FUNC:
+            eax, ebx, ecx, edx = self._cpuid(0x80000001)
+            ret = (ecx & (1 << SVM_CPUID_FEATURE_SHIFT)) != 0
+
+        self.logger.debug('svm support: %s', ret)
+        return ret
 
     def _prdmsr(self, cpu, index):
+        ret = -1
+
         msr = '/dev/cpu/%d/msr' % cpu
         if not os.path.exists(msr):
             raise AttributeError('No %s' % msr)
         with open(msr, 'r') as f:
-            f.seek(index)
             try:
-                return struct.unpack('L', f.read(8))[0]
+                f.seek(index)
+                ret = struct.unpack('L', f.read(8))[0]
             except struct.error:
-                return -1
+                pass
+
+        self.logger.debug('prdmsr: %s', ret)
+        return ret
 
     def _vmx_enabled_by_bios(self):
         MSR_IA32_FEATURE_CONTROL = 0x3a
@@ -104,21 +124,27 @@ class Plugin(plugin.PluginBase):
         MSR_IA32_FEATURE_CONTROL_VMXON_ENABLED = 0x4
 
         msr = self._prdmsr(0, MSR_IA32_FEATURE_CONTROL)
-        return (
+        ret = (
             msr & (
                 MSR_IA32_FEATURE_CONTROL_LOCKED |
                 MSR_IA32_FEATURE_CONTROL_VMXON_ENABLED
             )
         ) != MSR_IA32_FEATURE_CONTROL_LOCKED
 
+        self.logger.debug('vmx bios: %s', ret)
+        return ret
+
     def _svm_enabled_by_bios(self):
         SVM_VM_CR_SVM_DISABLE = 4
         MSR_VM_CR = 0xc0010114
 
         vm_cr = self._prdmsr(0, MSR_VM_CR)
-        return (vm_cr & (1 << SVM_VM_CR_SVM_DISABLE)) == 0
+        ret = (vm_cr & (1 << SVM_VM_CR_SVM_DISABLE)) == 0
+        self.logger.debug('svm bios: %s', ret)
+        return ret
 
     def _check_kvm_support_on_power(self):
+        ret = False
         with open('/proc/cpuinfo', 'r') as f:
             for line in f.readlines():
                 if ':' in line:
@@ -126,10 +152,14 @@ class Plugin(plugin.PluginBase):
                     k = k.strip()
                     v = v.strip()
                     if k == 'platform' and 'powernv' in v.lower():
-                        return True
-        return False
+                        ret = True
+                        break
+        self.logger.debug('kvm power: %s', ret)
+        return ret
 
     def _isVirtualizationEnabled(self):
+        cpu_ok = bios_ok = False
+
         vendor = self._getCPUVendor()
         if vendor == self.CPU_INTEL:
             bios_ok = self._vmx_enabled_by_bios()
