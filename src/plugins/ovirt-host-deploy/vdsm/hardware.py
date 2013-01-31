@@ -42,6 +42,11 @@ class Plugin(plugin.PluginBase):
         VdsmEnv.CHECK_VIRT_HARDWARE -- enable hardware detection.
 
     """
+
+    CPU_INTEL = 'GenuineIntel'
+    CPU_AMD = 'AuthenticAMD'
+    CPU_POWR = 'IBM_POWER'
+
     def _getCPUVendor(self):
         with open('/proc/cpuinfo', 'r') as f:
             for line in f.readlines():
@@ -51,11 +56,11 @@ class Plugin(plugin.PluginBase):
                     v = v.strip()
                     if (
                         k == 'vendor_id' and
-                        v in ('GenuineIntel', 'AuthenticAMD')
+                        v in (self.CPU_INTEL, self.CPU_AMD)
                     ):
                         return v
                     if k == 'cpu' and 'power' in v.lower():
-                        return 'IBM_POWER'
+                        return self.CPU_POWER
         raise RuntimeError(_('Architecture is unsupported'))
 
     def _cpuid(self, func):
@@ -126,13 +131,13 @@ class Plugin(plugin.PluginBase):
 
     def _isVirtualizationEnabled(self):
         vendor = self._getCPUVendor()
-        if vendor == 'GenuineIntel':
+        if vendor == self.CPU_INTEL:
             bios_ok = self._vmx_enabled_by_bios()
             cpu_ok = self._cpu_has_vmx_support()
-        elif vendor == 'AuthenticAMD':
+        elif vendor == self.CPU_AMD:
             bios_ok = self._svm_enabled_by_bios()
             cpu_ok = self._cpu_has_svm_support()
-        elif vendor == 'IBM_POWER':
+        elif vendor == self.CPU_POWER:
             if self._check_kvm_support_on_power():
                 bios_ok = True
                 cpu_ok = True
@@ -183,7 +188,7 @@ class Plugin(plugin.PluginBase):
         ],
     )
     def _validate_optional(self):
-        if self._getCPUVendor() in ('GenuineIntel', 'AuthenticAMD'):
+        if self._getCPUVendor() in (self.CPU_INTEL, self.CPU_AMD):
             with open('/proc/cpuinfo', 'r') as f:
                 if 'constant_tsc' not in f.read():
                     self.logger.warning(
