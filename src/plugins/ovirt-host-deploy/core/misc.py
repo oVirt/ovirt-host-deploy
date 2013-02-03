@@ -45,7 +45,10 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(
         stage=plugin.Stages.STAGE_BOOT,
-        priority=plugin.Stages.PRIORITY_FIRST,
+        before=[
+            otopicons.Stages.CORE_LOG_INIT,
+            otopicons.Stages.CORE_CONFIG_INIT,
+        ],
     )
     def _preinit(self):
         self.environment.setdefault(
@@ -118,7 +121,6 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
-        priority=plugin.Stages.PRIORITY_FIRST,
         condition=lambda self: (
             self.environment[
                 odeploycons.CoreEnv.FORCE_REBOOT

@@ -25,6 +25,7 @@ import gettext
 _ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
+from otopi import constants as otopicons
 from otopi import packager
 from otopi import util
 from otopi import plugin
@@ -63,7 +64,9 @@ class Plugin(plugin.PluginBase, packager.PackagerBase):
 
     @plugin.event(
         stage=plugin.Stages.STAGE_INIT,
-        priority=plugin.Stages.PRIORITY_MEDIUM,
+        after=[
+            otopicons.Stages.PACKAGERS_DETECTION,
+        ],
     )
     def _init(self):
         if self.environment.setdefault(
