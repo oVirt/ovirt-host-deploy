@@ -69,7 +69,7 @@ class Plugin(plugin.PluginBase):
             \s+
             (inet|inet6)
             \s+
-            ([0-9a-f.:]+)/[0-9]+
+            ([\da-f.:]+)/\d+
             .*
             scope
             \s+
@@ -97,12 +97,12 @@ class Plugin(plugin.PluginBase):
         pattern=r"""
             ^
             ((local)\s+|)
-            ([0-9a-f.:]+)
+            ([\da-f.:]+)
             \s+
             (
                 via
                 \s+
-                ([0-9a-f.:]+)
+                ([\da-f.:]+)
                 \s+
                 |
             )
@@ -112,7 +112,7 @@ class Plugin(plugin.PluginBase):
             \s+
             src
             \s+
-            ([0-9a-f.:]+)
+            ([\da-f.:]+)
         """
     )
     (
@@ -157,9 +157,9 @@ class Plugin(plugin.PluginBase):
         pattern=r"""
             IP4\.ADDRESS\[1\]:
             \s+
-            ip\s*=\s*([0-9.]+)/([0-9]+),
+            ip\s*=\s*([\d.]+)/(\d+),
             \s*
-            gw\s*=\s*([0-9.]+)
+            gw\s*=\s*([\d.]+)
         """
     )
     (
