@@ -128,8 +128,9 @@ class Plugin(plugin.PluginBase):
     _RE_VLAN_ID = re.compile(
         flags=re.VERBOSE,
         pattern=r"""
+            ^
             .*
-            VID: ([0-9]+)
+            \sVID:\s(\d+)\s
             .*
             """
     )
