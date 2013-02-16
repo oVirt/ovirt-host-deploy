@@ -388,8 +388,8 @@ class Plugin(plugin.PluginBase):
             if interface is None or vlanid is None:
                 raise RuntimeError(
                     _(
-                        'Interface {interface} is VLAN interface '
-                        'However its configuration is unexpected'
+                        'Interface {interface} is VLAN interface, '
+                        'however its configuration is unexpected'
                     ).format(
                         interface=name,
                     )
