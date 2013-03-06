@@ -123,9 +123,8 @@ class Plugin(plugin.PluginBase):
         MSR_IA32_FEATURE_CONTROL_LOCKED = 0x1
         MSR_IA32_FEATURE_CONTROL_VMXON_ENABLED = 0x4
 
-        msr = self._prdmsr(0, MSR_IA32_FEATURE_CONTROL)
         ret = (
-            msr & (
+            self._prdmsr(0, MSR_IA32_FEATURE_CONTROL) & (
                 MSR_IA32_FEATURE_CONTROL_LOCKED |
                 MSR_IA32_FEATURE_CONTROL_VMXON_ENABLED
             )
@@ -138,8 +137,11 @@ class Plugin(plugin.PluginBase):
         SVM_VM_CR_SVM_DISABLE = 4
         MSR_VM_CR = 0xc0010114
 
-        vm_cr = self._prdmsr(0, MSR_VM_CR)
-        ret = (vm_cr & (1 << SVM_VM_CR_SVM_DISABLE)) == 0
+        ret = (
+            self._prdmsr(0, MSR_VM_CR) &
+            (1 << SVM_VM_CR_SVM_DISABLE)
+        ) == 0
+
         self.logger.debug('svm bios: %s', ret)
         return ret
 
