@@ -212,6 +212,11 @@ class Plugin(plugin.PluginBase):
             self.logger.warning(
                 _('Cannot detect if hardware supports virtualization')
             )
+        except IOError:
+            self.logger.debug('Cannot detect virualization', exc_info=True)
+            self.logger.warning(
+                _('Cannot detect if hardware supports virtualization')
+            )
 
     @plugin.event(
         stage=plugin.Stages.STAGE_VALIDATION,
