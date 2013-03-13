@@ -69,20 +69,15 @@ class Plugin(plugin.PluginBase):
             \s+
             (inet|inet6)
             \s+
-            ([\da-f.:]+)/\d+
+            (?P<address>[\da-f.:]+)/\d+
             .*
             scope
             \s+
             global
             \s+
-            (\S+)
+            (?P<interface>\S+)
         """
     )
-    (
-        _RE_IPROUTE_ADDR_SHOW_TYPE,
-        _RE_IPROUTE_ADDR_SHOW_ADDRESS,
-        _RE_IPROUTE_ADDR_SHOW_INTERFACE
-    ) = range(1, 4)
 
     """
     Remote:
@@ -96,8 +91,8 @@ class Plugin(plugin.PluginBase):
         flags=re.VERBOSE,
         pattern=r"""
             ^
-            ((local)\s+|)
-            ([\da-f.:]+)
+            ((?P<local>local)\s+|)
+            (?P<address>[\da-f.:]+)
             \s+
             (
                 via
@@ -108,33 +103,23 @@ class Plugin(plugin.PluginBase):
             )
             dev
             \s+
-            (\S+)
+            (?P<device>\S+)
             \s+
             src
             \s+
             ([\da-f.:]+)
         """
     )
-    (
-        _RE_IPROUTE_ROUTE_GET_LOCAL,
-        _RE_IPROUTE_ROUTE_GET_DUMMY1,
-        _RE_IPROUTE_ROUTE_GET_ADDRESS,
-        _RE_IPROUTE_ROUTE_GET_DUMMY2,
-        _RE_IPROUTE_ROUTE_GET_VIA,
-        _RE_IPROUTE_ROUTE_GET_DEVICE,
-        _RE_IPROUTE_ROUTE_GET_SRC,
-    ) = range(1, 8)
 
     _RE_VLAN_ID = re.compile(
         flags=re.VERBOSE,
         pattern=r"""
             ^
             .*
-            \sVID:\s(\d+)\s
+            \sVID:\s(?P<vlan>\d+)\s
             .*
             """
     )
-    _RE_VLAN_ID_VLANID = 1
 
     _RE_VLAN_DEVICE = re.compile(
         flags=re.VERBOSE,
@@ -142,12 +127,11 @@ class Plugin(plugin.PluginBase):
             ^
             Device:
             \s+
-            (\S+)
+            (?P<device>\S+)
             \s*
             $
             """
     )
-    _RE_VLAN_DEVICE_DEVICE = 1
 
     """
     IP4.ADDRESS[1]:       ip = 10.35.1.115/23, gw = 10.35.1.254
@@ -157,16 +141,11 @@ class Plugin(plugin.PluginBase):
         pattern=r"""
             IP4\.ADDRESS\[1\]:
             \s+
-            ip\s*=\s*([\d.]+)/(\d+),
+            ip\s*=\s*(?P<address>[\d.]+)/(?P<prefix>\d+),
             \s*
-            gw\s*=\s*([\d.]+)
+            gw\s*=\s*(?P<gateway>[\d.]+)
         """
     )
-    (
-        _RE_NM_LIST_IF_IP_ADDRESS,
-        _RE_NM_LIST_IF_IP_PREFIX,
-        _RE_NM_LIST_IF_IP_GATEWAY,
-    ) = range(1, 4)
 
     _INTERFACE_LOOPBACK = 'lo'
 
@@ -323,17 +302,17 @@ class Plugin(plugin.PluginBase):
                 )
             )
 
-        if m.group(self._RE_IPROUTE_ROUTE_GET_ADDRESS) != address:
+        if m.group('address') != address:
             raise RuntimeError(
                 _('Invalid route information for {address}').format(
                     address=address
                 )
             )
 
-        if m.group(self._RE_IPROUTE_ROUTE_GET_LOCAL):
+        if m.group('local'):
             interface = self._INTERFACE_LOOPBACK
         else:
-            interface = m.group(self._RE_IPROUTE_ROUTE_GET_DEVICE)
+            interface = m.group('device')
 
         self.logger.debug('interface for %s is %s', address, interface)
         return interface
@@ -357,11 +336,9 @@ class Plugin(plugin.PluginBase):
                 m = self._RE_IPROUTE_ADDR_SHOW.match(line)
                 if (
                     m is not None and
-                    m.group(self._RE_IPROUTE_ADDR_SHOW_ADDRESS) == address
+                    m.group('address') == address
                 ):
-                    interface = m.group(
-                        self._RE_IPROUTE_ADDR_SHOW_INTERFACE
-                    )
+                    interface = m.group('interface')
 
         return interface
 
@@ -379,11 +356,11 @@ class Plugin(plugin.PluginBase):
                 for line in f:
                     m = self._RE_VLAN_ID.match(line)
                     if m is not None:
-                        vlanid = m.group(self._RE_VLAN_ID_VLANID)
+                        vlanid = m.group('vlan')
                     else:
                         m = self._RE_VLAN_DEVICE.match(line)
                         if m is not None:
-                            interface = m.group(self._RE_VLAN_DEVICE_DEVICE)
+                            interface = m.group('device')
 
             if interface is None or vlanid is None:
                 raise RuntimeError(
@@ -446,9 +423,9 @@ class Plugin(plugin.PluginBase):
                 if l.startswith('IP4.ADDRESS[1]:'):
                     r = self._RE_NM_LIST_IF_IP.match(l)
                     if r is not None:
-                        address = r.group(self._RE_NM_LIST_IF_IP_ADDRESS)
-                        prefix = r.group(self._RE_NM_LIST_IF_IP_PREFIX)
-                        gateway = r.group(self._RE_NM_LIST_IF_IP_GATEWAY)
+                        address = r.group('address')
+                        prefix = r.group('prefix')
+                        gateway = r.group('gateway')
                 if l.startswith('DHCP4.OPTION[1]:'):
                     dhcp = True
 
