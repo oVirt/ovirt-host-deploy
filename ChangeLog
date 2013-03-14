@@ -1,6 +1,6 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.0.1
+2013-03-14 - Version 1.0.1
 
  * fix vlan id detection, thanks to Jeff Bailey for reporting.
 
