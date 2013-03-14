@@ -22,8 +22,18 @@ ODEPLOY/offlinePackager(bool) [False]
 VDSM/keySize(int) [2048]
     RSA key size.
 
-VDSM/certificateEnrollment(bool) [True]
-    Enable certificate enrollment.
+VDSM/certificateEnrollment(str) [inline]
+    Certificate enrollment.
+      none - do not enroll.
+      request - generate only certificate request.
+      accept - only accept certificate.
+      inline - perform enrollment inline (request, accept).
+
+VDSM/certificateChain(multi-str)
+    Certificate chain to accept during 'accept' enrollment.
+
+VDSM/keySize(int) [2048]
+    Key side to use when generating certificate request.
 
 VDSM/vdsmId(str)
     VDSM id.
