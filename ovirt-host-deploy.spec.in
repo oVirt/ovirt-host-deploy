@@ -41,7 +41,6 @@ Requires:	python
 Requires:	otopi
 BuildRequires:	otopi-devel
 BuildRequires:	python2-devel
-BuildRequires:	gettext-devel
 
 BuildRequires:	java-devel
 BuildRequires:	jpackage-utils
