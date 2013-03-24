@@ -18,6 +18,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+ENV="/etc/ovirt-host-deploy.env.d"
+for f in $([ -d "${ENV}" ] && find "${ENV}" -name '*.conf' | sort); do
+	[ -r "${f}" ] && . "${f}"
+done
+
 scriptdir="$(dirname "$0")"
 otopidir="${scriptdir}"
 extraenv=""
