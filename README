@@ -47,7 +47,7 @@ Construct appropriate /etc/vdsm/vdsm.conf.
 Create:
 
 /etc/ovirt-host-deploy.conf.d/50-fake.conf
- [environment:override]
+ [environment:enforce]
  VDSM/checkVirtHardware=bool:False
  VDSM/configOverride=bool:False
 
@@ -56,5 +56,5 @@ DEVELOPMENT
 In order to avoid override of vdsm.conf, create:
 
 /etc/ovirt-host-deploy.conf.d/50-development.conf
- [environment:override]
+ [environment:enforce]
  VDSM/configOverride=bool:False
