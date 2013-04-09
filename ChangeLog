@@ -2,6 +2,7 @@ ovirt-host-deploy -- oVirt host deploy
 
 ????-??-?? - Version 1.0.2
 
+ * vdsm: vdsmid: do not attempt to install dmidecode on platforms other than
 
 2013-03-14 - Version 1.0.1
 
