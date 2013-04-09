@@ -4,6 +4,8 @@ ovirt-host-deploy -- oVirt host deploy
 
  * vdsm: bridge: fix vlan id detection, thanks to Jeff Bailey for reporting.
  * vdsm: hardware: do not fail if cannot read msr, rhbz#916589.
+ * vdsm: vdsmid: do not attempt to install dmidecode on platforms other than
+   x86.
  * gluster: packages: start glusterd if no reboot.
  * build: re-introduce external gettext packaging.
 

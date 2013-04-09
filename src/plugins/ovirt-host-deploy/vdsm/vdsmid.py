@@ -77,7 +77,8 @@ class Plugin(plugin.PluginBase):
         ),
     )
     def _packages(self):
-        self.packager.install(('dmidecode',))
+        if platform.machine() in ('x86_64', 'i686'):
+            self.packager.install(('dmidecode',))
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CUSTOMIZATION,
