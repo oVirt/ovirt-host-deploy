@@ -39,6 +39,7 @@ BuildArch:	noarch
 
 Requires:	python
 Requires:	otopi
+BuildRequires:	gettext
 BuildRequires:	otopi-devel
 BuildRequires:	python2-devel
 
