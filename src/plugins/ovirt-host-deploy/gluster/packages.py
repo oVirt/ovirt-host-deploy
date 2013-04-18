@@ -76,5 +76,18 @@ class Plugin(plugin.PluginBase):
     def _packages(self):
         self.packager.installUpdate(('vdsm-gluster',))
 
+    @plugin.event(
+        stage=plugin.Stages.STAGE_CLOSEUP,
+        condition=lambda self: (
+            self._enabled and
+            not self.environment[
+                odeploycons.CoreEnv.FORCE_REBOOT
+            ]
+        ),
+    )
+    def _closeup(self):
+        self.logger.info(_('Starting gluster'))
+        for state in (False, True):
+            self.services.state('glusterd', state)
 
 # vim: expandtab tabstop=4 shiftwidth=4
