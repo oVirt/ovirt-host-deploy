@@ -45,7 +45,7 @@ class Plugin(plugin.PluginBase):
 
     CPU_INTEL = 'GenuineIntel'
     CPU_AMD = 'AuthenticAMD'
-    CPU_POWR = 'IBM_POWER'
+    CPU_POWER = 'IBM_POWER'
 
     def _getCPUVendor(self):
         ret = None
