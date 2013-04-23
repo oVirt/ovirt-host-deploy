@@ -6,6 +6,7 @@ ovirt-host-deploy -- oVirt host deploy
  * vdsm: hardware: do not fail if cannot read msr, rhbz#916589.
  * vdsm: vdsmid: do not attempt to install dmidecode on platforms other than
    x86.
+ * vdsm: vdsmid: detect power cpu correctly.
  * gluster: packages: start glusterd if no reboot.
  * build: re-introduce external gettext packaging.
 
