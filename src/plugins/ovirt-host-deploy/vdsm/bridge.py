@@ -588,13 +588,13 @@ class Plugin(plugin.PluginBase):
             self.logger.debug('Management interface already exists')
         else:
             try:
-                addresses = [
+                addresses = set([
                     address[0] for __, __, __, __, address in
                     socket.getaddrinfo(
                         host,
                         None
                     )
-                ]
+                ])
                 self.logger.debug('Engine %s addresses: %s', host, addresses)
             except:
                 self.logger.debug(
