@@ -456,7 +456,7 @@ class Plugin(plugin.PluginBase):
             if dhcp:
                 parameters.append('bootproto=dhcp')
             elif address is not None:
-                parameters.append('ipaddr=%s', address)
+                parameters.append('ipaddr=%s' % address)
                 netmask = socket.inet_ntoa(
                     struct.pack(
                         "!I",
@@ -469,8 +469,8 @@ class Plugin(plugin.PluginBase):
                         )
                     )
                 )
-                parameters.append('netmask=%s', netmask)
-                parameters.append('gateway=%s', gateway)
+                parameters.append('netmask=%s' % netmask)
+                parameters.append('gateway=%s' % gateway)
             else:
                 raise RuntimeError(
                     _('Unsupported network manager configuration')
