@@ -1,6 +1,6 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.0.2
+2013-05-06 - Version 1.0.2
 
  * vdsm: bridge: fix format typo when querying network manager, thanks to
    Pascal Jakobi for reporting.
