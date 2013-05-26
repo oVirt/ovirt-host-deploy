@@ -29,6 +29,7 @@ CLEANFILES = \
 dist_ovirthostdeploylib_PYTHON = \
 	__init__.py \
 	constants.py \
+	hardware.py \
 	$(NULL)
 
 ovirthostdeploylib_PYTHON = \

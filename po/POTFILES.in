@@ -1,4 +1,5 @@
 ./src/ovirt_host_deploy/constants.py
+./src/ovirt_host_deploy/hardware.py
 ./src/ovirt_host_deploy/__init__.py
 ./src/plugins/ovirt-host-deploy/core/__init__.py
 ./src/plugins/ovirt-host-deploy/core/misc.py
