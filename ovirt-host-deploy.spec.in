@@ -166,12 +166,16 @@ cp src/java/pom.xml "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_ve
 %{_sbindir}/%{name}
 %dir %{python_sitelib}/ovirt_host_deploy
 %{python_sitelib}/ovirt_host_deploy/*.py*
+%dir %{_sysconfdir}/%{name}.conf.d
 %dir %{_datadir}/%{name}
+%dir %{_datadir}/%{name}/plugins
+%dir %{_datadir}/%{name}/plugins/%{name}
 %{_datadir}/%{name}/plugins/%{name}/*/*.py*
 %{_datadir}/%{name}/plugins/%{name}/*/*.rules
 %{_datadir}/%{name}/plugins/%{name}/*/*/.keep
 %{_datadir}/otopi/plugins/%{name}
 #%{_datadir}/locale/*/*/%{name}.mo
+%dir %{ovirt_host_deploy_root}
 %{ovirt_host_deploy_root}/.bundled
 %{ovirt_host_deploy_root}/setup
 %{ovirt_host_deploy_root}/ovirt-host-deploy
@@ -182,6 +186,7 @@ cp src/java/pom.xml "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_ve
 #%{ovirt_host_deploy_root}/locale/*/*/*.mo
 
 %files java
+%dir %{_javadir}/%{name}
 %{_javadir}/%{name}/%{name}*.jar
 %if 0%{?fedora:1}
 %{_mavenpomdir}/JPP.%{name}-%{name}.pom
@@ -190,6 +195,7 @@ cp src/java/pom.xml "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_ve
 
 %if 0%{?fedora:1}
 %files javadoc
+%dir %{_javadocdir}/%{name}
 %{_javadocdir}/%{name}
 %endif
 
