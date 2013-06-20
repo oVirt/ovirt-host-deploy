@@ -95,6 +95,7 @@ class VdsmEnv(object):
     MANAGEMENT_BRIDGE_NAME = 'VDSM/managementBridgeName'
     CHECK_VIRT_HARDWARE = 'VDSM/checkVirtHardware'
     OVIRT_NODE = 'VDSM/node'
+    OVIRT_NODE_HAS_OWN_BRIDGES = 'VDSM/nodeHasOwnBridges'
     CONFIG_OVERRIDE = 'VDSM/configOverride'
     CONFIG_PREFIX = 'VDSM_CONFIG/'
 

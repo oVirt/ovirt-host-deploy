@@ -9,6 +9,7 @@ ovirt-host-deploy -- oVirt host deploy
  * vdsm: vdsmid: do not attempt to install dmidecode on platforms other than
    x86.
  * vdsm: vdsmid: detect power cpu correctly.
+ * vdsm: ovirt-node: detect nodes with own bridges and report back.
  * gluster: packages: start glusterd if no reboot.
  * build: re-introduce external gettext packaging.
 

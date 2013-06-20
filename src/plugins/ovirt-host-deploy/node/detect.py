@@ -57,6 +57,9 @@ class Plugin(plugin.PluginBase):
                 bool(glob.glob('/etc/ovirt-node-*-release'))
             )
         )
+        self.environment[
+            odeploycons.VdsmEnv.OVIRT_NODE_HAS_OWN_BRIDGES
+        ] = len(glob.glob('/sys/class/net/br*/bridge/bridge_id')) != 0
         self.environment.setdefault(
             odeploycons.CoreEnv.OFFLINE_PACKAGER,
             self.environment[
