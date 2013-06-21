@@ -13,6 +13,7 @@ ovirt-host-deploy -- oVirt host deploy
  * vdsm: ovirt-node: detect nodes with own bridges and report back.
  * vdsm: packages: cgconfig is dependency of libvirt.
  * gluster: packages: start glusterd if no reboot.
+ * openstack: add neutron support.
  * build: re-introduce external gettext packaging.
 
 2013-02-14 - Version 1.0.0

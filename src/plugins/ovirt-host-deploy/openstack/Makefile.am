@@ -17,21 +17,24 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+include $(top_srcdir)/build/python.inc
+
 MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
 	$(NULL)
 
-SUBDIRS = \
-	core \
-	vdsm \
-	vdsmhooks \
-	tune \
-	node \
-	gluster \
-	openstack \
+mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/openstack
+dist_my_PYTHON = \
+	__init__.py \
+	neutron.py \
+	neutron_linuxbridge.py \
+	neutron_openvswitch.py \
 	$(NULL)
 
-install-data-local:
-	$(MKDIR_P) "$(DESTDIR)$(otopiplugindir)"
-	rm -f "$(DESTDIR)$(otopiplugindir)/$(PACKAGE_NAME)"
-	ln -s "$(ovirthostdeployplugindir)/$(PACKAGE_NAME)" "$(DESTDIR)$(otopiplugindir)/$(PACKAGE_NAME)"
+clean-local: \
+	python-clean \
+	$(NULL)
+
+all-local: \
+	python-syntax-check \
+	$(NULL)

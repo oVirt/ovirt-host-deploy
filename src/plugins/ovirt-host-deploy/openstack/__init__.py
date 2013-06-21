@@ -17,21 +17,23 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in \
-	$(NULL)
 
-SUBDIRS = \
-	core \
-	vdsm \
-	vdsmhooks \
-	tune \
-	node \
-	gluster \
-	openstack \
-	$(NULL)
+"""openstack plugin."""
 
-install-data-local:
-	$(MKDIR_P) "$(DESTDIR)$(otopiplugindir)"
-	rm -f "$(DESTDIR)$(otopiplugindir)/$(PACKAGE_NAME)"
-	ln -s "$(ovirthostdeployplugindir)/$(PACKAGE_NAME)" "$(DESTDIR)$(otopiplugindir)/$(PACKAGE_NAME)"
+
+from otopi import util
+
+
+from . import neutron
+from . import neutron_linuxbridge
+from . import neutron_openvswitch
+
+
+@util.export
+def createPlugins(context):
+    neutron.Plugin(context=context)
+    neutron_linuxbridge.Plugin(context=context)
+    neutron_openvswitch.Plugin(context=context)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

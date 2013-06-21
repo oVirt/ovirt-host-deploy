@@ -168,6 +168,7 @@ AC_CONFIG_FILES([
 	src/plugins/ovirt-host-deploy/tune/Makefile
 	src/plugins/ovirt-host-deploy/node/Makefile
 	src/plugins/ovirt-host-deploy/gluster/Makefile
+	src/plugins/ovirt-host-deploy/openstack/Makefile
 	src/java/Makefile
 	src/java/pom.xml
 	src/interface-3/Makefile
