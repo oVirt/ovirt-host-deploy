@@ -2,6 +2,7 @@ ovirt-host-deploy -- oVirt host deploy
 
 ????-??-?? - Version 1.0.3
 
+ * vdsm: bridge: fix python compatibility issue and network manager.
 
 2013-05-06 - Version 1.0.2
 
