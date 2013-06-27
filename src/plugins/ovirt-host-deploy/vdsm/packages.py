@@ -116,6 +116,8 @@ class Plugin(plugin.PluginBase):
                 self.services.startup('libvirtd', True)
             if self.services.exists('messagebus'):
                 self.services.startup('messagebus', True)
+            if self.services.exists('cgconfig'):
+                self.services.startup('cgconfig', True)
 
     # WORKAROUND-BEGIN
     # old vdsm does not support the reconfigure trigger.
@@ -146,6 +148,8 @@ class Plugin(plugin.PluginBase):
     def _start(self):
         self.logger.info(_('Starting vdsm'))
         if not self.services.supportsDependency:
+            if self.services.exists('cgconfig'):
+                self.services.state('cgconfig', True)
             if self.services.exists('messagebus'):
                 self.services.state('messagebus', True)
             if self.services.exists('libvirtd'):

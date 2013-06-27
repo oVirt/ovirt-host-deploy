@@ -11,6 +11,7 @@ ovirt-host-deploy -- oVirt host deploy
    x86.
  * vdsm: vdsmid: detect power cpu correctly.
  * vdsm: ovirt-node: detect nodes with own bridges and report back.
+ * vdsm: packages: cgconfig is dependency of libvirt.
  * gluster: packages: start glusterd if no reboot.
  * build: re-introduce external gettext packaging.
 
