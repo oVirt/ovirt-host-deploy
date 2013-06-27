@@ -424,7 +424,7 @@ class Plugin(plugin.PluginBase):
                     r = self._RE_NM_LIST_IF_IP.match(l)
                     if r is not None:
                         address = r.group('address')
-                        prefix = r.group('prefix')
+                        prefix = int(r.group('prefix'))
                         gateway = r.group('gateway')
                 if l.startswith('DHCP4.OPTION[1]:'):
                     dhcp = True
