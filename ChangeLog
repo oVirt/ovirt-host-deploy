@@ -12,6 +12,7 @@ ovirt-host-deploy -- oVirt host deploy
  * vdsm: vdsmid: detect power cpu correctly.
  * vdsm: ovirt-node: detect nodes with own bridges and report back.
  * vdsm: packages: cgconfig is dependency of libvirt.
+ * vdsm: packages: use new method of libvirt reconfigure.
  * gluster: packages: start glusterd if no reboot.
  * openstack: add neutron support.
  * build: re-introduce external gettext packaging.

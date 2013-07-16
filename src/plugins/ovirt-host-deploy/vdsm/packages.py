@@ -55,6 +55,12 @@ class Plugin(plugin.PluginBase):
         )
 
     @plugin.event(
+        stage=plugin.Stages.STAGE_SETUP,
+    )
+    def _setup(self):
+        self.command.detect('vdsm-tool')
+
+    @plugin.event(
         stage=plugin.Stages.STAGE_VALIDATION,
     )
     def _validation(self):
@@ -119,24 +125,28 @@ class Plugin(plugin.PluginBase):
             if self.services.exists('cgconfig'):
                 self.services.startup('cgconfig', True)
 
-    # WORKAROUND-BEGIN
-    # old vdsm does not support the reconfigure trigger.
-    # we need to manually locate and reconfigure the init.d script.
-    # can be removed while vdsm-4.9.6 (no fix) is gone.
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
     )
     def _reconfigure(self):
-        for script in ('/etc/init.d/vdsmd', '/lib/systemd/systemd-vdsmd'):
-            if os.path.exists(script):
-                rc, stdout, stderr = self.execute(
-                    [script, 'reconfigure'],
-                    raiseOnError=False
-                )
-                if rc != 0:
-                    self.logger.warning('Cannot reconfigure vdsm')
-                break
-    # WORKAROUND-END
+        rc, stdout, stderr = self.execute(
+            (
+                self.command.get('vdsm-tool'),
+                'libvirt-reconfigure',
+            ),
+            raiseOnError=False,
+        )
+        if rc != 0:
+            self.logger.warning('Cannot reconfigure vdsm using vdsm-tool')
+            for script in ('/etc/init.d/vdsmd', '/lib/systemd/systemd-vdsmd'):
+                if os.path.exists(script):
+                    rc, stdout, stderr = self.execute(
+                        [script, 'reconfigure'],
+                        raiseOnError=False
+                    )
+                    if rc != 0:
+                        self.logger.warning('Cannot reconfigure vdsm')
+                    break
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
