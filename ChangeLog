@@ -6,6 +6,7 @@ ovirt-host-deploy -- oVirt host deploy
  * vdsm: bridge: fix format typo when querying network manager, thanks to
    Pascal Jakobi for reporting.
  * vdsm: bridge: fix python compatibility issue and network manager.
+ * vdsm: bridge: attempt to rollback if bridge creation failed.
  * vdsm: hardware: do not fail if cannot read msr, rhbz#916589.
  * vdsm: vdsmid: do not attempt to install dmidecode on platforms other than
    x86.

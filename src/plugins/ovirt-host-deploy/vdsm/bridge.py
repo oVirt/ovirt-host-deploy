@@ -32,8 +32,10 @@ import gettext
 _ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
+from otopi import constants as otopicons
 from otopi import util
 from otopi import plugin
+from otopi import transaction
 
 
 from ovirt_host_deploy import constants as odeploycons
@@ -56,6 +58,44 @@ class Plugin(plugin.PluginBase):
         VdsmEnv.MANAGEMENT_BRIDGE_NAME -- management bridge name.
 
     """
+
+    class NetworkSetupTransaction(transaction.TransactionElement):
+        """yum transaction element."""
+
+        def __init__(self, parent):
+            self._parent = parent
+
+        def __str__(self):
+            return _("NetworkSetup Transaction")
+
+        def prepare(self):
+            pass
+
+        def abort(self):
+            self._parent.logger.debug('Rollback network transaction')
+            rc, stdout, stderr = self._parent.execute(
+                (
+                    os.path.join(
+                        odeploycons.FileLocations.VDSM_DATA_DIR,
+                        'vdsm-restore-net-config',
+                    ),
+                ),
+                raiseOnError=False,
+            )
+            if rc != 0:
+                self._parent.logger.error(
+                    _('Cannot create rollback network transaction')
+                )
+
+        def commit(self):
+            self._parent.execute(
+                (
+                    os.path.join(
+                        odeploycons.FileLocations.VDSM_DATA_DIR,
+                        'vdsm-store-net-config',
+                    ),
+                ),
+            )
 
     """
     3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP...
@@ -717,6 +757,12 @@ class Plugin(plugin.PluginBase):
         condition=lambda self: self._enabled,
     )
     def _misc(self):
+        self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
+            self.NetworkSetupTransaction(
+                parent=self,
+            )
+        )
+
         if self.services.exists('libvirtd'):
             if not self.services.supportsDependency:
                 self.services.state('messagebus', True)
@@ -754,20 +800,6 @@ class Plugin(plugin.PluginBase):
             ),
             timeout=self.environment[odeploycons.VdsmEnv.CONNECTION_TIMEOUT],
             retries=self.environment[odeploycons.VdsmEnv.CONNECTION_RETRIES],
-        )
-
-    @plugin.event(
-        stage=plugin.Stages.STAGE_TRANSACTION_END,
-        condition=lambda self: self._enabled,
-    )
-    def _transaction_end(self):
-        self.execute(
-            (
-                os.path.join(
-                    odeploycons.FileLocations.VDSM_DATA_DIR,
-                    'vdsm-store-net-config',
-                ),
-            ),
         )
 
     @plugin.event(
