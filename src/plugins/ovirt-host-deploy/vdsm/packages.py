@@ -137,7 +137,7 @@ class Plugin(plugin.PluginBase):
             raiseOnError=False,
         )
         if rc != 0:
-            self.logger.warning('Cannot reconfigure vdsm using vdsm-tool')
+            self.logger.debug('Cannot reconfigure vdsm using vdsm-tool')
             for script in ('/etc/init.d/vdsmd', '/lib/systemd/systemd-vdsmd'):
                 if os.path.exists(script):
                     rc, stdout, stderr = self.execute(
