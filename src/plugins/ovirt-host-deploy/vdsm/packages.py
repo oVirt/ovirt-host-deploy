@@ -132,7 +132,7 @@ class Plugin(plugin.PluginBase):
         rc, stdout, stderr = self.execute(
             (
                 self.command.get('vdsm-tool'),
-                'libvirt-reconfigure',
+                'libvirt-configure',
             ),
             raiseOnError=False,
         )
