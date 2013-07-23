@@ -38,33 +38,43 @@ class Plugin(plugin.PluginBase):
 
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
-        self.enabled = False
+        self._enabled = False
+        self._profile = None
 
     @plugin.event(
         stage=plugin.Stages.STAGE_SETUP,
         condition=lambda self: (
             not self.environment[
                 odeploycons.VdsmEnv.OVIRT_NODE
-            ] and
-            not self.environment[
-                odeploycons.GlusterEnv.ENABLE
             ]
-        )
+        ),
     )
     def _setup(self):
         self.command.detect('tuned-adm')
-        self.enabled = True
+        self._enabled = True
+
+    @plugin.event(
+        stage=plugin.Stages.STAGE_VALIDATION,
+        condition=lambda self: self._enabled,
+    )
+    def _validation(self):
+        if self.environment[odeploycons.GlusterEnv.ENABLE]:
+            self._profile = 'rhs-virtualization'
+        else:
+            self._profile = 'virtual-host'
+
+        self._enabled = True
 
     @plugin.event(
         stage=plugin.Stages.STAGE_PACKAGES,
-        condition=lambda self: self.enabled,
+        condition=lambda self: self._enabled,
     )
     def _packages(self):
         self.packager.installUpdate(('tuned',))
 
     @plugin.event(
         stage=plugin.Stages.STAGE_MISC,
-        condition=lambda self: self.enabled,
+        condition=lambda self: self._enabled,
     )
     def _misc(self):
         # tuned-adm does not work if daemon is down!
@@ -73,7 +83,7 @@ class Plugin(plugin.PluginBase):
             (
                 self.command.get('tuned-adm'),
                 'profile',
-                'virtual-host',
+                self._profile,
             ),
             raiseOnError=False,
         )
