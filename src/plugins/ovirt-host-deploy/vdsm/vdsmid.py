@@ -110,7 +110,7 @@ class Plugin(plugin.PluginBase):
             #eg. output IBM,03061C14A
             if os.path.exists('/proc/device-tree/system-id'):
                 with open('/proc/device-tree/system-id') as f:
-                    vdsmId = f.readline().replace(',', '')
+                    vdsmId = f.readline().rstrip('\0').replace(',', '')
 
         if vdsmId is None:
             vdsmId = str(uuid.uuid4())
