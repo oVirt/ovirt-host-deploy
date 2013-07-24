@@ -80,7 +80,9 @@ This package contains the API documentation for %{name}.
 
 %package offline
 Summary:	ovirt-host-deploy offline dependencies
+%ifarch %{ix86} x86_64
 Requires:	dmidecode
+%endif
 Requires:	iproute
 Requires:	libselinux-python
 Requires:	m2crypto
