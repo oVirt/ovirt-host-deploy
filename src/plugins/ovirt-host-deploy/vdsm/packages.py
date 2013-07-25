@@ -53,6 +53,10 @@ class Plugin(plugin.PluginBase):
             odeploycons.VdsmEnv.VDSM_MINIMUM_VERSION,
             None
         )
+        self.environment.setdefault(
+            odeploycons.VdsmEnv.DISABLE_NETWORKMANAGER,
+            True
+        )
 
     @plugin.event(
         stage=plugin.Stages.STAGE_SETUP,
@@ -174,6 +178,18 @@ class Plugin(plugin.PluginBase):
         if self.services.exists('network'):
             self.services.state('network', True)
             self.services.startup('network', True)
+
+        #
+        # remove network manager as it create timing
+        # issues with the network service and vdsm
+        # see rhbz#879180
+        #
+        if (
+            self.environment[odeploycons.VdsmEnv.DISABLE_NETWORKMANAGER] and
+            self.services.exists('NetworkManager')
+        ):
+            self.services.state('NetworkManager', False)
+            self.services.startup('NetworkManager', False)
 
         self.services.state('vdsmd', True)
 

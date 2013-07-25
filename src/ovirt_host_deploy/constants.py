@@ -104,6 +104,7 @@ class VdsmEnv(object):
     OVIRT_NODE = 'VDSM/node'
     OVIRT_NODE_HAS_OWN_BRIDGES = 'VDSM/nodeHasOwnBridges'
     CONFIG_OVERRIDE = 'VDSM/configOverride'
+    DISABLE_NETWORKMANAGER = 'VDSM/disableNetworkManager'
     CONFIG_PREFIX = 'VDSM_CONFIG/'
 
 

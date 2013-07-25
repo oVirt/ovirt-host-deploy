@@ -57,6 +57,9 @@ VDSM/checkVirtHardware(bool) [True]
 VDSM/configOverride(bool) [True]
     Override vdsm configuration file.
 
+VDSM/disableNetworkManager(bool) [True]
+    Disable NetworkManager service.
+
 VDSM_CONFIG/section/key(str)
     Set vdsm configuration option. If set vdsm configuration is
     overridden unless there is VDSM/configOverride = False.
