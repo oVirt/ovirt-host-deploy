@@ -176,7 +176,9 @@ class Plugin(plugin.PluginBase):
         # so we do this manually.
         #
         if self.services.exists('network'):
-            self.services.state('network', True)
+            # rhel network fails on second restart
+            if not self.services.status('network'):
+                self.services.state('network', True)
             self.services.startup('network', True)
 
         #
