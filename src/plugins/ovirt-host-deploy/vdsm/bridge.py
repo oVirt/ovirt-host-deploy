@@ -802,12 +802,5 @@ class Plugin(plugin.PluginBase):
             retries=self.environment[odeploycons.VdsmEnv.CONNECTION_RETRIES],
         )
 
-    @plugin.event(
-        stage=plugin.Stages.STAGE_CLOSEUP,
-        condition=lambda self: self._enabled,
-    )
-    def _closeup(self):
-        self.services.startup('network', True)
-
 
 # vim: expandtab tabstop=4 shiftwidth=4

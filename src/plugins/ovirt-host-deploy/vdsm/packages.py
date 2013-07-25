@@ -164,6 +164,17 @@ class Plugin(plugin.PluginBase):
                 self.services.state('messagebus', True)
             if self.services.exists('libvirtd'):
                 self.services.state('libvirtd', True)
+
+        #
+        # vdsm requires network to be active
+        # it cannot depend on this service as
+        # it will be stopped when network is stopped
+        # so we do this manually.
+        #
+        if self.services.exists('network'):
+            self.services.state('network', True)
+            self.services.startup('network', True)
+
         self.services.state('vdsmd', True)
 
 
