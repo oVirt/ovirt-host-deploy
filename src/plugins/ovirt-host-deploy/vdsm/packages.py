@@ -112,9 +112,6 @@ class Plugin(plugin.PluginBase):
     )
     def _closeup(self):
 
-        with open(odeploycons.FileLocations.VDSM_FORCE_RECONFIGURE, 'w'):
-            pass
-
         # libvirt-guests is a conflict
         if self.services.exists('libvirt-guests'):
             self.services.state('libvirt-guests', False)

@@ -30,7 +30,6 @@ class FileLocations(object):
 
     OVIRT_HOST_DEPLOY_LOG_PREFIX = 'ovirt-host-deploy'
     VDSM_CONFIG_FILE = '/etc/vdsm/vdsm.conf'
-    VDSM_FORCE_RECONFIGURE = '/var/lib/vdsm/reconfigure'
     VDSM_TRUST_STORE = '/etc/pki/vdsm'
     VDSM_CA_FILE = 'certs/cacert.pem'
     VDSM_CERT_FILE = 'certs/vdsmcert.pem'
