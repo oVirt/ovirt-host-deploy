@@ -68,7 +68,7 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_VALIDATION,
     )
     def _validation(self):
-        result = self.packager.queryPackages(patterns=['vdsm'])
+        result = self.packager.queryPackages(patterns=('vdsm',))
         if not result:
             raise RuntimeError(
                 _(

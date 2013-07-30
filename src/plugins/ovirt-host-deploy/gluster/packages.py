@@ -60,7 +60,7 @@ class Plugin(plugin.PluginBase):
         ),
     )
     def _validation(self):
-        if not self.packager.queryPackages(patterns=['vdsm-gluster']):
+        if not self.packager.queryPackages(patterns=('vdsm-gluster',)):
             raise RuntimeError(
                 _(
                     'Cannot locate gluster packages, '
