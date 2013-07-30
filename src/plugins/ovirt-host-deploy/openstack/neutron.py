@@ -111,7 +111,7 @@ class Plugin(plugin.PluginBase):
                     odeploycons.FileLocations.OPENSTACK_NEUTRON_CONFIG,
                     section,
                     key,
-                    value,
+                    str(value),
                 ),
             )
 

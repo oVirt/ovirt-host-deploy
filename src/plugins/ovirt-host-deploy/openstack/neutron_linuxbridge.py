@@ -126,7 +126,7 @@ class Plugin(plugin.PluginBase):
                     ),
                     section,
                     key,
-                    value,
+                    str(value),
                 ),
             )
         if os.path.exists(
