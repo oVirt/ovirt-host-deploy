@@ -169,18 +169,6 @@ class Plugin(plugin.PluginBase):
                 self.services.state('libvirtd', True)
 
         #
-        # vdsm requires network to be active
-        # it cannot depend on this service as
-        # it will be stopped when network is stopped
-        # so we do this manually.
-        #
-        if self.services.exists('network'):
-            # rhel network fails on second restart
-            if not self.services.status('network'):
-                self.services.state('network', True)
-            self.services.startup('network', True)
-
-        #
         # remove network manager as it create timing
         # issues with the network service and vdsm
         # see rhbz#879180
@@ -191,6 +179,18 @@ class Plugin(plugin.PluginBase):
         ):
             self.services.state('NetworkManager', False)
             self.services.startup('NetworkManager', False)
+
+        #
+        # vdsm requires network to be active
+        # it cannot depend on this service as
+        # it will be stopped when network is stopped
+        # so we do this manually.
+        #
+        if self.services.exists('network'):
+            # rhel network fails on second restart
+            if not self.services.status('network'):
+                self.services.state('network', True)
+            self.services.startup('network', True)
 
         self.services.state('vdsmd', True)
 
