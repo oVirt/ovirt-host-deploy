@@ -56,6 +56,18 @@ class Plugin(plugin.PluginBase, packager.PackagerBase):
                     'arch': 'noarch',
                 },
             ]
+        elif tuple(patterns) == ('vdsm-gluster',):
+            return [
+                {
+                    'operation': 'installed',
+                    'display_name': 'vdsm-gluster',
+                    'name': 'vdsm-gluster',
+                    'version': '999.9.9',
+                    'release': '1',
+                    'epoch': '0',
+                    'arch': 'noarch',
+                },
+            ]
         else:
             return []
 
