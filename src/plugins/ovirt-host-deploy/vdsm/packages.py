@@ -189,7 +189,16 @@ class Plugin(plugin.PluginBase):
         if self.services.exists('network'):
             # rhel network fails on second restart
             if not self.services.status('network'):
-                self.services.state('network', True)
+                try:
+                    self.services.state('network', True)
+                except RuntimeError:
+                    # rhel network fails to start if one
+                    # of the interfaces is failing.
+                    # see rhbz#990980.
+                    self.logger.debug(
+                        'Cannot start network service ignoring',
+                        exc_info=True,
+                    )
             self.services.startup('network', True)
 
         self.services.state('vdsmd', True)
