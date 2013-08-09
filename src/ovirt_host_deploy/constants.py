@@ -109,6 +109,12 @@ class VdsmEnv(object):
 
 @util.export
 @util.codegen
+class VirtEnv(object):
+    ENABLE = 'VIRT/enable'
+
+
+@util.export
+@util.codegen
 class GlusterEnv(object):
     ENABLE = 'GLUSTER/enable'
 

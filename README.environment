@@ -64,8 +64,11 @@ VDSM_CONFIG/section/key(str)
     Set vdsm configuration option. If set vdsm configuration is
     overridden unless there is VDSM/configOverride = False.
 
-GLUSTER/enable(str) [False]
-    Instal gluster support.
+VIRT/enable(bool) [False]
+    Virtualization support.
+
+GLUSTER/enable(bool) [False]
+    Install gluster support.
 
 OPENSTACK/neutronEnable(bool) [False]
     Enable Neutron configuration.
