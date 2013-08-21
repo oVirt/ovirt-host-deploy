@@ -132,14 +132,24 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_CLOSEUP,
     )
     def _reconfigure(self):
-        rc, stdout, stderr = self.execute(
-            (
-                self.command.get('vdsm-tool'),
-                'libvirt-configure',
-            ),
-            raiseOnError=False,
+        useLegacy = True
+
+        vdsm_tool = self.command.get(
+            command='vdsm-tool',
+            optional=True,
         )
-        if rc != 0:
+        if vdsm_tool is not None:
+            rc, stdout, stderr = self.execute(
+                (
+                    vdsm_tool,
+                    'libvirt-configure',
+                ),
+                raiseOnError=False,
+            )
+            if rc == 0:
+                useLegacy = False
+
+        if useLegacy:
             self.logger.debug('Cannot reconfigure vdsm using vdsm-tool')
             for script in ('/etc/init.d/vdsmd', '/lib/systemd/systemd-vdsmd'):
                 if os.path.exists(script):
