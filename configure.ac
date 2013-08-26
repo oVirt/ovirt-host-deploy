@@ -64,6 +64,13 @@ AC_ARG_ENABLE(
 )
 
 AC_ARG_WITH(
+	[local-version],
+	[AS_HELP_STRING([--with-local-version], [local version to use])],
+	[LOCAL_VERSION="${withval}"],
+	[LOCAL_VERSION=""]
+)
+
+AC_ARG_WITH(
 	[maven],
 	[AS_HELP_STRING([--with-maven], [use maven to build java-sdk @<:@default=no@:>@])],
 	,
@@ -145,6 +152,7 @@ AC_SUBST([otopiplugindir])
 AC_SUBST([ovirthostdeployplugindir])
 AC_SUBST([ovirthostdeploylibdir])
 AC_SUBST([ovirthostdeployinterfacedir])
+AC_SUBST([LOCAL_VERSION])
 AC_SUBST([OTOPI_SOURCES])
 AM_CONDITIONAL([PYTHON_SYNTAX_CHECK], [test "${enable_python_syntax_check}" = "yes"])
 AM_CONDITIONAL([JAVA_SDK], [test "${enable_java_sdk}" = "yes"])
