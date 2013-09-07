@@ -1,5 +1,8 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.1.2
+
+
 2013-09-07 - Version 1.1.1
 
  * vdsm: packages: stop libvirtd before using vdsm-tool to configure it.
