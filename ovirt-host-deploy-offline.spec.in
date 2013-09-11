@@ -1,0 +1,61 @@
+#
+# ovirt-host-deploy -- ovirt host deployer
+# Copyright (C) 2012-2013 Red Hat, Inc.
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2.1 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#
+
+%global		package_version @PACKAGE_VERSION@
+
+Summary:	oVirt host deploy tool offline settings
+Name:		@PACKAGE_NAME@-offline
+Version:	@PACKAGE_RPM_VERSION@
+Release:	@PACKAGE_RPM_RELEASE@%{?release_suffix}%{?dist}
+License:	LGPLv2+
+URL:		http://www.ovirt.org
+Source:		http://resources.ovirt.org/releases/stable/3.3/%{name}-%{package_version}.tar.gz
+Group:		Applications/System
+
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	iproute
+Requires:	libselinux-python
+Requires:	m2crypto
+Requires:	python
+Requires:	tuned
+Requires:	util-linux
+Requires:	vdsm
+Requires:	vdsm-cli
+%ifarch %{ix86} x86_64
+Requires:	dmidecode
+%endif
+
+%description
+Host deployment tool for oVirt project.
+
+%prep
+%setup -q -n %{name}-%{package_version}
+
+%install
+rm -rf "%{buildroot}"
+
+install -d -m 755 "%{buildroot}%{_sysconfdir}/ovirt-host-deploy.conf.d"
+install -pm 644 conf.d/50-offline-packager.conf "%{buildroot}%{_sysconfdir}/ovirt-host-deploy.conf.d"
+
+%files
+%{_sysconfdir}/ovirt-host-deploy.conf.d/50-offline-packager.conf
+
+%changelog
+* Wed Sep 11 2013 Alon Bar-Lev <alonbl@redhat.com> - 1.1.0-1
+- Release.

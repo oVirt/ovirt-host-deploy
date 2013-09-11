@@ -162,6 +162,7 @@ AM_CONDITIONAL([WITH_MAVEN], [test "${with_maven}" = "yes"])
 AC_CONFIG_FILES([
 	Makefile
 	ovirt-host-deploy.spec
+	ovirt-host-deploy-offline.spec
 	build/Makefile
 	po/Makefile.in
 	src/Makefile

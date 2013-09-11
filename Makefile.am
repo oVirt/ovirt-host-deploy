@@ -98,3 +98,18 @@ POTFILES.in:
 
 update-po: POTFILES.in
 	$(MAKE) -C po update-po
+
+#
+# offline-tarball to simlify creation
+# of release tarball for the offline package
+#
+OFFLINE_FILES = \
+	ovirt-host-deploy-offline.spec \
+	conf.d/50-offline-packager.conf \
+	$(NULL)
+OFFLINE_TARBALL = $(PACKAGE_TARNAME)-offline-$(PACKAGE_VERSION).tar.gz
+offline-tarball:	$(OFFLINE_TARBALL)
+$(OFFLINE_TARBALL):	$(OFFLINE_FILES)
+	tar -czf $(PACKAGE_TARNAME)-offline-$(PACKAGE_VERSION).tar.gz \
+		--transform "s#^#$$(echo $(OFFLINE_TARBALL) | sed 's/\.tar.*//')/#" \
+		$(OFFLINE_FILES)
