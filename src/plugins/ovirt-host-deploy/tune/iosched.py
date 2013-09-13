@@ -87,7 +87,8 @@ class Plugin(plugin.PluginBase):
             [
                 self.command.get('udevadm'),
                 'trigger',
-                '--type=devices'
+                '--type=devices',
+                '--action=change',
             ],
             raiseOnError=False,
         )
