@@ -321,6 +321,8 @@ class Plugin(plugin.PluginBase):
                     filetransaction.FileTransaction(
                         name=f,
                         owner='root',
+                        downer='vdsm',
+                        dgroup='kvm',
                         enforcePermissions=True,
                         content=cacert,
                         modifiedList=self.environment[
@@ -347,6 +349,8 @@ class Plugin(plugin.PluginBase):
                     filetransaction.FileTransaction(
                         name=f,
                         owner='root',
+                        downer='vdsm',
+                        dgroup='kvm',
                         enforcePermissions=True,
                         content=vdsmchain,
                         modifiedList=self.environment[
@@ -377,7 +381,6 @@ class Plugin(plugin.PluginBase):
                         downer='vdsm',
                         dgroup='kvm',
                         mode=0o440,
-                        dmode=0o750,
                         enforcePermissions=True,
                         content=vdsmkey,
                         modifiedList=self.environment[
