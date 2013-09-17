@@ -89,10 +89,6 @@ java libraries.
 Summary:	Javadocs for %{name}
 Group:		Documentation
 
-%if !0%{?fedora_19_maven:1}
-Requires:	jpackage-utils
-%endif
-
 %description javadoc
 This package contains the API documentation for %{name}.
 %endif
@@ -212,6 +208,7 @@ cp src/java/pom.xml "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_ve
 
 %if 0%{?fedora_19_maven:1}
 %files java -f src/java/.mfiles
+%dir %{_javadir}/%{name}
 %else
 %files java
 %dir %{_javadir}/%{name}
