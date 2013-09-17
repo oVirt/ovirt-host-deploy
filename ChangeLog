@@ -4,6 +4,8 @@ ovirt-host-deploy -- oVirt host deploy
 
  * vdsm: packages: stop libvirtd before using vdsm-tool to configure it.
    rhbz#999853.
+ * vdsm: pki: revert spice pki dir permissions and mode to revert legacy
+   vdsm-bootstrap doings. rhbz#1008328.
 
 2013-08-26 - Version 1.1.0
 

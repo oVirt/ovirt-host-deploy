@@ -22,6 +22,8 @@
 
 
 import os
+import pwd
+import grp
 import configparser
 import gettext
 _ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
@@ -224,6 +226,24 @@ class Plugin(plugin.PluginBase):
                 vdsmTrustStore = config.get('vars', 'trust_store_path')
             except:
                 pass
+
+        #
+        # LEGACY-BEGIN
+        # old vdsm-bootstrap implementations touched
+        # spice pki directory explicitly, so we need to revert
+        # to something sane.
+        # rhbz#1008328
+        #
+        dir = os.path.dirname(
+            os.path.join(
+                vdsmTrustStore,
+                odeploycons.FileLocations.VDSM_SPICE_CA_FILE,
+            )
+        )
+        if os.path.exists(dir):
+            os.chmod(dir, 0o755)
+            os.chown(dir, pwd.getpwnam('vdsm')[2], grp.getgrnam('kvm')[2])
+        # LEGACY-END
 
         useM2Crypto = self._isM2Crypto()
         enrollment = self.environment[
