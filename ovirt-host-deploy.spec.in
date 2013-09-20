@@ -75,12 +75,12 @@ Host deployment tool for oVirt project.
 Summary:	%{name} java support
 Requires:	%{name} = %{version}-%{release}
 Requires:	java
+Requires:	otopi-java
 
 %if !0%{?fedora_19_maven:1}
 Requires:	jpackage-utils
 %endif
 
-Requires:	otopi-java
 %description java
 java libraries.
 
