@@ -4,6 +4,7 @@ ovirt-host-deploy -- oVirt host deploy
 
  * openstack: rename quantum to neutron due to project rename,
    rhbz#1032890.
+ * vdsm: packages: adjust to new method of vdsm configure.
 
 2013-09-07 - Version 1.1.1
 
