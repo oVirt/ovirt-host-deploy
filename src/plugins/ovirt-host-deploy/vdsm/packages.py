@@ -139,13 +139,11 @@ class Plugin(plugin.PluginBase):
             optional=True,
         )
         if vdsm_tool is not None:
-            if self.services.exists('libvirtd'):
-                self.services.state('libvirtd', False)
-
             rc, stdout, stderr = self.execute(
                 (
                     vdsm_tool,
-                    'libvirt-configure',
+                    'configure',
+                    '--force',
                 ),
                 raiseOnError=False,
             )
