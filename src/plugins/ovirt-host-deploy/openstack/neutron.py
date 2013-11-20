@@ -78,7 +78,7 @@ class Plugin(plugin.PluginBase):
         condition=lambda self: self._enabled,
     )
     def _packages(self):
-        self.packager.installUpdate(('openstack-quantum',))
+        self.packager.installUpdate(('openstack-neutron',))
 
     @plugin.event(
         stage=plugin.Stages.STAGE_MISC,

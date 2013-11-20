@@ -83,7 +83,7 @@ class Plugin(plugin.PluginBase):
     def _packages(self):
         self.packager.installUpdate(
             (
-                'openstack-quantum-linuxbridge',
+                'openstack-neutron-linuxbridge',
                 'vdsm-hook-openstacknet',
             ),
         )
@@ -152,8 +152,8 @@ class Plugin(plugin.PluginBase):
     def _closeup(self):
         self.logger.info(_('Starting neutron linuxbridge plugin'))
         for state in (False, True):
-            self.services.state('quantum-linuxbridge-agent', state)
-        self.services.startup('quantum-linuxbridge-agent', True)
+            self.services.state('neutron-linuxbridge-agent', state)
+        self.services.startup('neutron-linuxbridge-agent', True)
 
 
 # vim: expandtab tabstop=4 shiftwidth=4

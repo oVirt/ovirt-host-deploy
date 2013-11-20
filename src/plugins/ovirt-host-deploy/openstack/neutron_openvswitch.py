@@ -115,7 +115,7 @@ class Plugin(plugin.PluginBase):
     def _packages(self):
         self.packager.installUpdate(
             (
-                'openstack-quantum-openvswitch',
+                'openstack-neutron-openvswitch',
                 'vdsm-hook-openstacknet',
             ),
         )
@@ -207,9 +207,9 @@ class Plugin(plugin.PluginBase):
     def _closeup(self):
         self.logger.info(_('Starting neutron openvswitch plugin'))
         for state in (False, True):
-            self.services.state('quantum-openvswitch-agent', state)
-        self.services.startup('quantum-openvswitch-agent', True)
-        self.services.startup('quantum-ovs-cleanup', True)
+            self.services.state('neutron-openvswitch-agent', state)
+        self.services.startup('neutron-openvswitch-agent', True)
+        self.services.startup('neutron-ovs-cleanup', True)
         self.services.startup('openvswitch', True)
 
 
