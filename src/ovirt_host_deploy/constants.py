@@ -53,12 +53,12 @@ class FileLocations(object):
     HOOKS_PLUGIN_HOOKS_DIR = 'hooks.d'
     HOOKS_PLUGIN_PACKAGES_DIR = 'packages.d'
 
-    OPENSTACK_NEUTRON_CONFIG = '/etc/quantum/quantum.conf'
-    OPENSTACK_NEUTRON_PLUGIN_CONFIG = '/etc/quantum/plugin.ini'
+    OPENSTACK_NEUTRON_CONFIG = '/etc/neutron/neutron.conf'
+    OPENSTACK_NEUTRON_PLUGIN_CONFIG = '/etc/neutron/plugin.ini'
     OPENSTACK_NEUTRON_LINUXBRIDGE_CONFIG = \
-        '/etc/quantum/plugins/linuxbridge/linuxbridge_conf.ini'
+        '/etc/neutron/plugins/linuxbridge/linuxbridge_conf.ini'
     OPENSTACK_NEUTRON_OPENVSWITCH_CONFIG = \
-        '/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini'
+        '/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini'
 
 
 @util.export

@@ -2,6 +2,8 @@ ovirt-host-deploy -- oVirt host deploy
 
 ????-??-?? - Version 1.1.2
 
+ * openstack: rename quantum to neutron due to project rename,
+   rhbz#1032890.
 
 2013-09-07 - Version 1.1.1
 
