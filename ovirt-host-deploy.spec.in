@@ -240,6 +240,9 @@ cp src/java/pom.xml "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_ve
 %endif
 
 %changelog
+* Sun Dec 1 2013 Alon Bar-Lev <alonbl@redhat.com> - 1.1.2-1
+- Release.
+
 * Sat Sep 7 2013 Alon Bar-Lev <alonbl@redhat.com> - 1.1.1-1
 - Release.
 
