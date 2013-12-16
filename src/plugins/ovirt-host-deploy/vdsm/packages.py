@@ -170,6 +170,10 @@ class Plugin(plugin.PluginBase):
         ],
     )
     def _start(self):
+        self.logger.info(_('Stopping libvirtd'))
+        if self.services.exists('libvirtd'):
+            self.services.state('libvirtd', False)
+
         self.logger.info(_('Starting vdsm'))
         if not self.services.supportsDependency:
             if self.services.exists('cgconfig'):
