@@ -107,7 +107,7 @@ class Plugin(plugin.PluginBase):
             else:
                 vdsmId = stdout[0]
         elif arch in ('ppc', 'ppc64'):
-            #eg. output IBM,03061C14A
+            # eg. output IBM,03061C14A
             if os.path.exists('/proc/device-tree/system-id'):
                 with open('/proc/device-tree/system-id') as f:
                     vdsmId = f.readline().rstrip('\0').replace(',', '')
