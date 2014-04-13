@@ -99,7 +99,9 @@ class Plugin(plugin.PluginBase):
             for name in sorted(os.listdir(pluginpackagesdir)):
                 if name.startswith('.'):
                     continue
-                if name.endswith(platform.linux_distribution()):
+                if name.endswith(
+                    platform.linux_distribution(full_distribution_name=0)[0]
+                ):
                     with open(name, 'r') as f:
                         for package in f:
                             self.packager.installUpdate(package)
