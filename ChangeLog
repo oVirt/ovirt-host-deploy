@@ -4,6 +4,7 @@ ovirt-host-deploy -- oVirt host deploy
 
  * vdsmhooks: use short distribution name as suffix.
  * hardware: fix typo in debug message.
+ * gluster: nrpe: add nrpe configuration support. rhbz#1091978.
 
 2014-03-28 - Version 1.2.0
 

@@ -26,6 +26,7 @@ MAINTAINERCLEANFILES = \
 mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/gluster
 dist_my_PYTHON = \
 	__init__.py \
+        nrpe.py \
 	packages.py \
 	$(NULL)
 

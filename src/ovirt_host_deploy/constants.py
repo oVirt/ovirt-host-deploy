@@ -59,6 +59,7 @@ class FileLocations(object):
         '/etc/neutron/plugins/linuxbridge/linuxbridge_conf.ini'
     OPENSTACK_NEUTRON_OPENVSWITCH_CONFIG = \
         '/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini'
+    NRPE_CONFIG_FILE = '/etc/nagios/nrpe.cfg'
 
 
 @util.export
@@ -117,6 +118,8 @@ class VirtEnv(object):
 @util.codegen
 class GlusterEnv(object):
     ENABLE = 'GLUSTER/enable'
+    MONITORING_ENABLE = 'GLUSTER/monitoringEnable'
+    MONITORING_SERVER = 'GLUSTER/monitoringServer'
 
 
 @util.export
