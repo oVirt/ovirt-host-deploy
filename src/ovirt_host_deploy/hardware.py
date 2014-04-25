@@ -195,11 +195,13 @@ class Virtualization(base.Base):
         try:
             if self._isVirtualizationEnabled():
                 self.logger.debug(
-                    _('Hardware does not support virtualization')
+                    _('Hardware supports virtualization')
                 )
                 ret = self.DETECT_RESULT_SUPPORTED
             else:
-                self.logger.debug(_('Hardware supports virtualization'))
+                self.logger.debug(
+                    _('Hardware does not support virtualization')
+                )
                 ret = self.DETECT_RESULT_UNSUPPORTED
         except (AttributeError, IOError):
             self.logger.debug('Cannot detect virualization', exc_info=True)
