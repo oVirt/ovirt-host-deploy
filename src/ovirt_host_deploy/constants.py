@@ -61,6 +61,8 @@ class FileLocations(object):
         '/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini'
     NRPE_CONFIG_FILE = '/etc/nagios/nrpe.cfg'
 
+    KDUMP_CONFIG_FILE = '/etc/kdump.conf'
+
 
 @util.export
 class Defaults(object):
@@ -84,6 +86,16 @@ class CoreEnv(object):
     INSTALL_INCOMPLETE = 'ODEPLOY/installIncomplete'
     INSTALL_INCOMPLETE_REASONS = 'ODEPLOY/installIncompleteReasons'
     OFFLINE_PACKAGER = 'ODEPLOY/offlinePackager'
+
+
+@util.export
+@util.codegen
+class KdumpEnv(object):
+    ENABLE = 'KDUMP/enable'
+    SUPPORTED = 'KDUMP/supported'
+    DESTINATION_ADDRESS = 'KDUMP/destinationAddress'
+    DESTINATION_PORT = 'KDUMP/destinationPort'
+    MESSAGE_INTERVAL = 'KDUMP/messageInterval'
 
 
 @util.export

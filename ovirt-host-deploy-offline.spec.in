@@ -40,6 +40,14 @@ Requires:	vdsm-cli
 %ifarch %{ix86} x86_64
 Requires:	dmidecode
 %endif
+%if 0%{?fedora}
+%if %{fedora} >= 20
+Requires:	kexec-tools >= 2.0.4-27
+%endif
+%endif
+%if 0%{?rhel}
+Requires:	kexec-tools >= 2.0.0-274
+%endif
 
 %description
 Host deployment tool for oVirt project.
