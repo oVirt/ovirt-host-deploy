@@ -102,9 +102,8 @@ class Plugin(plugin.PluginBase):
                 if name.endswith(
                     platform.linux_distribution(full_distribution_name=0)[0]
                 ):
-                    with open(name, 'r') as f:
-                        for package in f:
-                            self.packager.installUpdate(package)
+                    with open(os.path.join(pluginpackagesdir, name)) as f:
+                        self.packager.installUpdate(f.read().splitlines())
 
 
 # vim: expandtab tabstop=4 shiftwidth=4
