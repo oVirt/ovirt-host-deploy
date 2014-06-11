@@ -5,6 +5,7 @@
 ./src/plugins/ovirt-host-deploy/core/misc.py
 ./src/plugins/ovirt-host-deploy/core/offlinepackager.py
 ./src/plugins/ovirt-host-deploy/gluster/__init__.py
+./src/plugins/ovirt-host-deploy/gluster/nrpe.py
 ./src/plugins/ovirt-host-deploy/gluster/packages.py
 ./src/plugins/ovirt-host-deploy/kdump/__init__.py
 ./src/plugins/ovirt-host-deploy/kdump/packages.py
