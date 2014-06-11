@@ -4,6 +4,7 @@ ovirt-host-deploy -- oVirt host deploy
 
  * kdump: initial support. rhbz#1079821.
  * vdsmhooks: fix package installation.
+ * vdsm: fix dmidecode output parsing, rhbz#1109342.
 
 2014-05-02 - Version 1.2.1
 
