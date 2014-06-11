@@ -100,6 +100,8 @@ class Plugin(plugin.PluginBase):
                 ),
                 raiseOnError=False
             )
+            # Filter out comments
+            stdout = [line for line in stdout if not line.startswith('#')]
             if rc != 0 or len(stdout) != 1:
                 self.logger.warning(_('Invalid dmidecode output'))
             elif stdout[0].startswith('Not '):
