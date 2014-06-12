@@ -88,7 +88,7 @@ class Plugin(plugin.PluginBase):
                     )
 
     @plugin.event(
-        stage=plugin.Stages.STAGE_MISC,
+        stage=plugin.Stages.STAGE_PACKAGES,
     )
     def _packages(self):
         pluginpackagesdir = os.path.join(
