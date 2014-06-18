@@ -83,6 +83,7 @@ class Plugin(plugin.PluginBase):
 
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
+        self._modified = False
 
     @plugin.event(
         stage=plugin.Stages.STAGE_INIT,
@@ -119,6 +120,7 @@ class Plugin(plugin.PluginBase):
             ]
         )
         if content != newcontent:
+            self._modified = True
             self.environment[
                 otopicons.CoreEnv.MAIN_TRANSACTION
             ].append(
@@ -131,5 +133,18 @@ class Plugin(plugin.PluginBase):
                 )
             )
 
+    @plugin.event(
+        stage=plugin.Stages.STAGE_CLOSEUP,
+        condition=lambda self: (
+            odeploycons.GlusterEnv.MONITORING_ENABLE
+        )
+    )
+    def _closeup(self):
+        if self.services.exists('nrpe'):
+            self.logger.info(_('Restarting nrpe service'))
+            if self._modified:
+                self.services.state('nrpe', False)
+            self.services.state('nrpe', True)
+            self.services.startup('nrpe', True)
 
 # vim: expandtab tabstop=4 shiftwidth=4
