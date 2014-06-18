@@ -4,6 +4,7 @@ ovirt-host-deploy -- oVirt host deploy
 
  * vdsm: fix dmidecode output parsing, rhbz#1109342.
  * vdsmhooks: fix package installation.
+ * gluster: Restart nrpe service during host deploy, rhbz#1110623.
 
 2014-05-02 - Version 1.2.1
 
