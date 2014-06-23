@@ -80,10 +80,8 @@ class Plugin(plugin.PluginBase, packager.PackagerBase):
             except ValueError:
                 major_version = 0
             if (
+                name in ('redhat', 'centos') or
                 (
-                    name in ('redhat', 'centos') and
-                    major_version == 6
-                ) or (
                     name == 'fedora' and
                     major_version >= 20
                 )

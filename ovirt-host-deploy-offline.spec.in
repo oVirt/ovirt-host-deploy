@@ -46,7 +46,12 @@ Requires:	kexec-tools >= 2.0.4-27
 %endif
 %endif
 %if 0%{?rhel}
+%if %{rhel} == 6
 Requires:	kexec-tools >= 2.0.0-274
+%endif
+%if %{rhel} == 7
+Requires:	kexec-tools >= 2.0.4-33
+%endif
 %endif
 
 %description
