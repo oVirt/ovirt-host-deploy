@@ -21,8 +21,17 @@
 %global		package_maven_version @PACKAGE_MAVEN_VERSION@
 %global		ovirt_host_deploy_root %{_datadir}/%{name}/interface-@INTERFACE_VERSION@
 
+%if 0%{?fedora:1}
+%global _use_maven 1
+%endif
 %if 0%{?rhel:1}
-%global		maven2brewrepodir %{_javadir}/repository.jboss.com/maven2-brew/dummy
+%if %{rhel} >= 7
+%global _use_maven 1
+%else
+%global _use_maven 0
+%global _use_repolib 1
+%global maven2brewrepodir %{_javadir}/repository.jboss.com/maven2-brew/dummy
+%endif
 %endif
 
 Summary:	oVirt host deploy tool
@@ -44,7 +53,7 @@ BuildRequires:	otopi-devel
 BuildRequires:	python2-devel
 BuildRequires:	java-devel
 
-%if 0%{?fedora:1}
+%if %{_use_maven}
 BuildRequires:	maven-compiler-plugin
 BuildRequires:	maven-enforcer-plugin
 BuildRequires:	maven-install-plugin
@@ -66,7 +75,7 @@ Requires:	otopi-java
 %description java
 java libraries.
 
-%if 0%{?fedora:1}
+%if %{_use_maven}
 %package javadoc
 Summary:	Javadocs for %{name}
 Group:		Documentation
@@ -75,7 +84,7 @@ Group:		Documentation
 This package contains the API documentation for %{name}.
 %endif
 
-%if 0%{?rhel:1}
+%if 0%{?_use_repolib:1}
 %package repolib
 Summary:	%{name} maven repo
 %description repolib
@@ -86,7 +95,7 @@ Summary:	%{name} maven repo
 %setup -q -n %{name}-%{package_version}
 
 %build
-%if 0%{?fedora:1}
+%if %{_use_maven}
 %global conf --disable-java-sdk-compile
 %endif
 %configure \
@@ -97,7 +106,7 @@ Summary:	%{name} maven repo
 	%{?conf}
 make %{?_smp_mflags}
 
-%if 0%{?fedora:1}
+%if %{_use_maven}
 cd src/java
 %mvn_build
 cd ../..
@@ -107,7 +116,7 @@ cd ../..
 rm -rf "%{buildroot}"
 make %{?_smp_mflags} install DESTDIR="%{buildroot}"
 
-%if 0%{?fedora:1}
+%if %{_use_maven}
 cd src/java
 %mvn_install
 cd ../..
@@ -150,11 +159,11 @@ install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 
 %files java -f src/java/.mfiles
 
-%if 0%{?fedora:1}
+%if %{_use_maven}
 %files javadoc -f src/java/.mfiles-javadoc
 %endif
 
-%if 0%{?rhel:1}
+%if 0%{?_use_repolib:1}
 %files repolib
 %{maven2brewrepodir}/
 %endif
