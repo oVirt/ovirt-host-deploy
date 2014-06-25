@@ -98,6 +98,15 @@ class Plugin(plugin.PluginBase):
 
         return min_version
 
+    def _crashkernel_param_present(self):
+        crashkernel = False
+        with open('/proc/cmdline') as f:
+            for line in f.read().splitlines():
+                if 'crashkernel=' in line:
+                    crashkernel = True
+                    break
+        return crashkernel
+
     def _update_kdump_conf(
             self,
             content,
@@ -150,21 +159,33 @@ class Plugin(plugin.PluginBase):
         priority=plugin.Stages.PRIORITY_HIGH,
     )
     def _customization(self):
-        min_version = self._get_min_kexec_tools_version()
-        if min_version is not None:
-            from distutils.version import LooseVersion
-            result = self.packager.queryPackages(
-                patterns=(self._KEXEC_TOOLS_PKG,),
-            )
-            self.logger.debug("minver: %s, result=%s", min_version, result)
-            for package in result:
-                cur_version = '%s-%s' % (
-                    package['version'],
-                    package['release'],
+        if self._crashkernel_param_present():
+            # crashkernel param set, check for required kexec-tools version
+            min_version = self._get_min_kexec_tools_version()
+            if min_version is not None:
+                from distutils.version import LooseVersion
+                result = self.packager.queryPackages(
+                    patterns=(self._KEXEC_TOOLS_PKG,),
                 )
-                if LooseVersion(cur_version) >= LooseVersion(min_version):
-                    self.environment[odeploycons.KdumpEnv.SUPPORTED] = True
-                    break
+                self.logger.debug("minver: %s, result=%s", min_version, result)
+                for package in result:
+                    cur_version = '%s-%s' % (
+                        package['version'],
+                        package['release'],
+                    )
+                    if LooseVersion(cur_version) >= LooseVersion(min_version):
+                        self.environment[odeploycons.KdumpEnv.SUPPORTED] = True
+                        break
+
+        self.logger.info(
+            _('Kdump {result}').format(
+                result=(
+                    'supported'
+                    if self.environment[odeploycons.KdumpEnv.SUPPORTED]
+                    else 'unsupported'
+                ),
+            )
+        )
 
     @plugin.event(
         stage=plugin.Stages.STAGE_PACKAGES,
