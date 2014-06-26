@@ -69,35 +69,6 @@ class Plugin(plugin.PluginBase, packager.PackagerBase):
                     'arch': 'noarch',
                 },
             ]
-        elif tuple(patterns) == ('kexec-tools',):
-            (name, version, desc) = platform.linux_distribution(
-                full_distribution_name=0
-            )
-
-            pkgs = []
-            try:
-                major_version = int(version.split('.')[0])
-            except ValueError:
-                major_version = 0
-            if (
-                name in ('redhat', 'centos') or
-                (
-                    name == 'fedora' and
-                    major_version >= 20
-                )
-            ):
-                    pkgs = [
-                        {
-                            'operation': 'installed',
-                            'display_name': 'kexec-tools',
-                            'name': 'kexec-tools',
-                            'version': '999.9.9',
-                            'release': '1',
-                            'epoch': '0',
-                            'arch': 'noarch',
-                        },
-                    ]
-            return pkgs
 
         else:
             return []
