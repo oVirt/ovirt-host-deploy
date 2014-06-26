@@ -47,10 +47,10 @@ Requires:	kexec-tools >= 2.0.4-27
 %endif
 %if 0%{?rhel}
 %if %{rhel} == 6
-Requires:	kexec-tools >= 2.0.0-274
+Requires:	kexec-tools >= 2.0.0-273.1
 %endif
 %if %{rhel} == 7
-Requires:	kexec-tools >= 2.0.4-33
+Requires:	kexec-tools >= 2.0.4-32.1
 %endif
 %endif
 

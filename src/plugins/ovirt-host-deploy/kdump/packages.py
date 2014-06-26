@@ -89,9 +89,9 @@ class Plugin(plugin.PluginBase):
         if name in ('redhat', 'centos'):
             major = version.split('.', 1)[0]
             if major == '6':
-                min_version = '2.0.0-274'
+                min_version = '2.0.0-273.1'
             elif major == '7':
-                min_version = '2.0.4-33'
+                min_version = '2.0.4-32.1'
 
         elif name == 'fedora':
             min_version = '2.0.4-27'
