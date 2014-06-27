@@ -89,12 +89,12 @@ class Plugin(plugin.PluginBase):
         if name in ('redhat', 'centos'):
             major = version.split('.', 1)[0]
             if major == '6':
-                min_version = '2.0.0-273.1'
+                min_version = None, '2.0.0', '273.1'
             elif major == '7':
-                min_version = '2.0.4-32.1'
+                min_version = None, '2.0.4', '32.1'
 
         elif name == 'fedora':
-            min_version = '2.0.4-27'
+            min_version = None, '2.0.4', '27'
 
         return min_version
 
@@ -163,17 +163,18 @@ class Plugin(plugin.PluginBase):
             # crashkernel param set, check for required kexec-tools version
             min_version = self._get_min_kexec_tools_version()
             if min_version is not None:
-                from distutils.version import LooseVersion
+                from rpmUtils.miscutils import compareEVR
                 result = self.packager.queryPackages(
                     patterns=(self._KEXEC_TOOLS_PKG,),
                 )
                 self.logger.debug("minver: %s, result=%s", min_version, result)
                 for package in result:
-                    cur_version = '%s-%s' % (
+                    cur_version = (
+                        None,
                         package['version'],
                         package['release'],
                     )
-                    if LooseVersion(cur_version) >= LooseVersion(min_version):
+                    if compareEVR(cur_version, min_version) >= 0:
                         self.environment[odeploycons.KdumpEnv.SUPPORTED] = True
                         break
 
