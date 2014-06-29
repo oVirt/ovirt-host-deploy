@@ -22,7 +22,6 @@
 
 
 import gettext
-import platform
 _ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
