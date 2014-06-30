@@ -107,6 +107,41 @@ class Plugin(plugin.PluginBase):
                     break
         return crashkernel
 
+    def _kexec_tools_version_supported(self):
+        from rpmUtils.miscutils import compareEVR
+        result = False
+
+        if self.environment[odeploycons.VdsmEnv.OVIRT_NODE]:
+            # on node check ovirt-node-plugin-vdsm version
+            plugin_version = self.environment[
+                odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_VERSION
+            ]
+            result = (
+                plugin_version is not None and
+                compareEVR(
+                    (None, plugin_version[0], plugin_version[1]),
+                    (None, '0.2.0', None)
+                ) >= 0
+            )
+        else:
+            # on standard host use packager
+            min_version = self._get_min_kexec_tools_version()
+            if min_version is not None:
+                pkgs = self.packager.queryPackages(
+                    patterns=(self._KEXEC_TOOLS_PKG,),
+                )
+                for package in pkgs:
+                    cur_version = (
+                        None,
+                        package['version'],
+                        package['release'],
+                    )
+                    if compareEVR(cur_version, min_version) >= 0:
+                        result = True
+                        break
+
+        return result
+
     def _update_kdump_conf(
             self,
             content,
@@ -159,24 +194,10 @@ class Plugin(plugin.PluginBase):
         priority=plugin.Stages.PRIORITY_HIGH,
     )
     def _customization(self):
-        if self._crashkernel_param_present():
-            # crashkernel param set, check for required kexec-tools version
-            min_version = self._get_min_kexec_tools_version()
-            if min_version is not None:
-                from rpmUtils.miscutils import compareEVR
-                result = self.packager.queryPackages(
-                    patterns=(self._KEXEC_TOOLS_PKG,),
-                )
-                self.logger.debug("minver: %s, result=%s", min_version, result)
-                for package in result:
-                    cur_version = (
-                        None,
-                        package['version'],
-                        package['release'],
-                    )
-                    if compareEVR(cur_version, min_version) >= 0:
-                        self.environment[odeploycons.KdumpEnv.SUPPORTED] = True
-                        break
+        self.environment[odeploycons.KdumpEnv.SUPPORTED] = (
+            self._crashkernel_param_present() and
+            self._kexec_tools_version_supported()
+        )
 
         self.logger.info(
             _('Kdump {result}').format(
