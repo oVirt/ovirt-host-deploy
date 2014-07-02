@@ -22,6 +22,7 @@
 
 
 import os
+import re
 import glob
 import gettext
 _ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
@@ -40,10 +41,48 @@ class Plugin(plugin.PluginBase):
 
     Environment:
         VdsmEnv.OVIRT_NODE -- is node.
+        VdsmEnv.NODE_PLUGIN_VDSM_VERSION -- version of ovirt-node-plugin-vdsm
 
     """
+
+    _PLUGIN_VER_FILE_RE = re.compile(
+        flags=re.VERBOSE,
+        pattern=r"""
+            ^
+            (?P<key>[a-zA-Z0-9_]+)
+            =
+            (?P<value>.*)
+            $
+        """,
+    )
+
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
+
+    def _get_node_plugin_version(self, plugin_name):
+        result = None
+        version_file = '/etc/default/version%s' % (
+            '.%s' % plugin_name if plugin_name else ''
+        )
+        if os.path.exists(version_file):
+            content = {}
+            with open(version_file) as f:
+                for line in f.read().splitlines():
+                    m = self._PLUGIN_VER_FILE_RE.match(line)
+                    if m is not None:
+                        content[m.group('key')] = m.group('value')
+            result = (
+                content.get('VERSION', None),
+                content.get('RELEASE', None),
+            )
+
+        self.logger.debug(
+            "Plugin '%s' version: '%s'",
+            plugin_name,
+            result,
+        )
+
+        return result
 
     @plugin.event(
         stage=plugin.Stages.STAGE_INIT,
@@ -66,6 +105,13 @@ class Plugin(plugin.PluginBase):
                 odeploycons.VdsmEnv.OVIRT_NODE
             ]
         )
+
+        if self.environment[odeploycons.VdsmEnv.OVIRT_NODE]:
+            self.environment[
+                odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_VERSION
+            ] = self._get_node_plugin_version(
+                'ovirt-node-plugin-vdsm'
+            )
 
 
 # vim: expandtab tabstop=4 shiftwidth=4
