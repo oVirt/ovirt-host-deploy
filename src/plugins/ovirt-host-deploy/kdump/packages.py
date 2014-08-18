@@ -94,7 +94,7 @@ class Plugin(plugin.PluginBase):
             elif major == '7':
                 min_version = None, '2.0.4', '32.1'
 
-        elif name == 'fedora':
+        elif name in ('fedora', 'ibm_powerkvm'):
             min_version = None, '2.0.4', '27'
 
         return min_version
