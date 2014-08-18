@@ -35,6 +35,21 @@ from otopi import plugin
 class Plugin(plugin.PluginBase):
     """Hardware prerequisites plugin."""
 
+    _SUPPORTED = [
+        {
+            'distro': ('redhat', 'centos'),
+            'version': '6.2',
+        },
+        {
+            'distro': ('fedora', ),
+            'version': '17',
+        },
+        {
+            'distro': ('ibm_powerkvm', ),
+            'version': '2.1.0',
+        },
+    ]
+
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
 
@@ -43,32 +58,24 @@ class Plugin(plugin.PluginBase):
     )
     def _validation(self):
         dist, ver = platform.linux_distribution(full_distribution_name=0)[:2]
-        if dist in ('redhat', 'centos'):
-            if LooseVersion(ver) < LooseVersion('6.2'):
-                raise RuntimeError(
-                    _(
-                        'Distribution {distribution} version {version} '
-                        'is not supported'
-                    ).format(
-                        distribution=dist,
-                        version=ver,
-                    )
-                )
-        elif dist == 'fedora':
-            if LooseVersion(ver) < LooseVersion('17'):
-                raise RuntimeError(
-                    _(
-                        'Distribution {distribution} version {version} '
-                        'is not supported'
-                    ).format(
-                        distribution=dist,
-                        version=ver,
-                    )
-                )
-        else:
+
+        supported = False
+        for entry in self._SUPPORTED:
+            if (
+                dist in entry['distro'] and
+                LooseVersion(ver) >= LooseVersion(entry['version'])
+            ):
+                supported = True
+                break
+
+        if not supported:
             raise RuntimeError(
-                _('Distribution {distribution} is not supported').format(
+                _(
+                    'Distribution {distribution} version {version} '
+                    'is not supported'
+                ).format(
                     distribution=dist,
+                    version=ver,
                 )
             )
 
