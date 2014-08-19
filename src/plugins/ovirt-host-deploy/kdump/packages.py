@@ -24,6 +24,7 @@
 import gettext
 import platform
 import re
+import socket
 
 
 from otopi import util
@@ -106,6 +107,29 @@ class Plugin(plugin.PluginBase):
                     crashkernel = True
                     break
         return crashkernel
+
+    def _resolve_destination_address(self, host):
+        try:
+            result = socket.getaddrinfo(
+                host,
+                None,
+            )
+            self.logger.debug(
+                "Kdump destination '%s' addresses: '%s'",
+                host,
+                result,
+            )
+        except Exception:
+            self.logger.debug(
+                "Cannot resolve kdump destination address '%s'",
+                host,
+                exc_info=True,
+            )
+            raise RuntimeError(
+                _("Cannot resolve kdump destination address '{host}'").format(
+                    host=host,
+                )
+            )
 
     def _kexec_tools_version_supported(self):
         from rpmUtils.miscutils import compareEVR
@@ -216,6 +240,15 @@ class Plugin(plugin.PluginBase):
     def _packages(self):
         self.packager.installUpdate(
             packages=(self._KEXEC_TOOLS_PKG,),
+        )
+
+    @plugin.event(
+        stage=plugin.Stages.STAGE_VALIDATION,
+        condition=lambda self: self.environment[odeploycons.KdumpEnv.ENABLE],
+    )
+    def _validate(self):
+        self._resolve_destination_address(
+            self.environment[odeploycons.KdumpEnv.DESTINATION_ADDRESS],
         )
 
     @plugin.event(
