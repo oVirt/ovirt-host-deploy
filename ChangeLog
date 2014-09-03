@@ -6,6 +6,8 @@ ovirt-host-deploy -- oVirt host deploy
  * vdsmhooks: fix package installation.
  * vdsm: fix dmidecode output parsing, rhbz#1109342.
  * gluster: Restart nrpe service during host deploy, rhbz#1110623.
+ * kdump: support ibm_powerkvm distribution, rhbz#1131177.
+ * vdsm: support ibm_powerkvm distribution, rhbz#1131177.
 
 2014-05-02 - Version 1.2.1
 
