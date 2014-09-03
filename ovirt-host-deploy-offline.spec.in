@@ -57,6 +57,9 @@ install -pm 644 conf.d/50-offline-packager.conf "%{buildroot}%{_sysconfdir}/ovir
 %{_sysconfdir}/ovirt-host-deploy.conf.d/50-offline-packager.conf
 
 %changelog
+* Wed Sep 3 2014 Alon Bar-Lev <alonbl@redhat.com> - 1.2.3-1
+- Release.
+
 * Sun Jun 22 2014 Alon Bar-Lev <alonbl@redhat.com> - 1.2.2-1
 - Release.
 
