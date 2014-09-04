@@ -28,6 +28,7 @@ dist_my_PYTHON = \
 	__init__.py \
         nrpe.py \
 	packages.py \
+	glusterpmd.py \
 	$(NULL)
 
 clean-local: \
