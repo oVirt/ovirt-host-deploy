@@ -132,22 +132,15 @@ class Plugin(plugin.PluginBase):
             )
 
     def _kexec_tools_version_supported(self):
-        from rpmUtils.miscutils import compareEVR
         result = False
 
         if self.environment[odeploycons.VdsmEnv.OVIRT_NODE]:
-            # on node check ovirt-node-plugin-vdsm version
-            plugin_version = self.environment[
-                odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_VERSION
+            # on node check ovirt-node-plugin-vdsm features
+            result = 'kdump' in self.environment[
+                odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_FEATURES
             ]
-            result = (
-                plugin_version is not None and
-                compareEVR(
-                    (None, plugin_version[0], plugin_version[1]),
-                    (None, '0.2.0', None)
-                ) >= 0
-            )
         else:
+            from rpmUtils.miscutils import compareEVR
             # on standard host use packager
             min_version = self._get_min_kexec_tools_version()
             if min_version is not None:

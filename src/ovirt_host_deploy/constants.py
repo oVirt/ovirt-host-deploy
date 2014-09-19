@@ -115,7 +115,7 @@ class VdsmEnv(object):
     CHECK_VIRT_HARDWARE = 'VDSM/checkVirtHardware'
     OVIRT_NODE = 'VDSM/node'
     OVIRT_NODE_HAS_OWN_BRIDGES = 'VDSM/nodeHasOwnBridges'
-    NODE_PLUGIN_VDSM_VERSION = 'VDSM/nodePluginVdsmVersion'
+    NODE_PLUGIN_VDSM_FEATURES = 'VDSM/nodePluginVdsmFeatures'
     CONFIG_OVERRIDE = 'VDSM/configOverride'
     DISABLE_NETWORKMANAGER = 'VDSM/disableNetworkManager'
     CONFIG_PREFIX = 'VDSM_CONFIG/'

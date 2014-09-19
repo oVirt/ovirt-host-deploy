@@ -41,7 +41,7 @@ class Plugin(plugin.PluginBase):
 
     Environment:
         VdsmEnv.OVIRT_NODE -- is node.
-        VdsmEnv.NODE_PLUGIN_VDSM_VERSION -- version of ovirt-node-plugin-vdsm
+        VdsmEnv.NODE_PLUGIN_VDSM_FEATURES -- features of ovirt-node-plugin-vdsm
 
     """
 
@@ -59,8 +59,8 @@ class Plugin(plugin.PluginBase):
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
 
-    def _get_node_plugin_version(self, plugin_name):
-        result = None
+    def _get_node_plugin_features(self, plugin_name):
+        features = []
         version_file = '/etc/default/version%s' % (
             '.%s' % plugin_name if plugin_name else ''
         )
@@ -71,18 +71,15 @@ class Plugin(plugin.PluginBase):
                     m = self._PLUGIN_VER_FILE_RE.match(line)
                     if m is not None:
                         content[m.group('key')] = m.group('value')
-            result = (
-                content.get('VERSION', None),
-                content.get('RELEASE', None),
-            )
+            features = content.get('FEATURES', '').split()
 
         self.logger.debug(
-            "Plugin '%s' version: '%s'",
+            "Plugin '%s', features='%s'",
             plugin_name,
-            result,
+            features,
         )
 
-        return result
+        return features
 
     @plugin.event(
         stage=plugin.Stages.STAGE_INIT,
@@ -96,6 +93,10 @@ class Plugin(plugin.PluginBase):
                 bool(glob.glob('/etc/ovirt-node-*-release'))
             )
         )
+        self.environment.setdefault(
+            odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_FEATURES,
+            []
+        )
         self.environment[
             odeploycons.VdsmEnv.OVIRT_NODE_HAS_OWN_BRIDGES
         ] = len(glob.glob('/sys/class/net/br*/bridge/bridge_id')) != 0
@@ -107,11 +108,14 @@ class Plugin(plugin.PluginBase):
         )
 
         if self.environment[odeploycons.VdsmEnv.OVIRT_NODE]:
-            self.environment[
-                odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_VERSION
-            ] = self._get_node_plugin_version(
-                'ovirt-node-plugin-vdsm'
-            )
+            if not self.environment[
+                odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_FEATURES
+            ]:
+                self.environment[
+                    odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_FEATURES
+                ] = self._get_node_plugin_features(
+                    'ovirt-node-plugin-vdsm'
+                )
 
 
 # vim: expandtab tabstop=4 shiftwidth=4
