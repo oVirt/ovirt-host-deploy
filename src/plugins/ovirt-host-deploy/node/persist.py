@@ -48,14 +48,25 @@ class Plugin(plugin.PluginBase):
         ],
     )
     def _closeup(self):
-        from ovirtnode import ovirtfunctions
+        _persist = None
+        try:
+            # First: Try importing the new code,
+            # this should work most of the time
+            from ovirt.node.utils.fs import Config
+            _persist = lambda f: Config().persist(f)
+        except ImportError:
+            # If it failed, then try importing the legacy code
+            from ovirtnode import ovirtfunctions
+            _persist = lambda f: ovirtfunctions.ovirt_store_config(f)
+        else:
+            raise RuntimeError("Cannot execute persist task!")
 
         for f in (
             [odeploycons.FileLocations.VDSM_ID_FILE] +
             self.environment[otopicons.CoreEnv.MODIFIED_FILES]
         ):
             self.logger.debug('persisting: %s' % f)
-            ovirtfunctions.ovirt_store_config(f)
+            _persist(f)
 
 
 # vim: expandtab tabstop=4 shiftwidth=4
