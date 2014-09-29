@@ -55,11 +55,12 @@ class Plugin(plugin.PluginBase):
             from ovirt.node.utils.fs import Config
             _persist = lambda f: Config().persist(f)
         except ImportError:
-            # If it failed, then try importing the legacy code
-            from ovirtnode import ovirtfunctions
-            _persist = lambda f: ovirtfunctions.ovirt_store_config(f)
-        else:
-            raise RuntimeError("Cannot execute persist task!")
+            try:
+                # If it failed, then try importing the legacy code
+                from ovirtnode import ovirtfunctions
+                _persist = lambda f: ovirtfunctions.ovirt_store_config(f)
+            except ImportError:
+                raise RuntimeError(_('Cannot resolve persist module.'))
 
         for f in (
             [odeploycons.FileLocations.VDSM_ID_FILE] +
