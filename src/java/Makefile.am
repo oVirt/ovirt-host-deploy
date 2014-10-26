@@ -76,7 +76,7 @@ $(targetjar):	\
 	rm -f "$(targetjar)"
 	$(MKDIR_P) "$(targetdir)"
 	$(MKDIR_P) target
-	$(JAVAC) -d target `find src/main/java -name '*.java'`
+	$(JAVAC) -d target -source 1.5 -target 1.5 `find src/main/java -name '*.java'`
 	$(JAR) -cmf $(srcdir)/MANIFEST.MF "$(targetjar)" -C target .
 
 endif
