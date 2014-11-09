@@ -42,14 +42,24 @@ DEVELOPMENT AND TEST
 
 FAKEQEMU
 
-Construct appropriate /etc/vdsm/vdsm.conf.
-
-Create:
+On the host, create:
 
 /etc/ovirt-host-deploy.conf.d/50-fake.conf
- [environment:enforce]
- VDSM/checkVirtHardware=bool:False
- VDSM/configOverride=bool:False
+
+  [environment:enforce]
+  VDSM/checkVirtHardware=bool:False
+  VDSM/configOverride=bool:False
+  VDSM_CONFIG/fake_kvm_support=str:true
+
+Install hooks manually or on the manager, create:
+
+/usr/share/ovirt-host-deploy/plugins/ovirt-host-deploy/vdsmhooks/packages.d/fake.@DISTRIBUTION@
+
+  vdsm-hook-faqemu
+
+@DISTRIBUTION@ should be replaced with output of:
+
+    python -c "import platform; print(platform.linux_distribution(full_distribution_name=0)[0])"
 
 DEVELOPMENT
 
