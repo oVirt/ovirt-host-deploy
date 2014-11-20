@@ -54,6 +54,7 @@ class Plugin(plugin.PluginBase):
         if self.services.exists('glusterpmd'):
             self.logger.info(_('Starting glusterpmd service'))
             self.services.state('glusterpmd', True)
+            self.services.startup('glusterpmd', True)
 
 
 # vim: expandtab tabstop=4 shiftwidth=4
