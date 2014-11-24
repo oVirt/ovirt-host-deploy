@@ -1,6 +1,6 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.2.5
+2014-11-24 - Version 1.2.5
 
  * gluster: start glusterpmd service after reboot, rhbz#1138198.
 
