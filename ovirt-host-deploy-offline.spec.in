@@ -33,6 +33,7 @@ Requires:	iproute
 Requires:	libselinux-python
 Requires:	m2crypto
 Requires:	python
+Requires:	tar
 Requires:	tuned
 Requires:	util-linux
 Requires:	vdsm
