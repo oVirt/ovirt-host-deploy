@@ -187,6 +187,7 @@ AC_CONFIG_FILES([
 	src/plugins/ovirt-host-deploy/tune/Makefile
 	src/plugins/ovirt-host-deploy/vdsm/Makefile
 	src/plugins/ovirt-host-deploy/vdsmhooks/Makefile
+	src/plugins/ovirt-host-deploy/vmconsole/Makefile
 	src/plugins/ovirt-host-mgmt/Makefile
 	src/plugins/ovirt-host-mgmt/core/Makefile
 	src/plugins/ovirt-host-mgmt/packages/Makefile

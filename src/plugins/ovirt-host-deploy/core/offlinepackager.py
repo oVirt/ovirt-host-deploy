@@ -52,6 +52,7 @@ class Plugin(plugin.PluginBase, packager.PackagerBase):
             if pattern in (
                 'vdsm',
                 'vdsm-gluster',
+                'ovirt-vmconsole-host',
             ):
                 ret.append(
                     {

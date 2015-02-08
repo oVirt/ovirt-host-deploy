@@ -17,23 +17,23 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+include $(top_srcdir)/build/python.inc
+
 MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
 	$(NULL)
 
-SUBDIRS = \
-	core \
-	gluster \
-	kdump \
-	node \
-	openstack \
-	tune \
-	vdsm \
-	vdsmhooks \
-	vmconsole \
+mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/sercon
+dist_my_PYTHON = \
+	__init__.py \
+	packages.py \
+	pki.py \
 	$(NULL)
 
-install-data-local:
-	$(MKDIR_P) "$(DESTDIR)$(otopiplugindir)"
-	rm -f "$(DESTDIR)$(otopiplugindir)/ovirt-host-deploy"
-	ln -s "$(ovirthostdeployplugindir)/ovirt-host-deploy" "$(DESTDIR)$(otopiplugindir)/ovirt-host-deploy"
+clean-local: \
+	python-clean \
+	$(NULL)
+
+all-local: \
+	python-syntax-check \
+	$(NULL)

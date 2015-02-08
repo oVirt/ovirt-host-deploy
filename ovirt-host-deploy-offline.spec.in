@@ -32,6 +32,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	iproute
 Requires:	libselinux-python
 Requires:	m2crypto
+Requires:	ovirt-vmconsole-host
 Requires:	python
 Requires:	tar
 Requires:	tuned

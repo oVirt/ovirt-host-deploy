@@ -21,6 +21,9 @@
 """Constants."""
 
 
+import os
+
+
 from otopi import util
 
 
@@ -63,6 +66,18 @@ class FileLocations(object):
 
     KDUMP_CONFIG_FILE = '/etc/kdump.conf'
 
+    VMCONSOLE_STORE = '/etc/pki/ovirt-vmconsole'
+    VMCONSOLE_CA_FILE = os.path.join(VMCONSOLE_STORE, 'ca.pub')
+    VMCONSOLE_CERT_FILE = os.path.join(
+        VMCONSOLE_STORE,
+        'host-ssh_host_rsa-cert.pub',
+    )
+    VMCONSOLE_KEY_FILE = os.path.join(VMCONSOLE_STORE, 'host-ssh_host_rsa')
+    VMCONSOLE_KEY_PENDING_FILE = os.path.join(
+        VMCONSOLE_STORE,
+        'host-ssh_host_rsa.pending',
+    )
+
 
 @util.export
 class Defaults(object):
@@ -76,6 +91,9 @@ class Const(object):
     CERTIFICATE_ENROLLMENT_INLINE = 'inline'
     CERTIFICATE_ENROLLMENT_REQUEST = 'request'
     CERTIFICATE_ENROLLMENT_ACCEPT = 'accept'
+
+    VMCONSOLE_SUPPORT_NONE = 0
+    VMCONSOLE_SUPPORT_V1 = 1
 
 
 @util.export
@@ -123,6 +141,16 @@ class VdsmEnv(object):
 
 @util.export
 @util.codegen
+class VMConsoleEnv(object):
+    SUPPORT = 'VMCONSOLE/support'
+    ENABLE = 'VMCONSOLE/enable'
+    CAKEY = 'VMCONSOLE/caKey'
+    KEY_SIZE = 'VMCONSOLE/keySize'
+    CERTIFICATE = 'VMCONSOLE/certificate'
+
+
+@util.export
+@util.codegen
 class VirtEnv(object):
     ENABLE = 'VIRT/enable'
 
@@ -158,12 +186,14 @@ class OpenStackEnv(object):
 @util.codegen
 class Queries(object):
     CERTIFICATE_CHAIN = 'VDSM_CERTIFICATE_CHAIN'
+    VMCONSOLE_CERTIFICATE = 'VMCONSOLE_CERTIFICATE'
 
 
 @util.export
 @util.codegen
 class Displays(object):
     CERTIFICATE_REQUEST = 'VDSM_CERTIFICATE_REQUEST'
+    VMCONSOLE_CERTIFICATE_REQUEST = 'VMCONSOLE_CERTIFICATE_REQUEST'
 
 
 @util.export
