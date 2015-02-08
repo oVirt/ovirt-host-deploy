@@ -44,9 +44,9 @@ EXTRA_DIST = \
 
 SUBDIRS = \
 	build \
+	conf.d \
 	po \
 	src \
-	conf.d \
 	tests \
 	$(NULL)
 

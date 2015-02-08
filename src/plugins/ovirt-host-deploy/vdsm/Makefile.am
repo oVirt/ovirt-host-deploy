@@ -26,13 +26,13 @@ MAINTAINERCLEANFILES = \
 mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/vdsm
 dist_my_PYTHON = \
 	__init__.py \
-	vdsmid.py \
-	pki.py \
-	hardware.py \
-	software.py \
-	packages.py \
-	config.py \
 	bridge.py \
+	config.py \
+	hardware.py \
+	packages.py \
+	pki.py \
+	software.py \
+	vdsmid.py \
 	$(NULL)
 
 clean-local: \

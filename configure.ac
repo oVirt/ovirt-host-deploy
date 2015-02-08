@@ -161,28 +161,28 @@ AM_CONDITIONAL([WITH_MAVEN], [test "${with_maven}" = "yes"])
 
 AC_CONFIG_FILES([
 	Makefile
-	ovirt-host-deploy.spec
-	ovirt-host-deploy-offline.spec
 	build/Makefile
+	conf.d/Makefile
+	ovirt-host-deploy-offline.spec
+	ovirt-host-deploy.spec
 	po/Makefile.in
 	src/Makefile
 	src/bin/Makefile
+	src/interface-3/Makefile
+	src/java/Makefile
+	src/java/pom.xml
 	src/ovirt_host_deploy/Makefile
 	src/ovirt_host_deploy/config.py
 	src/plugins/Makefile
 	src/plugins/ovirt-host-deploy/Makefile
 	src/plugins/ovirt-host-deploy/core/Makefile
+	src/plugins/ovirt-host-deploy/gluster/Makefile
+	src/plugins/ovirt-host-deploy/kdump/Makefile
+	src/plugins/ovirt-host-deploy/node/Makefile
+	src/plugins/ovirt-host-deploy/openstack/Makefile
+	src/plugins/ovirt-host-deploy/tune/Makefile
 	src/plugins/ovirt-host-deploy/vdsm/Makefile
 	src/plugins/ovirt-host-deploy/vdsmhooks/Makefile
-	src/plugins/ovirt-host-deploy/tune/Makefile
-	src/plugins/ovirt-host-deploy/node/Makefile
-	src/plugins/ovirt-host-deploy/gluster/Makefile
-	src/plugins/ovirt-host-deploy/openstack/Makefile
-	src/plugins/ovirt-host-deploy/kdump/Makefile
-	src/java/Makefile
-	src/java/pom.xml
-	src/interface-3/Makefile
-	conf.d/Makefile
 	tests/Makefile
 ])
 AC_CONFIG_FILES(

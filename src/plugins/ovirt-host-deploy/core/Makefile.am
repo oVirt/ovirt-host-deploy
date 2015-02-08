@@ -26,8 +26,8 @@ MAINTAINERCLEANFILES = \
 mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/core
 dist_my_PYTHON = \
 	__init__.py \
-	offlinepackager.py \
 	misc.py \
+	offlinepackager.py \
 	$(NULL)
 
 clean-local: \

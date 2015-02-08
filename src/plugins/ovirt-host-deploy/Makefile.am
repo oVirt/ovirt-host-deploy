@@ -23,13 +23,13 @@ MAINTAINERCLEANFILES = \
 
 SUBDIRS = \
 	core \
+	gluster \
+	kdump \
+	node \
+	openstack \
+	tune \
 	vdsm \
 	vdsmhooks \
-	tune \
-	node \
-	gluster \
-	openstack \
-	kdump \
 	$(NULL)
 
 install-data-local:

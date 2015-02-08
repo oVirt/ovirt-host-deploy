@@ -23,8 +23,8 @@ MAINTAINERCLEANFILES = \
 
 SUBDIRS = \
 	bin \
+	interface-3 \
+	java \
 	ovirt_host_deploy \
 	plugins \
-	java \
-	interface-3 \
 	$(NULL)
