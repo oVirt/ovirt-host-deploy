@@ -21,14 +21,19 @@
 """vdsm hardware prerequisites plugin."""
 
 
-import platform
-from distutils.version import LooseVersion
 import gettext
-_ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
+import platform
 
 
-from otopi import util
+from distutils.version import LooseVersion
+
+
 from otopi import plugin
+from otopi import util
+
+
+def _(m):
+    return gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
 @util.export

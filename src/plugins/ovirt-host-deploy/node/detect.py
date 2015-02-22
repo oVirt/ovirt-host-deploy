@@ -21,18 +21,21 @@
 """ovirt-node detection."""
 
 
+import gettext
+import glob
 import os
 import re
-import glob
-import gettext
-_ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
-from otopi import util
 from otopi import plugin
+from otopi import util
 
 
 from ovirt_host_deploy import constants as odeploycons
+
+
+def _(m):
+    return gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
 @util.export

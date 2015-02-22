@@ -24,16 +24,16 @@
 from otopi import util
 
 
-from . import packages
-from . import nrpe
 from . import glusterpmd
+from . import nrpe
+from . import packages
 
 
 @util.export
 def createPlugins(context):
-    packages.Plugin(context=context)
-    nrpe.Plugin(context=context)
     glusterpmd.Plugin(context=context)
+    nrpe.Plugin(context=context)
+    packages.Plugin(context=context)
 
 
 # vim: expandtab tabstop=4 shiftwidth=4

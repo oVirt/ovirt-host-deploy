@@ -21,19 +21,22 @@
 """vdsm hooks installation."""
 
 
+import gettext
 import os
 import platform
-import gettext
-_ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
 from otopi import constants as otopicons
-from otopi import util
-from otopi import plugin
 from otopi import filetransaction
+from otopi import plugin
+from otopi import util
 
 
 from ovirt_host_deploy import constants as odeploycons
+
+
+def _(m):
+    return gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
 @util.export

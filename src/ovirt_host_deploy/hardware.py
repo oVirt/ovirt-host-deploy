@@ -21,14 +21,17 @@
 """hardware checks plugin."""
 
 
+import gettext
 import os
 import struct
-import gettext
-_ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
 from otopi import base
 from otopi import util
+
+
+def _(m):
+    return gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
 @util.export

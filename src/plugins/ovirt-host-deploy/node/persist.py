@@ -22,15 +22,18 @@
 
 
 import gettext
-_ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
 from otopi import constants as otopicons
-from otopi import util
 from otopi import plugin
+from otopi import util
 
 
 from ovirt_host_deploy import constants as odeploycons
+
+
+def _(m):
+    return gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
 @util.export
@@ -53,12 +56,20 @@ class Plugin(plugin.PluginBase):
             # First: Try importing the new code,
             # this should work most of the time
             from ovirt.node.utils.fs import Config
-            _persist = lambda f: Config().persist(f)
+
+            def _persist1(f):
+                Config().persist(f)
+
+            _persist = _persist1
         except ImportError:
             try:
                 # If it failed, then try importing the legacy code
                 from ovirtnode import ovirtfunctions
-                _persist = lambda f: ovirtfunctions.ovirt_store_config(f)
+
+                def _persist2(f):
+                    ovirtfunctions.ovirt_store_config(f)
+
+                _persist = _persist2
             except ImportError:
                 raise RuntimeError(_('Cannot resolve persist module.'))
 

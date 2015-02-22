@@ -21,17 +21,22 @@
 """Install required vdsm packages."""
 
 
-from distutils.version import LooseVersion
-import os
 import gettext
-_ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
+import os
 
 
-from otopi import util
+from distutils.version import LooseVersion
+
+
 from otopi import plugin
+from otopi import util
 
 
 from ovirt_host_deploy import constants as odeploycons
+
+
+def _(m):
+    return gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
 @util.export

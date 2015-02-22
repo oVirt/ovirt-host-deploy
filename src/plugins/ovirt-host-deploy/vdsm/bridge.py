@@ -21,24 +21,27 @@
 """vdsm management bridge plugin."""
 
 
+import gettext
 import os
-import time
 import re
+import select
 import shlex
 import socket
 import struct
-import select
-import gettext
-_ = lambda m: gettext.dgettext(message=m, domain='ovirt-host-deploy')
+import time
 
 
 from otopi import constants as otopicons
-from otopi import util
 from otopi import plugin
 from otopi import transaction
+from otopi import util
 
 
 from ovirt_host_deploy import constants as odeploycons
+
+
+def _(m):
+    return gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
 @util.export
