@@ -39,6 +39,9 @@ Requires:	tuned
 Requires:	util-linux
 Requires:	vdsm
 Requires:	vdsm-cli
+%ifarch x86_64
+Requires:	ovirt-hosted-engine-setup
+%endif
 %ifarch %{ix86} x86_64
 Requires:	dmidecode
 %endif

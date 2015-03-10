@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2012-2013 Red Hat, Inc.
+# Copyright (C) 2012-2015 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -77,6 +77,7 @@ class FileLocations(object):
         VMCONSOLE_STORE,
         'host-ssh_host_rsa.pending',
     )
+    HOSTED_ENGINE_CONF = '/etc/ovirt-hosted-engine/hosted-engine.conf'
 
 
 @util.export
@@ -94,6 +95,10 @@ class Const(object):
 
     VMCONSOLE_SUPPORT_NONE = 0
     VMCONSOLE_SUPPORT_V1 = 1
+
+    HOSTED_ENGINE_ACTION_DEPLOY = 'deploy'
+    HOSTED_ENGINE_ACTION_REMOVE = 'remove'
+    HOSTED_ENGINE_ACTION_NONE = 'none'
 
 
 @util.export
@@ -168,6 +173,13 @@ class GlusterEnv(object):
 @util.codegen
 class TuneEnv(object):
     TUNED_PROFILE = 'TUNE/tunedProfile'
+
+
+@util.export
+@util.codegen
+class HostedEngineEnv(object):
+    ACTION = 'HOSTED_ENGINE/action'
+    HOSTED_ENGINE_CONFIG_PREFIX = 'HOSTED_ENGINE_CONFIG/'
 
 
 @util.export

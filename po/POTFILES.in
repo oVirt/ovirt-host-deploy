@@ -5,6 +5,9 @@
 ./src/ovirt_host_mgmt/__init__.py
 ./src/plugins/ovirt-host-common/core/__init__.py
 ./src/plugins/ovirt-host-common/core/misc.py
+./src/plugins/ovirt-host-common/hosted-engine/configureha.py
+./src/plugins/ovirt-host-common/hosted-engine/__init__.py
+./src/plugins/ovirt-host-common/hosted-engine/packages.py
 ./src/plugins/ovirt-host-common/vdsm/__init__.py
 ./src/plugins/ovirt-host-common/vdsm/pki.py
 ./src/plugins/ovirt-host-common/vmconsole/__init__.py
