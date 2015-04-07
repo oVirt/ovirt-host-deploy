@@ -137,6 +137,12 @@ class GlusterEnv(object):
 
 @util.export
 @util.codegen
+class TuneEnv(object):
+    TUNED_PROFILE = 'TUNE/tunedProfile'
+
+
+@util.export
+@util.codegen
 class OpenStackEnv(object):
     NEUTRON_ENABLE = 'OPENSTACK/neutronEnable'
     NEUTRON_CONFIG_PREFIX = 'OPENSTACK_NEUTRON_CONFIG/'

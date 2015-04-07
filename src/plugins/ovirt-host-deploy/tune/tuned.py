@@ -55,16 +55,23 @@ class Plugin(plugin.PluginBase):
     def _setup(self):
         self.command.detect('tuned-adm')
         self._enabled = True
+        self.environment.setdefault(
+            odeploycons.TuneEnv.TUNED_PROFILE,
+            None
+        )
 
     @plugin.event(
         stage=plugin.Stages.STAGE_VALIDATION,
         condition=lambda self: self._enabled,
     )
     def _validation(self):
-        if self.environment[odeploycons.GlusterEnv.ENABLE]:
-            self._profile = 'rhs-virtualization'
-        else:
-            self._profile = 'virtual-host'
+        self._profile = self.environment[odeploycons.TuneEnv.TUNED_PROFILE]
+
+        if self._profile is None:
+            if self.environment[odeploycons.GlusterEnv.ENABLE]:
+                self._profile = 'rhs-virtualization'
+            else:
+                self._profile = 'virtual-host'
 
         self._enabled = True
 
