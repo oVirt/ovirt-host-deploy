@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2012-2013 Red Hat, Inc.
+# Copyright (C) 2012-2015 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,22 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+include $(top_srcdir)/build/python.inc
+
 MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
 	$(NULL)
 
-EXTRA_DIST = \
-	.source \
+mydir=$(ovirthostdeployplugindir)/ovirt-host-mgmt/packages
+dist_my_PYTHON = \
+	__init__.py \
+	update.py \
 	$(NULL)
 
-sbin_SCRIPTS = \
-	ovirt-host-deploy \
-	ovirt-host-mgmt \
+clean-local: \
+	python-clean \
+	$(NULL)
+
+all-local: \
+	python-syntax-check \
 	$(NULL)

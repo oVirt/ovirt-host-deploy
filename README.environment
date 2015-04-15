@@ -90,3 +90,20 @@ OPENSTACK/neutronOpenvswitchIntegrationBridge(str) [br-int]
 
 OPENSTACK_NEUTRON_OPENVSWITCH_CONFIG/section/key(str)
     Set Neutron Open vSwitch agent configuration option.
+
+MANAGEMENT ENVIRONMENT
+----------------------
+
+OMGMT_CORE/offlinePackager(str) [False]
+    Force offline packager.
+
+OMGMT_PACKAGES/packagesUpdateMode(str) [disabled]
+    disabled - do nothing
+    checkUpdate - only check for updates
+    update - perform update
+
+OMGMT_PACKAGES/packages(multi-str)
+    Packages to monitor
+
+OMGMT_PACKAGES/packagesInfo(multi-str)
+    Package information that is retrieved out of check.

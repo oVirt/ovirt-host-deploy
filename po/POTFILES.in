@@ -1,6 +1,8 @@
 ./src/ovirt_host_deploy/constants.py
 ./src/ovirt_host_deploy/hardware.py
 ./src/ovirt_host_deploy/__init__.py
+./src/ovirt_host_mgmt/constants.py
+./src/ovirt_host_mgmt/__init__.py
 ./src/plugins/ovirt-host-deploy/core/__init__.py
 ./src/plugins/ovirt-host-deploy/core/misc.py
 ./src/plugins/ovirt-host-deploy/core/offlinepackager.py
@@ -30,3 +32,8 @@
 ./src/plugins/ovirt-host-deploy/vdsm/pki.py
 ./src/plugins/ovirt-host-deploy/vdsm/software.py
 ./src/plugins/ovirt-host-deploy/vdsm/vdsmid.py
+./src/plugins/ovirt-host-mgmt/core/__init__.py
+./src/plugins/ovirt-host-mgmt/core/misc.py
+./src/plugins/ovirt-host-mgmt/core/offlinepackager.py
+./src/plugins/ovirt-host-mgmt/packages/__init__.py
+./src/plugins/ovirt-host-mgmt/packages/update.py

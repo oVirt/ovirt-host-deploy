@@ -27,4 +27,6 @@ __pycache__
 .bundeled
 target
 src/bin/ovirt-host-deploy
+src/bin/ovirt-host-mgmt
 src/ovirt_host_deploy/config.py
+src/ovirt_host_mgmt/config.py

@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2012-2013 Red Hat, Inc.
+# Copyright (C) 2012-2015 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -21,11 +21,12 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
 	$(NULL)
 
-EXTRA_DIST = \
-	.source \
+SUBDIRS = \
+	core \
+	packages \
 	$(NULL)
 
-sbin_SCRIPTS = \
-	ovirt-host-deploy \
-	ovirt-host-mgmt \
-	$(NULL)
+install-data-local:
+	$(MKDIR_P) "$(DESTDIR)$(otopiplugindir)"
+	rm -f "$(DESTDIR)$(otopiplugindir)/ovirt-host-mgmt"
+	ln -s "$(ovirthostdeployplugindir)/ovirt-host-mgmt" "$(DESTDIR)$(otopiplugindir)/ovirt-host-mgmt"

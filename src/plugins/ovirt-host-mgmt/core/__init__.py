@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2012-2013 Red Hat, Inc.
+# Copyright (C) 2012-2015 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,15 +17,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in \
-	$(NULL)
 
-EXTRA_DIST = \
-	.source \
-	$(NULL)
+"""vdsm core plugin."""
 
-sbin_SCRIPTS = \
-	ovirt-host-deploy \
-	ovirt-host-mgmt \
-	$(NULL)
+
+from otopi import util
+
+
+from . import misc
+from . import offlinepackager
+
+
+@util.export
+def createPlugins(context):
+    misc.Plugin(context=context)
+    offlinepackager.Plugin(context=context)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4

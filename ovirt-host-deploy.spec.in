@@ -145,17 +145,23 @@ install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 %doc COPYING
 %doc README
 %doc README.environment
-%{_datadir}/%{name}/plugins/%{name}/
-%{_datadir}/otopi/plugins/%{name}
-%{_sbindir}/%{name}
+%{_datadir}/%{name}/plugins/ovirt-host-deploy/
+%{_datadir}/%{name}/plugins/ovirt-host-mgmt/
+%{_datadir}/otopi/plugins/ovirt-host-deploy
+%{_datadir}/otopi/plugins/ovirt-host-mgmt
+%{_sbindir}/ovirt-host-deploy
+%{_sbindir}/ovirt-host-mgmt
 %{ovirt_host_deploy_root}/.bundled
 %{ovirt_host_deploy_root}/otopi
 %{ovirt_host_deploy_root}/otopi-plugins
 %{ovirt_host_deploy_root}/ovirt-host-deploy
+%{ovirt_host_deploy_root}/ovirt-host-mgmt
 %{ovirt_host_deploy_root}/pythonlib/otopi
 %{ovirt_host_deploy_root}/pythonlib/ovirt_host_deploy
+%{ovirt_host_deploy_root}/pythonlib/ovirt_host_mgmt
 %{ovirt_host_deploy_root}/setup
 %{python_sitelib}/ovirt_host_deploy/
+%{python_sitelib}/ovirt_host_mgmt/
 
 %files java -f src/java/.mfiles
 

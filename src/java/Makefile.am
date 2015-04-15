@@ -21,6 +21,7 @@ artifact = ovirt-host-deploy
 
 generate = \
 	ovirt_host_deploy.constants \
+	ovirt_host_mgmt.constants \
 	$(NULL)
 
 targetdir = $(abs_top_builddir)/target

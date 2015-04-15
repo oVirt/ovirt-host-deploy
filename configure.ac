@@ -1,6 +1,6 @@
 dnl
 dnl ovirt-host-deploy -- ovirt host deployer
-dnl Copyright (C) 2012-2013 Red Hat, Inc.
+dnl Copyright (C) 2012-2015 Red Hat, Inc.
 dnl
 dnl This library is free software; you can redistribute it and/or
 dnl modify it under the terms of the GNU Lesser General Public
@@ -147,11 +147,13 @@ test -z "${OTOPI_BUNDLE}" && AC_MSG_ERROR([otopi-bundle required but missing])
 otopiplugindir="\$(datadir)/otopi/plugins"
 ovirthostdeployplugindir="\$(pkgdatadir)/plugins"
 ovirthostdeploylibdir="\$(pythondir)/ovirt_host_deploy"
+ovirthostmgmtlibdir="\$(pythondir)/ovirt_host_mgmt"
 ovirthostdeployinterfacedir="\$(pkgdatadir)/interface-${INTERFACE_VERSION}"
 AC_SUBST([otopiplugindir])
 AC_SUBST([ovirthostdeployplugindir])
 AC_SUBST([ovirthostdeploylibdir])
 AC_SUBST([ovirthostdeployinterfacedir])
+AC_SUBST([ovirthostmgmtlibdir])
 AC_SUBST([LOCAL_VERSION])
 AC_SUBST([OTOPI_SOURCES])
 AM_CONDITIONAL([PYTHON_SYNTAX_CHECK], [test "${enable_python_syntax_check}" = "yes"])
@@ -173,6 +175,8 @@ AC_CONFIG_FILES([
 	src/java/pom.xml
 	src/ovirt_host_deploy/Makefile
 	src/ovirt_host_deploy/config.py
+	src/ovirt_host_mgmt/Makefile
+	src/ovirt_host_mgmt/config.py
 	src/plugins/Makefile
 	src/plugins/ovirt-host-deploy/Makefile
 	src/plugins/ovirt-host-deploy/core/Makefile
@@ -183,10 +187,17 @@ AC_CONFIG_FILES([
 	src/plugins/ovirt-host-deploy/tune/Makefile
 	src/plugins/ovirt-host-deploy/vdsm/Makefile
 	src/plugins/ovirt-host-deploy/vdsmhooks/Makefile
+	src/plugins/ovirt-host-mgmt/Makefile
+	src/plugins/ovirt-host-mgmt/core/Makefile
+	src/plugins/ovirt-host-mgmt/packages/Makefile
 	tests/Makefile
 ])
 AC_CONFIG_FILES(
 	[src/bin/ovirt-host-deploy:src/bin/executor.in],
 	[chmod a+x src/bin/ovirt-host-deploy]
+)
+AC_CONFIG_FILES(
+	[src/bin/ovirt-host-mgmt:src/bin/executor.in],
+	[chmod a+x src/bin/ovirt-host-mgmt]
 )
 AC_OUTPUT

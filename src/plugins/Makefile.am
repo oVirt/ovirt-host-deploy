@@ -23,4 +23,5 @@ MAINTAINERCLEANFILES = \
 
 SUBDIRS = \
 	ovirt-host-deploy \
+	ovirt-host-mgmt \
 	$(NULL)

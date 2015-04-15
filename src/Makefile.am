@@ -26,5 +26,6 @@ SUBDIRS = \
 	interface-3 \
 	java \
 	ovirt_host_deploy \
+	ovirt_host_mgmt \
 	plugins \
 	$(NULL)
