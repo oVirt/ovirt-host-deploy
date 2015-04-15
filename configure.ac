@@ -186,7 +186,7 @@ AC_CONFIG_FILES([
 	tests/Makefile
 ])
 AC_CONFIG_FILES(
-	[src/bin/ovirt-host-deploy],
+	[src/bin/ovirt-host-deploy:src/bin/executor.in],
 	[chmod a+x src/bin/ovirt-host-deploy]
 )
 AC_OUTPUT
