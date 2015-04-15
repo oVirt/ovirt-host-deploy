@@ -27,14 +27,14 @@ install-data-hook:
 		--target="$(DESTDIR)$(ovirthostdeployinterfacedir)" \
 		--root="$(DESTDIR)" \
 		--otopi-sources="$(OTOPI_SOURCES)"
-	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/$(PACKAGE_NAME)"
-	$(LN_SR) "$(DESTDIR)$(sbindir)/$(PACKAGE_NAME)" "$(DESTDIR)$(ovirthostdeployinterfacedir)/$(PACKAGE_NAME)"
+	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/ovirt-host-deploy"
+	$(LN_SR) "$(DESTDIR)$(sbindir)/ovirt-host-deploy" "$(DESTDIR)$(ovirthostdeployinterfacedir)/ovirt-host-deploy"
 	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/pythonlib/ovirt_host_deploy"
 	$(LN_SR) "$(DESTDIR)$(ovirthostdeploylibdir)" "$(DESTDIR)$(ovirthostdeployinterfacedir)/pythonlib/ovirt_host_deploy"
-	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/otopi-plugins/$(PACKAGE_NAME)"
-	$(LN_SR) "$(DESTDIR)$(ovirthostdeployplugindir)/$(PACKAGE_NAME)" "$(DESTDIR)$(ovirthostdeployinterfacedir)/otopi-plugins/$(PACKAGE_NAME)"
+	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/otopi-plugins/ovirt-host-deploy"
+	$(LN_SR) "$(DESTDIR)$(ovirthostdeployplugindir)/ovirt-host-deploy" "$(DESTDIR)$(ovirthostdeployinterfacedir)/otopi-plugins/ovirt-host-deploy"
 	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/setup"
-	ln -s $(PACKAGE_NAME) "$(DESTDIR)$(ovirthostdeployinterfacedir)/setup"
+	ln -s ovirt-host-deploy "$(DESTDIR)$(ovirthostdeployinterfacedir)/setup"
 
 uninstall-hook:
 	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/.bundled"

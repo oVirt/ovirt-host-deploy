@@ -22,6 +22,7 @@ include $(top_srcdir)/build/python.inc
 MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
 	$(NULL)
+
 CLEANFILES = \
 	config.py \
 	$(NULL)
@@ -45,6 +46,5 @@ clean-local: \
 	$(NULL)
 
 all-local: \
-	$(DISTFILES) \
 	python-syntax-check \
 	$(NULL)

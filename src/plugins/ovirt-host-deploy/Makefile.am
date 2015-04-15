@@ -34,5 +34,5 @@ SUBDIRS = \
 
 install-data-local:
 	$(MKDIR_P) "$(DESTDIR)$(otopiplugindir)"
-	rm -f "$(DESTDIR)$(otopiplugindir)/$(PACKAGE_NAME)"
-	ln -s "$(ovirthostdeployplugindir)/$(PACKAGE_NAME)" "$(DESTDIR)$(otopiplugindir)/$(PACKAGE_NAME)"
+	rm -f "$(DESTDIR)$(otopiplugindir)/ovirt-host-deploy"
+	ln -s "$(ovirthostdeployplugindir)/ovirt-host-deploy" "$(DESTDIR)$(otopiplugindir)/ovirt-host-deploy"

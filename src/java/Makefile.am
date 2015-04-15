@@ -17,12 +17,15 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-artifact=ovirt-host-deploy
-generate=ovirt_host_deploy.constants
+artifact = ovirt-host-deploy
 
-targetdir=$(abs_top_builddir)/target
-jarname=$(artifact)-$(PACKAGE_MAVEN_VERSION).jar
-targetjar=$(targetdir)/$(jarname)
+generate = \
+	ovirt_host_deploy.constants \
+	$(NULL)
+
+targetdir = $(abs_top_builddir)/target
+jarname = $(artifact)-$(PACKAGE_MAVEN_VERSION).jar
+targetjar = $(targetdir)/$(jarname)
 
 MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
