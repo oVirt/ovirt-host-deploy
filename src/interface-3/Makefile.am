@@ -21,6 +21,10 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
 	$(NULL)
 
+ovirthostdeployinterface_SCRIPTS = \
+	setup \
+	$(NULL)
+
 install-data-hook:
 	$(SHELL) "$(OTOPI_BUNDLE)"  \
 		--gettext-domain="$(PACKAGE_NAME)" \
@@ -33,8 +37,6 @@ install-data-hook:
 	$(LN_SR) "$(DESTDIR)$(ovirthostdeploylibdir)" "$(DESTDIR)$(ovirthostdeployinterfacedir)/pythonlib/ovirt_host_deploy"
 	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/otopi-plugins/ovirt-host-deploy"
 	$(LN_SR) "$(DESTDIR)$(ovirthostdeployplugindir)/ovirt-host-deploy" "$(DESTDIR)$(ovirthostdeployinterfacedir)/otopi-plugins/ovirt-host-deploy"
-	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/setup"
-	ln -s ovirt-host-deploy "$(DESTDIR)$(ovirthostdeployinterfacedir)/setup"
 
 uninstall-hook:
 	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/.bundled"
