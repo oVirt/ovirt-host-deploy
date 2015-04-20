@@ -1,2 +1,2 @@
 #!/bin/sh
-exec "$(dirname "$0")/ovirt-host-deploy"
+exec "$(dirname "$0")/ovirt-host-deploy" "$@"
