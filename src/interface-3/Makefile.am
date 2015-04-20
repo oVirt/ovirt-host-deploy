@@ -21,7 +21,7 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
 	$(NULL)
 
-ovirthostdeployinterface_SCRIPTS = \
+dist_ovirthostdeployinterface_SCRIPTS = \
 	setup \
 	$(NULL)
 
