@@ -25,6 +25,6 @@ EXTRA_DIST = \
 	.source \
 	$(NULL)
 
-dist_sbin_SCRIPTS = \
+sbin_SCRIPTS = \
 	ovirt-host-deploy \
 	$(NULL)
