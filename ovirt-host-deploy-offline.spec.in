@@ -43,6 +43,7 @@ Requires:	dmidecode
 %endif
 %if 0%{?fedora}
 %if %{fedora} >= 20
+Requires:	iptables-services
 Requires:	kexec-tools >= 2.0.4-27
 %endif
 %endif
@@ -50,7 +51,8 @@ Requires:	kexec-tools >= 2.0.4-27
 %if %{rhel} == 6
 Requires:	kexec-tools >= 2.0.0-273.1
 %endif
-%if %{rhel} == 7
+%if %{rhel} >= 7
+Requires:	iptables-services
 Requires:	kexec-tools >= 2.0.4-32.1
 %endif
 %endif
