@@ -47,33 +47,24 @@ class Plugin(plugin.PluginBase, packager.PackagerBase):
         pass
 
     def queryPackages(self, patterns=None):
-        if tuple(patterns) == ('vdsm',):
-            return [
-                {
-                    'operation': 'installed',
-                    'display_name': 'vdsm',
-                    'name': 'vdsm',
-                    'version': '999.9.9',
-                    'release': '1',
-                    'epoch': '0',
-                    'arch': 'noarch',
-                },
-            ]
-        elif tuple(patterns) == ('vdsm-gluster',):
-            return [
-                {
-                    'operation': 'installed',
-                    'display_name': 'vdsm-gluster',
-                    'name': 'vdsm-gluster',
-                    'version': '999.9.9',
-                    'release': '1',
-                    'epoch': '0',
-                    'arch': 'noarch',
-                },
-            ]
-
-        else:
-            return []
+        ret = []
+        for pattern in patterns:
+            if pattern in (
+                'vdsm',
+                'vdsm-gluster',
+            ):
+                ret.append(
+                    {
+                        'operation': 'installed',
+                        'display_name': pattern,
+                        'name': pattern,
+                        'version': '999.9.9',
+                        'release': '1',
+                        'epoch': '0',
+                        'arch': 'noarch',
+                    }
+                )
+        return ret
 
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
