@@ -57,10 +57,6 @@ dist_noinst_DATA = \
 	ovirt-host-deploy.spec \
 	$(NULL)
 
-dist_noinst_SCRIPTS = \
-	autogen.sh \
-	$(NULL)
-
 TMPREPOS = tmp.repos
 srpm:	dist
 	rm -fr "$(TMPREPOS)"
