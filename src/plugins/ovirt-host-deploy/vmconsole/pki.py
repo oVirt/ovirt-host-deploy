@@ -44,7 +44,7 @@ class Plugin(plugin.PluginBase):
         from M2Crypto import X509, RSA, EVP
 
         rsa = RSA.gen_key(
-            self.environment[odeploycons.VdsmEnv.KEY_SIZE],
+            self.environment[odeploycons.VMConsoleEnv.KEY_SIZE],
             65537,
         )
         rsapem = rsa.as_pem(cipher=None)
@@ -67,6 +67,10 @@ class Plugin(plugin.PluginBase):
     def _init(self):
         self._enabled = False
         self.environment.setdefault(
+            odeploycons.VMConsoleEnv.CERTIFICATE_ENROLLMENT,
+            odeploycons.Const.CERTIFICATE_ENROLLMENT_NONE
+        )
+        self.environment.setdefault(
             odeploycons.VMConsoleEnv.CERTIFICATE,
             None
         )
@@ -78,14 +82,12 @@ class Plugin(plugin.PluginBase):
     @plugin.event(
         stage=plugin.Stages.STAGE_VALIDATION,
         condition=lambda self: self.environment[
-            odeploycons.VMConsoleEnv.ENABLE
-        ]
+            odeploycons.VMConsoleEnv.CERTIFICATE_ENROLLMENT
+        ] != odeploycons.Const.CERTIFICATE_ENROLLMENT_NONE
     )
     def _validation(self):
-        self._enabled = True
-
         if self.environment[
-            odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT
+            odeploycons.VMConsoleEnv.CERTIFICATE_ENROLLMENT
         ] == odeploycons.Const.CERTIFICATE_ENROLLMENT_ACCEPT:
             # we cannot perform the following
             # in validation stage, as we do not have
@@ -96,6 +98,8 @@ class Plugin(plugin.PluginBase):
                 raise RuntimeError(
                     _('PKI accept mode while no pending request')
                 )
+
+        self._enabled = True
 
     @plugin.event(
         stage=plugin.Stages.STAGE_PACKAGES,
@@ -113,7 +117,7 @@ class Plugin(plugin.PluginBase):
         self.dialog.note(_('Setting up Serial Console PKI'))
 
         enrollment = self.environment[
-            odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT
+            odeploycons.VMConsoleEnv.CERTIFICATE_ENROLLMENT
         ]
 
         if enrollment == odeploycons.Const.CERTIFICATE_ENROLLMENT_ACCEPT:

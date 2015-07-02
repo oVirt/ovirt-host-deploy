@@ -147,6 +147,7 @@ class VMConsoleEnv(object):
     CAKEY = 'VMCONSOLE/caKey'
     KEY_SIZE = 'VMCONSOLE/keySize'
     CERTIFICATE = 'VMCONSOLE/certificate'
+    CERTIFICATE_ENROLLMENT = 'VMCONSOLE/certificateEnrollment'
 
 
 @util.export
