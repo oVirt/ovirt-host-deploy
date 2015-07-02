@@ -30,7 +30,6 @@ dist_my_PYTHON = \
 	config.py \
 	hardware.py \
 	packages.py \
-	pki.py \
 	software.py \
 	vdsmid.py \
 	$(NULL)

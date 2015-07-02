@@ -39,6 +39,8 @@ install-data-hook:
 	$(LN_SR) "$(DESTDIR)$(ovirthostdeploylibdir)" "$(DESTDIR)$(ovirthostdeployinterfacedir)/pythonlib/ovirt_host_deploy"
 	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/pythonlib/ovirt_host_mgmt"
 	$(LN_SR) "$(DESTDIR)$(ovirthostmgmtlibdir)" "$(DESTDIR)$(ovirthostdeployinterfacedir)/pythonlib/ovirt_host_mgmt"
+	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/otopi-plugins/ovirt-host-common"
+	$(LN_SR) "$(DESTDIR)$(ovirthostdeployplugindir)/ovirt-host-common" "$(DESTDIR)$(ovirthostdeployinterfacedir)/otopi-plugins/ovirt-host-common"
 	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/otopi-plugins/ovirt-host-deploy"
 	$(LN_SR) "$(DESTDIR)$(ovirthostdeployplugindir)/ovirt-host-deploy" "$(DESTDIR)$(ovirthostdeployinterfacedir)/otopi-plugins/ovirt-host-deploy"
 	rm -f "$(DESTDIR)$(ovirthostdeployinterfacedir)/otopi-plugins/ovirt-host-mgmt"

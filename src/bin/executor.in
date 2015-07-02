@@ -40,4 +40,4 @@ if [ -f "${scriptdir}/.source" ]; then
 	export PYTHONPATH="$(cd "${scriptdir}" && pwd)/..:${PYTHONPATH}"
 	extraenv="\"PREPEND:BASE/pluginPath=str:${scriptdir}/../plugins\""
 fi
-exec "${otopidir}/otopi" "${extraenv} APPEND:BASE/pluginGroups=str:$(basename "$0") $*"
+exec "${otopidir}/otopi" "${extraenv} APPEND:BASE/pluginGroups=str:ovirt-host-common:$(basename "$0") $*"

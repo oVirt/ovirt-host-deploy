@@ -28,7 +28,6 @@ from . import bridge
 from . import config
 from . import hardware
 from . import packages
-from . import pki
 from . import software
 from . import vdsmid
 
@@ -39,7 +38,6 @@ def createPlugins(context):
     config.Plugin(context=context)
     hardware.Plugin(context=context)
     packages.Plugin(context=context)
-    pki.Plugin(context=context)
     software.Plugin(context=context)
     vdsmid.Plugin(context=context)
 

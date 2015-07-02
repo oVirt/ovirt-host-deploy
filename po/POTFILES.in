@@ -3,6 +3,10 @@
 ./src/ovirt_host_deploy/__init__.py
 ./src/ovirt_host_mgmt/constants.py
 ./src/ovirt_host_mgmt/__init__.py
+./src/plugins/ovirt-host-common/vdsm/__init__.py
+./src/plugins/ovirt-host-common/vdsm/pki.py
+./src/plugins/ovirt-host-common/vmconsole/__init__.py
+./src/plugins/ovirt-host-common/vmconsole/pki.py
 ./src/plugins/ovirt-host-deploy/core/__init__.py
 ./src/plugins/ovirt-host-deploy/core/misc.py
 ./src/plugins/ovirt-host-deploy/core/offlinepackager.py
@@ -29,9 +33,10 @@
 ./src/plugins/ovirt-host-deploy/vdsmhooks/__init__.py
 ./src/plugins/ovirt-host-deploy/vdsm/__init__.py
 ./src/plugins/ovirt-host-deploy/vdsm/packages.py
-./src/plugins/ovirt-host-deploy/vdsm/pki.py
 ./src/plugins/ovirt-host-deploy/vdsm/software.py
 ./src/plugins/ovirt-host-deploy/vdsm/vdsmid.py
+./src/plugins/ovirt-host-deploy/vmconsole/__init__.py
+./src/plugins/ovirt-host-deploy/vmconsole/packages.py
 ./src/plugins/ovirt-host-mgmt/core/__init__.py
 ./src/plugins/ovirt-host-mgmt/core/misc.py
 ./src/plugins/ovirt-host-mgmt/core/offlinepackager.py

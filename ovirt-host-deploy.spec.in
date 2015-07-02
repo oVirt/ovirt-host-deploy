@@ -145,8 +145,10 @@ install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 %doc COPYING
 %doc README
 %doc README.environment
+%{_datadir}/%{name}/plugins/ovirt-host-common/
 %{_datadir}/%{name}/plugins/ovirt-host-deploy/
 %{_datadir}/%{name}/plugins/ovirt-host-mgmt/
+%{_datadir}/otopi/plugins/ovirt-host-common
 %{_datadir}/otopi/plugins/ovirt-host-deploy
 %{_datadir}/otopi/plugins/ovirt-host-mgmt
 %{_sbindir}/ovirt-host-deploy

@@ -17,22 +17,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-include $(top_srcdir)/build/python.inc
 
-MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in \
-	$(NULL)
+"""pki plugin."""
 
-mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/sercon
-dist_my_PYTHON = \
-	__init__.py \
-	packages.py \
-	$(NULL)
 
-clean-local: \
-	python-clean \
-	$(NULL)
+from otopi import util
 
-all-local: \
-	python-syntax-check \
-	$(NULL)
+
+from . import pki
+
+
+@util.export
+def createPlugins(context):
+    pki.Plugin(context=context)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4
