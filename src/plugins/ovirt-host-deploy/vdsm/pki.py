@@ -178,7 +178,7 @@ class Plugin(plugin.PluginBase):
     def _init(self):
         self.environment.setdefault(
             odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT,
-            odeploycons.Const.CERTIFICATE_ENROLLMENT_INLINE
+            odeploycons.Const.CERTIFICATE_ENROLLMENT_NONE
         )
         self.environment.setdefault(
             odeploycons.VdsmEnv.CERTIFICATE_CHAIN,
