@@ -61,6 +61,22 @@ Install hooks manually or on the manager, create:
 
     python -c "import platform; print(platform.linux_distribution(full_distribution_name=0)[0])"
 
+FAKEVMSTATS
+
+On the host, create:
+
+/etc/ovirt-host-deploy.conf.d/50-fakevmstats.conf
+
+  [environment:enforce]
+  VDSM/configOverride=bool:False
+  VDSM_CONFIG/fake_vmstats_enable=str:true
+
+Install hooks manually or on the manager, create:
+
+/usr/share/ovirt-host-deploy/plugins/ovirt-host-deploy/vdsmhooks/packages.d/fakevmstats.@DISTRIBUTION@
+
+  vdsm-hook-fakevmstats
+
 DEVELOPMENT
 
 In order to avoid override of vdsm.conf, create:
