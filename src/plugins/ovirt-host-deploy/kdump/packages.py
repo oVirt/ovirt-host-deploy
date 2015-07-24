@@ -286,8 +286,18 @@ class Plugin(plugin.PluginBase):
     def _closeup(self):
         self.logger.info(_('Restarting kdump'))
         self.services.startup('kdump', True)
-        for state in (False, True):
-            self.services.state('kdump', state)
+        try:
+            for state in (False, True):
+                self.services.state('kdump', state)
+        except RuntimeError:
+            self.logger.debug('kdump service failed', exc_info=True)
+            raise RuntimeError(
+                _(
+                    'kdump service restart failed. Please either redeploy '
+                    'with Kdump Integration disabled or fix kdump '
+                    'configuration manually and redeploy the host'
+                )
+            )
 
 
 # vim: expandtab tabstop=4 shiftwidth=4
