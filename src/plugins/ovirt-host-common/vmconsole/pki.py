@@ -99,14 +99,7 @@ class Plugin(plugin.PluginBase):
                     _('PKI accept mode while no pending request')
                 )
 
-        try:
-            pwd.getpwnam('ovirt-vmconsole')
-            self._enabled = True
-        except Exception:
-            self.logger.debug(
-                'ovirt-vmconsole user is missing disabling support',
-                exc_info=True,
-            )
+        self._enabled = True
 
     @plugin.event(
         stage=plugin.Stages.STAGE_PACKAGES,
@@ -117,10 +110,24 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(
         stage=plugin.Stages.STAGE_MISC,
-        priority=plugin.Stages.PRIORITY_LOW,
         condition=lambda self: self._enabled,
     )
     def _misc(self):
+        try:
+            pwd.getpwnam('ovirt-vmconsole')
+        except Exception:
+            self.logger.debug(
+                'ovirt-vmconsole user is missing disabling support',
+                exc_info=True,
+            )
+            self._enabled = False
+
+    @plugin.event(
+        stage=plugin.Stages.STAGE_MISC,
+        priority=plugin.Stages.PRIORITY_LOW,
+        condition=lambda self: self._enabled,
+    )
+    def _miscLate(self):
         self.dialog.note(_('Setting up Serial Console PKI'))
 
         enrollment = self.environment[
