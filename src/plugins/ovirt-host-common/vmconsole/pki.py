@@ -23,6 +23,7 @@
 
 import gettext
 import os
+import pwd
 
 
 from otopi import constants as otopicons
@@ -65,7 +66,6 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_INIT,
     )
     def _init(self):
-        self._enabled = False
         self.environment.setdefault(
             odeploycons.VMConsoleEnv.CERTIFICATE_ENROLLMENT,
             odeploycons.Const.CERTIFICATE_ENROLLMENT_NONE
@@ -99,7 +99,14 @@ class Plugin(plugin.PluginBase):
                     _('PKI accept mode while no pending request')
                 )
 
-        self._enabled = True
+        try:
+            pwd.getpwnam('ovirt-vmconsole')
+            self._enabled = True
+        except Exception:
+            self.logger.debug(
+                'ovirt-vmconsole user is missing disabling support',
+                exc_info=True,
+            )
 
     @plugin.event(
         stage=plugin.Stages.STAGE_PACKAGES,
