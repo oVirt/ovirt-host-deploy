@@ -7,6 +7,7 @@ ovirt-host-deploy -- oVirt host deploy
  * mgmt: new component to enable host management.
  * offline: pull iptables-services where available, rhbz#1224804.
  * ovirt-vmconsole: initial add.
+ * kdump: improve message when service fails, rhbz#1248010.
 
 2015-01-15 - Version 1.3.1
 
