@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2012-2013 Red Hat, Inc.
+# Copyright (C) 2012-2015 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,17 +17,41 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in \
-	$(NULL)
 
-SUBDIRS = \
-	core \
-	vdsm \
-	vmconsole \
-	$(NULL)
+"""Misc plugin."""
 
-install-data-local:
-	$(MKDIR_P) "$(DESTDIR)$(otopiplugindir)"
-	rm -f "$(DESTDIR)$(otopiplugindir)/ovirt-host-common"
-	ln -s "$(ovirthostdeployplugindir)/ovirt-host-common" "$(DESTDIR)$(otopiplugindir)/ovirt-host-common"
+
+import gettext
+
+
+from otopi import plugin
+from otopi import util
+
+
+from ovirt_host_deploy import constants as odeploycons
+
+
+def _(m):
+    return gettext.dgettext(message=m, domain='ovirt-host-deploy')
+
+
+@util.export
+class Plugin(plugin.PluginBase):
+    """Misc plugin."""
+
+    def __init__(self, context):
+        super(Plugin, self).__init__(context=context)
+
+    @plugin.event(
+        stage=plugin.Stages.STAGE_INIT,
+    )
+    def _init(self):
+
+        self.environment[
+            odeploycons.CoreEnv.INSTALL_INCOMPLETE
+        ] = False
+        self.environment[
+            odeploycons.CoreEnv.INSTALL_INCOMPLETE_REASONS
+        ] = []
+
+# vim: expandtab tabstop=4 shiftwidth=4

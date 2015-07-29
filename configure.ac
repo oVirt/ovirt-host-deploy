@@ -179,6 +179,7 @@ AC_CONFIG_FILES([
 	src/ovirt_host_mgmt/config.py
 	src/plugins/Makefile
 	src/plugins/ovirt-host-common/Makefile
+	src/plugins/ovirt-host-common/core/Makefile
 	src/plugins/ovirt-host-common/vdsm/Makefile
 	src/plugins/ovirt-host-common/vmconsole/Makefile
 	src/plugins/ovirt-host-deploy/Makefile

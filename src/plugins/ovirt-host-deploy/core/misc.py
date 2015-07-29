@@ -97,12 +97,6 @@ class Plugin(plugin.PluginBase):
             odeploycons.CoreEnv.FORCE_REBOOT,
             False
         )
-        self.environment[
-            odeploycons.CoreEnv.INSTALL_INCOMPLETE
-        ] = False
-        self.environment[
-            odeploycons.CoreEnv.INSTALL_INCOMPLETE_REASONS
-        ] = []
 
         self.logger.debug(
             'ovirt-host-deploy interface version %s' % (

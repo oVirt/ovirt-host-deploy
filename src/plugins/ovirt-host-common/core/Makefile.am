@@ -17,17 +17,22 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+include $(top_srcdir)/build/python.inc
+
 MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
 	$(NULL)
 
-SUBDIRS = \
-	core \
-	vdsm \
-	vmconsole \
+mydir=$(ovirthostdeployplugindir)/ovirt-host-common/core
+dist_my_PYTHON = \
+	__init__.py \
+	misc.py \
 	$(NULL)
 
-install-data-local:
-	$(MKDIR_P) "$(DESTDIR)$(otopiplugindir)"
-	rm -f "$(DESTDIR)$(otopiplugindir)/ovirt-host-common"
-	ln -s "$(ovirthostdeployplugindir)/ovirt-host-common" "$(DESTDIR)$(otopiplugindir)/ovirt-host-common"
+clean-local: \
+	python-clean \
+	$(NULL)
+
+all-local: \
+	python-syntax-check \
+	$(NULL)
