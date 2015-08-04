@@ -23,7 +23,7 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
 	$(NULL)
 
-mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/sercon
+mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/vmconsole
 dist_my_PYTHON = \
 	__init__.py \
 	packages.py \
