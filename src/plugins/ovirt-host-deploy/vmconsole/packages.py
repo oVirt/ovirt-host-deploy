@@ -94,6 +94,7 @@ class Plugin(plugin.PluginBase):
         if self.services.exists('ovirt-vmconsole-host-sshd'):
             self.services.state('ovirt-vmconsole-host-sshd', False)
             self.services.state('ovirt-vmconsole-host-sshd', True)
+            self.services.startup('ovirt-vmconsole-host-sshd', True)
 
 
 # vim: expandtab tabstop=4 shiftwidth=4
