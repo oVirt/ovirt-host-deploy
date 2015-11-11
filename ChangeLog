@@ -3,6 +3,7 @@ ovirt-host-deploy -- oVirt host deploy
 ????-??-?? - Version 1.5.0
 
  * hosted-engine: initial support, rhbz#1200469
+ * vmconsole: automatic start of ovirt-vmconsole-host-sshd, rhbz#1279434.
 
 2015-10-15 - Version 1.4.0
 
