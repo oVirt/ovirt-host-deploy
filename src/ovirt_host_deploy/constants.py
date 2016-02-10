@@ -136,7 +136,7 @@ class VdsmEnv(object):
     CONNECTION_RETRIES = 'VDSM/connectionRetries'
     MANAGEMENT_BRIDGE_NAME = 'VDSM/managementBridgeName'
     CHECK_VIRT_HARDWARE = 'VDSM/checkVirtHardware'
-    OVIRT_NODE = 'VDSM/node'
+    OVIRT_VINTAGE_NODE = 'VDSM/ovirt-legacy-node'
     OVIRT_NODE_HAS_OWN_BRIDGES = 'VDSM/nodeHasOwnBridges'
     NODE_PLUGIN_VDSM_FEATURES = 'VDSM/nodePluginVdsmFeatures'
     CONFIG_OVERRIDE = 'VDSM/configOverride'

@@ -43,7 +43,7 @@ class Plugin(plugin.PluginBase):
     """ovirt-node detection.
 
     Environment:
-        VdsmEnv.OVIRT_NODE -- is node.
+        VdsmEnv.OVIRT_VINTAGE_NODE -- is node.
         VdsmEnv.NODE_PLUGIN_VDSM_FEATURES -- features of ovirt-node-plugin-vdsm
 
     """
@@ -90,7 +90,7 @@ class Plugin(plugin.PluginBase):
     )
     def _init(self):
         self.environment.setdefault(
-            odeploycons.VdsmEnv.OVIRT_NODE,
+            odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE,
             (
                 os.path.exists('/etc/rhev-hypervisor-release') or
                 bool(glob.glob('/etc/ovirt-node-*-release'))
@@ -106,11 +106,11 @@ class Plugin(plugin.PluginBase):
         self.environment.setdefault(
             odeploycons.CoreEnv.OFFLINE_PACKAGER,
             self.environment[
-                odeploycons.VdsmEnv.OVIRT_NODE
+                odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
             ]
         )
 
-        if self.environment[odeploycons.VdsmEnv.OVIRT_NODE]:
+        if self.environment[odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE]:
             if not self.environment[
                 odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_FEATURES
             ]:

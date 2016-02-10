@@ -136,7 +136,7 @@ class Plugin(plugin.PluginBase):
     def _kexec_tools_version_supported(self):
         result = False
 
-        if self.environment[odeploycons.VdsmEnv.OVIRT_NODE]:
+        if self.environment[odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE]:
             # on node check ovirt-node-plugin-vdsm features
             result = 'kdump' in self.environment[
                 odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_FEATURES

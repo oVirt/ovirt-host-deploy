@@ -57,7 +57,7 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_VALIDATION,
         condition=lambda self: (
             not self.environment[
-                odeploycons.VdsmEnv.OVIRT_NODE
+                odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
             ] and
             self.environment[odeploycons.GlusterEnv.ENABLE]
         ),

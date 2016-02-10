@@ -521,7 +521,7 @@ class Plugin(plugin.PluginBase):
         # ifcfg file to avoid having duplicate
         # bridge.
         #
-        if self.environment[odeploycons.VdsmEnv.OVIRT_NODE]:
+        if self.environment[odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE]:
             ifcfg = '/etc/sysconfig/network-scripts/ifcfg-%s' % (
                 name
             )
@@ -697,7 +697,7 @@ class Plugin(plugin.PluginBase):
                 # only for ovirt-node we delete existing
                 # bridge?
                 #
-                if self.environment[odeploycons.VdsmEnv.OVIRT_NODE]:
+                if self.environment[odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE]:
                     if not interface.startswith('br'):
                         self._setIncomplete(
                             _(
@@ -780,7 +780,7 @@ class Plugin(plugin.PluginBase):
         # only at node as we won't reach here
         # if we are not running on node
         if (
-            self.environment[odeploycons.VdsmEnv.OVIRT_NODE] and
+            self.environment[odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE] and
             self._interfaceIsBridge(name=interface)
         ):
             nic = interface.replace('br', '', 1)

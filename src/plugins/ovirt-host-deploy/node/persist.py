@@ -47,7 +47,7 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_CLOSEUP,
         priority=plugin.Stages.PRIORITY_LAST,
         condition=lambda self: self.environment[
-            odeploycons.VdsmEnv.OVIRT_NODE
+            odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
         ],
     )
     def _closeup(self):

@@ -60,6 +60,12 @@ class Plugin(plugin.PluginBase):
             odeploycons.VdsmEnv.CONFIG_OVERRIDE
         ],
     )
+    @plugin.event(
+        stage=plugin.Stages.STAGE_VALIDATION,
+        condition=lambda self: self.environment[
+            odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
+        ],
+    )
     def _validation(self):
         config = configparser.ConfigParser()
         config.optionxform = str
@@ -109,6 +115,16 @@ class Plugin(plugin.PluginBase):
                     ],
                 )
             )
+
+    @plugin.event(
+        stage=plugin.Stages.STAGE_CLOSEUP,
+        condition=lambda self: self.environment[
+            odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
+        ],
+    )
+    def _closeup(self):
+        if self.services.exists('vdsm-reg'):
+            self.services.state('vdsm-reg', False)
 
 
 # vim: expandtab tabstop=4 shiftwidth=4

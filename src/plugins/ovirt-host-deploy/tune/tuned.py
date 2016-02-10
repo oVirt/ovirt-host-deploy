@@ -48,7 +48,7 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_SETUP,
         condition=lambda self: (
             not self.environment[
-                odeploycons.VdsmEnv.OVIRT_NODE
+                odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
             ]
         ),
     )
