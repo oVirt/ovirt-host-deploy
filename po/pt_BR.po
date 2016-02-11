@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-17 09:18+0100\n"
+"POT-Creation-Date: 2016-03-21 16:47+0200\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -27,7 +27,7 @@ msgstr ""
 #: src/plugins/ovirt-host-deploy/gluster/nrpe.py:38
 #: src/plugins/ovirt-host-deploy/gluster/packages.py:35
 #: src/plugins/ovirt-host-deploy/kdump/packages.py:40
-#: src/plugins/ovirt-host-deploy/node/detect.py:38
+#: src/plugins/ovirt-host-deploy/node/detect.py:40
 #: src/plugins/ovirt-host-deploy/node/persist.py:36
 #: src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py:36
 #: src/plugins/ovirt-host-deploy/openstack/neutron_openvswitch.py:36

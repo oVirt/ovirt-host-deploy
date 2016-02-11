@@ -21,11 +21,13 @@
 """ovirt-node detection."""
 
 
+import codecs
+import configparser
 import gettext
 import glob
+import io
 import os
 import re
-
 
 from otopi import plugin
 from otopi import util
@@ -58,6 +60,24 @@ class Plugin(plugin.PluginBase):
             $
         """,
     )
+
+    def hasconf(self, filename, key, value):
+        if os.path.exists(filename):
+            with codecs.open(filename, 'r', encoding='utf-8') as f:
+                parser = configparser.ConfigParser()
+                parser.readfp(
+                    io.StringIO('[default]\n' + f.read().decode('utf-8'))
+                )
+                try:
+                    val = parser.get('default', key)
+                    if val == value or val == '"%s"' % value:
+                        return True
+                    else:
+                        return False
+                except configparser.Error:
+                    return False
+        else:
+            return False
 
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
@@ -94,6 +114,14 @@ class Plugin(plugin.PluginBase):
             (
                 os.path.exists('/etc/rhev-hypervisor-release') or
                 bool(glob.glob('/etc/ovirt-node-*-release'))
+            )
+        )
+        self.environment.setdefault(
+            odeploycons.VdsmEnv.OVIRT_NODE,
+            (
+                self.hasconf(odeploycons.FileLocations.OVIRT_NODE_OS_FILE,
+                             odeploycons.FileLocations.OVIRT_NODE_VARIANT_KEY,
+                             odeploycons.FileLocations.OVIRT_NODE_VARIANT_VAL)
             )
         )
         self.environment.setdefault(

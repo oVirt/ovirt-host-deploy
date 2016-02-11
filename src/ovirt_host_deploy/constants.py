@@ -78,6 +78,9 @@ class FileLocations(object):
         'host-ssh_host_rsa.pending',
     )
     HOSTED_ENGINE_CONF = '/etc/ovirt-hosted-engine/hosted-engine.conf'
+    OVIRT_NODE_OS_FILE = '/etc/os-release'
+    OVIRT_NODE_VARIANT_KEY = 'VARIANT_ID'
+    OVIRT_NODE_VARIANT_VAL = 'ovirt-node'
 
 
 @util.export
