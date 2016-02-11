@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2012-2013 Red Hat, Inc.
+# Copyright (C) 2012-2016 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -18,21 +18,7 @@
 #
 
 %global		package_version @PACKAGE_VERSION@
-%global		package_maven_version @PACKAGE_MAVEN_VERSION@
 %global		ovirt_host_deploy_root %{_datadir}/%{name}/interface-@INTERFACE_VERSION@
-
-%if 0%{?fedora:1}
-%global _use_maven 1
-%endif
-%if 0%{?rhel:1}
-%if %{rhel} >= 7
-%global _use_maven 1
-%else
-%global _use_maven 0
-%global _use_repolib 1
-%global maven2brewrepodir %{_javadir}/repository.jboss.com/maven2-brew/dummy
-%endif
-%endif
 
 Summary:	oVirt host deploy tool
 Name:		@PACKAGE_NAME@
@@ -43,17 +29,13 @@ URL:		http://www.ovirt.org
 Source:		http://resources.ovirt.org/pub/src/%{name}/%{name}-%{package_version}.tar.gz
 Group:		Applications/System
 
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:	noarch
 
-Requires:	python
 Requires:	otopi
-BuildRequires:	gettext
-BuildRequires:	otopi-devel
-BuildRequires:	python2-devel
-BuildRequires:	java-devel
+Requires:	python
 
-%if %{_use_maven}
+BuildRequires:	gettext
+BuildRequires:	java-devel
 BuildRequires:	maven-compiler-plugin
 BuildRequires:	maven-enforcer-plugin
 BuildRequires:	maven-install-plugin
@@ -61,7 +43,8 @@ BuildRequires:	maven-jar-plugin
 BuildRequires:	maven-javadoc-plugin
 BuildRequires:	maven-source-plugin
 BuildRequires:	maven-local
-%endif
+BuildRequires:	otopi-devel
+BuildRequires:	python2-devel
 
 %description
 Host deployment tool for oVirt project.
@@ -75,64 +58,33 @@ Requires:	otopi-java
 %description java
 java libraries.
 
-%if %{_use_maven}
 %package javadoc
 Summary:	Javadocs for %{name}
 Group:		Documentation
 
 %description javadoc
 This package contains the API documentation for %{name}.
-%endif
-
-%if 0%{?_use_repolib:1}
-%package repolib
-Summary:	%{name} maven repo
-%description repolib
-%{name} maven repo
-%endif
 
 %prep
 %setup -q -n %{name}-%{package_version}
 
 %build
-%if %{_use_maven}
-%global conf --disable-java-sdk-compile
-%endif
 %configure \
 	--docdir="%{_docdir}/%{name}-%{version}" \
 	--disable-python-syntax-check \
 	--enable-java-sdk \
 	--with-local-version="%{name}-%{version}-%{release}" \
-	%{?conf}
+	--disable-java-sdk-compile
 make %{?_smp_mflags}
-
-%if %{_use_maven}
 cd src/java
 %mvn_build
 cd ../..
-%endif
 
 %install
-rm -rf "%{buildroot}"
 make %{?_smp_mflags} install DESTDIR="%{buildroot}"
-
-%if %{_use_maven}
 cd src/java
 %mvn_install
 cd ../..
-%else
-install -d "%{buildroot}%{_javadir}/%{name}"
-install target/%{name}-%{package_maven_version}.jar %{buildroot}%{_javadir}/%{name}
-ln -s %{name}-%{package_maven_version}.jar %{buildroot}%{_javadir}/%{name}/%{name}.jar
-cat > src/java/.mfiles << __EOF__
-%{_javadir}/%{name}/
-__EOF__
-
-install -d "%{buildroot}%{maven2brewrepodir}"
-cp "%{buildroot}%{_javadir}/%{name}/%{name}.jar" "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_version}.jar"
-cp src/java/pom.xml "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_version}.pom"
-%endif
-
 install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 
 %files
@@ -142,7 +94,7 @@ install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 %dir %{ovirt_host_deploy_root}
 %dir %{ovirt_host_deploy_root}/pythonlib
 %doc AUTHORS
-%doc COPYING
+%license COPYING
 %doc README
 %doc README.environment
 %{_datadir}/%{name}/plugins/ovirt-host-common/
@@ -167,14 +119,7 @@ install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 
 %files java -f src/java/.mfiles
 
-%if %{_use_maven}
 %files javadoc -f src/java/.mfiles-javadoc
-%endif
-
-%if 0%{?_use_repolib:1}
-%files repolib
-%{maven2brewrepodir}/
-%endif
 
 %changelog
 * Thu Oct 15 2015 Alon Bar-Lev <alonbl@redhat.com> - 1.4.0-1

@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2012-2013 Red Hat, Inc.
+# Copyright (C) 2012-2016 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,6 @@ URL:		http://www.ovirt.org
 Source:		http://resources.ovirt.org/pub/src/%{name}/%{name}-%{package_version}.tar.gz
 Group:		Applications/System
 
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:	iproute
 Requires:	libselinux-python
 Requires:	m2crypto
@@ -45,21 +44,8 @@ Requires:	ovirt-hosted-engine-setup
 %ifarch %{ix86} x86_64
 Requires:	dmidecode
 %endif
-%if 0%{?fedora}
-%if %{fedora} >= 20
-Requires:	iptables-services
-Requires:	kexec-tools >= 2.0.4-27
-%endif
-%endif
-%if 0%{?rhel}
-%if %{rhel} == 6
-Requires:	kexec-tools >= 2.0.0-273.1
-%endif
-%if %{rhel} >= 7
 Requires:	iptables-services
 Requires:	kexec-tools >= 2.0.4-32.1
-%endif
-%endif
 
 %description
 Host deployment tool for oVirt project.
@@ -68,8 +54,6 @@ Host deployment tool for oVirt project.
 %setup -q -n %{name}-%{package_version}
 
 %install
-rm -rf "%{buildroot}"
-
 install -d -m 755 "%{buildroot}%{_sysconfdir}/ovirt-host-deploy.conf.d"
 install -pm 644 conf.d/50-offline-packager.conf "%{buildroot}%{_sysconfdir}/ovirt-host-deploy.conf.d"
 
