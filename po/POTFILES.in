@@ -24,7 +24,6 @@
 ./src/plugins/ovirt-host-deploy/node/detect.py
 ./src/plugins/ovirt-host-deploy/node/__init__.py
 ./src/plugins/ovirt-host-deploy/node/persist.py
-./src/plugins/ovirt-host-deploy/node/vdsm_reg.py
 ./src/plugins/ovirt-host-deploy/openstack/__init__.py
 ./src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py
 ./src/plugins/ovirt-host-deploy/openstack/neutron_openvswitch.py

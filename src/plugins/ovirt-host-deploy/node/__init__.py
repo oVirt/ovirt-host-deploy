@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2012-2013 Red Hat, Inc.
+# Copyright (C) 2012-2016 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -26,14 +26,11 @@ from otopi import util
 
 from . import detect
 from . import persist
-from . import vdsm_reg
 
 
 @util.export
 def createPlugins(context):
     detect.Plugin(context=context)
     persist.Plugin(context=context)
-    vdsm_reg.Plugin(context=context)
-
 
 # vim: expandtab tabstop=4 shiftwidth=4
