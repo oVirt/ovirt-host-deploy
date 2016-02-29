@@ -140,7 +140,7 @@ if test "${with_otopi_sources}" = "no"; then
 	AX_PYTHON_MODULE([otopi], [fatal])
 fi
 
-test -z "${OTOPI_BUNDLE}" && AC_MSG_ERROR([otopi-bundle required but missing])
+test -z "${OTOPI_BUNDLE}" && AC_MSG_ERROR([otopi-devtools required but missing])
 
 otopiplugindir="\$(datadir)/otopi/plugins"
 ovirthostdeployplugindir="\$(pkgdatadir)/plugins"

@@ -43,7 +43,7 @@ BuildRequires:	maven-jar-plugin
 BuildRequires:	maven-javadoc-plugin
 BuildRequires:	maven-source-plugin
 BuildRequires:	maven-local
-BuildRequires:	otopi-devel
+BuildRequires:	otopi-devtools
 BuildRequires:	python2-devel
 
 %description
