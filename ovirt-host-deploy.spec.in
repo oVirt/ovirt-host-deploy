@@ -86,8 +86,9 @@ cd src/java
 %mvn_install
 cd ../..
 install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
+%find_lang %{name}
 
-%files
+%files -f %{name}.lang
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/plugins
 %dir %{_sysconfdir}/%{name}.conf.d
