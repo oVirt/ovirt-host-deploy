@@ -114,7 +114,13 @@ class Plugin(plugin.PluginBase):
                 )
                 if myum.buildTransaction():
                     for entry in myum.queryTransaction():
-                        if entry['operation'] in ('update', 'install'):
+                        if entry[
+                            'operation'
+                        ] in (
+                            'update',
+                            'install',
+                            'obsoleting',
+                        ):
                             info.append(
                                 '%s-%s-%s' % (
                                     entry['name'],
