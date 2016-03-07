@@ -77,6 +77,20 @@ Install hooks manually or on the manager, create:
 
   vdsm-hook-fakevmstats
 
+
+
+OFFLINE
+
+In order to avoid to try to use the package manager to install or update
+packages on the host, create:
+/etc/ovirt-host-deploy.conf.d/50-offline-packager.conf
+
+  [environment:init]
+  ODEPLOY/offlinePackager=bool:True
+  PACKAGER/yumpackagerEnabled=bool:False
+
+
+
 DEVELOPMENT
 
 In order to avoid override of vdsm.conf, create:

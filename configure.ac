@@ -1,6 +1,6 @@
 dnl
 dnl ovirt-host-deploy -- ovirt host deployer
-dnl Copyright (C) 2012-2015 Red Hat, Inc.
+dnl Copyright (C) 2012-2016 Red Hat, Inc.
 dnl
 dnl This library is free software; you can redistribute it and/or
 dnl modify it under the terms of the GNU Lesser General Public
@@ -162,8 +162,6 @@ AM_CONDITIONAL([WITH_MAVEN], [test "${with_maven}" = "yes"])
 AC_CONFIG_FILES([
 	Makefile
 	build/Makefile
-	conf.d/Makefile
-	ovirt-host-deploy-offline.spec
 	ovirt-host-deploy.spec
 	po/Makefile.in
 	src/Makefile
