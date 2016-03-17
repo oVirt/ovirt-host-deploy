@@ -20,6 +20,10 @@
 %global		package_version @PACKAGE_VERSION@
 %global		ovirt_host_deploy_root %{_datadir}/%{name}/interface-@INTERFACE_VERSION@
 
+%global _use_maven 1
+%global _use_repolib 0
+%global maven2brewrepodir %{_javadir}/repository.jboss.com/maven2-brew/dummy
+
 Summary:	oVirt host deploy tool
 Name:		@PACKAGE_NAME@
 Version:	@PACKAGE_RPM_VERSION@
@@ -34,8 +38,12 @@ BuildArch:	noarch
 Requires:	otopi
 Requires:	python
 
-BuildRequires:	gettext
 BuildRequires:	java-devel
+BuildRequires:	gettext
+BuildRequires:	otopi-devel
+BuildRequires:	python2-devel
+
+%if %{_use_maven}
 BuildRequires:	maven-compiler-plugin
 BuildRequires:	maven-enforcer-plugin
 BuildRequires:	maven-install-plugin
@@ -43,8 +51,7 @@ BuildRequires:	maven-jar-plugin
 BuildRequires:	maven-javadoc-plugin
 BuildRequires:	maven-source-plugin
 BuildRequires:	maven-local
-BuildRequires:	otopi-devtools
-BuildRequires:	python2-devel
+%endif
 
 %description
 Host deployment tool for oVirt project.
@@ -58,33 +65,63 @@ Requires:	otopi-java
 %description java
 java libraries.
 
+%if %{_use_maven}
 %package javadoc
 Summary:	Javadocs for %{name}
 Group:		Documentation
 
 %description javadoc
 This package contains the API documentation for %{name}.
+%endif
+
+%if %{_use_repolib}
+%package repolib
+Summary:	%{name} maven repo
+%description repolib
+%{name} maven repo
+%endif
 
 %prep
 %setup -q -n %{name}-%{package_version}
 
 %build
+%if %{_use_maven}
+%global conf --disable-java-sdk-compile
+%endif
 %configure \
 	--docdir="%{_docdir}/%{name}-%{version}" \
 	--disable-python-syntax-check \
 	--enable-java-sdk \
 	--with-local-version="%{name}-%{version}-%{release}" \
-	--disable-java-sdk-compile
+	%{?conf}
 make %{?_smp_mflags}
+
+%if %{_use_maven}
 cd src/java
 %mvn_build
 cd ../..
+%endif
 
 %install
 make %{?_smp_mflags} install DESTDIR="%{buildroot}"
+
+%if %{_use_maven}
 cd src/java
 %mvn_install
 cd ../..
+%else
+install -d "%{buildroot}%{_javadir}/%{name}"
+install target/%{name}-%{package_maven_version}.jar %{buildroot}%{_javadir}/%{name}
+ln -s %{name}-%{package_maven_version}.jar %{buildroot}%{_javadir}/%{name}/%{name}.jar
+cat > src/java/.mfiles << __EOF__
+%{_javadir}/%{name}/
+__EOF__
+
+install -d "%{buildroot}%{maven2brewrepodir}"
+cp "%{buildroot}%{_javadir}/%{name}/%{name}.jar" "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_version}.jar"
+cp src/java/pom.xml "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_version}.pom"
+%endif
+
 install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 %find_lang %{name}
 
@@ -120,7 +157,14 @@ install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 
 %files java -f src/java/.mfiles
 
+%if %{_use_maven}
 %files javadoc -f src/java/.mfiles-javadoc
+%endif
+
+%if %{_use_repolib}
+%files repolib
+%{maven2brewrepodir}/
+%endif
 
 %changelog
 * Thu Oct 15 2015 Alon Bar-Lev <alonbl@redhat.com> - 1.4.0-1
