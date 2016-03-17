@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: devel@ovirt.org\n"
-"POT-Creation-Date: 2016-02-28 09:58-0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-17 09:18+0100\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -29,19 +29,17 @@ msgstr ""
 #: src/plugins/ovirt-host-deploy/kdump/packages.py:40
 #: src/plugins/ovirt-host-deploy/node/detect.py:38
 #: src/plugins/ovirt-host-deploy/node/persist.py:36
-#: src/plugins/ovirt-host-deploy/node/vdsm_reg.py:39
-#: src/plugins/ovirt-host-deploy/openstack/neutron.py:35
 #: src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py:36
 #: src/plugins/ovirt-host-deploy/openstack/neutron_openvswitch.py:36
+#: src/plugins/ovirt-host-deploy/openstack/neutron.py:35
 #: src/plugins/ovirt-host-deploy/tune/iosched.py:40
 #: src/plugins/ovirt-host-deploy/tune/tuned.py:35
 #: src/plugins/ovirt-host-deploy/vdsm/bridge.py:44
-#: src/plugins/ovirt-host-deploy/vdsm/config.py:38
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:36
+#: src/plugins/ovirt-host-deploy/vdsmhooks/hooks.py:39
 #: src/plugins/ovirt-host-deploy/vdsm/packages.py:39
 #: src/plugins/ovirt-host-deploy/vdsm/software.py:36
 #: src/plugins/ovirt-host-deploy/vdsm/vdsmid.py:40
-#: src/plugins/ovirt-host-deploy/vdsmhooks/hooks.py:39
 #: src/plugins/ovirt-host-deploy/vmconsole/packages.py:35
 #: src/plugins/ovirt-host-mgmt/core/misc.py:38
 #: src/plugins/ovirt-host-mgmt/core/offlinepackager.py:37
@@ -73,8 +71,11 @@ msgstr "Atualizando configuração do hosted-engine"
 
 #: src/plugins/ovirt-host-common/hosted-engine/packages.py:69
 #, python-brace-format
-msgid "Hosted Engine support requested on unsupported machine: {arch}. Disabling"
-msgstr "Suporte do Hosted Engine solicitado na máquina sem suporte: {arch}. Desabilitando"
+msgid ""
+"Hosted Engine support requested on unsupported machine: {arch}. Disabling"
+msgstr ""
+"Suporte do Hosted Engine solicitado na máquina sem suporte: {arch}. "
+"Desabilitando"
 
 #: src/plugins/ovirt-host-common/vdsm/pki.py:103
 msgid "CA Certificate was not provided"
@@ -119,8 +120,8 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Por favor coloque a cadeia de certificados VDSM que correspondem ao certificado "
-"pedido, superior é emitente\n"
+"Por favor coloque a cadeia de certificados VDSM que correspondem ao "
+"certificado pedido, superior é emitente\n"
 "\n"
 
 #: src/plugins/ovirt-host-common/vdsm/pki.py:426
@@ -154,20 +155,20 @@ msgstr "Inscrição do certificado de console Serial requerido"
 msgid ""
 "\n"
 "\n"
-"Please input serial console certificate chain that matches certificate request, "
-"top is issuer\n"
+"Please input serial console certificate chain that matches certificate "
+"request, top is issuer\n"
 "\n"
 msgstr ""
 "\n"
 "\n"
-"Por favor coloque a cadeia de certificados do console serial que coincida com "
-"pedido de certificado, superior é emitente\n"
+"Por favor coloque a cadeia de certificados do console serial que coincida "
+"com pedido de certificado, superior é emitente\n"
 "\n"
 
 #: src/plugins/ovirt-host-deploy/core/misc.py:85
 msgid ""
-"Continuing will configure this host for serving as hypervisor. Are you sure you "
-"want to continue? (yes/no) "
+"Continuing will configure this host for serving as hypervisor. Are you sure "
+"you want to continue? (yes/no) "
 msgstr ""
 "Continuando irá configurar este host para servir como hypervisor. Você tem "
 "certeza que quer continuar? (sim/não) "
@@ -188,7 +189,8 @@ msgstr "Reiniciando serviço nrpe"
 
 #: src/plugins/ovirt-host-deploy/gluster/packages.py:69
 msgid "Cannot locate gluster packages, possible cause is incorrect channels"
-msgstr "Não posso localizar pacotes gluster, possível causa são os canais incorretos"
+msgstr ""
+"Não posso localizar pacotes gluster, possível causa são os canais incorretos"
 
 #: src/plugins/ovirt-host-deploy/gluster/packages.py:92
 msgid "Starting gluster"
@@ -213,16 +215,17 @@ msgid ""
 "kdump service restart failed. Please either redeploy with Kdump Integration "
 "disabled or fix kdump configuration manually and redeploy the host"
 msgstr ""
-"falha ao reiniciar serviço kdump. Por favor faça novo deploy com Integração Kdump "
-"desabilitado ou corrigir manualmente a configuração do kdump e faça novo deploy"
+"falha ao reiniciar serviço kdump. Por favor faça novo deploy com Integração "
+"Kdump desabilitado ou corrigir manualmente a configuração do kdump e faça "
+"novo deploy"
 
 #: src/plugins/ovirt-host-deploy/node/persist.py:74
 msgid "Cannot resolve persist module."
 msgstr "Não é possível resolver módulo persistente."
 
-#: src/plugins/ovirt-host-deploy/openstack/neutron.py:103
 #: src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py:115
 #: src/plugins/ovirt-host-deploy/openstack/neutron_openvswitch.py:147
+#: src/plugins/ovirt-host-deploy/openstack/neutron.py:103
 #, python-brace-format
 msgid "Invalid neutron configuration entry {key}"
 msgstr "Entrada da configuração neutron inválida {key}"
@@ -270,7 +273,8 @@ msgstr "Informação de rota inválida para {address}"
 #: src/plugins/ovirt-host-deploy/vdsm/bridge.py:411
 #, python-brace-format
 msgid ""
-"Interface {interface} is VLAN interface, however its configuration is unexpected"
+"Interface {interface} is VLAN interface, however its configuration is "
+"unexpected"
 msgstr ""
 "Interface {interface} é uma interface VLAN, contudo a sua configuração é "
 "inesperada"
@@ -290,8 +294,10 @@ msgstr "Não posso resolver o  nome de host do engine '{host}'"
 
 #: src/plugins/ovirt-host-deploy/vdsm/bridge.py:679
 #, python-brace-format
-msgid "Cannot connect engine host '{name}' at any of the addresses {addresses}'"
-msgstr "Não posso conectar ao host do engine '{name}' em qualquer um dos endereços "
+msgid ""
+"Cannot connect engine host '{name}' at any of the addresses {addresses}'"
+msgstr ""
+"Não posso conectar ao host do engine '{name}' em qualquer um dos endereços "
 "'{addresses}'"
 
 #: src/plugins/ovirt-host-deploy/vdsm/bridge.py:704
@@ -307,23 +313,18 @@ msgstr ""
 #: src/plugins/ovirt-host-deploy/vdsm/bridge.py:722
 #, python-brace-format
 msgid ""
-"non standard bridge name {interface} while running on hypervisor name does not "
-"match any physical interface. Please configure manually bridge on this device "
-"with name {bridge}"
+"non standard bridge name {interface} while running on hypervisor name does "
+"not match any physical interface. Please configure manually bridge on this "
+"device with name {bridge}"
 msgstr ""
-"Nome de bridge não padrão {interface} enquanto no hypervisor em execução nenhum "
-"nome coincide com a interface física. Por favor configure manualmente a bridge "
-"neste dispostivo com o nome {bridge}"
+"Nome de bridge não padrão {interface} enquanto no hypervisor em execução "
+"nenhum nome coincide com a interface física. Por favor configure manualmente "
+"a bridge neste dispostivo com o nome {bridge}"
 
 #: src/plugins/ovirt-host-deploy/vdsm/bridge.py:743
 #, python-brace-format
 msgid "Management channel interface {interface} is already a bridge"
 msgstr "Interface do canal de gerenciamento {interface} já é uma bridge"
-
-#: src/plugins/ovirt-host-deploy/vdsm/config.py:79
-#, python-brace-format
-msgid "Invalid VDSM configuration entry {key}"
-msgstr "Entrada da configuração VDSM inválida {key}"
 
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:77
 msgid "Cannot detect if hardware supports virtualization"
@@ -331,13 +332,16 @@ msgstr "Não posso detectar se o hardware suporta virtualização"
 
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:93
 msgid ""
-"Machine does not support constant timestamp counter, this may effect performance"
+"Machine does not support constant timestamp counter, this may effect "
+"performance"
 msgstr ""
-"Máquina não suporta contador constante de timestamp, isso pode afetar o desempenho"
+"Máquina não suporta contador constante de timestamp, isso pode afetar o "
+"desempenho"
 
 #: src/plugins/ovirt-host-deploy/vdsm/packages.py:80
 msgid "Cannot locate vdsm package, possible cause is incorrect channels"
-msgstr "Não posso localizar pacotes vdsm, possível causa são os canais incorretos"
+msgstr ""
+"Não posso localizar pacotes vdsm, possível causa são os canais incorretos"
 
 #: src/plugins/ovirt-host-deploy/vdsm/packages.py:98
 #, python-brace-format
@@ -368,3 +372,6 @@ msgstr "Sem UUID do sistema"
 #: src/plugins/ovirt-host-deploy/vmconsole/packages.py:93
 msgid "Starting ovirt-vmconsole-host-sshd"
 msgstr "Iniciando ovirt-vmconsole-host-sshd"
+
+#~ msgid "Invalid VDSM configuration entry {key}"
+#~ msgstr "Entrada da configuração VDSM inválida {key}"
