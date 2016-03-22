@@ -22,7 +22,6 @@
 
 
 import gettext
-import os
 
 
 from distutils.version import LooseVersion
@@ -137,35 +136,19 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_CLOSEUP,
     )
     def _reconfigure(self):
-        useLegacy = True
-
         vdsm_tool = self.command.get(
             command='vdsm-tool',
-            optional=True,
         )
-        if vdsm_tool is not None:
-            rc, stdout, stderr = self.execute(
-                (
-                    vdsm_tool,
-                    'configure',
-                    '--force',
-                ),
-                raiseOnError=False,
-            )
-            if rc == 0:
-                useLegacy = False
-
-        if useLegacy:
-            self.logger.debug('Cannot reconfigure vdsm using vdsm-tool')
-            for script in ('/etc/init.d/vdsmd', '/lib/systemd/systemd-vdsmd'):
-                if os.path.exists(script):
-                    rc, stdout, stderr = self.execute(
-                        [script, 'reconfigure'],
-                        raiseOnError=False
-                    )
-                    if rc != 0:
-                        self.logger.warning('Cannot reconfigure vdsm')
-                    break
+        rc, stdout, stderr = self.execute(
+            (
+                vdsm_tool,
+                'configure',
+                '--force',
+            ),
+            raiseOnError=False,
+        )
+        if rc != 0:
+            self.logger.warning('Cannot configure vdsm')
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
