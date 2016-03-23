@@ -39,7 +39,7 @@ Requires:	otopi
 Requires:	python
 
 BuildRequires:	java-devel
-BuildRequires:	gettext
+BuildRequires:	gettext >= 0.18.2
 BuildRequires:	otopi-devel
 BuildRequires:	python2-devel
 

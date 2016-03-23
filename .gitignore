@@ -25,6 +25,7 @@ tmp.*
 __pycache__
 
 .bundeled
+intl
 target
 src/bin/ovirt-host-deploy
 src/bin/ovirt-host-mgmt

@@ -32,6 +32,7 @@
 ./src/plugins/ovirt-host-deploy/tune/iosched.py
 ./src/plugins/ovirt-host-deploy/tune/tuned.py
 ./src/plugins/ovirt-host-deploy/vdsm/bridge.py
+./src/plugins/ovirt-host-deploy/vdsm/config.py
 ./src/plugins/ovirt-host-deploy/vdsm/hardware.py
 ./src/plugins/ovirt-host-deploy/vdsmhooks/hooks.py
 ./src/plugins/ovirt-host-deploy/vdsmhooks/__init__.py
