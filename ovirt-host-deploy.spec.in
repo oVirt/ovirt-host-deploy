@@ -40,7 +40,7 @@ Requires:	python
 
 BuildRequires:	java-devel
 BuildRequires:	gettext >= 0.18.2
-BuildRequires:	otopi-devel
+BuildRequires:	otopi-devtools
 BuildRequires:	python2-devel
 
 %if %{_use_maven}
