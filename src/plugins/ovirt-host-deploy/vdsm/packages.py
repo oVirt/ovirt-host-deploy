@@ -134,6 +134,7 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
+        priority=plugin.Stages.PRIORITY_HIGH,
     )
     def _reconfigure(self):
         vdsm_tool = self.command.get(
