@@ -49,7 +49,6 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_BOOT,
         before=(
             otopicons.Stages.CORE_LOG_INIT,
-            otopicons.Stages.CORE_CONFIG_INIT,
         ),
     )
     def _preinit(self):
