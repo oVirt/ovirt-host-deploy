@@ -4,6 +4,12 @@ ovirt-host-deploy -- Environment
 INSTALLER ENVIRONMENT
 ---------------------
 
+KERNEL/cmdlineNew(str)
+    New arguments to kernel command line.
+
+KERNEL/cmdlineOld(str)
+    Previous (to be removed) arguments of kernel command line.
+
 ODEPLOY/installIncomplete(bool)
     Marks incomplete installation.
     Incomplete installation is not a failure.

@@ -116,6 +116,13 @@ class CoreEnv(object):
 
 @util.export
 @util.codegen
+class KernelEnv(object):
+    CMDLINE_NEW = 'KERNEL/cmdlineNew'
+    CMDLINE_OLD = 'KERNEL/cmdlineOld'
+
+
+@util.export
+@util.codegen
 class KdumpEnv(object):
     ENABLE = 'KDUMP/enable'
     SUPPORTED = 'KDUMP/supported'
