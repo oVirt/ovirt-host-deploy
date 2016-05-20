@@ -22,4 +22,12 @@ variable:
 
 Maven publish is done via oss.sonatype.org, refer to instructions[1].
 
+To create RPM packages:
+
+$ autoreconf -ivf
+$ ./configure
+$ make dist
+$ TARGZ=`ls -1 ovirt-host-deploy*.tar.gz`
+$ sudo rpmbuild -tb $TARGZ
+
 [1] https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-7a.2.PublishSnapshots
