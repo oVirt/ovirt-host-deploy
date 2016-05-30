@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-21 16:47+0200\n"
+"POT-Creation-Date: 2016-05-20 11:07+0200\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -35,9 +35,10 @@ msgstr ""
 #: src/plugins/ovirt-host-deploy/tune/iosched.py:40
 #: src/plugins/ovirt-host-deploy/tune/tuned.py:35
 #: src/plugins/ovirt-host-deploy/vdsm/bridge.py:44
+#: src/plugins/ovirt-host-deploy/vdsm/config.py:38
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:36
 #: src/plugins/ovirt-host-deploy/vdsmhooks/hooks.py:39
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:39
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:38
 #: src/plugins/ovirt-host-deploy/vdsm/software.py:36
 #: src/plugins/ovirt-host-deploy/vdsm/vdsmid.py:40
 #: src/plugins/ovirt-host-deploy/vmconsole/packages.py:35
@@ -326,6 +327,11 @@ msgstr ""
 msgid "Management channel interface {interface} is already a bridge"
 msgstr "Interface do canal de gerenciamento {interface} já é uma bridge"
 
+#: src/plugins/ovirt-host-deploy/vdsm/config.py:85
+#, python-brace-format
+msgid "Invalid VDSM configuration entry {key}"
+msgstr "Entrada da configuração VDSM inválida {key}"
+
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:77
 msgid "Cannot detect if hardware supports virtualization"
 msgstr "Não posso detectar se o hardware suporta virtualização"
@@ -338,21 +344,21 @@ msgstr ""
 "Máquina não suporta contador constante de timestamp, isso pode afetar o "
 "desempenho"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:80
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:79
 msgid "Cannot locate vdsm package, possible cause is incorrect channels"
 msgstr ""
 "Não posso localizar pacotes vdsm, possível causa são os canais incorretos"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:98
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:97
 #, python-brace-format
 msgid "VDSM package is too old, need {minimum} found {version}"
 msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:178
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:162
 msgid "Stopping libvirtd"
 msgstr "Parando libvirtd"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:182
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:166
 msgid "Starting vdsm"
 msgstr "Iniciando vdsm"
 
@@ -372,6 +378,3 @@ msgstr "Sem UUID do sistema"
 #: src/plugins/ovirt-host-deploy/vmconsole/packages.py:93
 msgid "Starting ovirt-vmconsole-host-sshd"
 msgstr "Iniciando ovirt-vmconsole-host-sshd"
-
-#~ msgid "Invalid VDSM configuration entry {key}"
-#~ msgstr "Entrada da configuração VDSM inválida {key}"

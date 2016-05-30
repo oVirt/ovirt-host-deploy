@@ -1,9 +1,16 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.5.0
+2016-06-01 - Version 1.5.0
 
  * hosted-engine: initial support, rhbz#1200469
  * vmconsole: automatic start of ovirt-vmconsole-host-sshd, rhbz#1279434.
+ * kernel: automatic configuration of host's boot parameters for VFIO
+   passthrough,  rhbz#1301104
+ * node: support both legacy and next generation node
+ * vdsm: properly configure vdsm before running it, rhbz#1320059
+ * i18n: add pt_BR support
+ * offline: dropped packaging rhbz#1314790
+
 
 2015-10-15 - Version 1.4.0
 
