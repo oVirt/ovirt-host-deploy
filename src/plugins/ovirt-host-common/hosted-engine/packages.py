@@ -91,8 +91,13 @@ class Plugin(plugin.PluginBase):
         condition=lambda self: self.environment[
             odeploycons.HostedEngineEnv.ACTION
         ] != odeploycons.Const.HOSTED_ENGINE_ACTION_NONE,
+        after=(
+            odeploycons.Stages.VDSM_STARTED,
+        ),
+        priority=plugin.Stages.PRIORITY_LOW,
     )
     def _closeup(self):
+        self.logger.info(_('Starting ovirt-ha-agent'))
         self.services.startup(
             name='ovirt-ha-agent',
             state=(

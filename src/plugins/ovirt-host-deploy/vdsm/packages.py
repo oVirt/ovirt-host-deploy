@@ -157,6 +157,7 @@ class Plugin(plugin.PluginBase):
         condition=lambda self: not self.environment[
             odeploycons.CoreEnv.FORCE_REBOOT
         ],
+        name=odeploycons.Stages.VDSM_STARTED,
     )
     def _start(self):
         self.logger.info(_('Stopping libvirtd'))

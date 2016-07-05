@@ -226,4 +226,9 @@ class Confirms(object):
     DEPLOY_PROCEED = 'DEPLOY_PROCEED'
 
 
+@util.export
+class Stages(object):
+    VDSM_STARTED = 'odeploycons.packages.vdsm.started'
+
+
 # vim: expandtab tabstop=4 shiftwidth=4
