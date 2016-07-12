@@ -1,5 +1,8 @@
 ovirt-host-deploy -- oVirt host deploy
 
+2016-07-12 - Version 1.5.1
+ * hosted-engine: start ha daemon only after vdsm started, rhbz#349532
+
 2016-06-01 - Version 1.5.0
 
  * hosted-engine: initial support, rhbz#1200469

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-20 11:07+0200\n"
+"POT-Creation-Date: 2016-07-12 15:35+0200\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -77,6 +77,10 @@ msgid ""
 msgstr ""
 "Suporte do Hosted Engine solicitado na máquina sem suporte: {arch}. "
 "Desabilitando"
+
+#: src/plugins/ovirt-host-common/hosted-engine/packages.py:100
+msgid "Starting ovirt-ha-agent"
+msgstr ""
 
 #: src/plugins/ovirt-host-common/vdsm/pki.py:103
 msgid "CA Certificate was not provided"
@@ -354,11 +358,11 @@ msgstr ""
 msgid "VDSM package is too old, need {minimum} found {version}"
 msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:162
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:163
 msgid "Stopping libvirtd"
 msgstr "Parando libvirtd"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:166
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:167
 msgid "Starting vdsm"
 msgstr "Iniciando vdsm"
 
