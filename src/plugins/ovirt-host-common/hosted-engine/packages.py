@@ -41,8 +41,10 @@ class Plugin(plugin.PluginBase):
     """oVirt Hosted Engine pacakges.
 
     Environment:
-        HostedEngineEnv.ENABLE -- perform Hosted Engine customization.
-
+        HostedEngineEnv.ACTION -- perform Hosted Engine customization:
+          Const.HOSTED_ENGINE_ACTION_NONE: do nothing
+          Const.HOSTED_ENGINE_ACTION_DEPLOY: deploy configuration
+          Const.HOSTED_ENGINE_ACTION_REMOVE: remove configuration
     """
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)

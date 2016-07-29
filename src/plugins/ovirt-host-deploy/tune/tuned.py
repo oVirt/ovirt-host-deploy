@@ -37,7 +37,11 @@ def _(m):
 
 @util.export
 class Plugin(plugin.PluginBase):
-    """tuned configuration plugin."""
+    """TuneD configuration plugin.
+
+    Environment:
+        TuneEnv.TUNED_PROFILE -- tuned profile to be set
+    """
 
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)

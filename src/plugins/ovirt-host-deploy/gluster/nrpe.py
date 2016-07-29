@@ -41,6 +41,12 @@ def _(m):
 @util.export
 class Plugin(plugin.PluginBase):
     """
+    Environment:
+        GlusterEnv.MONITORING_ENABLE -- enable gluster nrpe agent
+
+        GlusterEnv.MONITORING_SERVER -- server accessing nrpe agent
+
+    Configuration:
     # sample nrpe config file format
     # comment
     key1=value1
