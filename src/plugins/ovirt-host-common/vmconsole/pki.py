@@ -78,6 +78,10 @@ class Plugin(plugin.PluginBase):
             odeploycons.VMConsoleEnv.KEY_SIZE,
             odeploycons.Defaults.DEFAULT_KEY_SIZE
         )
+        self.environment.setdefault(
+            odeploycons.VMConsoleEnv.CAKEY,
+            None
+        )
 
     @plugin.event(
         stage=plugin.Stages.STAGE_VALIDATION,
