@@ -2,13 +2,13 @@ ovirt-host-deploy -- Environment
 ================================
 
 INSTALLER ENVIRONMENT
----------------------
+=====================
 
-KERNEL/cmdlineNew(str)
-    New arguments to kernel command line.
+Core
+----
 
-KERNEL/cmdlineOld(str)
-    Previous (to be removed) arguments of kernel command line.
+ODEPLOY/INTERFACE_VERSION(str) ['3']
+    Version of the oVirt Host Deploy API
 
 ODEPLOY/installIncomplete(bool)
     Marks incomplete installation.
@@ -24,6 +24,38 @@ ODEPLOY/forceReboot(bool) [False]
 
 ODEPLOY/offlinePackager(bool) [False]
     Force offline packager, assume everything is installed.
+
+
+Kernel boot configuration
+-------------------------
+
+KERNEL/cmdlineNew(str)
+    New arguments to kernel command line.
+
+KERNEL/cmdlineOld(str)
+    Previous (to be removed) arguments of kernel command line.
+
+
+Kdump
+-----
+KDUMP/enable(bool) [False]
+    Perform kdump detection configuration
+
+KDUMP/supported(bool) [False]
+    kexec-tools package supports fence_kdump configuration
+
+KDUMP/destinationAddress
+    server to send fence_kdump messages to
+
+KDUMP/destinationPort
+    port to send fence_kdump messages to
+
+KDUMP/messageInterval
+    interval between fence_kdump messages
+
+
+VDSM Configuration
+------------------
 
 VDSM/keySize(int) [2048]
     RSA key size.
@@ -45,8 +77,11 @@ VDSM/vdsmId(str)
     VDSM id.
     Current available at customiztion stage.
 
-VDSM/vdsmMinimumVersion(str) [4.9.6]
+VDSM/vdsmMinimumVersion(str) [4.9]
     Minimum version allowed to be installed (version component only).
+
+VDSM/engineAddress(str)
+    Engine address (resolved) optional for connectivity check.
 
 VDSM/engineHost(str)
     Engine host name for connectivity check.
@@ -63,6 +98,12 @@ VDSM/checkVirtHardware(bool) [True]
 VDSM/configOverride(bool) [True]
     Override vdsm configuration file.
 
+VDSM/connectionRetries=int:'60'
+    Connect retries to establish route on bridge creation
+
+VDSM/connectionTimeout=int:'10'
+    timeout for tcp connect on bridge creation
+
 VDSM/disableNetworkManager(bool) [True]
     Disable NetworkManager service.
 
@@ -70,14 +111,61 @@ VDSM_CONFIG/section/key(str)
     Set vdsm configuration option. If set vdsm configuration is
     overridden unless there is VDSM/configOverride = False.
 
+Hosted Engine
+-------------
+HOSTED_ENGINE/action(str) [none]
+    perform Hosted Engine customization:
+    none: do nothing
+    deploy: deploy hosted engine configuration
+    remove: remove hosted engine configuration
+
+TuneD
+-----
+TUNE/tunedProfile(str)
+    tuned profile to be set.
+    if unset: rhs-virtualization if gluster is enabled, virtual-host otherwise.
+
+
+oVirt Node
+----------
+VDSM/nodeHasOwnBridges(bool) (internal)
+    detect nodes with own bridges and report back
+
+VDSM/nodePluginVdsmFeatures(list)
+    features of ovirt-node-plugin-vdsm
+
+VDSM/ovirt-legacy-node(bool) [False]
+    is vintage node
+
+VDSM/ovirt-node(bool) [False]
+    is next generation node
+
+
+Virtualization
+--------------
+
 VIRT/enable(bool) [False]
     Virtualization support.
+
+
+Storage
+-------
 
 GLUSTER/enable(bool) [False]
     Install gluster support.
 
+GLUSTER/monitoringEnable=bool:'False'
+    Enable gluster nrpe agent used by nagios for monitoring
+
+GLUSTER/monitoringServer=NoneType:'None'
+    Server to be allowed to access nrpe agent
+
+OpenStack
+---------
+
 OPENSTACK/neutronEnable(bool) [False]
     Enable Neutron configuration.
+
 
 OPENSTACK_NEUTRON_CONFIG/section/key(str)
     Set Neutron configuration option.
@@ -125,7 +213,7 @@ VMCONSOLE/support [0]
 
 
 MANAGEMENT ENVIRONMENT
-----------------------
+======================
 
 OMGMT_CORE/offlinePackager(str) [False]
     Force offline packager.
@@ -140,3 +228,5 @@ OMGMT_PACKAGES/packages(multi-str)
 
 OMGMT_PACKAGES/packagesInfo(multi-str)
     Package information that is retrieved out of check.
+
+
