@@ -97,6 +97,33 @@ OPENSTACK/neutronOpenvswitchIntegrationBridge(str) [br-int]
 OPENSTACK_NEUTRON_OPENVSWITCH_CONFIG/section/key(str)
     Set Neutron Open vSwitch agent configuration option.
 
+
+oVirt VM Console
+----------------
+
+VMCONSOLE/caKey [None]
+    certification authority to be used by VM Console
+
+VMCONSOLE/keySize [2048]
+    size of the key to be used by VM Console
+
+VMCONSOLE/certificate [None]
+    certificate chain to be used by VM Console
+
+VMCONSOLE/certificateEnrollment ['none']
+    'none'
+    'inline'
+    'request': generate a certificate sign request
+    'accept': accept certificate which was pending sign request
+
+VMCONSOLE/enable [False]
+    Enable VM Console configuration
+
+VMCONSOLE/support [0]
+    Internal use, enable vmconsole plugins for supported VM Console version.
+    Set to 1 if ovirt-vmconsole-host is installed
+
+
 MANAGEMENT ENVIRONMENT
 ----------------------
 
