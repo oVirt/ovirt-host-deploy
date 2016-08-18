@@ -40,20 +40,26 @@ vdsm hooks
 DEVELOPMENT AND TEST
 --------------------
 
-FAKEQEMU
+FAQEMU
 
 On the host, create:
 
-/etc/ovirt-host-deploy.conf.d/50-fake.conf
+/etc/ovirt-host-deploy.conf.d/50-faqemu.conf
 
   [environment:enforce]
   VDSM/checkVirtHardware=bool:False
   VDSM/configOverride=bool:False
-  VDSM_CONFIG/fake_kvm_support=str:true
+  VDSM_CONFIG/vars/fake_kvm_support=str:true
+  VDSM_CONFIG/vars/fake_kvm_architecture=str:@ARCHITECTURE@
 
-Install hooks manually or on the manager, create:
+Where @ARCHITECTURE@ is the target architecture of faqemu (ppc64le or x86_64).
+Either install hooks manually on the host:
 
-/usr/share/ovirt-host-deploy/plugins/ovirt-host-deploy/vdsmhooks/packages.d/fake.@DISTRIBUTION@
+  yum -y install vdsm-hook-faqemu
+
+Or on the engine create:
+
+/usr/share/ovirt-host-deploy/plugins/ovirt-host-deploy/vdsmhooks/packages.d/faqemu.@DISTRIBUTION@
 
   vdsm-hook-faqemu
 
@@ -69,9 +75,13 @@ On the host, create:
 
   [environment:enforce]
   VDSM/configOverride=bool:False
-  VDSM_CONFIG/fake_vmstats_enable=str:true
+  VDSM_CONFIG/vars/fake_vmstats_enable=str:true
 
-Install hooks manually or on the manager, create:
+Either install hooks manually on the host:
+
+  yum -y install vdsm-hook-fakevmstats
+
+Or on the engine create:
 
 /usr/share/ovirt-host-deploy/plugins/ovirt-host-deploy/vdsmhooks/packages.d/fakevmstats.@DISTRIBUTION@
 
