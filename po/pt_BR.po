@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-12 15:43+0200\n"
+"POT-Creation-Date: 2016-08-04 16:25+0200\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -70,7 +70,7 @@ msgstr "Removendo configuração do hosted-engine"
 msgid "Updating hosted-engine configuration"
 msgstr "Atualizando configuração do hosted-engine"
 
-#: src/plugins/ovirt-host-common/hosted-engine/packages.py:69
+#: src/plugins/ovirt-host-common/hosted-engine/packages.py:71
 #, python-brace-format
 msgid ""
 "Hosted Engine support requested on unsupported machine: {arch}. Disabling"
@@ -78,7 +78,7 @@ msgstr ""
 "Suporte do Hosted Engine solicitado na máquina sem suporte: {arch}. "
 "Desabilitando"
 
-#: src/plugins/ovirt-host-common/hosted-engine/packages.py:100
+#: src/plugins/ovirt-host-common/hosted-engine/packages.py:102
 msgid "Starting ovirt-ha-agent"
 msgstr ""
 
@@ -95,7 +95,7 @@ msgid "Setting up PKI"
 msgstr "Definindo PKI"
 
 #: src/plugins/ovirt-host-common/vdsm/pki.py:267
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:99
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:103
 msgid "PKI accept mode while no pending request"
 msgstr "Modo PKI aceito enquanto nenhuma solicitação estiver pendente"
 
@@ -130,16 +130,16 @@ msgstr ""
 "\n"
 
 #: src/plugins/ovirt-host-common/vdsm/pki.py:426
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:240
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:244
 #, python-brace-format
 msgid "Cannot remove file '{name}'."
 msgstr "Não posso remover arquivo '{name}'."
 
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:131
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:135
 msgid "Setting up Serial Console PKI"
 msgstr "Definindo o PKI do Console Serial"
 
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:149
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:153
 msgid ""
 "\n"
 "\n"
@@ -152,11 +152,11 @@ msgstr ""
 "requisitado\n"
 "\n"
 
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:158
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:162
 msgid "Serial console certificate enrollment required"
 msgstr "Inscrição do certificado de console Serial requerido"
 
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:186
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:190
 msgid ""
 "\n"
 "\n"
@@ -188,7 +188,7 @@ msgstr "Versão: {package}-{version} ({local_version})"
 msgid "Starting glusterpmd service"
 msgstr "Iniciando serviço glusterpmd"
 
-#: src/plugins/ovirt-host-deploy/gluster/nrpe.py:147
+#: src/plugins/ovirt-host-deploy/gluster/nrpe.py:153
 msgid "Restarting nrpe service"
 msgstr "Reiniciando serviço nrpe"
 
@@ -247,7 +247,7 @@ msgstr "Resposta inválida do OVS"
 msgid "Starting neutron openvswitch plugin"
 msgstr "Iniciando plugin neutron openswitch"
 
-#: src/plugins/ovirt-host-deploy/tune/tuned.py:101
+#: src/plugins/ovirt-host-deploy/tune/tuned.py:105
 msgid "Cannot set tuned profile"
 msgstr "Não posso definir perfil sintonizado"
 
