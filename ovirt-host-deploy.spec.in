@@ -44,6 +44,7 @@ BuildRequires:	otopi-devtools
 BuildRequires:	python2-devel
 
 %if %{_use_maven}
+BuildRequires:	javapackages-tools
 BuildRequires:	maven-compiler-plugin
 BuildRequires:	maven-enforcer-plugin
 BuildRequires:	maven-install-plugin
@@ -51,6 +52,7 @@ BuildRequires:	maven-jar-plugin
 BuildRequires:	maven-javadoc-plugin
 BuildRequires:	maven-source-plugin
 BuildRequires:	maven-local
+BuildRequires:	sonatype-oss-parent
 %endif
 
 %description
