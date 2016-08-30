@@ -1,5 +1,8 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.5.3
+ *
+
 2016-08-30 - Version 1.5.2
  * documentation: updated, rhbz#1332586
  * vmconsole: fixed missing variable initialization
