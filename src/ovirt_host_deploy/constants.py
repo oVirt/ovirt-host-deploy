@@ -60,8 +60,14 @@ class FileLocations(object):
     OPENSTACK_NEUTRON_PLUGIN_CONFIG = '/etc/neutron/plugin.ini'
     OPENSTACK_NEUTRON_LINUXBRIDGE_CONFIG = \
         '/etc/neutron/plugins/linuxbridge/linuxbridge_conf.ini'
-    OPENSTACK_NEUTRON_OPENVSWITCH_CONFIG = \
-        '/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini'
+    if os.path.exists('/etc/neutron/plugins/ml2/openvswitch_agent.ini'):
+        # OpenStack Liberty or newer
+        OPENSTACK_NEUTRON_OPENVSWITCH_CONFIG = \
+            '/etc/neutron/plugins/ml2/openvswitch_agent.ini'
+    else:
+        # OpenStack Kilo or older
+        OPENSTACK_NEUTRON_OPENVSWITCH_CONFIG = \
+            '/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini'
     NRPE_CONFIG_FILE = '/etc/nagios/nrpe.cfg'
 
     KDUMP_CONFIG_FILE = '/etc/kdump.conf'
