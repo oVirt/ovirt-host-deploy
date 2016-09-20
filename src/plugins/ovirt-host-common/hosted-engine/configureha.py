@@ -23,7 +23,7 @@
 
 import gettext
 import os
-import sys
+
 
 from otopi import constants as otopicons
 from otopi import filetransaction
@@ -32,19 +32,6 @@ from otopi import util
 
 
 from ovirt_host_deploy import constants as odeploycons
-
-ha_client = None
-temp_stderr = sys.stderr
-try:
-    # needed since importing the client sends a warning to the stderr that
-    # fails the installation
-    # this can be removed once BZ 1101554 is solved
-    sys.stderr = open(os.devnull, 'wb')
-    import ovirt_hosted_engine_ha.client.client as ha_client
-except ImportError:
-    pass
-finally:
-    sys.stderr = temp_stderr
 
 
 def _(m):
@@ -117,12 +104,6 @@ class Plugin(plugin.PluginBase):
                 ],
             ),
         )
-        try:
-            ha_client.HAClient().set_maintenance_mode(
-                ha_client.HAClient.MaintenanceMode.LOCAL, False
-            )
-        except Exception:
-            self.logger.exception("error setting HA maintenance mode")
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
