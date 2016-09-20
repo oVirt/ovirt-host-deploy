@@ -23,15 +23,30 @@
 
 import gettext
 import os
-
+import sys
 
 from otopi import constants as otopicons
 from otopi import filetransaction
 from otopi import plugin
+from otopi import transaction
 from otopi import util
 
 
 from ovirt_host_deploy import constants as odeploycons
+
+ha_client = None
+temp_stderr = sys.stderr
+try:
+    with open('os.devnull', 'wb') as empty_stderr:
+        # needed since importing the client sends a warning to the stderr that
+        # fails the installation
+        # this can be removed once BZ 1101554 is solved
+        sys.stderr = empty_stderr
+        import ovirt_hosted_engine_ha.client.client as ha_client
+except ImportError:
+    pass
+finally:
+    sys.stderr = temp_stderr
 
 
 def _(m):
@@ -41,6 +56,38 @@ def _(m):
 @util.export
 class Plugin(plugin.PluginBase):
     """oVirt Hosted Engine configuration plugin."""
+
+    class HeMaintenanceModeTransaction(transaction.TransactionElement):
+        """transaction element for setting he maintenance mode."""
+
+        def __init__(self, parent):
+            self._parent = parent
+
+        def __str__(self):
+            return _("HeMaintenanceMode Transaction")
+
+        def prepare(self):
+            pass
+
+        def abort(self):
+            try:
+                ha_client.HAClient().set_maintenance_mode(
+                    ha_client.HAClient.MaintenanceMode.LOCAL, True
+                )
+            except Exception:
+                self._parent.logger.error(
+                    _('Error setting HA local maintenance mode to true')
+                )
+
+        def commit(self):
+            try:
+                ha_client.HAClient().set_maintenance_mode(
+                    ha_client.HAClient.MaintenanceMode.LOCAL, False
+                )
+            except Exception:
+                self._parent.logger.error(
+                    _('Error setting HA local maintenance mode to false')
+                )
 
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
@@ -104,6 +151,14 @@ class Plugin(plugin.PluginBase):
                 ],
             ),
         )
+        if ha_client is None:
+            self.logger.error(_('HA client was not imported'))
+        else:
+            self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
+                self.HeMaintenanceModeTransaction(
+                    parent=self,
+                )
+            )
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
