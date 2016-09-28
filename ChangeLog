@@ -1,5 +1,8 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.5.4
+ *
+
 2016-09-28 - Version 1.5.3
  * hosted-engine: set local maintenance to false when installing host,
    rhbz#1353600
