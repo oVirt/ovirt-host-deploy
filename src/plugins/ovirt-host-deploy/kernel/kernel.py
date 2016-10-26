@@ -44,6 +44,7 @@ class Plugin(plugin.PluginBase):
                                  line part
         KernelEnv.CMDLINE_OLD -- string containing old parameters for kernel
                                  command line
+        KernelEnv.ENABLE_REALTIME -- install realtime packages
     """
 
     _GRUBBY_PKG = 'grubby'
@@ -91,6 +92,10 @@ class Plugin(plugin.PluginBase):
 
         self.environment.setdefault(odeploycons.KernelEnv.CMDLINE_NEW, None)
         self.environment.setdefault(odeploycons.KernelEnv.CMDLINE_OLD, None)
+        self.environment.setdefault(
+            odeploycons.KernelEnv.ENABLE_REALTIME,
+            False
+        )
 
         self.command.detect('grubby')
 
@@ -109,6 +114,25 @@ class Plugin(plugin.PluginBase):
             self.logger.warning(
                 'Vintage node, skipping kernel arguments.'
             )
+
+        if self.environment[odeploycons.KernelEnv.ENABLE_REALTIME]:
+            if self.environment[odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE]:
+                raise RuntimeError(
+                    _('RT operation is not available on ovirt node')
+                )
+            if not self.packager.queryPackages(
+                patterns=(
+                    'kernel-rt',
+                ),
+            ) or not self.packager.queryPackages(
+                patterns=(
+                    'kernel-rt-kvm',
+                ),
+            ):
+                raise RuntimeError(
+                    _('RT packages not available - '
+                      'missing repo or channel')
+                )
 
     @plugin.event(
         stage=plugin.Stages.STAGE_MISC,
@@ -141,3 +165,12 @@ class Plugin(plugin.PluginBase):
                         self.environment[new]]
 
         return cmd
+
+    @plugin.event(
+        stage=plugin.Stages.STAGE_PACKAGES,
+        condition=lambda self: self._enabled,
+    )
+    def _realtime_packages(self):
+        if (not self.environment[odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE] and
+                self.environment[odeploycons.KernelEnv.ENABLE_REALTIME]):
+            self.packager.install(packages=('kernel-rt', 'kernel-rt-kvm'))

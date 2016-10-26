@@ -35,6 +35,9 @@ KERNEL/cmdlineNew(str)
 KERNEL/cmdlineOld(str)
     Previous (to be removed) arguments of kernel command line.
 
+KERNEL/enableRealtime(str)
+    Install realtime kernel and KVM.
+
 
 Kdump
 -----

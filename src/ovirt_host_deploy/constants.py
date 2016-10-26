@@ -127,6 +127,7 @@ class CoreEnv(object):
 class KernelEnv(object):
     CMDLINE_NEW = 'KERNEL/cmdlineNew'
     CMDLINE_OLD = 'KERNEL/cmdlineOld'
+    ENABLE_REALTIME = 'KERNEL/enableRealtime'
 
 
 @util.export
