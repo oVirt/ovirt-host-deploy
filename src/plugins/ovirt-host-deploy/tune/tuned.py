@@ -73,7 +73,8 @@ class Plugin(plugin.PluginBase):
 
         if self._profile is None:
             if self.environment[odeploycons.GlusterEnv.ENABLE]:
-                self._profile = 'rhs-virtualization'
+                self._enabled = False
+                return
             else:
                 self._profile = 'virtual-host'
 
