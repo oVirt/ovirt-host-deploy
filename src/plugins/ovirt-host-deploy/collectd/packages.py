@@ -47,6 +47,7 @@ class Plugin(plugin.PluginBase):
     def _packages(self):
         self.packager.installUpdate((
             'collectd',
+            'collectd-disk',
             'collectd-netlink',
             'collectd-virt',
             'collectd-write_http',
