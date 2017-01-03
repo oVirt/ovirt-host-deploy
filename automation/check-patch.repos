@@ -1,2 +1,2 @@
-ovirt-41-snapshot,http://resources.ovirt.org/repos/ovirt/experimental/4.1/latest/rpm/$distro
+ovirt-41-snapshot,http://resources.ovirt.org/repos/ovirt/experimental/4.1/latest.tested/rpm/$distro
 ovirt-41-snapshot-static,http://resources.ovirt.org/pub/ovirt-4.1-snapshot-static/rpm/$distro
