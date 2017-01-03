@@ -72,11 +72,13 @@ class Plugin(plugin.PluginBase):
         self._profile = self.environment[odeploycons.TuneEnv.TUNED_PROFILE]
 
         if self._profile is None:
-            if self.environment[odeploycons.GlusterEnv.ENABLE]:
+            if self.environment[odeploycons.VirtEnv.ENABLE]:
+                # 'virtual-host is the default profile when virt
+                #  service is enabled.
+                self._profile = 'virtual-host'
+            else:
                 self._enabled = False
                 return
-            else:
-                self._profile = 'virtual-host'
 
         self._enabled = True
 
