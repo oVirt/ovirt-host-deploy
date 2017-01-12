@@ -23,7 +23,6 @@
 
 import gettext
 import os
-import sys
 
 from otopi import constants as otopicons
 from otopi import filetransaction
@@ -35,18 +34,10 @@ from otopi import util
 from ovirt_host_deploy import constants as odeploycons
 
 ha_client = None
-temp_stderr = sys.stderr
 try:
-    with open('os.devnull', 'wb') as empty_stderr:
-        # needed since importing the client sends a warning to the stderr that
-        # fails the installation
-        # this can be removed once BZ 1101554 is solved
-        sys.stderr = empty_stderr
-        import ovirt_hosted_engine_ha.client.client as ha_client
+    import ovirt_hosted_engine_ha.client.client as ha_client
 except ImportError:
     pass
-finally:
-    sys.stderr = temp_stderr
 
 
 def _(m):
