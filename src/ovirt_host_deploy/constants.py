@@ -33,6 +33,7 @@ class FileLocations(object):
 
     OVIRT_HOST_DEPLOY_LOG_PREFIX = 'ovirt-host-deploy'
     VDSM_CONFIG_FILE = '/etc/vdsm/vdsm.conf'
+    VDSM_CONFIG_D = '/etc/vdsm/vdsm.conf.d'
     VDSM_TRUST_STORE = '/etc/pki/vdsm'
     VDSM_CA_FILE = 'certs/cacert.pem'
     VDSM_CERT_FILE = 'certs/vdsmcert.pem'
@@ -87,6 +88,11 @@ class FileLocations(object):
     OVIRT_NODE_OS_FILE = '/etc/os-release'
     OVIRT_NODE_VARIANT_KEY = 'VARIANT_ID'
     OVIRT_NODE_VARIANT_VAL = 'ovirt-node'
+
+    VDSM_METRICS_CONF = os.path.join(
+        VDSM_CONFIG_D,
+        'metrics.conf',
+    )
 
 
 @util.export
@@ -159,6 +165,8 @@ class VdsmEnv(object):
     CONFIG_OVERRIDE = 'VDSM/configOverride'
     DISABLE_NETWORKMANAGER = 'VDSM/disableNetworkManager'
     CONFIG_PREFIX = 'VDSM_CONFIG/'
+    ENABLE_METRICS_CONFIG = 'VDSM/enableMetricsConfig'
+    METRICS_CONFIG = 'VDSM/metricsConfig'
 
 
 @util.export
