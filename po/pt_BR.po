@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-04 16:25+0200\n"
+"POT-Creation-Date: 2017-01-19 08:47+0100\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/ovirt_host_deploy/hardware.py:34
 #: src/plugins/ovirt-host-common/core/misc.py:35
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:38
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:44
 #: src/plugins/ovirt-host-common/hosted-engine/packages.py:36
 #: src/plugins/ovirt-host-common/vdsm/pki.py:41
 #: src/plugins/ovirt-host-common/vmconsole/pki.py:39
@@ -63,12 +63,29 @@ msgid "Hardware does not support virtualization"
 msgstr "Hardware não suporta virtualização"
 
 #: src/plugins/ovirt-host-common/hosted-engine/configureha.py:58
+#, fuzzy
+msgid "HeMaintenanceMode Transaction"
+msgstr "Transação do NetworkSetup"
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:70
+msgid "Error setting HA local maintenance mode to true"
+msgstr ""
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:80
+msgid "Error setting HA local maintenance mode to false"
+msgstr ""
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:96
 msgid "Removing hosted-engine configuration"
 msgstr "Removendo configuração do hosted-engine"
 
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:76
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:114
 msgid "Updating hosted-engine configuration"
 msgstr "Atualizando configuração do hosted-engine"
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:146
+msgid "HA client was not imported"
+msgstr ""
 
 #: src/plugins/ovirt-host-common/hosted-engine/packages.py:71
 #, python-brace-format
@@ -247,7 +264,7 @@ msgstr "Resposta inválida do OVS"
 msgid "Starting neutron openvswitch plugin"
 msgstr "Iniciando plugin neutron openswitch"
 
-#: src/plugins/ovirt-host-deploy/tune/tuned.py:105
+#: src/plugins/ovirt-host-deploy/tune/tuned.py:108
 msgid "Cannot set tuned profile"
 msgstr "Não posso definir perfil sintonizado"
 
