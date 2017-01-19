@@ -26,7 +26,6 @@ MAINTAINERCLEANFILES = \
 mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/vdsm
 dist_my_PYTHON = \
 	__init__.py \
-	bridge.py \
 	config.py \
 	hardware.py \
 	packages.py \

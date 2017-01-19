@@ -89,9 +89,6 @@ VDSM/engineHost(str)
 VDSM/enginePort(int)
     Engine port for connectivity check.
 
-VDSM/managementBridgeName(str)
-    Managment bridge name.
-
 VDSM/checkVirtHardware(bool) [True]
     Check hardware virtualization support.
 
