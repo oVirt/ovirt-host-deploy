@@ -27,7 +27,6 @@ from otopi import util
 from . import bridge
 from . import config
 from . import hardware
-from . import metrics
 from . import packages
 from . import software
 from . import vdsmid
@@ -38,7 +37,6 @@ def createPlugins(context):
     bridge.Plugin(context=context)
     config.Plugin(context=context)
     hardware.Plugin(context=context)
-    metrics.Plugin(context=context)
     packages.Plugin(context=context)
     software.Plugin(context=context)
     vdsmid.Plugin(context=context)

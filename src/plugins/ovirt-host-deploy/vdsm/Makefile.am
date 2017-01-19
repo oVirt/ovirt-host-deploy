@@ -29,7 +29,6 @@ dist_my_PYTHON = \
 	bridge.py \
 	config.py \
 	hardware.py \
-	metrics.py \
 	packages.py \
 	software.py \
 	vdsmid.py \
