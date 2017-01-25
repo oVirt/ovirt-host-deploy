@@ -111,7 +111,7 @@ class Plugin(plugin.PluginBase):
         if self.services.exists('supervdsmd'):
             self.services.state('supervdsmd', False)
         self.packager.install(('qemu-kvm-tools',))
-        self.packager.installUpdate(('vdsm', 'vdsm-cli'))
+        self.packager.installUpdate(('vdsm',))
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
