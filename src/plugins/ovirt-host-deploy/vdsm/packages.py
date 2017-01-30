@@ -173,6 +173,12 @@ class Plugin(plugin.PluginBase):
             if self.services.exists('libvirtd'):
                 self.services.state('libvirtd', True)
 
+        # restarts 'ovirt-imageio-daemon' service to ensure
+        # that a valid certificate is loaded.
+        if self.services.exists('ovirt-imageio-daemon'):
+            self.services.state('ovirt-imageio-daemon', False)
+            self.services.state('ovirt-imageio-daemon', True)
+
         #
         # remove network manager as it create timing
         # issues with the network service and vdsm
