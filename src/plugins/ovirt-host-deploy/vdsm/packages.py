@@ -59,7 +59,7 @@ class Plugin(plugin.PluginBase):
         )
         self.environment.setdefault(
             odeploycons.VdsmEnv.DISABLE_NETWORKMANAGER,
-            True
+            False
         )
 
     @plugin.event(
@@ -179,14 +179,20 @@ class Plugin(plugin.PluginBase):
             self.services.state('ovirt-imageio-daemon', False)
             self.services.state('ovirt-imageio-daemon', True)
 
-        #
-        # remove network manager as it create timing
-        # issues with the network service and vdsm
-        # see rhbz#879180
-        #
+        # NetworkManager is not supported for vdsm versions <4.19,
+        # disable/stop NetworkManager if either it is set to be disabled
+        # or vdsm version is beneath 4.19
+        vdsm_query = self.packager.queryPackages(patterns=('vdsm',))
+        current_vdsm_version = LooseVersion(vdsm_query[0]['version'])
+        min_vdsm_nm_version = LooseVersion(
+            str(odeploycons.Const.MIN_VDSM_VERSION_FOR_NETWORK_MANAGER))
         if (
-            self.environment[odeploycons.VdsmEnv.DISABLE_NETWORKMANAGER] and
-            self.services.exists('NetworkManager')
+            self.services.exists('NetworkManager') and
+                (
+                    current_vdsm_version < min_vdsm_nm_version or
+                    self.environment[
+                        odeploycons.VdsmEnv.DISABLE_NETWORKMANAGER]
+                )
         ):
             self.services.state('NetworkManager', False)
             self.services.startup('NetworkManager', False)
