@@ -109,6 +109,8 @@ class Const(object):
     HOSTED_ENGINE_ACTION_REMOVE = 'remove'
     HOSTED_ENGINE_ACTION_NONE = 'none'
 
+    MIN_VDSM_VERSION_FOR_NETWORK_MANAGER = 4.19
+
 
 @util.export
 @util.codegen
