@@ -57,12 +57,6 @@ class Plugin(plugin.PluginBase):
     @plugin.event(
         stage=plugin.Stages.STAGE_VALIDATION,
         condition=lambda self: self.environment[
-            odeploycons.VdsmEnv.CONFIG_OVERRIDE
-        ],
-    )
-    @plugin.event(
-        stage=plugin.Stages.STAGE_VALIDATION,
-        condition=lambda self: self.environment[
             odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
         ],
     )
