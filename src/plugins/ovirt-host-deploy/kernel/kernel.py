@@ -96,11 +96,18 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(stage=plugin.Stages.STAGE_VALIDATION)
     def _validation(self):
-        if self.command.get('grubby', optional=True):
-            self._enabled = True
+        if not self.environment[
+            odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
+        ]:
+            if self.command.get('grubby', optional=True):
+                self._enabled = True
+            else:
+                self.logger.warning(
+                    'Grubby not present - not setting kernel arguments.'
+                )
         else:
-            self.logger.warn(
-                'Grubby not present - not setting kernel arguments.'
+            self.logger.warning(
+                'Vintage node, skipping kernel arguments.'
             )
 
     @plugin.event(
