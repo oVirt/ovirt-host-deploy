@@ -1,5 +1,8 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.6.1
+ *
+
 2017-01-13 - Version 1.6.0
  * metrics: Install Collectd and fluentd with relevant plugins
    rhbz#1371530
