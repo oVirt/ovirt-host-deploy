@@ -1,7 +1,12 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.6.1
- *
+2017-02-21 - Version 1.6.1
+ * packaging: fix repolib install
+ * vdsm: restart imageio daemon on vdsm start
+ * kernel: avoid runnning grubby on vintage node
+ * node: remove a duplicate decorator
+ * vdsm: Don't disable NetworkManager by default
+ * tune/iosched: Keep default
 
 2017-01-13 - Version 1.6.0
  * metrics: Install Collectd and fluentd with relevant plugins
