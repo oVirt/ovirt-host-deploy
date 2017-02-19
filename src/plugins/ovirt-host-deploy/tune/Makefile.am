@@ -30,10 +30,6 @@ dist_my_PYTHON = \
 	tuned.py \
 	$(NULL)
 
-dist_my_DATA = \
-	ovirt-iosched.rules \
-	$(NULL)
-
 clean-local: \
 	python-clean \
 	$(NULL)
