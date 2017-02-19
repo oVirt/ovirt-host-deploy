@@ -27,8 +27,6 @@ import gettext
 import os
 
 
-from otopi import constants as otopicons
-from otopi import filetransaction
 from otopi import plugin
 from otopi import util
 
@@ -44,8 +42,12 @@ def _(m):
 class Plugin(plugin.PluginBase):
     """iosched setup plugin."""
 
+    # In previous versions, we used to write this file to change the
+    # default scheduler to 'deadline'. This is not needed anymore,
+    # because this is the default for supported kernels, and we want
+    # to remove this file, because its content made overriding the
+    # scheduler harder than necessary.
     DEST_UDEV_RULE_FILE = '/etc/udev/rules.d/12-ovirt-iosched.rules'
-    SRC_UDEV_RULE_FILE = 'ovirt-iosched.rules'
 
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
@@ -57,43 +59,39 @@ class Plugin(plugin.PluginBase):
         self.command.detect('udevadm')
 
     @plugin.event(
-        stage=plugin.Stages.STAGE_MISC,
-    )
-    def _misc(self):
-        with open(
-            os.path.join(
-                os.path.dirname(__file__),
-                self.SRC_UDEV_RULE_FILE,
-            ),
-            'r'
-        ) as f:
-            self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
-                filetransaction.FileTransaction(
-                    name=self.DEST_UDEV_RULE_FILE,
-                    content=f.read(),
-                    modifiedList=self.environment[
-                        otopicons.CoreEnv.MODIFIED_FILES
-                    ],
-                )
-            )
-
-    @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
-        priority=plugin.Stages.PRIORITY_LOW,
-        condition=lambda self: not self.environment[
-            odeploycons.CoreEnv.FORCE_REBOOT
-        ],
     )
-    def _refresh(self):
-        self.execute(
-            [
-                self.command.get('udevadm'),
-                'trigger',
-                '--type=devices',
-                '--action=change',
-            ],
-            raiseOnError=False,
-        )
+    def _remove_old_iosched_udev_conf(self):
+        removed = False
+        if os.path.exists(self.DEST_UDEV_RULE_FILE):
+            try:
+                os.unlink(self.DEST_UDEV_RULE_FILE)
+                removed = True
+            except OSError:
+                self.logger.warning(
+                    _("Cannot remove file '{name}'.").format(
+                        name=self.DEST_UDEV_RULE_FILE,
+                    )
+                )
+                self.logger.debug(exc_info=True)
+        if removed and not self.environment[odeploycons.CoreEnv.FORCE_REBOOT]:
+            self.execute(
+                [
+                    self.command.get('udevadm'),
+                    'control',
+                    '--reload',
+                ],
+                raiseOnError=False,
+            )
+            self.execute(
+                [
+                    self.command.get('udevadm'),
+                    'trigger',
+                    '--type=devices',
+                    '--action=change',
+                ],
+                raiseOnError=False,
+            )
 
 
 # vim: expandtab tabstop=4 shiftwidth=4
