@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2012-2017 Red Hat, Inc.
+# Copyright (C) 2017 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,19 +17,22 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
+include $(top_srcdir)/build/python.inc
+
 MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
 	$(NULL)
 
-SUBDIRS = \
-	cockpit \
-	core \
-	hosted-engine \
-	vdsm \
-	vmconsole \
+mydir=$(ovirthostdeployplugindir)/ovirt-host-common/cockpit
+dist_my_PYTHON = \
+	__init__.py \
+	packages.py \
 	$(NULL)
 
-install-data-local:
-	$(MKDIR_P) "$(DESTDIR)$(otopiplugindir)"
-	rm -f "$(DESTDIR)$(otopiplugindir)/ovirt-host-common"
-	ln -s "$(ovirthostdeployplugindir)/ovirt-host-common" "$(DESTDIR)$(otopiplugindir)/ovirt-host-common"
+clean-local: \
+	python-clean \
+	$(NULL)
+
+all-local: \
+	python-syntax-check \
+	$(NULL)

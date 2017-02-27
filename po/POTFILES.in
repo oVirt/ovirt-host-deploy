@@ -3,6 +3,8 @@
 ./src/ovirt_host_deploy/__init__.py
 ./src/ovirt_host_mgmt/constants.py
 ./src/ovirt_host_mgmt/__init__.py
+./src/plugins/ovirt-host-common/cockpit/__init__.py
+./src/plugins/ovirt-host-common/cockpit/packages.py
 ./src/plugins/ovirt-host-common/core/__init__.py
 ./src/plugins/ovirt-host-common/core/misc.py
 ./src/plugins/ovirt-host-common/hosted-engine/configureha.py
