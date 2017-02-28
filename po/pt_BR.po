@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-19 08:47+0100\n"
+"POT-Creation-Date: 2017-02-28 15:42+0100\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -17,34 +17,37 @@ msgstr ""
 
 #: src/ovirt_host_deploy/hardware.py:34
 #: src/plugins/ovirt-host-common/core/misc.py:35
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:44
-#: src/plugins/ovirt-host-common/hosted-engine/packages.py:36
-#: src/plugins/ovirt-host-common/vdsm/pki.py:41
 #: src/plugins/ovirt-host-common/vmconsole/pki.py:39
-#: src/plugins/ovirt-host-deploy/core/misc.py:39
-#: src/plugins/ovirt-host-deploy/core/offlinepackager.py:37
+#: src/plugins/ovirt-host-common/vdsm/pki.py:41
+#: src/plugins/ovirt-host-common/hosted-engine/packages.py:36
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:44
+#: src/plugins/ovirt-host-common/cockpit/packages.py:33
+#: src/plugins/ovirt-host-mgmt/packages/update.py:36
+#: src/plugins/ovirt-host-mgmt/core/offlinepackager.py:37
+#: src/plugins/ovirt-host-mgmt/core/misc.py:38
+#: src/plugins/ovirt-host-deploy/vdsmhooks/hooks.py:39
 #: src/plugins/ovirt-host-deploy/gluster/glusterpmd.py:35
 #: src/plugins/ovirt-host-deploy/gluster/nrpe.py:38
 #: src/plugins/ovirt-host-deploy/gluster/packages.py:35
 #: src/plugins/ovirt-host-deploy/kdump/packages.py:40
-#: src/plugins/ovirt-host-deploy/node/detect.py:40
-#: src/plugins/ovirt-host-deploy/node/persist.py:36
+#: src/plugins/ovirt-host-deploy/openstack/neutron.py:35
 #: src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py:36
 #: src/plugins/ovirt-host-deploy/openstack/neutron_openvswitch.py:36
-#: src/plugins/ovirt-host-deploy/openstack/neutron.py:35
-#: src/plugins/ovirt-host-deploy/tune/iosched.py:40
+#: src/plugins/ovirt-host-deploy/node/detect.py:40
+#: src/plugins/ovirt-host-deploy/node/persist.py:36
 #: src/plugins/ovirt-host-deploy/tune/tuned.py:35
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:44
-#: src/plugins/ovirt-host-deploy/vdsm/config.py:38
+#: src/plugins/ovirt-host-deploy/tune/iosched.py:38
+#: src/plugins/ovirt-host-deploy/core/offlinepackager.py:37
+#: src/plugins/ovirt-host-deploy/core/misc.py:39
+#: src/plugins/ovirt-host-deploy/vmconsole/packages.py:35
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:36
-#: src/plugins/ovirt-host-deploy/vdsmhooks/hooks.py:39
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:38
 #: src/plugins/ovirt-host-deploy/vdsm/software.py:36
 #: src/plugins/ovirt-host-deploy/vdsm/vdsmid.py:40
-#: src/plugins/ovirt-host-deploy/vmconsole/packages.py:35
-#: src/plugins/ovirt-host-mgmt/core/misc.py:38
-#: src/plugins/ovirt-host-mgmt/core/offlinepackager.py:37
-#: src/plugins/ovirt-host-mgmt/packages/update.py:36
+#: src/plugins/ovirt-host-deploy/vdsm/config.py:38
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:38
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:35
+#: src/plugins/ovirt-host-deploy/collectd/packages.py:32
+#: src/plugins/ovirt-host-deploy/fluentd/packages.py:32
 msgid "ovirt-host-deploy"
 msgstr "ovirt-host-deploy"
 
@@ -62,95 +65,10 @@ msgstr "Hardware suporta virtualização"
 msgid "Hardware does not support virtualization"
 msgstr "Hardware não suporta virtualização"
 
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:58
-#, fuzzy
-msgid "HeMaintenanceMode Transaction"
-msgstr "Transação do NetworkSetup"
-
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:70
-msgid "Error setting HA local maintenance mode to true"
-msgstr ""
-
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:80
-msgid "Error setting HA local maintenance mode to false"
-msgstr ""
-
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:96
-msgid "Removing hosted-engine configuration"
-msgstr "Removendo configuração do hosted-engine"
-
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:114
-msgid "Updating hosted-engine configuration"
-msgstr "Atualizando configuração do hosted-engine"
-
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:146
-msgid "HA client was not imported"
-msgstr ""
-
-#: src/plugins/ovirt-host-common/hosted-engine/packages.py:71
-#, python-brace-format
-msgid ""
-"Hosted Engine support requested on unsupported machine: {arch}. Disabling"
-msgstr ""
-"Suporte do Hosted Engine solicitado na máquina sem suporte: {arch}. "
-"Desabilitando"
-
-#: src/plugins/ovirt-host-common/hosted-engine/packages.py:102
-msgid "Starting ovirt-ha-agent"
-msgstr ""
-
-#: src/plugins/ovirt-host-common/vdsm/pki.py:103
-msgid "CA Certificate was not provided"
-msgstr "Certificado CA não foi fornecido"
-
-#: src/plugins/ovirt-host-common/vdsm/pki.py:119
-msgid "VDM Certificate was not provided"
-msgstr "Certificado VDM não foi fornecido"
-
-#: src/plugins/ovirt-host-common/vdsm/pki.py:222
-msgid "Setting up PKI"
-msgstr "Definindo PKI"
-
-#: src/plugins/ovirt-host-common/vdsm/pki.py:267
 #: src/plugins/ovirt-host-common/vmconsole/pki.py:103
+#: src/plugins/ovirt-host-common/vdsm/pki.py:267
 msgid "PKI accept mode while no pending request"
 msgstr "Modo PKI aceito enquanto nenhuma solicitação estiver pendente"
-
-#: src/plugins/ovirt-host-common/vdsm/pki.py:282
-msgid ""
-"\n"
-"\n"
-"Please issue VDSM certificate based on this certificate request\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"Por favor emita o certificado VDSM com base neste pedido de certificado\n"
-"\n"
-
-#: src/plugins/ovirt-host-common/vdsm/pki.py:291
-msgid "Certificate enrollment required"
-msgstr "A inscrição de certificado é exigido"
-
-#: src/plugins/ovirt-host-common/vdsm/pki.py:319
-msgid ""
-"\n"
-"\n"
-"Please input VDSM certificate chain that matches certificate request, top is "
-"issuer\n"
-"\n"
-msgstr ""
-"\n"
-"\n"
-"Por favor coloque a cadeia de certificados VDSM que correspondem ao "
-"certificado pedido, superior é emitente\n"
-"\n"
-
-#: src/plugins/ovirt-host-common/vdsm/pki.py:426
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:244
-#, python-brace-format
-msgid "Cannot remove file '{name}'."
-msgstr "Não posso remover arquivo '{name}'."
 
 #: src/plugins/ovirt-host-common/vmconsole/pki.py:135
 msgid "Setting up Serial Console PKI"
@@ -187,16 +105,106 @@ msgstr ""
 "com pedido de certificado, superior é emitente\n"
 "\n"
 
-#: src/plugins/ovirt-host-deploy/core/misc.py:85
-msgid ""
-"Continuing will configure this host for serving as hypervisor. Are you sure "
-"you want to continue? (yes/no) "
-msgstr ""
-"Continuando irá configurar este host para servir como hypervisor. Você tem "
-"certeza que quer continuar? (sim/não) "
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:244
+#: src/plugins/ovirt-host-common/vdsm/pki.py:426
+#: src/plugins/ovirt-host-deploy/tune/iosched.py:72
+#, python-brace-format
+msgid "Cannot remove file '{name}'."
+msgstr "Não posso remover arquivo '{name}'."
 
-#: src/plugins/ovirt-host-deploy/core/misc.py:113
+#: src/plugins/ovirt-host-common/vdsm/pki.py:103
+msgid "CA Certificate was not provided"
+msgstr "Certificado CA não foi fornecido"
+
+#: src/plugins/ovirt-host-common/vdsm/pki.py:119
+msgid "VDM Certificate was not provided"
+msgstr "Certificado VDM não foi fornecido"
+
+#: src/plugins/ovirt-host-common/vdsm/pki.py:222
+msgid "Setting up PKI"
+msgstr "Definindo PKI"
+
+#: src/plugins/ovirt-host-common/vdsm/pki.py:282
+msgid ""
+"\n"
+"\n"
+"Please issue VDSM certificate based on this certificate request\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Por favor emita o certificado VDSM com base neste pedido de certificado\n"
+"\n"
+
+#: src/plugins/ovirt-host-common/vdsm/pki.py:291
+msgid "Certificate enrollment required"
+msgstr "A inscrição de certificado é exigido"
+
+#: src/plugins/ovirt-host-common/vdsm/pki.py:319
+msgid ""
+"\n"
+"\n"
+"Please input VDSM certificate chain that matches certificate request, top is "
+"issuer\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Por favor coloque a cadeia de certificados VDSM que correspondem ao "
+"certificado pedido, superior é emitente\n"
+"\n"
+
+#: src/plugins/ovirt-host-common/hosted-engine/packages.py:71
+#, python-brace-format
+msgid ""
+"Hosted Engine support requested on unsupported machine: {arch}. Disabling"
+msgstr ""
+"Suporte do Hosted Engine solicitado na máquina sem suporte: {arch}. "
+"Desabilitando"
+
+#: src/plugins/ovirt-host-common/hosted-engine/packages.py:102
+msgid "Starting ovirt-ha-agent"
+msgstr ""
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:58
+#, fuzzy
+msgid "HeMaintenanceMode Transaction"
+msgstr "Transação do NetworkSetup"
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:70
+msgid "Error setting HA local maintenance mode to true"
+msgstr ""
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:80
+msgid "Error setting HA local maintenance mode to false"
+msgstr ""
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:96
+msgid "Removing hosted-engine configuration"
+msgstr "Removendo configuração do hosted-engine"
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:114
+msgid "Updating hosted-engine configuration"
+msgstr "Atualizando configuração do hosted-engine"
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:146
+msgid "HA client was not imported"
+msgstr ""
+
+#: src/plugins/ovirt-host-common/cockpit/packages.py:51
+#, fuzzy, python-brace-format
+msgid "Cockpit support not available on unsupported machine: {arch}. Disabling"
+msgstr ""
+"Suporte do Hosted Engine solicitado na máquina sem suporte: {arch}. "
+"Desabilitando"
+
+#: src/plugins/ovirt-host-common/cockpit/packages.py:69
+#, fuzzy
+msgid "Starting cockpit"
+msgstr "Iniciando gluster"
+
 #: src/plugins/ovirt-host-mgmt/core/misc.py:78
+#: src/plugins/ovirt-host-deploy/core/misc.py:113
 #, python-brace-format
 msgid "Version: {package}-{version} ({local_version})"
 msgstr "Versão: {package}-{version} ({local_version})"
@@ -241,13 +249,9 @@ msgstr ""
 "Kdump desabilitado ou corrigir manualmente a configuração do kdump e faça "
 "novo deploy"
 
-#: src/plugins/ovirt-host-deploy/node/persist.py:74
-msgid "Cannot resolve persist module."
-msgstr "Não é possível resolver módulo persistente."
-
+#: src/plugins/ovirt-host-deploy/openstack/neutron.py:103
 #: src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py:115
 #: src/plugins/ovirt-host-deploy/openstack/neutron_openvswitch.py:147
-#: src/plugins/ovirt-host-deploy/openstack/neutron.py:103
 #, python-brace-format
 msgid "Invalid neutron configuration entry {key}"
 msgstr "Entrada da configuração neutron inválida {key}"
@@ -264,94 +268,25 @@ msgstr "Resposta inválida do OVS"
 msgid "Starting neutron openvswitch plugin"
 msgstr "Iniciando plugin neutron openswitch"
 
+#: src/plugins/ovirt-host-deploy/node/persist.py:74
+msgid "Cannot resolve persist module."
+msgstr "Não é possível resolver módulo persistente."
+
 #: src/plugins/ovirt-host-deploy/tune/tuned.py:108
 msgid "Cannot set tuned profile"
 msgstr "Não posso definir perfil sintonizado"
 
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:72
-msgid "NetworkSetup Transaction"
-msgstr "Transação do NetworkSetup"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:90
-msgid "Cannot create rollback network transaction"
-msgstr "Não posso criar um rollback de transação da rede"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:265
-#, python-brace-format
-msgid "Cannot establish connection to {host}:{port}"
-msgstr "Não posso estabilizar conexão ao {host}:{port}"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:335
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:343
-#, python-brace-format
-msgid "Unable to determine route interface for {address}"
-msgstr "Incapaz de determinar a interface de rota para {address}"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:350
-#, python-brace-format
-msgid "Invalid route information for {address}"
-msgstr "Informação de rota inválida para {address}"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:411
-#, python-brace-format
+#: src/plugins/ovirt-host-deploy/core/misc.py:85
 msgid ""
-"Interface {interface} is VLAN interface, however its configuration is "
-"unexpected"
+"Continuing will configure this host for serving as hypervisor. Are you sure "
+"you want to continue? (yes/no) "
 msgstr ""
-"Interface {interface} é uma interface VLAN, contudo a sua configuração é "
-"inesperada"
+"Continuando irá configurar este host para servir como hypervisor. Você tem "
+"certeza que quer continuar? (sim/não) "
 
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:496
-msgid "Unsupported network manager configuration"
-msgstr "Configuração do Network Manager não suportada"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:623
-msgid "Bridge creation requested but engine host was not specified"
-msgstr "Criação de bridge requerida mas o host do engine não foi especificado"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:649
-#, python-brace-format
-msgid "Cannot resolve engine host name '{host}'"
-msgstr "Não posso resolver o  nome de host do engine '{host}'"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:679
-#, python-brace-format
-msgid ""
-"Cannot connect engine host '{name}' at any of the addresses {addresses}'"
-msgstr ""
-"Não posso conectar ao host do engine '{name}' em qualquer um dos endereços "
-"'{addresses}'"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:704
-#, python-brace-format
-msgid ""
-"Non standard bridge name {interface} while running on hypervisor br prefix "
-"expected. Please configure manually bridge on this device with name {bridge}"
-msgstr ""
-"Nome de bridge não padrão {interface} enquanto no hypervisor em execução o "
-"prefixo br era esperado. Por favor configure manualmente a bridge neste "
-"dispostivo com o nome {bridge}"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:722
-#, python-brace-format
-msgid ""
-"non standard bridge name {interface} while running on hypervisor name does "
-"not match any physical interface. Please configure manually bridge on this "
-"device with name {bridge}"
-msgstr ""
-"Nome de bridge não padrão {interface} enquanto no hypervisor em execução "
-"nenhum nome coincide com a interface física. Por favor configure manualmente "
-"a bridge neste dispostivo com o nome {bridge}"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:743
-#, python-brace-format
-msgid "Management channel interface {interface} is already a bridge"
-msgstr "Interface do canal de gerenciamento {interface} já é uma bridge"
-
-#: src/plugins/ovirt-host-deploy/vdsm/config.py:85
-#, python-brace-format
-msgid "Invalid VDSM configuration entry {key}"
-msgstr "Entrada da configuração VDSM inválida {key}"
+#: src/plugins/ovirt-host-deploy/vmconsole/packages.py:93
+msgid "Starting ovirt-vmconsole-host-sshd"
+msgstr "Iniciando ovirt-vmconsole-host-sshd"
 
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:77
 msgid "Cannot detect if hardware supports virtualization"
@@ -364,24 +299,6 @@ msgid ""
 msgstr ""
 "Máquina não suporta contador constante de timestamp, isso pode afetar o "
 "desempenho"
-
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:79
-msgid "Cannot locate vdsm package, possible cause is incorrect channels"
-msgstr ""
-"Não posso localizar pacotes vdsm, possível causa são os canais incorretos"
-
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:97
-#, python-brace-format
-msgid "VDSM package is too old, need {minimum} found {version}"
-msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
-
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:163
-msgid "Stopping libvirtd"
-msgstr "Parando libvirtd"
-
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:167
-msgid "Starting vdsm"
-msgstr "Iniciando vdsm"
 
 #: src/plugins/ovirt-host-deploy/vdsm/software.py:79
 #, python-brace-format
@@ -396,6 +313,94 @@ msgstr "Saída dmidecode inválida"
 msgid "No system uuid"
 msgstr "Sem UUID do sistema"
 
-#: src/plugins/ovirt-host-deploy/vmconsole/packages.py:93
-msgid "Starting ovirt-vmconsole-host-sshd"
-msgstr "Iniciando ovirt-vmconsole-host-sshd"
+#: src/plugins/ovirt-host-deploy/vdsm/config.py:79
+#, python-brace-format
+msgid "Invalid VDSM configuration entry {key}"
+msgstr "Entrada da configuração VDSM inválida {key}"
+
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:79
+msgid "Cannot locate vdsm package, possible cause is incorrect channels"
+msgstr ""
+"Não posso localizar pacotes vdsm, possível causa são os canais incorretos"
+
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:97
+#, python-brace-format
+msgid "VDSM package is too old, need {minimum} found {version}"
+msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
+
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:162
+msgid "Stopping libvirtd"
+msgstr "Parando libvirtd"
+
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:166
+msgid "Starting vdsm"
+msgstr "Iniciando vdsm"
+
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:58
+#, fuzzy
+msgid "KernelSetup Transaction"
+msgstr "Transação do NetworkSetup"
+
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:121
+msgid "RT operation is not available on ovirt node"
+msgstr ""
+
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:133
+msgid "RT packages not available - missing repo or channel"
+msgstr ""
+
+#~ msgid "Cannot create rollback network transaction"
+#~ msgstr "Não posso criar um rollback de transação da rede"
+
+#~ msgid "Cannot establish connection to {host}:{port}"
+#~ msgstr "Não posso estabilizar conexão ao {host}:{port}"
+
+#~ msgid "Unable to determine route interface for {address}"
+#~ msgstr "Incapaz de determinar a interface de rota para {address}"
+
+#~ msgid "Invalid route information for {address}"
+#~ msgstr "Informação de rota inválida para {address}"
+
+#~ msgid ""
+#~ "Interface {interface} is VLAN interface, however its configuration is "
+#~ "unexpected"
+#~ msgstr ""
+#~ "Interface {interface} é uma interface VLAN, contudo a sua configuração é "
+#~ "inesperada"
+
+#~ msgid "Unsupported network manager configuration"
+#~ msgstr "Configuração do Network Manager não suportada"
+
+#~ msgid "Bridge creation requested but engine host was not specified"
+#~ msgstr ""
+#~ "Criação de bridge requerida mas o host do engine não foi especificado"
+
+#~ msgid "Cannot resolve engine host name '{host}'"
+#~ msgstr "Não posso resolver o  nome de host do engine '{host}'"
+
+#~ msgid ""
+#~ "Cannot connect engine host '{name}' at any of the addresses {addresses}'"
+#~ msgstr ""
+#~ "Não posso conectar ao host do engine '{name}' em qualquer um dos "
+#~ "endereços '{addresses}'"
+
+#~ msgid ""
+#~ "Non standard bridge name {interface} while running on hypervisor br "
+#~ "prefix expected. Please configure manually bridge on this device with "
+#~ "name {bridge}"
+#~ msgstr ""
+#~ "Nome de bridge não padrão {interface} enquanto no hypervisor em execução "
+#~ "o prefixo br era esperado. Por favor configure manualmente a bridge neste "
+#~ "dispostivo com o nome {bridge}"
+
+#~ msgid ""
+#~ "non standard bridge name {interface} while running on hypervisor name "
+#~ "does not match any physical interface. Please configure manually bridge "
+#~ "on this device with name {bridge}"
+#~ msgstr ""
+#~ "Nome de bridge não padrão {interface} enquanto no hypervisor em execução "
+#~ "nenhum nome coincide com a interface física. Por favor configure "
+#~ "manualmente a bridge neste dispostivo com o nome {bridge}"
+
+#~ msgid "Management channel interface {interface} is already a bridge"
+#~ msgstr "Interface do canal de gerenciamento {interface} já é uma bridge"
