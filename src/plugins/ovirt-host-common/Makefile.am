@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2012-2017 Red Hat, Inc.
+# Copyright (C) 2012-2015 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,7 +22,6 @@ MAINTAINERCLEANFILES = \
 	$(NULL)
 
 SUBDIRS = \
-	cockpit \
 	core \
 	hosted-engine \
 	vdsm \
