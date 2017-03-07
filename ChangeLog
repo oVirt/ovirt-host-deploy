@@ -1,5 +1,8 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.6.4
+ *
+
 2017-03-07 - Version 1.6.3
  * Reverted "Add cockpit-ovirt on x86_64"
 
