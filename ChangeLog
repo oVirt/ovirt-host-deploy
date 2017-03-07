@@ -1,5 +1,8 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.5.6
+ *
+
 2017-03-07 - Version 1.5.5
  * hosted-engine: fixing an old workaround, rhbz#1420865
 
