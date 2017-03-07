@@ -1,7 +1,7 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.5.5
- *
+2017-03-07 - Version 1.5.5
+ * hosted-engine: fixing an old workaround, rhbz#1420865
 
 2017-02-22 - Version 1.5.4
  * tune: Remove default tuned profile for Gluster, rhbz#1378087
