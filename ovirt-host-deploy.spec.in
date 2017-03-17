@@ -61,7 +61,7 @@ Host deployment tool for oVirt project.
 %package java
 Summary:	%{name} java support
 Requires:	%{name} = %{version}-%{release}
-Requires:	java
+Requires:	java-headless
 Requires:	otopi-java
 
 %description java
