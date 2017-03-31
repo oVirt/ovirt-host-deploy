@@ -117,6 +117,13 @@ class Plugin(plugin.PluginBase):
             )
         )
         self.environment.setdefault(
+            odeploycons.VdsmEnv.OVIRT_CONTAINER_NODE,
+            (
+                os.path.exists('/etc/rhev-container-hypervisor-release') or
+                os.path.exists('/etc/ovirt-container-node-release')
+            )
+        )
+        self.environment.setdefault(
             odeploycons.VdsmEnv.OVIRT_NODE,
             (
                 self.hasconf(odeploycons.FileLocations.OVIRT_NODE_OS_FILE,

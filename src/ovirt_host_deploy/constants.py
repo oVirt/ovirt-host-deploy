@@ -156,6 +156,7 @@ class VdsmEnv(object):
     CHECK_VIRT_HARDWARE = 'VDSM/checkVirtHardware'
     OVIRT_NODE = 'VDSM/ovirt-node'
     OVIRT_VINTAGE_NODE = 'VDSM/ovirt-legacy-node'
+    OVIRT_CONTAINER_NODE = 'VDSM/ovirt-container-node'
     OVIRT_NODE_HAS_OWN_BRIDGES = 'VDSM/nodeHasOwnBridges'
     NODE_PLUGIN_VDSM_FEATURES = 'VDSM/nodePluginVdsmFeatures'
     CONFIG_OVERRIDE = 'VDSM/configOverride'

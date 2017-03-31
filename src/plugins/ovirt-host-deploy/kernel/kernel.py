@@ -101,9 +101,13 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(stage=plugin.Stages.STAGE_VALIDATION)
     def _validation(self):
-        if not self.environment[
-            odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
-        ]:
+        if (
+            not self.environment[
+                odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
+            ] and not self.environment[
+                odeploycons.VdsmEnv.OVIRT_CONTAINER_NODE
+            ]
+        ):
             if self.command.get('grubby', optional=True):
                 self._enabled = True
             else:
@@ -112,7 +116,7 @@ class Plugin(plugin.PluginBase):
                 )
         else:
             self.logger.warning(
-                'Vintage node, skipping kernel arguments.'
+                'Vintage or container node, skipping kernel arguments.'
             )
 
         if self.environment[odeploycons.KernelEnv.ENABLE_REALTIME]:
