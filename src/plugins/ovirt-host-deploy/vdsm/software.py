@@ -18,7 +18,7 @@
 #
 
 
-"""vdsm hardware prerequisites plugin."""
+"""vdsm software prerequisites plugin."""
 
 
 import gettext
@@ -38,7 +38,7 @@ def _(m):
 
 @util.export
 class Plugin(plugin.PluginBase):
-    """Hardware prerequisites plugin."""
+    """Software prerequisites plugin."""
 
     _SUPPORTED = [
         {
