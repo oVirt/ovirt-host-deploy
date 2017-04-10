@@ -43,7 +43,7 @@ class Plugin(plugin.PluginBase):
     _SUPPORTED = [
         {
             'distro': ('redhat', 'centos'),
-            'version': '6.2',
+            'version': '7.0',
         },
         {
             'distro': ('fedora', ),
