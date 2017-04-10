@@ -47,7 +47,7 @@ class Plugin(plugin.PluginBase):
         },
         {
             'distro': ('fedora', ),
-            'version': '17',
+            'version': '22',
         },
         {
             'distro': ('ibm_powerkvm', ),
