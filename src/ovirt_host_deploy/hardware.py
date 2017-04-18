@@ -40,6 +40,7 @@ class CPU(base.Base):
     CPU_INTEL = 'GenuineIntel'
     CPU_AMD = 'AuthenticAMD'
     CPU_POWER = 'IBM_POWER'
+    CPU_S390 = 'IBM/S390'
 
     def __init__(self):
         super(CPU, self).__init__()
@@ -57,7 +58,7 @@ class CPU(base.Base):
                     v = v.strip()
                     if (
                         k == 'vendor_id' and
-                        v in (self.CPU_INTEL, self.CPU_AMD)
+                        v in (self.CPU_INTEL, self.CPU_AMD, self.CPU_S390)
                     ):
                         ret = v
                     if k == 'cpu' and 'power' in v.lower():
@@ -166,6 +167,20 @@ class Virtualization(base.Base):
         self.logger.debug('kvm power: %s', ret)
         return ret
 
+    def _check_s390_sie(self):
+        ret = False
+        with open('/proc/cpuinfo', 'r') as f:
+            for line in f.readlines():
+                if ':' in line:
+                    k, v = line.split(':', 1)
+                    k = k.strip()
+                    v = v.split()
+                    if k == 'features' and 'sie' in v:
+                        ret = True
+                        break
+        self.logger.debug('kvm s390: %s', ret)
+        return ret
+
     def _isVirtualizationEnabled(self):
         cpu_ok = bios_ok = False
 
@@ -179,6 +194,10 @@ class Virtualization(base.Base):
             cpu_ok = self._cpu_has_svm_support()
         elif vendor == cpu.CPU_POWER:
             if self._check_kvm_support_on_power():
+                bios_ok = True
+                cpu_ok = True
+        elif vendor == cpu.CPU_S390:
+            if self._check_s390_sie():
                 bios_ok = True
                 cpu_ok = True
 
