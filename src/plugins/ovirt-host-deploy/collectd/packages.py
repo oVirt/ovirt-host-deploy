@@ -45,13 +45,24 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_PACKAGES,
     )
     def _packages(self):
-        self.packager.installUpdate((
-            'collectd',
-            'collectd-disk',
-            'collectd-netlink',
-            'collectd-virt',
-            'collectd-write_http',
-        ))
+        try:
+            self.packager.installUpdate((
+                'collectd',
+                'collectd-disk',
+                'collectd-netlink',
+                'collectd-virt',
+                'collectd-write_http',
+            ))
+        except RuntimeError as e:
+            self.logger.warning(
+                _('Failed to install collectd packages: {e}').format(
+                    e=e,
+                )
+            )
+            self.logger.debug(
+                'Failed to install collectd packages',
+                exc_info=True,
+            )
 
     # We do not configure collectd, so do not start it on closeup.
     # This is done separately later on.
