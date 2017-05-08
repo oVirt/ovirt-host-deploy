@@ -45,21 +45,19 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_PACKAGES,
     )
     def _packages(self):
-        try:
-            self.packager.installUpdate((
+        if not self.packager.installUpdate(
+            (
                 'fluentd',
                 'rubygem-fluent-plugin-rewrite-tag-filter',
                 'rubygem-fluent-plugin-secure-forward',
-            ))
-        except RuntimeError as e:
+            ),
+            ignoreErrors=True,
+        ):
             self.logger.warning(
-                _('Failed to install fluentd packages: {e}').format(
-                    e=e,
+                _(
+                    'Failed to install fluentd packages.'
+                    'Please check the log for details'
                 )
-            )
-            self.logger.debug(
-                'Failed to install fluentd packages',
-                exc_info=True,
             )
 
     # We do not configure fluentd, so do not start it on closeup.
