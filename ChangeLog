@@ -1,7 +1,7 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.6.5
- *
+2017-05-11 - Version 1.6.5
+ * metrics: Prevent errors on failed collectd/fluentd installation
 
 2017-05-03 - Version 1.6.4
  * vdsm: fix config decorator, to correct the condition on when to update
