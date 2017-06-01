@@ -50,6 +50,8 @@ class Plugin(plugin.PluginBase):
                 'fluentd',
                 'rubygem-fluent-plugin-rewrite-tag-filter',
                 'rubygem-fluent-plugin-secure-forward',
+                'rubygem-fluent-plugin-collectd-nest',
+                'rubygem-fluent-plugin-viaq_data_model',
             ),
             ignoreErrors=True,
         ):
