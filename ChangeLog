@@ -1,5 +1,8 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.6.7
+ *
+
 2017-06-07 - Version 1.6.6
  * metrics: Install fluentd collectd-nest and viaq_data_model plugins
   rhbz#1426900, rhbz#1426903
