@@ -188,8 +188,7 @@ AC_CONFIG_FILES([
 	src/plugins/ovirt-host-common/vmconsole/Makefile
 	src/plugins/ovirt-host-deploy/Makefile
 	src/plugins/ovirt-host-deploy/core/Makefile
-	src/plugins/ovirt-host-deploy/collectd/Makefile
-	src/plugins/ovirt-host-deploy/fluentd/Makefile
+	src/plugins/ovirt-host-deploy/host/Makefile
 	src/plugins/ovirt-host-deploy/gluster/Makefile
 	src/plugins/ovirt-host-deploy/kdump/Makefile
 	src/plugins/ovirt-host-deploy/kernel/Makefile

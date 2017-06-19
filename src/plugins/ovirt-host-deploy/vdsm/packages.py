@@ -104,17 +104,13 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(
         stage=plugin.Stages.STAGE_PACKAGES,
+        before=odeploycons.Stages.OVIRT_HOST_INSTALLED,
     )
     def _packages(self):
         if self.services.exists('vdsmd'):
             self.services.state('vdsmd', False)
         if self.services.exists('supervdsmd'):
             self.services.state('supervdsmd', False)
-        self.packager.installUpdate(('vdsm',))
-        try:
-            self.packager.installUpdate(('vdsm-client',))
-        except Exception:
-            self.packager.installUpdate(('vdsm-cli',))
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,

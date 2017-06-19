@@ -26,6 +26,13 @@ ODEPLOY/offlinePackager(bool) [False]
     Force offline packager, assume everything is installed.
 
 
+oVirt Host package configuration
+--------------------------------
+
+OVIRT_HOST/minimumVersion(str) [4.2.0]
+    Minimum version allowed to be installed (version component only).
+
+
 Kernel boot configuration
 -------------------------
 

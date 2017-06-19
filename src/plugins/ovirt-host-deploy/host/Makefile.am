@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2016 Red Hat, Inc.
+# Copyright (C) 2017 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -23,7 +23,7 @@ MAINTAINERCLEANFILES = \
 	$(srcdir)/Makefile.in \
 	$(NULL)
 
-mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/fluentd
+mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/host
 dist_my_PYTHON = \
 	__init__.py \
 	packages.py \

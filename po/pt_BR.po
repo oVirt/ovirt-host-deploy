@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-19 08:47+0100\n"
+"POT-Creation-Date: 2017-06-19 17:28+0200\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -32,9 +32,8 @@ msgstr ""
 #: src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py:36
 #: src/plugins/ovirt-host-deploy/openstack/neutron_openvswitch.py:36
 #: src/plugins/ovirt-host-deploy/openstack/neutron.py:35
-#: src/plugins/ovirt-host-deploy/tune/iosched.py:40
+#: src/plugins/ovirt-host-deploy/tune/iosched.py:38
 #: src/plugins/ovirt-host-deploy/tune/tuned.py:35
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:44
 #: src/plugins/ovirt-host-deploy/vdsm/config.py:38
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:36
 #: src/plugins/ovirt-host-deploy/vdsmhooks/hooks.py:39
@@ -148,6 +147,7 @@ msgstr ""
 
 #: src/plugins/ovirt-host-common/vdsm/pki.py:426
 #: src/plugins/ovirt-host-common/vmconsole/pki.py:244
+#: src/plugins/ovirt-host-deploy/tune/iosched.py:72
 #, python-brace-format
 msgid "Cannot remove file '{name}'."
 msgstr "Não posso remover arquivo '{name}'."
@@ -218,21 +218,21 @@ msgstr ""
 msgid "Starting gluster"
 msgstr "Iniciando gluster"
 
-#: src/plugins/ovirt-host-deploy/kdump/packages.py:131
+#: src/plugins/ovirt-host-deploy/kdump/packages.py:129
 #, python-brace-format
 msgid "Cannot resolve kdump destination address '{host}'"
 msgstr "Não posso resolver endereços de destinação do kdump '{host}'"
 
-#: src/plugins/ovirt-host-deploy/kdump/packages.py:222
+#: src/plugins/ovirt-host-deploy/kdump/packages.py:220
 #, python-brace-format
 msgid "Kdump {result}"
 msgstr "Kdump {result}"
 
-#: src/plugins/ovirt-host-deploy/kdump/packages.py:287
+#: src/plugins/ovirt-host-deploy/kdump/packages.py:285
 msgid "Restarting kdump"
 msgstr "Reiniciando kdump"
 
-#: src/plugins/ovirt-host-deploy/kdump/packages.py:296
+#: src/plugins/ovirt-host-deploy/kdump/packages.py:294
 msgid ""
 "kdump service restart failed. Please either redeploy with Kdump Integration "
 "disabled or fix kdump configuration manually and redeploy the host"
@@ -268,87 +268,7 @@ msgstr "Iniciando plugin neutron openswitch"
 msgid "Cannot set tuned profile"
 msgstr "Não posso definir perfil sintonizado"
 
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:72
-msgid "NetworkSetup Transaction"
-msgstr "Transação do NetworkSetup"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:90
-msgid "Cannot create rollback network transaction"
-msgstr "Não posso criar um rollback de transação da rede"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:265
-#, python-brace-format
-msgid "Cannot establish connection to {host}:{port}"
-msgstr "Não posso estabilizar conexão ao {host}:{port}"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:335
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:343
-#, python-brace-format
-msgid "Unable to determine route interface for {address}"
-msgstr "Incapaz de determinar a interface de rota para {address}"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:350
-#, python-brace-format
-msgid "Invalid route information for {address}"
-msgstr "Informação de rota inválida para {address}"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:411
-#, python-brace-format
-msgid ""
-"Interface {interface} is VLAN interface, however its configuration is "
-"unexpected"
-msgstr ""
-"Interface {interface} é uma interface VLAN, contudo a sua configuração é "
-"inesperada"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:496
-msgid "Unsupported network manager configuration"
-msgstr "Configuração do Network Manager não suportada"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:623
-msgid "Bridge creation requested but engine host was not specified"
-msgstr "Criação de bridge requerida mas o host do engine não foi especificado"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:649
-#, python-brace-format
-msgid "Cannot resolve engine host name '{host}'"
-msgstr "Não posso resolver o  nome de host do engine '{host}'"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:679
-#, python-brace-format
-msgid ""
-"Cannot connect engine host '{name}' at any of the addresses {addresses}'"
-msgstr ""
-"Não posso conectar ao host do engine '{name}' em qualquer um dos endereços "
-"'{addresses}'"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:704
-#, python-brace-format
-msgid ""
-"Non standard bridge name {interface} while running on hypervisor br prefix "
-"expected. Please configure manually bridge on this device with name {bridge}"
-msgstr ""
-"Nome de bridge não padrão {interface} enquanto no hypervisor em execução o "
-"prefixo br era esperado. Por favor configure manualmente a bridge neste "
-"dispostivo com o nome {bridge}"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:722
-#, python-brace-format
-msgid ""
-"non standard bridge name {interface} while running on hypervisor name does "
-"not match any physical interface. Please configure manually bridge on this "
-"device with name {bridge}"
-msgstr ""
-"Nome de bridge não padrão {interface} enquanto no hypervisor em execução "
-"nenhum nome coincide com a interface física. Por favor configure manualmente "
-"a bridge neste dispostivo com o nome {bridge}"
-
-#: src/plugins/ovirt-host-deploy/vdsm/bridge.py:743
-#, python-brace-format
-msgid "Management channel interface {interface} is already a bridge"
-msgstr "Interface do canal de gerenciamento {interface} já é uma bridge"
-
-#: src/plugins/ovirt-host-deploy/vdsm/config.py:85
+#: src/plugins/ovirt-host-deploy/vdsm/config.py:79
 #, python-brace-format
 msgid "Invalid VDSM configuration entry {key}"
 msgstr "Entrada da configuração VDSM inválida {key}"
@@ -375,11 +295,11 @@ msgstr ""
 msgid "VDSM package is too old, need {minimum} found {version}"
 msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:163
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:162
 msgid "Stopping libvirtd"
 msgstr "Parando libvirtd"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:167
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:166
 msgid "Starting vdsm"
 msgstr "Iniciando vdsm"
 
@@ -399,3 +319,62 @@ msgstr "Sem UUID do sistema"
 #: src/plugins/ovirt-host-deploy/vmconsole/packages.py:93
 msgid "Starting ovirt-vmconsole-host-sshd"
 msgstr "Iniciando ovirt-vmconsole-host-sshd"
+
+#~ msgid "NetworkSetup Transaction"
+#~ msgstr "Transação do NetworkSetup"
+
+#~ msgid "Cannot create rollback network transaction"
+#~ msgstr "Não posso criar um rollback de transação da rede"
+
+#~ msgid "Cannot establish connection to {host}:{port}"
+#~ msgstr "Não posso estabilizar conexão ao {host}:{port}"
+
+#~ msgid "Unable to determine route interface for {address}"
+#~ msgstr "Incapaz de determinar a interface de rota para {address}"
+
+#~ msgid "Invalid route information for {address}"
+#~ msgstr "Informação de rota inválida para {address}"
+
+#~ msgid ""
+#~ "Interface {interface} is VLAN interface, however its configuration is "
+#~ "unexpected"
+#~ msgstr ""
+#~ "Interface {interface} é uma interface VLAN, contudo a sua configuração é "
+#~ "inesperada"
+
+#~ msgid "Unsupported network manager configuration"
+#~ msgstr "Configuração do Network Manager não suportada"
+
+#~ msgid "Bridge creation requested but engine host was not specified"
+#~ msgstr ""
+#~ "Criação de bridge requerida mas o host do engine não foi especificado"
+
+#~ msgid "Cannot resolve engine host name '{host}'"
+#~ msgstr "Não posso resolver o  nome de host do engine '{host}'"
+
+#~ msgid ""
+#~ "Cannot connect engine host '{name}' at any of the addresses {addresses}'"
+#~ msgstr ""
+#~ "Não posso conectar ao host do engine '{name}' em qualquer um dos "
+#~ "endereços '{addresses}'"
+
+#~ msgid ""
+#~ "Non standard bridge name {interface} while running on hypervisor br "
+#~ "prefix expected. Please configure manually bridge on this device with "
+#~ "name {bridge}"
+#~ msgstr ""
+#~ "Nome de bridge não padrão {interface} enquanto no hypervisor em execução "
+#~ "o prefixo br era esperado. Por favor configure manualmente a bridge neste "
+#~ "dispostivo com o nome {bridge}"
+
+#~ msgid ""
+#~ "non standard bridge name {interface} while running on hypervisor name "
+#~ "does not match any physical interface. Please configure manually bridge "
+#~ "on this device with name {bridge}"
+#~ msgstr ""
+#~ "Nome de bridge não padrão {interface} enquanto no hypervisor em execução "
+#~ "nenhum nome coincide com a interface física. Por favor configure "
+#~ "manualmente a bridge neste dispostivo com o nome {bridge}"
+
+#~ msgid "Management channel interface {interface} is already a bridge"
+#~ msgstr "Interface do canal de gerenciamento {interface} já é uma bridge"

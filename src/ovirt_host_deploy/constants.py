@@ -217,6 +217,12 @@ class OpenStackEnv(object):
 
 @util.export
 @util.codegen
+class OvirtHost(object):
+    OVIRT_HOST_MINIMUM_VERSION = 'OVIRT_HOST/minimumVersion'
+
+
+@util.export
+@util.codegen
 class Queries(object):
     CERTIFICATE_CHAIN = 'VDSM_CERTIFICATE_CHAIN'
     VMCONSOLE_CERTIFICATE = 'VMCONSOLE_CERTIFICATE'
@@ -238,6 +244,7 @@ class Confirms(object):
 @util.export
 class Stages(object):
     VDSM_STARTED = 'odeploycons.packages.vdsm.started'
+    OVIRT_HOST_INSTALLED = 'odeploycons.packages.ovirt-host.installed'
 
 
 # vim: expandtab tabstop=4 shiftwidth=4

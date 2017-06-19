@@ -23,9 +23,8 @@ MAINTAINERCLEANFILES = \
 
 SUBDIRS = \
 	core \
-	collectd \
-	fluentd \
 	gluster \
+	host \
 	kdump \
 	kernel \
 	node \
