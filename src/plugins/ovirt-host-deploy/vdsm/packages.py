@@ -110,7 +110,11 @@ class Plugin(plugin.PluginBase):
             self.services.state('vdsmd', False)
         if self.services.exists('supervdsmd'):
             self.services.state('supervdsmd', False)
-        self.packager.installUpdate(('vdsm', 'vdsm-client'))
+        self.packager.installUpdate(('vdsm',))
+        try:
+            self.packager.installUpdate(('vdsm-client',))
+        except Exception:
+            self.packager.installUpdate(('vdsm-cli',))
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
