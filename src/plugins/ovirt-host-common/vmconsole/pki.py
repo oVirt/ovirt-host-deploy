@@ -41,21 +41,34 @@ def _(m):
 
 @util.export
 class Plugin(plugin.PluginBase):
-    def _genReqM2Crypto(self):
-        from M2Crypto import X509, RSA, EVP
-
-        rsa = RSA.gen_key(
-            self.environment[odeploycons.VMConsoleEnv.KEY_SIZE],
-            65537,
+    def _genReqOpenSSL(self):
+        """issue via openssl use file"""
+        import tempfile
+        fd, tmpfile = tempfile.mkstemp(
+            suffix=".tmp",
         )
-        rsapem = rsa.as_pem(cipher=None)
-        evp = EVP.PKey()
-        evp.assign_rsa(rsa)
-        rsa = None  # should not be freed here
-        req = X509.Request()
-        req.set_pubkey(evp)
-        req.sign(evp, 'sha1')
-        return rsapem, req.as_pem()
+        os.close(fd)
+        try:
+            rc, stdout, stderr = self.execute(
+                (
+                    self.command.get('openssl'),
+                    'req',
+                    '-new',
+                    '-newkey', 'rsa:%s' % (
+                        self.environment[odeploycons.VMConsoleEnv.KEY_SIZE]
+                    ),
+                    '-nodes',
+                    '-subj', '/',
+                    '-keyout', tmpfile
+                ),
+                logStreams=False
+            )
+            with open(tmpfile, 'r') as f:
+                rsapem = f.read()
+        finally:
+            os.unlink(tmpfile)
+
+        return rsapem, '\n'.join(stdout)
 
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
@@ -106,13 +119,6 @@ class Plugin(plugin.PluginBase):
         self._enabled = True
 
     @plugin.event(
-        stage=plugin.Stages.STAGE_PACKAGES,
-        condition=lambda self: self._enabled,
-    )
-    def _packages(self):
-        self.packager.install(('m2crypto',))
-
-    @plugin.event(
         stage=plugin.Stages.STAGE_MISC,
         condition=lambda self: self._enabled,
     )
@@ -144,7 +150,7 @@ class Plugin(plugin.PluginBase):
             ) as f:
                 key = f.read()
         else:
-            key, req = self._genReqM2Crypto()
+            key, req = self._genReqOpenSSL()
 
             self.dialog.displayMultiString(
                 name=odeploycons.Displays.VMCONSOLE_CERTIFICATE_REQUEST,

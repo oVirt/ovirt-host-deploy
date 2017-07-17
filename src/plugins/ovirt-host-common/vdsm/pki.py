@@ -58,12 +58,7 @@ class Plugin(plugin.PluginBase):
 
     """
     def _isM2Crypto(self):
-        try:
-            import M2Crypto
-            type(M2Crypto)
-            return True
-        except ImportError:
-            return False
+        return False
 
     def _genReqM2Crypto(self):
         from M2Crypto import X509, RSA, EVP
@@ -143,7 +138,8 @@ class Plugin(plugin.PluginBase):
                     '-nodes',
                     '-subj', '/',
                     '-keyout', tmpfile
-                )
+                ),
+                logStreams=False
             )
             with open(tmpfile, 'r') as f:
                 rsapem = f.read()
