@@ -50,7 +50,6 @@ class Plugin(plugin.PluginBase):
                 'collectd',
                 'collectd-disk',
                 'collectd-netlink',
-                'collectd-virt',
                 'collectd-write_http',
             ),
             ignoreErrors=True,
