@@ -57,67 +57,6 @@ class Plugin(plugin.PluginBase):
         Displays.CERTIFICATE_REQUEST -- present certificate request.
 
     """
-    def _isM2Crypto(self):
-        return False
-
-    def _genReqM2Crypto(self):
-        from M2Crypto import X509, RSA, EVP
-
-        rsa = RSA.gen_key(
-            self.environment[odeploycons.VdsmEnv.KEY_SIZE],
-            65537,
-        )
-        rsapem = rsa.as_pem(cipher=None)
-        evp = EVP.PKey()
-        evp.assign_rsa(rsa)
-        rsa = None  # should not be freed here
-        req = X509.Request()
-        req.set_pubkey(evp)
-        req.sign(evp, 'sha1')
-        return rsapem, req.as_pem()
-
-    def _getChainM2Crypto(self, chain):
-        from M2Crypto import X509, BIO
-
-        cacert = None
-        vdsmchain = ''
-        bio = None
-        try:
-            bio = BIO.MemoryBuffer('\n'.join(chain).encode('utf-8'))
-
-            try:
-                cacert = X509.load_cert_bio(
-                    bio=bio,
-                    format=X509.FORMAT_PEM
-                ).as_pem()
-            except X509.X509Error:
-                self.logger.debug(
-                    'read vdsm certificate chain',
-                    exc_info=True
-                )
-                raise RuntimeError(_('CA Certificate was not provided'))
-
-            try:
-                while True:
-                    vdsmchain += X509.load_cert_bio(
-                        bio=bio,
-                        format=X509.FORMAT_PEM
-                    ).as_pem()
-            except X509.X509Error:
-                if not vdsmchain:
-                    self.logger.debug(
-                        'read vdsm certificate chain',
-                        exc_info=True
-                    )
-
-                    raise RuntimeError(
-                        _('VDM Certificate was not provided')
-                    )
-
-            return (cacert, vdsmchain)
-        finally:
-            if bio is not None:
-                bio.close()
 
     def _genReqOpenSSL(self):
         """issue via openssl use file"""
@@ -189,8 +128,6 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_SETUP,
     )
     def _setup(self):
-        # TODO:
-        # remove when node comes with m2crypto
         self.command.detect('openssl')
 
     @plugin.event(
@@ -201,13 +138,6 @@ class Plugin(plugin.PluginBase):
     )
     def _validation(self):
         self._enabled = True
-
-    @plugin.event(
-        stage=plugin.Stages.STAGE_PACKAGES,
-        condition=lambda self: self._enabled,
-    )
-    def _packages(self):
-        self.packager.install(('m2crypto',))
 
     @plugin.event(
         stage=plugin.Stages.STAGE_MISC,
@@ -244,7 +174,6 @@ class Plugin(plugin.PluginBase):
             os.chown(dir, pwd.getpwnam('vdsm')[2], grp.getgrnam('kvm')[2])
         # LEGACY-END
 
-        useM2Crypto = self._isM2Crypto()
         enrollment = self.environment[
             odeploycons.VdsmEnv.CERTIFICATE_ENROLLMENT
         ]
@@ -266,10 +195,7 @@ class Plugin(plugin.PluginBase):
             with open(pendingKey, 'r') as f:
                 vdsmkey = f.read()
         else:
-            if useM2Crypto:
-                vdsmkey, req = self._genReqM2Crypto()
-            else:
-                vdsmkey, req = self._genReqOpenSSL()
+            vdsmkey, req = self._genReqOpenSSL()
 
             self.dialog.displayMultiString(
                 name=odeploycons.Displays.CERTIFICATE_REQUEST,
@@ -317,10 +243,7 @@ class Plugin(plugin.PluginBase):
                     ),
                 )
 
-            if useM2Crypto:
-                cacert, vdsmchain = self._getChainM2Crypto(chain)
-            else:
-                cacert, vdsmchain = self._getChainOpenSSL(chain)
+            cacert, vdsmchain = self._getChainOpenSSL(chain)
 
             for f in (
                 os.path.join(
