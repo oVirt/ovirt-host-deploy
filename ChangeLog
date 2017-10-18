@@ -1,5 +1,8 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.6.8
+ *
+
 2017-10-18 - Version 1.6.7
 * vdsm: make qemu-kvm-tools optional in order to support oVirt Node 4.2
   rhbz#1501761
