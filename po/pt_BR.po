@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-13 10:27+0100\n"
+"POT-Creation-Date: 2017-10-18 10:15+0200\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -32,7 +32,7 @@ msgstr ""
 #: src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py:36
 #: src/plugins/ovirt-host-deploy/openstack/neutron_openvswitch.py:36
 #: src/plugins/ovirt-host-deploy/openstack/neutron.py:35
-#: src/plugins/ovirt-host-deploy/tune/iosched.py:40
+#: src/plugins/ovirt-host-deploy/tune/iosched.py:38
 #: src/plugins/ovirt-host-deploy/tune/tuned.py:35
 #: src/plugins/ovirt-host-deploy/vdsm/bridge.py:44
 #: src/plugins/ovirt-host-deploy/vdsm/config.py:38
@@ -148,6 +148,7 @@ msgstr ""
 
 #: src/plugins/ovirt-host-common/vdsm/pki.py:426
 #: src/plugins/ovirt-host-common/vmconsole/pki.py:244
+#: src/plugins/ovirt-host-deploy/tune/iosched.py:72
 #, python-brace-format
 msgid "Cannot remove file '{name}'."
 msgstr "Não posso remover arquivo '{name}'."
@@ -348,7 +349,7 @@ msgstr ""
 msgid "Management channel interface {interface} is already a bridge"
 msgstr "Interface do canal de gerenciamento {interface} já é uma bridge"
 
-#: src/plugins/ovirt-host-deploy/vdsm/config.py:85
+#: src/plugins/ovirt-host-deploy/vdsm/config.py:79
 #, python-brace-format
 msgid "Invalid VDSM configuration entry {key}"
 msgstr "Entrada da configuração VDSM inválida {key}"
@@ -375,11 +376,15 @@ msgstr ""
 msgid "VDSM package is too old, need {minimum} found {version}"
 msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:163
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:116
+msgid "skipping qemu-kvm-tools installation"
+msgstr ""
+
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:166
 msgid "Stopping libvirtd"
 msgstr "Parando libvirtd"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:167
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:170
 msgid "Starting vdsm"
 msgstr "Iniciando vdsm"
 
