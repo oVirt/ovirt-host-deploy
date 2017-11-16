@@ -34,10 +34,6 @@ from otopi import util
 from ovirt_host_deploy import constants as odeploycons
 
 ha_client = None
-try:
-    import ovirt_hosted_engine_ha.client.client as ha_client
-except ImportError:
-    pass
 
 
 def _(m):
@@ -111,6 +107,14 @@ class Plugin(plugin.PluginBase):
         ] == odeploycons.Const.HOSTED_ENGINE_ACTION_DEPLOY,
     )
     def _set_ha_conf(self):
+        global ha_client
+        try:
+            import ovirt_hosted_engine_ha.client.client as ha_client
+        except ImportError:
+            self.logger.error(_('HA client was not imported'))
+            raise RuntimeError(
+                _('Cannot resolve ovirt_hosted_engine_ha module')
+            )
         self.logger.info(_('Updating hosted-engine configuration'))
         content = (
             'ca_cert={ca_cert}\n'
@@ -142,14 +146,11 @@ class Plugin(plugin.PluginBase):
                 ],
             ),
         )
-        if ha_client is None:
-            self.logger.error(_('HA client was not imported'))
-        else:
-            self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
-                self.HeMaintenanceModeTransaction(
-                    parent=self,
-                )
+        self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
+            self.HeMaintenanceModeTransaction(
+                parent=self,
             )
+        )
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
