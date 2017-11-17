@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-19 17:28+0200\n"
+"POT-Creation-Date: 2017-11-18 07:06+0100\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -47,16 +47,16 @@ msgstr ""
 msgid "ovirt-host-deploy"
 msgstr "ovirt-host-deploy"
 
-#: src/ovirt_host_deploy/hardware.py:67
+#: src/ovirt_host_deploy/hardware.py:68
 msgid "Architecture is unsupported"
 msgstr "Arquitetura sem suporte"
 
-#: src/ovirt_host_deploy/hardware.py:201
+#: src/ovirt_host_deploy/hardware.py:220
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:74
 msgid "Hardware supports virtualization"
 msgstr "Hardware suporta virtualização"
 
-#: src/ovirt_host_deploy/hardware.py:206
+#: src/ovirt_host_deploy/hardware.py:225
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:71
 msgid "Hardware does not support virtualization"
 msgstr "Hardware não suporta virtualização"
@@ -98,24 +98,16 @@ msgstr ""
 msgid "Starting ovirt-ha-agent"
 msgstr ""
 
-#: src/plugins/ovirt-host-common/vdsm/pki.py:103
-msgid "CA Certificate was not provided"
-msgstr "Certificado CA não foi fornecido"
-
-#: src/plugins/ovirt-host-common/vdsm/pki.py:119
-msgid "VDM Certificate was not provided"
-msgstr "Certificado VDM não foi fornecido"
-
-#: src/plugins/ovirt-host-common/vdsm/pki.py:222
+#: src/plugins/ovirt-host-common/vdsm/pki.py:148
 msgid "Setting up PKI"
 msgstr "Definindo PKI"
 
-#: src/plugins/ovirt-host-common/vdsm/pki.py:267
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:103
+#: src/plugins/ovirt-host-common/vdsm/pki.py:192
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:116
 msgid "PKI accept mode while no pending request"
 msgstr "Modo PKI aceito enquanto nenhuma solicitação estiver pendente"
 
-#: src/plugins/ovirt-host-common/vdsm/pki.py:282
+#: src/plugins/ovirt-host-common/vdsm/pki.py:204
 msgid ""
 "\n"
 "\n"
@@ -127,11 +119,11 @@ msgstr ""
 "Por favor emita o certificado VDSM com base neste pedido de certificado\n"
 "\n"
 
-#: src/plugins/ovirt-host-common/vdsm/pki.py:291
+#: src/plugins/ovirt-host-common/vdsm/pki.py:213
 msgid "Certificate enrollment required"
 msgstr "A inscrição de certificado é exigido"
 
-#: src/plugins/ovirt-host-common/vdsm/pki.py:319
+#: src/plugins/ovirt-host-common/vdsm/pki.py:241
 msgid ""
 "\n"
 "\n"
@@ -145,18 +137,18 @@ msgstr ""
 "certificado pedido, superior é emitente\n"
 "\n"
 
-#: src/plugins/ovirt-host-common/vdsm/pki.py:426
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:244
+#: src/plugins/ovirt-host-common/vdsm/pki.py:345
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:250
 #: src/plugins/ovirt-host-deploy/tune/iosched.py:72
 #, python-brace-format
 msgid "Cannot remove file '{name}'."
 msgstr "Não posso remover arquivo '{name}'."
 
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:135
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:141
 msgid "Setting up Serial Console PKI"
 msgstr "Definindo o PKI do Console Serial"
 
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:153
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:159
 msgid ""
 "\n"
 "\n"
@@ -169,11 +161,11 @@ msgstr ""
 "requisitado\n"
 "\n"
 
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:162
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:168
 msgid "Serial console certificate enrollment required"
 msgstr "Inscrição do certificado de console Serial requerido"
 
-#: src/plugins/ovirt-host-common/vmconsole/pki.py:190
+#: src/plugins/ovirt-host-common/vmconsole/pki.py:196
 msgid ""
 "\n"
 "\n"
@@ -187,7 +179,7 @@ msgstr ""
 "com pedido de certificado, superior é emitente\n"
 "\n"
 
-#: src/plugins/ovirt-host-deploy/core/misc.py:85
+#: src/plugins/ovirt-host-deploy/core/misc.py:84
 msgid ""
 "Continuing will configure this host for serving as hypervisor. Are you sure "
 "you want to continue? (yes/no) "
@@ -195,8 +187,8 @@ msgstr ""
 "Continuando irá configurar este host para servir como hypervisor. Você tem "
 "certeza que quer continuar? (sim/não) "
 
-#: src/plugins/ovirt-host-deploy/core/misc.py:113
-#: src/plugins/ovirt-host-mgmt/core/misc.py:78
+#: src/plugins/ovirt-host-deploy/core/misc.py:112
+#: src/plugins/ovirt-host-mgmt/core/misc.py:77
 #, python-brace-format
 msgid "Version: {package}-{version} ({local_version})"
 msgstr "Versão: {package}-{version} ({local_version})"
@@ -319,6 +311,12 @@ msgstr "Sem UUID do sistema"
 #: src/plugins/ovirt-host-deploy/vmconsole/packages.py:93
 msgid "Starting ovirt-vmconsole-host-sshd"
 msgstr "Iniciando ovirt-vmconsole-host-sshd"
+
+#~ msgid "CA Certificate was not provided"
+#~ msgstr "Certificado CA não foi fornecido"
+
+#~ msgid "VDM Certificate was not provided"
+#~ msgstr "Certificado VDM não foi fornecido"
 
 #~ msgid "NetworkSetup Transaction"
 #~ msgstr "Transação do NetworkSetup"

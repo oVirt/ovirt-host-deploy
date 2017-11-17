@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2012-2017 Red Hat, Inc.
+# Copyright (C) 2017 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,26 +17,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #
 
-MAINTAINERCLEANFILES = \
-	$(srcdir)/Makefile.in \
-	$(NULL)
 
-SUBDIRS = \
-	cockpit \
-	core \
-	gluster \
-	host \
-	kdump \
-	kernel \
-	node \
-	openstack \
-	tune \
-	vdsm \
-	vdsmhooks \
-	vmconsole \
-	$(NULL)
+"""cockpit plugin."""
 
-install-data-local:
-	$(MKDIR_P) "$(DESTDIR)$(otopiplugindir)"
-	rm -f "$(DESTDIR)$(otopiplugindir)/ovirt-host-deploy"
-	ln -s "$(ovirthostdeployplugindir)/ovirt-host-deploy" "$(DESTDIR)$(otopiplugindir)/ovirt-host-deploy"
+
+from otopi import util
+
+
+from . import cockpit
+
+
+@util.export
+def createPlugins(context):
+    cockpit.Plugin(context=context)
+
+
+# vim: expandtab tabstop=4 shiftwidth=4
