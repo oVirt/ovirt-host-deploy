@@ -1,0 +1,18 @@
+#!/usr/bin/expect -f
+
+set timeout 600
+spawn env OTOPI_DEBUG=1 OTOPI_COVERAGE=1 COVERAGE_PROCESS_START=/tmp/coverage.rc ovirt-host-deploy ODEBUG/packagesAction=str:install VIRT/enable=bool:true ODEBUG/packages=str:zziplib,zsh
+expect {
+    "yes/no" { send "yes\n" ; exp_continue}
+    "Stage: Termination"
+}
+
+foreach {pid spawnid os_error_flag value} [wait] break
+
+if {$os_error_flag == 0} {
+    puts "exit status: $value"
+    exit $value
+} else {
+    puts "errno: $value"
+    exit $value
+}
