@@ -86,7 +86,8 @@ class Plugin(plugin.PluginBase):
         for s in ('ovirt-ha-agent', 'ovirt-ha-broker'):
             if self.services.exists(s):
                 self.services.state(s, False)
-        self.packager.installUpdate(('ovirt-hosted-engine-setup',))
+        if platform.machine() not in ('s390', 's390x'):
+            self.packager.installUpdate(('ovirt-hosted-engine-setup',))
 
     @plugin.event(
         stage=plugin.Stages.STAGE_CLOSEUP,
