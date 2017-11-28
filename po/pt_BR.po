@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-18 07:06+0100\n"
+"POT-Creation-Date: 2017-11-28 14:31+0100\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -17,7 +17,7 @@ msgstr ""
 
 #: src/ovirt_host_deploy/hardware.py:34
 #: src/plugins/ovirt-host-common/core/misc.py:35
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:44
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:40
 #: src/plugins/ovirt-host-common/hosted-engine/packages.py:36
 #: src/plugins/ovirt-host-common/vdsm/pki.py:41
 #: src/plugins/ovirt-host-common/vmconsole/pki.py:39
@@ -61,30 +61,35 @@ msgstr "Hardware suporta virtualização"
 msgid "Hardware does not support virtualization"
 msgstr "Hardware não suporta virtualização"
 
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:58
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:54
 #, fuzzy
 msgid "HeMaintenanceMode Transaction"
 msgstr "Transação do NetworkSetup"
 
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:70
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:66
 msgid "Error setting HA local maintenance mode to true"
 msgstr ""
 
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:80
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:76
 msgid "Error setting HA local maintenance mode to false"
 msgstr ""
 
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:96
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:92
 msgid "Removing hosted-engine configuration"
 msgstr "Removendo configuração do hosted-engine"
 
 #: src/plugins/ovirt-host-common/hosted-engine/configureha.py:114
-msgid "Updating hosted-engine configuration"
-msgstr "Atualizando configuração do hosted-engine"
-
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:146
 msgid "HA client was not imported"
 msgstr ""
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:116
+#, fuzzy
+msgid "Cannot resolve ovirt_hosted_engine_ha module"
+msgstr "Não é possível resolver módulo persistente."
+
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:118
+msgid "Updating hosted-engine configuration"
+msgstr "Atualizando configuração do hosted-engine"
 
 #: src/plugins/ovirt-host-common/hosted-engine/packages.py:71
 #, python-brace-format
@@ -94,7 +99,7 @@ msgstr ""
 "Suporte do Hosted Engine solicitado na máquina sem suporte: {arch}. "
 "Desabilitando"
 
-#: src/plugins/ovirt-host-common/hosted-engine/packages.py:102
+#: src/plugins/ovirt-host-common/hosted-engine/packages.py:103
 msgid "Starting ovirt-ha-agent"
 msgstr ""
 
