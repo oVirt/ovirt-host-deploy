@@ -50,7 +50,7 @@ class Plugin(plugin.PluginBase):
     @plugin.event(
         stage=plugin.Stages.STAGE_INIT,
     )
-    def _setup(self):
+    def _init(self):
         self.environment[odeploycons.GlusterEnv.ENABLE] = False
 
     @plugin.event(
@@ -92,5 +92,9 @@ class Plugin(plugin.PluginBase):
         self.logger.info(_('Starting gluster'))
         for state in (False, True):
             self.services.state('glusterd', state)
+        if self.services.exist('glustereventsd'):
+            self.logger.info(_('Starting glustereventsd'))
+            self.services.startup('glustereventsd', True)
+            self.services.state('glustereventsd', True)
 
 # vim: expandtab tabstop=4 shiftwidth=4
