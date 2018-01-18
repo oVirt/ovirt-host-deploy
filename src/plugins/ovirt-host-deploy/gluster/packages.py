@@ -92,7 +92,7 @@ class Plugin(plugin.PluginBase):
         self.logger.info(_('Starting gluster'))
         for state in (False, True):
             self.services.state('glusterd', state)
-        if self.services.exist('glustereventsd'):
+        if self.services.exists('glustereventsd'):
             self.logger.info(_('Starting glustereventsd'))
             self.services.startup('glustereventsd', True)
             self.services.state('glustereventsd', True)
