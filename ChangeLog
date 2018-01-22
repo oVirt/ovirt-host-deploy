@@ -1,5 +1,7 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.7.2
+
 2018-01-22 - Version 1.7.1
  * gluster: Starting glustereventsd for gluster hosts
 
