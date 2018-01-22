@@ -1,6 +1,7 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.7.1
+2018-01-22 - Version 1.7.1
+ * gluster: Starting glustereventsd for gluster hosts
 
 2017-11-28 - Version 1.7.0
  * kernel: add capability to enable real-time settings

@@ -18,6 +18,7 @@
 #
 
 %global		package_version @PACKAGE_VERSION@
+%global		package_maven_version @PACKAGE_MAVEN_VERSION@
 %global		ovirt_host_deploy_root %{_datadir}/%{name}/interface-@INTERFACE_VERSION@
 
 %global _use_maven 1
@@ -171,6 +172,9 @@ install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 %endif
 
 %changelog
+* Mon Jan 22 2018 Sandro Bonazzola <sbonazzo@redhat.com> - 1.7.1-1
+- Release.
+
 * Tue Nov 28 2017 Sandro Bonazzola <sbonazzo@redhat.com> - 1.7.0-1
 - Release.
 
