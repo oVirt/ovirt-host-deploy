@@ -118,12 +118,6 @@ class Plugin(plugin.PluginBase):
         stage=plugin.Stages.STAGE_CLOSEUP,
     )
     def _closeup(self):
-
-        # libvirt-guests is a conflict
-        if self.services.exists('libvirt-guests'):
-            self.services.state('libvirt-guests', False)
-            self.services.startup('libvirt-guests', False)
-
         self.services.startup('vdsmd', True)
         if not self.services.supportsDependency:
             if self.services.exists('libvirtd'):
@@ -161,9 +155,9 @@ class Plugin(plugin.PluginBase):
         name=odeploycons.Stages.VDSM_STARTED,
     )
     def _start(self):
-        self.logger.info(_('Stopping libvirtd'))
+        self.logger.info(_('Restarting libvirtd'))
         if self.services.exists('libvirtd'):
-            self.services.state('libvirtd', False)
+            self.services.restart('libvirtd')
 
         self.logger.info(_('Starting vdsm'))
         if not self.services.supportsDependency:
