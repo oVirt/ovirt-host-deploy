@@ -36,7 +36,7 @@ Group:		Applications/System
 
 BuildArch:	noarch
 
-Requires:	otopi >= 1.7.1
+Requires:	otopi >= 1.7.7
 Requires:	python
 
 BuildRequires:	java-devel
