@@ -104,7 +104,9 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(
         stage=plugin.Stages.STAGE_PACKAGES,
-        before=odeploycons.Stages.OVIRT_HOST_INSTALLED,
+        before=(
+            odeploycons.Stages.OVIRT_HOST_INSTALLED,
+        ),
     )
     def _packages(self):
         if self.services.exists('vdsmd'):
