@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 14:31+0100\n"
+"POT-Creation-Date: 2018-02-01 11:26+0100\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -215,6 +215,11 @@ msgstr ""
 msgid "Starting gluster"
 msgstr "Iniciando gluster"
 
+#: src/plugins/ovirt-host-deploy/gluster/packages.py:96
+#, fuzzy
+msgid "Starting glustereventsd"
+msgstr "Iniciando gluster"
+
 #: src/plugins/ovirt-host-deploy/kdump/packages.py:129
 #, python-brace-format
 msgid "Cannot resolve kdump destination address '{host}'"
@@ -292,11 +297,12 @@ msgstr ""
 msgid "VDSM package is too old, need {minimum} found {version}"
 msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:162
-msgid "Stopping libvirtd"
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:158
+#, fuzzy
+msgid "Restarting libvirtd"
 msgstr "Parando libvirtd"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:166
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:162
 msgid "Starting vdsm"
 msgstr "Iniciando vdsm"
 
