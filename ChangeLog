@@ -1,5 +1,7 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.7.3
+
 2018-02-01 - Version 1.7.2
  * deploy: avoid stopping libvirt-guests to preserve HE VM
    rhbz #1539040
