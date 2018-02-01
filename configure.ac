@@ -1,6 +1,6 @@
 dnl
 dnl ovirt-host-deploy -- ovirt host deployer
-dnl Copyright (C) 2012-2017 Red Hat, Inc.
+dnl Copyright (C) 2012-2018 Red Hat, Inc.
 dnl
 dnl This library is free software; you can redistribute it and/or
 dnl modify it under the terms of the GNU Lesser General Public
@@ -19,8 +19,8 @@ dnl
 AC_PREREQ(2.60)
 
 define([VERSION_MAJOR], [1])
-define([VERSION_MINOR], [7])
-define([VERSION_FIX], [2])
+define([VERSION_MINOR], [8])
+define([VERSION_FIX], [0])
 define([VERSION_NUMBER], VERSION_MAJOR[.]VERSION_MINOR[.]VERSION_FIX)
 define([VERSION_SUFFIX], [_master])
 
