@@ -3,7 +3,6 @@ automake
 java-devel
 gettext-devel
 make
-otopi-devtools
 pyflakes
 python-pep8
 python2-devel

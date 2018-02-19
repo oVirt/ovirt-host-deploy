@@ -7,6 +7,10 @@
 
 SUFFIX=".$(date -u +%Y%m%d%H%M%S).git$(git rev-parse --short HEAD)"
 
+# workaround for bad caching on slaves
+yum --disablerepo=* --enablerepo=otopi-4.2-last-build clean metadata
+yum -y install otopi-devtools
+
 autoreconf -ivf
 ./configure
 yum-builddep ovirt-host-deploy.spec
