@@ -6,3 +6,4 @@ make
 pyflakes
 python-pep8
 python2-devel
+yum
