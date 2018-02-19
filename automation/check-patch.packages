@@ -5,7 +5,6 @@ gettext-devel
 git
 java-devel
 make
-otopi-devtools
 python-coverage
 pyflakes
 python-pep8
