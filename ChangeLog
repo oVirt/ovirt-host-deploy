@@ -1,5 +1,8 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.6.9
+ *
+
 2018-02-27 - Version 1.6.8
  * plugins: Try to import from hosted-engine-ha once more
    rhbz#1549489
