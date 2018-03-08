@@ -2,10 +2,8 @@ autoconf
 automake
 java-devel
 gettext-devel
-git
 make
 pyflakes
 python-pep8
 python2-devel
-dnf-utils
-dnf
+yum

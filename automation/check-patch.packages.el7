@@ -1,11 +1,13 @@
 autoconf
 automake
-java-devel
+expect
 gettext-devel
 git
+java-devel
 make
+python-coverage
 pyflakes
 python-pep8
 python2-devel
-dnf-utils
-dnf
+yum-utils
+yum
