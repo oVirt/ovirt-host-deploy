@@ -1,7 +1,15 @@
 #!/bin/bash -e
+DISTVER="$(rpm --eval "%dist"|cut -c2-3)"
+PACKAGER=""
+if [[ "${DISTVER}" == "el" ]]; then
+    PACKAGER=yum
+else
+    PACKAGER=dnf
+fi
+
 # workaround for bad caching on slaves
-yum --disablerepo=* --enablerepo=otopi-4.2-last-build clean metadata
-yum -y install otopi-devtools
+${PACKAGER} --disablerepo=* --enablerepo=otopi-4.2-last-build clean metadata
+${PACKAGER} -y install otopi-devtools
 
 autoreconf -ivf
 ./configure --enable-java-sdk
