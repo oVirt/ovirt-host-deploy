@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-01 11:26+0100\n"
+"POT-Creation-Date: 2018-03-08 15:33+0100\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -215,7 +215,7 @@ msgstr ""
 msgid "Starting gluster"
 msgstr "Iniciando gluster"
 
-#: src/plugins/ovirt-host-deploy/gluster/packages.py:96
+#: src/plugins/ovirt-host-deploy/gluster/packages.py:97
 #, fuzzy
 msgid "Starting glustereventsd"
 msgstr "Iniciando gluster"
