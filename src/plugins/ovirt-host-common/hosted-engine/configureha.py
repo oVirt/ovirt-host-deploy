@@ -111,6 +111,7 @@ class Plugin(plugin.PluginBase):
         try:
             import ovirt_hosted_engine_ha.client.client as ha_client
         except ImportError:
+            self.logger.debug("ha client import failed", exc_info=True)
             self.logger.error(_('HA client was not imported'))
             raise RuntimeError(
                 _('Cannot resolve ovirt_hosted_engine_ha module')
