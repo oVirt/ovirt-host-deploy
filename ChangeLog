@@ -1,5 +1,7 @@
 ovirt-host-deploy -- oVirt host deploy
 
+????-??-?? - Version 1.7.5
+
 2018-05-30 - Version 1.7.4
  * Hosted-engine: log import exception stack trace
    rhbz #1583038
