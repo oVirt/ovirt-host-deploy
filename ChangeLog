@@ -1,6 +1,8 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.7.4
+2018-05-30 - Version 1.7.4
+ * Hosted-engine: log import exception stack trace
+   rhbz #1583038
 
 2018-03-08 - Version 1.7.3
  * gluster: enable gluster service
