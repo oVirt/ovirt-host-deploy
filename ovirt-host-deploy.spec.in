@@ -24,6 +24,21 @@
 %global _use_maven 1
 %global _use_repolib 0
 %global maven2brewrepodir %{_javadir}/repository.jboss.com/maven2-brew/dummy
+%global _configure ../configure
+
+%if 0%{?fedora} || 0%{?rhel} >= 8
+%global with_python3 1
+%global src_java_dir py3/src/java
+%else
+%global with_python3 0
+%endif
+
+%if 0%{?rhel} >= 8
+%global with_python2 0
+%else
+%global with_python2 1
+%global src_java_dir py2/src/java
+%endif
 
 Summary:	oVirt host deploy tool
 Name:		@PACKAGE_NAME@
@@ -36,13 +51,20 @@ Group:		Applications/System
 
 BuildArch:	noarch
 
-Requires:	otopi >= 1.8.0
-Requires:	python
-
 BuildRequires:	java-devel
 BuildRequires:	gettext >= 0.18.2
-BuildRequires:	otopi-devtools
+
+%if 0%{with_python2}
+Requires:	otopi >= 1.8.0
+BuildRequires:	python2-otopi-devtools
 BuildRequires:	python2-devel
+%endif
+
+%if 0%{?with_python3}
+Requires:	python3-otopi >= 1.8.0
+BuildRequires:	python3-otopi-devtools
+BuildRequires:	python%{python3_pkgversion}-devel
+%endif
 
 %if %{_use_maven}
 BuildRequires:	javapackages-tools
@@ -58,6 +80,40 @@ BuildRequires:	sonatype-oss-parent
 
 %description
 Host deployment tool for oVirt project.
+
+%if 0%{?with_python2}
+%package -n python2-%{name}
+Summary:	%{summary}
+%{?python_provide:%python_provide python2-%{name}}
+Requires:	python
+Requires:	%{name}-common = %{version}-%{release}
+Provides:	%{name} = %{version}-%{release}
+Obsoletes:	%{name} < %{version}-%{release}
+
+%description -n python2-%{name}
+%{summary}.
+
+Python 2 version.
+%endif # with_python2
+
+%if 0%{?with_python3}
+%package -n python%{python3_pkgversion}-%{name}
+Summary:	%{summary}
+%{?python_provide:%python_provide python%{python3_pkgversion}-%{name}}
+Requires:	python%{python3_pkgversion}
+Requires:	%{name}-common = %{version}-%{release}
+
+%description -n python%{python3_pkgversion}-%{name}
+%{summary}.
+
+Python %{python3_pkgversion} version.
+%endif # with_python3
+
+%package common
+Summary:	Commong files for %{name}
+
+%description common
+%{summary}
 
 %package java
 Summary:	%{name} java support
@@ -86,37 +142,61 @@ Summary:	%{name} maven repo
 
 %prep
 %setup -q -n %{name}-%{package_version}
+mkdir py2 py3
 
 %build
 %if %{_use_maven}
 %global conf --disable-java-sdk-compile
 %endif
-%configure \
+
+%if 0%{with_python2}
+pushd py2
+%configure PYTHON="%{__python2}" \
 	--docdir="%{_docdir}/%{name}-%{version}" \
 	--disable-python-syntax-check \
 	--enable-java-sdk \
 	--with-local-version="%{name}-%{version}-%{release}" \
 	%{?conf}
 make %{?_smp_mflags}
+popd
+%endif # with_python2
+
+%if 0%{?with_python3}
+pushd py3
+%configure PYTHON="%{__python3}" \
+	--docdir="%{_docdir}/%{name}-%{version}" \
+	--disable-python-syntax-check \
+	--enable-java-sdk \
+	--with-local-version="%{name}-%{version}-%{release}" \
+	%{?conf}
+make %{?_smp_mflags}
+popd
+%endif # with_python3
 
 %if %{_use_maven}
-cd src/java
+pushd %{src_java_dir}
 %mvn_build
-cd ../..
+popd
 %endif
 
 %install
-make %{?_smp_mflags} install DESTDIR="%{buildroot}"
+%if 0%{?with_python2}
+make -C py2 %{?_smp_mflags} install DESTDIR="%{buildroot}"
+%endif # with_python2
+
+%if 0%{?with_python3}
+make -C py3 %{?_smp_mflags} install DESTDIR="%{buildroot}"
+%endif # with_python3
 
 %if %{_use_maven}
-cd src/java
+pushd %{src_java_dir}
 %mvn_install
-cd ../..
+popd
 %else
 install -d "%{buildroot}%{_javadir}/%{name}"
 install target/%{name}-%{package_maven_version}.jar %{buildroot}%{_javadir}/%{name}
 ln -s %{name}-%{package_maven_version}.jar %{buildroot}%{_javadir}/%{name}/%{name}.jar
-cat > src/java/.mfiles << __EOF__
+cat > %{src_java_dir}/.mfiles << __EOF__
 %{_javadir}/%{name}/
 __EOF__
 %endif
@@ -124,30 +204,53 @@ __EOF__
 %if %{_use_repolib}
 install -d "%{buildroot}%{maven2brewrepodir}"
 cp "%{buildroot}%{_javadir}/%{name}/%{name}.jar" "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_version}.jar"
-cp src/java/pom.xml "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_version}.pom"
+cp %{src_java_dir}/pom.xml "%{buildroot}%{maven2brewrepodir}/%{name}-%{package_maven_version}.pom"
 %endif
 
 install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 %find_lang %{name}
 
-%files -f %{name}.lang
+%if 0%{?with_python2}
+%files -n python2-%{name}
+
+%doc AUTHORS
+%license COPYING
+%doc README
+%doc README.environment
+%doc README.localization
+%{_sbindir}/ovirt-host-deploy
+%{_sbindir}/ovirt-host-mgmt
+%{python_sitelib}/ovirt_host_deploy/
+%{python_sitelib}/ovirt_host_mgmt/
+%endif # with_python2
+
+%if 0%{?with_python3}
+%files -n python%{python3_pkgversion}-%{name}
+
+%doc AUTHORS
+%license COPYING
+%doc README
+%doc README.environment
+%doc README.localization
+%{_sbindir}/ovirt-host-deploy
+%{_sbindir}/ovirt-host-mgmt
+%{python3_sitelib}/ovirt_host_deploy/
+%{python3_sitelib}/ovirt_host_mgmt/
+%endif # with_python3
+
+%files common -f %{name}.lang
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/plugins
 %dir %{_sysconfdir}/%{name}.conf.d
 %dir %{ovirt_host_deploy_root}
 %dir %{ovirt_host_deploy_root}/pythonlib
-%doc AUTHORS
-%license COPYING
-%doc README
-%doc README.environment
 %{_datadir}/%{name}/plugins/ovirt-host-common/
 %{_datadir}/%{name}/plugins/ovirt-host-deploy/
 %{_datadir}/%{name}/plugins/ovirt-host-mgmt/
 %{_datadir}/otopi/plugins/ovirt-host-common
 %{_datadir}/otopi/plugins/ovirt-host-deploy
 %{_datadir}/otopi/plugins/ovirt-host-mgmt
-%{_sbindir}/ovirt-host-deploy
-%{_sbindir}/ovirt-host-mgmt
+%{ovirt_host_deploy_root}/setup
 %{ovirt_host_deploy_root}/.bundled
 %{ovirt_host_deploy_root}/otopi
 %{ovirt_host_deploy_root}/otopi-functions
@@ -157,14 +260,11 @@ install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 %{ovirt_host_deploy_root}/pythonlib/otopi
 %{ovirt_host_deploy_root}/pythonlib/ovirt_host_deploy
 %{ovirt_host_deploy_root}/pythonlib/ovirt_host_mgmt
-%{ovirt_host_deploy_root}/setup
-%{python_sitelib}/ovirt_host_deploy/
-%{python_sitelib}/ovirt_host_mgmt/
 
-%files java -f src/java/.mfiles
+%files java -f %{src_java_dir}/.mfiles
 
 %if %{_use_maven}
-%files javadoc -f src/java/.mfiles-javadoc
+%files javadoc -f %{src_java_dir}/.mfiles-javadoc
 %endif
 
 %if %{_use_repolib}
