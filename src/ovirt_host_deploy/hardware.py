@@ -83,7 +83,7 @@ class Virtualization(base.Base):
         cpuid = '/dev/cpu/0/cpuid'
         if not os.path.exists(cpuid):
             raise AttributeError('No %s' % cpuid)
-        with open('/dev/cpu/0/cpuid') as f:
+        with open('/dev/cpu/0/cpuid', 'rb') as f:
             f.seek(func)
             ret = struct.unpack('IIII', f.read(16))
         self.logger.debug('cpuid: %s', ret)
@@ -116,7 +116,7 @@ class Virtualization(base.Base):
         msr = '/dev/cpu/%d/msr' % cpu
         if not os.path.exists(msr):
             raise AttributeError('No %s' % msr)
-        with open(msr, 'r') as f:
+        with open(msr, 'rb') as f:
             try:
                 f.seek(index)
                 ret = struct.unpack('L', f.read(8))[0]

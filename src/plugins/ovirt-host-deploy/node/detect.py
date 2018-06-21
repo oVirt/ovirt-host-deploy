@@ -66,7 +66,7 @@ class Plugin(plugin.PluginBase):
             with codecs.open(filename, 'r', encoding='utf-8') as f:
                 parser = configparser.ConfigParser()
                 parser.readfp(
-                    io.StringIO('[default]\n' + f.read().decode('utf-8'))
+                    io.StringIO('[default]\n' + f.read())
                 )
                 try:
                     val = parser.get('default', key)
