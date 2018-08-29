@@ -72,7 +72,6 @@ BuildRequires:	maven-compiler-plugin
 BuildRequires:	maven-enforcer-plugin
 BuildRequires:	maven-install-plugin
 BuildRequires:	maven-jar-plugin
-BuildRequires:	maven-javadoc-plugin
 BuildRequires:	maven-source-plugin
 BuildRequires:	maven-local
 BuildRequires:	sonatype-oss-parent
@@ -142,6 +141,7 @@ Summary:	%{name} maven repo
 
 %prep
 %setup -q -n %{name}-%{package_version}
+%pom_remove_plugin :maven-javadoc-plugin src/java/pom.xml.in
 mkdir py2 py3
 
 %build
