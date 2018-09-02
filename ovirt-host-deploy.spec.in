@@ -55,15 +55,17 @@ BuildRequires:	java-devel
 BuildRequires:	gettext >= 0.18.2
 
 %if 0%{with_python2}
-Requires:	otopi >= 1.8.0
 BuildRequires:	python2-otopi-devtools
 BuildRequires:	python2-devel
+Requires:		python2-%{name}
 %endif
 
 %if 0%{?with_python3}
-Requires:	python3-otopi >= 1.8.0
-BuildRequires:	python3-otopi-devtools
+BuildRequires:	python%{python3_pkgversion}-otopi-devtools
 BuildRequires:	python%{python3_pkgversion}-devel
+%if 0%{!?with_python2}
+Requires:		python%{python3_pkgversion}-%{name}
+%endif
 %endif
 
 %if %{_use_maven}
@@ -86,6 +88,7 @@ Summary:	%{summary}
 %{?python_provide:%python_provide python2-%{name}}
 Requires:	python
 Requires:	%{name}-common = %{version}-%{release}
+Requires:	python2-otopi >= 1.8.0
 Provides:	%{name} = %{version}-%{release}
 Obsoletes:	%{name} < %{version}-%{release}
 
@@ -101,6 +104,7 @@ Summary:	%{summary}
 %{?python_provide:%python_provide python%{python3_pkgversion}-%{name}}
 Requires:	python%{python3_pkgversion}
 Requires:	%{name}-common = %{version}-%{release}
+Requires:	python%{python3_pkgversion}-otopi >= 1.8.0
 
 %description -n python%{python3_pkgversion}-%{name}
 %{summary}.
@@ -116,7 +120,12 @@ Summary:	Commong files for %{name}
 
 %package java
 Summary:	%{name} java support
-Requires:	%{name} = %{version}-%{release}
+%if 0%{?with_python2}
+Requires:	python2-%{name} = %{version}-%{release}
+%endif
+%if 0%{?with_python3}
+Requires:	python%{python3_pkgversion}-%{name} = %{version}-%{release}
+%endif
 Requires:	java-headless
 Requires:	otopi-java
 
