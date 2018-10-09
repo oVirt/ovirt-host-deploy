@@ -170,27 +170,23 @@ GLUSTER/monitoringServer=NoneType:'None'
 OpenStack
 ---------
 
-OPENSTACK/neutronEnable(bool) [False]
-    Enable Neutron configuration.
+OpenStack agent configuration is removed from oVirt 4.3.
+All related environment variables are ignored and deprecated,
+and only available to provide a backward compatible interface to oVirt < 4.3
 
+OPENSTACK/neutronEnable(bool)
 
 OPENSTACK_NEUTRON_CONFIG/section/key(str)
-    Set Neutron configuration option.
 
-OPENSTACK/neutronLinuxBridgeEnable(bool) [False]
-    Enable Neutron Linux Bridge agent configuration.
+OPENSTACK/neutronLinuxBridgeEnable(bool)
 
 OPENSTACK_NEUTRON_LINUXBRIDGE_CONFIG/section/key(str)
-    Set Neutron Linux Bridge agent configuration option.
 
-OPENSTACK/neutronOpenvswitchEnable(bool) [False]
-    Enable Neutron Open vSwitch agent configuration.
+OPENSTACK/neutronOpenvswitchEnable(bool)
 
-OPENSTACK/neutronOpenvswitchIntegrationBridge(str) [br-int]
-    Name of integration bridge.
+OPENSTACK/neutronOpenvswitchIntegrationBridge(str)
 
 OPENSTACK_NEUTRON_OPENVSWITCH_CONFIG/section/key(str)
-    Set Neutron Open vSwitch agent configuration option.
 
 
 oVirt VM Console
