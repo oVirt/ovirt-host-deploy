@@ -227,10 +227,8 @@ install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 %doc README
 %doc README.environment
 %doc README.localization
-%{_sbindir}/ovirt-host-deploy
-%{_sbindir}/ovirt-host-mgmt
-%{python_sitelib}/ovirt_host_deploy/
-%{python_sitelib}/ovirt_host_mgmt/
+%{python2_sitelib}/ovirt_host_deploy/
+%{python2_sitelib}/ovirt_host_mgmt/
 %endif # with_python2
 
 %if 0%{?with_python3}
@@ -241,8 +239,6 @@ install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 %doc README
 %doc README.environment
 %doc README.localization
-%{_sbindir}/ovirt-host-deploy
-%{_sbindir}/ovirt-host-mgmt
 %{python3_sitelib}/ovirt_host_deploy/
 %{python3_sitelib}/ovirt_host_mgmt/
 %endif # with_python3
@@ -253,6 +249,8 @@ install -d -m 755 "%{buildroot}%{_sysconfdir}/%{name}.conf.d"
 %dir %{_sysconfdir}/%{name}.conf.d
 %dir %{ovirt_host_deploy_root}
 %dir %{ovirt_host_deploy_root}/pythonlib
+%{_sbindir}/ovirt-host-deploy
+%{_sbindir}/ovirt-host-mgmt
 %{_datadir}/%{name}/plugins/ovirt-host-common/
 %{_datadir}/%{name}/plugins/ovirt-host-deploy/
 %{_datadir}/%{name}/plugins/ovirt-host-mgmt/
