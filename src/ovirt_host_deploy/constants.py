@@ -56,6 +56,18 @@ class FileLocations(object):
     HOOKS_PLUGIN_HOOKS_DIR = 'hooks.d'
     HOOKS_PLUGIN_PACKAGES_DIR = 'packages.d'
 
+    OPENSTACK_NEUTRON_CONFIG = '/etc/neutron/neutron.conf'
+    OPENSTACK_NEUTRON_PLUGIN_CONFIG = '/etc/neutron/plugin.ini'
+    OPENSTACK_NEUTRON_LINUXBRIDGE_CONFIG = \
+        '/etc/neutron/plugins/linuxbridge/linuxbridge_conf.ini'
+    if os.path.exists('/etc/neutron/plugins/ml2/openvswitch_agent.ini'):
+        # OpenStack Liberty or newer
+        OPENSTACK_NEUTRON_OPENVSWITCH_CONFIG = \
+            '/etc/neutron/plugins/ml2/openvswitch_agent.ini'
+    else:
+        # OpenStack Kilo or older
+        OPENSTACK_NEUTRON_OPENVSWITCH_CONFIG = \
+            '/etc/neutron/plugins/openvswitch/ovs_neutron_plugin.ini'
     NRPE_CONFIG_FILE = '/etc/nagios/nrpe.cfg'
 
     KDUMP_CONFIG_FILE = '/etc/kdump.conf'
@@ -193,12 +205,6 @@ class HostedEngineEnv(object):
 @util.export
 @util.codegen
 class OpenStackEnv(object):
-    """
-    OpenStack agent configuration is removed from oVirt 4.3.
-    All related environment variables are ignored and deprecated,
-    and only available to provide a backward compatible interface to
-    oVirt < 4.3
-    """
     NEUTRON_ENABLE = 'OPENSTACK/neutronEnable'
     NEUTRON_CONFIG_PREFIX = 'OPENSTACK_NEUTRON_CONFIG/'
     NEUTRON_LINUXBRIDGE_ENABLE = 'OPENSTACK/neutronLinuxBridgeEnable'

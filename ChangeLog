@@ -1,7 +1,6 @@
 ovirt-host-deploy -- oVirt host deploy
 
 ????-??-?? - Version 1.8.0
- * openstack: remove neutron support
 
 2018-01-22 - Version 1.7.1
  * gluster: Starting glustereventsd for gluster hosts
