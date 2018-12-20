@@ -91,8 +91,7 @@ class Plugin(plugin.PluginBase):
     def _closeup(self):
         self.logger.info(_('Starting gluster'))
         self.services.startup('glusterd', True)
-        for state in (False, True):
-            self.services.state('glusterd', state)
+        self.services.state('glusterd', True)
         if self.services.exists('glustereventsd'):
             self.logger.info(_('Starting glustereventsd'))
             self.services.startup('glustereventsd', True)
