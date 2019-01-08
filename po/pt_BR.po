@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-28 14:31+0100\n"
+"POT-Creation-Date: 2019-01-08 09:43+0200\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -21,12 +21,15 @@ msgstr ""
 #: src/plugins/ovirt-host-common/hosted-engine/packages.py:36
 #: src/plugins/ovirt-host-common/vdsm/pki.py:41
 #: src/plugins/ovirt-host-common/vmconsole/pki.py:39
+#: src/plugins/ovirt-host-deploy/cockpit/cockpit.py:30
 #: src/plugins/ovirt-host-deploy/core/misc.py:39
 #: src/plugins/ovirt-host-deploy/core/offlinepackager.py:37
 #: src/plugins/ovirt-host-deploy/gluster/glusterpmd.py:35
 #: src/plugins/ovirt-host-deploy/gluster/nrpe.py:38
 #: src/plugins/ovirt-host-deploy/gluster/packages.py:35
+#: src/plugins/ovirt-host-deploy/host/packages.py:38
 #: src/plugins/ovirt-host-deploy/kdump/packages.py:40
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:35
 #: src/plugins/ovirt-host-deploy/node/detect.py:40
 #: src/plugins/ovirt-host-deploy/node/persist.py:36
 #: src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py:36
@@ -34,7 +37,6 @@ msgstr ""
 #: src/plugins/ovirt-host-deploy/openstack/neutron.py:35
 #: src/plugins/ovirt-host-deploy/tune/iosched.py:38
 #: src/plugins/ovirt-host-deploy/tune/tuned.py:35
-#: src/plugins/ovirt-host-deploy/vdsm/config.py:38
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:36
 #: src/plugins/ovirt-host-deploy/vdsmhooks/hooks.py:39
 #: src/plugins/ovirt-host-deploy/vdsm/packages.py:38
@@ -78,21 +80,20 @@ msgstr ""
 msgid "Removing hosted-engine configuration"
 msgstr "Removendo configuração do hosted-engine"
 
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:114
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:115
 msgid "HA client was not imported"
 msgstr ""
 
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:116
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:117
 #, fuzzy
 msgid "Cannot resolve ovirt_hosted_engine_ha module"
 msgstr "Não é possível resolver módulo persistente."
 
-#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:118
+#: src/plugins/ovirt-host-common/hosted-engine/configureha.py:119
 msgid "Updating hosted-engine configuration"
 msgstr "Atualizando configuração do hosted-engine"
 
 #: src/plugins/ovirt-host-common/hosted-engine/packages.py:71
-#, python-brace-format
 msgid ""
 "Hosted Engine support requested on unsupported machine: {arch}. Disabling"
 msgstr ""
@@ -145,7 +146,6 @@ msgstr ""
 #: src/plugins/ovirt-host-common/vdsm/pki.py:345
 #: src/plugins/ovirt-host-common/vmconsole/pki.py:250
 #: src/plugins/ovirt-host-deploy/tune/iosched.py:72
-#, python-brace-format
 msgid "Cannot remove file '{name}'."
 msgstr "Não posso remover arquivo '{name}'."
 
@@ -184,6 +184,15 @@ msgstr ""
 "com pedido de certificado, superior é emitente\n"
 "\n"
 
+#: src/plugins/ovirt-host-deploy/cockpit/cockpit.py:45
+#, fuzzy
+msgid "Starting Cockpit"
+msgstr "Iniciando gluster"
+
+#: src/plugins/ovirt-host-deploy/cockpit/cockpit.py:50
+msgid "Cockpit not found!"
+msgstr ""
+
 #: src/plugins/ovirt-host-deploy/core/misc.py:84
 msgid ""
 "Continuing will configure this host for serving as hypervisor. Are you sure "
@@ -194,7 +203,6 @@ msgstr ""
 
 #: src/plugins/ovirt-host-deploy/core/misc.py:112
 #: src/plugins/ovirt-host-mgmt/core/misc.py:77
-#, python-brace-format
 msgid "Version: {package}-{version} ({local_version})"
 msgstr "Versão: {package}-{version} ({local_version})"
 
@@ -215,13 +223,27 @@ msgstr ""
 msgid "Starting gluster"
 msgstr "Iniciando gluster"
 
+#: src/plugins/ovirt-host-deploy/gluster/packages.py:96
+#, fuzzy
+msgid "Starting glustereventsd"
+msgstr "Iniciando gluster"
+
+#: src/plugins/ovirt-host-deploy/host/packages.py:69
+#, fuzzy
+msgid "Cannot locate ovirt-host package, possible cause is incorrect channels"
+msgstr ""
+"Não posso localizar pacotes vdsm, possível causa são os canais incorretos"
+
+#: src/plugins/ovirt-host-deploy/host/packages.py:89
+#, fuzzy
+msgid "oVirt Host package is too old, need {minimum} found {version}"
+msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
+
 #: src/plugins/ovirt-host-deploy/kdump/packages.py:129
-#, python-brace-format
 msgid "Cannot resolve kdump destination address '{host}'"
 msgstr "Não posso resolver endereços de destinação do kdump '{host}'"
 
 #: src/plugins/ovirt-host-deploy/kdump/packages.py:220
-#, python-brace-format
 msgid "Kdump {result}"
 msgstr "Kdump {result}"
 
@@ -238,6 +260,19 @@ msgstr ""
 "Kdump desabilitado ou corrigir manualmente a configuração do kdump e faça "
 "novo deploy"
 
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:58
+#, fuzzy
+msgid "KernelSetup Transaction"
+msgstr "Transação do NetworkSetup"
+
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:125
+msgid "RT operation is not available on ovirt node"
+msgstr ""
+
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:137
+msgid "RT packages not available - missing repo or channel"
+msgstr ""
+
 #: src/plugins/ovirt-host-deploy/node/persist.py:74
 msgid "Cannot resolve persist module."
 msgstr "Não é possível resolver módulo persistente."
@@ -245,7 +280,6 @@ msgstr "Não é possível resolver módulo persistente."
 #: src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py:115
 #: src/plugins/ovirt-host-deploy/openstack/neutron_openvswitch.py:147
 #: src/plugins/ovirt-host-deploy/openstack/neutron.py:103
-#, python-brace-format
 msgid "Invalid neutron configuration entry {key}"
 msgstr "Entrada da configuração neutron inválida {key}"
 
@@ -265,11 +299,6 @@ msgstr "Iniciando plugin neutron openswitch"
 msgid "Cannot set tuned profile"
 msgstr "Não posso definir perfil sintonizado"
 
-#: src/plugins/ovirt-host-deploy/vdsm/config.py:79
-#, python-brace-format
-msgid "Invalid VDSM configuration entry {key}"
-msgstr "Entrada da configuração VDSM inválida {key}"
-
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:77
 msgid "Cannot detect if hardware supports virtualization"
 msgstr "Não posso detectar se o hardware suporta virtualização"
@@ -288,20 +317,19 @@ msgstr ""
 "Não posso localizar pacotes vdsm, possível causa são os canais incorretos"
 
 #: src/plugins/ovirt-host-deploy/vdsm/packages.py:97
-#, python-brace-format
 msgid "VDSM package is too old, need {minimum} found {version}"
 msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:162
-msgid "Stopping libvirtd"
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:158
+#, fuzzy
+msgid "Restarting libvirtd"
 msgstr "Parando libvirtd"
 
-#: src/plugins/ovirt-host-deploy/vdsm/packages.py:166
+#: src/plugins/ovirt-host-deploy/vdsm/packages.py:162
 msgid "Starting vdsm"
 msgstr "Iniciando vdsm"
 
 #: src/plugins/ovirt-host-deploy/vdsm/software.py:79
-#, python-brace-format
 msgid "Distribution {distribution} version {version} is not supported"
 msgstr "Distribuição {distribution} versão {version} não é suportada"
 
@@ -317,14 +345,14 @@ msgstr "Sem UUID do sistema"
 msgid "Starting ovirt-vmconsole-host-sshd"
 msgstr "Iniciando ovirt-vmconsole-host-sshd"
 
+#~ msgid "Invalid VDSM configuration entry {key}"
+#~ msgstr "Entrada da configuração VDSM inválida {key}"
+
 #~ msgid "CA Certificate was not provided"
 #~ msgstr "Certificado CA não foi fornecido"
 
 #~ msgid "VDM Certificate was not provided"
 #~ msgstr "Certificado VDM não foi fornecido"
-
-#~ msgid "NetworkSetup Transaction"
-#~ msgstr "Transação do NetworkSetup"
 
 #~ msgid "Cannot create rollback network transaction"
 #~ msgstr "Não posso criar um rollback de transação da rede"

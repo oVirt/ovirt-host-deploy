@@ -12,6 +12,8 @@
 ./src/plugins/ovirt-host-common/vdsm/pki.py
 ./src/plugins/ovirt-host-common/vmconsole/__init__.py
 ./src/plugins/ovirt-host-common/vmconsole/pki.py
+./src/plugins/ovirt-host-deploy/cockpit/cockpit.py
+./src/plugins/ovirt-host-deploy/cockpit/__init__.py
 ./src/plugins/ovirt-host-deploy/core/__init__.py
 ./src/plugins/ovirt-host-deploy/core/misc.py
 ./src/plugins/ovirt-host-deploy/core/offlinepackager.py
@@ -19,8 +21,12 @@
 ./src/plugins/ovirt-host-deploy/gluster/__init__.py
 ./src/plugins/ovirt-host-deploy/gluster/nrpe.py
 ./src/plugins/ovirt-host-deploy/gluster/packages.py
+./src/plugins/ovirt-host-deploy/host/__init__.py
+./src/plugins/ovirt-host-deploy/host/packages.py
 ./src/plugins/ovirt-host-deploy/kdump/__init__.py
 ./src/plugins/ovirt-host-deploy/kdump/packages.py
+./src/plugins/ovirt-host-deploy/kernel/__init__.py
+./src/plugins/ovirt-host-deploy/kernel/kernel.py
 ./src/plugins/ovirt-host-deploy/node/detect.py
 ./src/plugins/ovirt-host-deploy/node/__init__.py
 ./src/plugins/ovirt-host-deploy/node/persist.py
@@ -31,7 +37,6 @@
 ./src/plugins/ovirt-host-deploy/tune/__init__.py
 ./src/plugins/ovirt-host-deploy/tune/iosched.py
 ./src/plugins/ovirt-host-deploy/tune/tuned.py
-./src/plugins/ovirt-host-deploy/vdsm/config.py
 ./src/plugins/ovirt-host-deploy/vdsm/hardware.py
 ./src/plugins/ovirt-host-deploy/vdsmhooks/hooks.py
 ./src/plugins/ovirt-host-deploy/vdsmhooks/__init__.py
