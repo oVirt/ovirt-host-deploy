@@ -9,7 +9,7 @@ else
 fi
 
 # workaround for bad caching on slaves
-${PACKAGER} --disablerepo=* --enablerepo=otopi-master-last-build clean metadata
+${PACKAGER} --disablerepo=* --enablerepo=otopi-43-last-build clean metadata
 ${PACKAGER} -y install otopi-devtools
 
 autoreconf -ivf
@@ -26,7 +26,7 @@ rm -f /etc/yum.conf
 ${PACKAGER} reinstall -y system-release ${PACKAGER}
 [[ -d /etc/dnf ]] && [[ -x /usr/bin/dnf ]] && dnf -y reinstall dnf-conf
 [[ -d /etc/dnf ]] && sed -i -re 's#^(reposdir *= *).*$#\1/etc/yum.repos.d#' '/etc/dnf/dnf.conf'
-${PACKAGER} install -y ovirt-release-master
+${PACKAGER} install -y ovirt-release43-snapshot
 rm -f /etc/yum/yum.conf
 
 ${PACKAGER} repolist enabled
