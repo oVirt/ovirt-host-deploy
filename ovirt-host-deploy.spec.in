@@ -33,7 +33,7 @@
 %global with_python3 0
 %endif
 
-%if 0%{?rhel} >= 8
+%if 0%{?rhel} >= 8 || 0%{?fedora} >= 30
 %global with_python2 0
 %else
 %global with_python2 1

@@ -15,9 +15,14 @@ fi
 
 # workaround for bad caching on slaves
 ${PACKAGER} --disablerepo=* --enablerepo=otopi-master-last-tested clean metadata
-${PACKAGER} -y install otopi-devtools
+${PACKAGER} -y install python2-otopi-devtools || echo "python2-otopi-devtools not found"
+${PACKAGER} -y install python3-otopi-devtools || echo "python3-otopi-devtools not found"
 
 SUFFIX=".$(date -u +%Y%m%d%H%M%S).git$(git rev-parse --short HEAD)"
+
+if [[ $(rpm --eval "%{fedora}") -gt 29 ]] ; then
+export PYTHON=python3
+fi
 
 autoreconf -ivf
 ./configure
