@@ -1,4 +1,4 @@
 ovirt-43-snapshot,http://resources.ovirt.org/pub/ovirt-4.3-snapshot/rpm/$distro
 ovirt-43-snapshot-static,http://resources.ovirt.org/pub/ovirt-4.3-snapshot-static/rpm/$distro
-otopi-43-last-build,http://jenkins.ovirt.org/job/otopi_master_build-artifacts-$distro-$basearch/lastSuccessfulBuild/artifact/exported-artifacts/
-virt7-ovirt-common-testing,https://cbs.centos.org/repos/virt7-ovirt-common-testing/$basearch/os/
+otopi-43-last-tested,https://resources.ovirt.org/repos/ovirt/tested/4.3/rpm/$distro
+virt7-ovirt-testing,https://buildlogs.centos.org/centos/7/virt/$basearch/ovirt-4.3/

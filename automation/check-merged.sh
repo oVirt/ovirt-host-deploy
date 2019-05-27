@@ -8,7 +8,7 @@ else
 fi
 
 # workaround for bad caching on slaves
-${PACKAGER} --disablerepo=* --enablerepo=otopi-43-last-build clean metadata
+${PACKAGER} --disablerepo=* --enablerepo=otopi-43-last-tested clean metadata
 ${PACKAGER} -y install otopi-devtools
 
 autoreconf -ivf
