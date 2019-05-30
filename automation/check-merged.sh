@@ -8,7 +8,7 @@ else
 fi
 
 # workaround for bad caching on slaves
-${PACKAGER} --disablerepo=* --enablerepo=otopi-master-last-build clean metadata
+${PACKAGER} --disablerepo=* --enablerepo=otopi-master-last-tested clean metadata
 ${PACKAGER} -y install python2-otopi-devtools || echo "python2-otopi-devtools not found"
 ${PACKAGER} -y install python3-otopi-devtools || echo "python3-otopi-devtools not found"
 
