@@ -43,11 +43,11 @@ class Plugin(plugin.PluginBase):
     _SUPPORTED = [
         {
             'distro': ('redhat', 'centos'),
-            'version': '7.0',
+            'version': '7.5',
         },
         {
             'distro': ('fedora', ),
-            'version': '22',
+            'version': '24',
         },
         {
             'distro': ('ibm_powerkvm', ),
