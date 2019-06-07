@@ -29,7 +29,6 @@
 ./src/plugins/ovirt-host-deploy/kernel/kernel.py
 ./src/plugins/ovirt-host-deploy/node/detect.py
 ./src/plugins/ovirt-host-deploy/node/__init__.py
-./src/plugins/ovirt-host-deploy/node/persist.py
 ./src/plugins/ovirt-host-deploy/tune/__init__.py
 ./src/plugins/ovirt-host-deploy/tune/iosched.py
 ./src/plugins/ovirt-host-deploy/tune/tuned.py

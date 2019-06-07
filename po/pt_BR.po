@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-10 13:45+0200\n"
+"POT-Creation-Date: 2019-11-05 13:11+0200\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -27,10 +27,9 @@ msgstr ""
 #: src/plugins/ovirt-host-deploy/gluster/nrpe.py:38
 #: src/plugins/ovirt-host-deploy/gluster/packages.py:35
 #: src/plugins/ovirt-host-deploy/host/packages.py:38
-#: src/plugins/ovirt-host-deploy/kdump/packages.py:40
-#: src/plugins/ovirt-host-deploy/kernel/kernel.py:35
-#: src/plugins/ovirt-host-deploy/node/detect.py:40
-#: src/plugins/ovirt-host-deploy/node/persist.py:36
+#: src/plugins/ovirt-host-deploy/kdump/packages.py:41
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:36
+#: src/plugins/ovirt-host-deploy/node/detect.py:39
 #: src/plugins/ovirt-host-deploy/tune/iosched.py:38
 #: src/plugins/ovirt-host-deploy/tune/tuned.py:35
 #: src/plugins/ovirt-host-deploy/vdsm/hardware.py:36
@@ -213,16 +212,16 @@ msgstr "Iniciando serviço glusterpmd"
 msgid "Restarting nrpe service"
 msgstr "Reiniciando serviço nrpe"
 
-#: src/plugins/ovirt-host-deploy/gluster/packages.py:69
+#: src/plugins/ovirt-host-deploy/gluster/packages.py:66
 msgid "Cannot locate gluster packages, possible cause is incorrect channels"
 msgstr ""
 "Não posso localizar pacotes gluster, possível causa são os canais incorretos"
 
-#: src/plugins/ovirt-host-deploy/gluster/packages.py:92
+#: src/plugins/ovirt-host-deploy/gluster/packages.py:89
 msgid "Starting gluster"
 msgstr "Iniciando gluster"
 
-#: src/plugins/ovirt-host-deploy/gluster/packages.py:96
+#: src/plugins/ovirt-host-deploy/gluster/packages.py:93
 #, fuzzy
 msgid "Starting glustereventsd"
 msgstr "Iniciando gluster"
@@ -238,7 +237,7 @@ msgstr ""
 msgid "oVirt Host package is too old, need {minimum} found {version}"
 msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
 
-#: src/plugins/ovirt-host-deploy/kdump/packages.py:129
+#: src/plugins/ovirt-host-deploy/kdump/packages.py:130
 #, python-brace-format
 msgid "Cannot resolve kdump destination address '{host}'"
 msgstr "Não posso resolver endereços de destinação do kdump '{host}'"
@@ -261,24 +260,29 @@ msgstr ""
 "Kdump desabilitado ou corrigir manualmente a configuração do kdump e faça "
 "novo deploy"
 
-#: src/plugins/ovirt-host-deploy/kernel/kernel.py:58
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:62
 #, fuzzy
 msgid "KernelSetup Transaction"
 msgstr "Transação do NetworkSetup"
 
-#: src/plugins/ovirt-host-deploy/kernel/kernel.py:125
-msgid "RT operation is not available on ovirt node"
-msgstr ""
-
-#: src/plugins/ovirt-host-deploy/kernel/kernel.py:137
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:136
 msgid "RT packages not available - missing repo or channel"
 msgstr ""
 
-#: src/plugins/ovirt-host-deploy/node/persist.py:74
-msgid "Cannot resolve persist module."
-msgstr "Não é possível resolver módulo persistente."
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:147
+msgid "Got fips=1 without boot parameter, trying to detect it"
+msgstr ""
 
-#: src/plugins/ovirt-host-deploy/tune/tuned.py:108
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:163
+#, python-brace-format
+msgid "Adding: {boot_a}"
+msgstr ""
+
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:172
+msgid "Cannot detect /boot partition UUID"
+msgstr ""
+
+#: src/plugins/ovirt-host-deploy/tune/tuned.py:103
 msgid "Cannot set tuned profile"
 msgstr "Não posso definir perfil sintonizado"
 
@@ -329,3 +333,83 @@ msgstr "Sem UUID do sistema"
 #: src/plugins/ovirt-host-deploy/vmconsole/packages.py:93
 msgid "Starting ovirt-vmconsole-host-sshd"
 msgstr "Iniciando ovirt-vmconsole-host-sshd"
+
+#~ msgid "Invalid neutron configuration entry {key}"
+#~ msgstr "Entrada da configuração neutron inválida {key}"
+
+#~ msgid "Starting neutron linuxbridge plugin"
+#~ msgstr "Iniciando plugin neutron linuxbridge"
+
+#~ msgid "Invalid response from OVS"
+#~ msgstr "Resposta inválida do OVS"
+
+#~ msgid "Starting neutron openvswitch plugin"
+#~ msgstr "Iniciando plugin neutron openswitch"
+
+#~ msgid "Cannot resolve persist module."
+#~ msgstr "Não é possível resolver módulo persistente."
+
+#~ msgid "Invalid VDSM configuration entry {key}"
+#~ msgstr "Entrada da configuração VDSM inválida {key}"
+
+#~ msgid "CA Certificate was not provided"
+#~ msgstr "Certificado CA não foi fornecido"
+
+#~ msgid "VDM Certificate was not provided"
+#~ msgstr "Certificado VDM não foi fornecido"
+
+#~ msgid "Cannot create rollback network transaction"
+#~ msgstr "Não posso criar um rollback de transação da rede"
+
+#~ msgid "Cannot establish connection to {host}:{port}"
+#~ msgstr "Não posso estabilizar conexão ao {host}:{port}"
+
+#~ msgid "Unable to determine route interface for {address}"
+#~ msgstr "Incapaz de determinar a interface de rota para {address}"
+
+#~ msgid "Invalid route information for {address}"
+#~ msgstr "Informação de rota inválida para {address}"
+
+#~ msgid ""
+#~ "Interface {interface} is VLAN interface, however its configuration is "
+#~ "unexpected"
+#~ msgstr ""
+#~ "Interface {interface} é uma interface VLAN, contudo a sua configuração é "
+#~ "inesperada"
+
+#~ msgid "Unsupported network manager configuration"
+#~ msgstr "Configuração do Network Manager não suportada"
+
+#~ msgid "Bridge creation requested but engine host was not specified"
+#~ msgstr ""
+#~ "Criação de bridge requerida mas o host do engine não foi especificado"
+
+#~ msgid "Cannot resolve engine host name '{host}'"
+#~ msgstr "Não posso resolver o  nome de host do engine '{host}'"
+
+#~ msgid ""
+#~ "Cannot connect engine host '{name}' at any of the addresses {addresses}'"
+#~ msgstr ""
+#~ "Não posso conectar ao host do engine '{name}' em qualquer um dos "
+#~ "endereços '{addresses}'"
+
+#~ msgid ""
+#~ "Non standard bridge name {interface} while running on hypervisor br "
+#~ "prefix expected. Please configure manually bridge on this device with "
+#~ "name {bridge}"
+#~ msgstr ""
+#~ "Nome de bridge não padrão {interface} enquanto no hypervisor em execução "
+#~ "o prefixo br era esperado. Por favor configure manualmente a bridge neste "
+#~ "dispostivo com o nome {bridge}"
+
+#~ msgid ""
+#~ "non standard bridge name {interface} while running on hypervisor name "
+#~ "does not match any physical interface. Please configure manually bridge "
+#~ "on this device with name {bridge}"
+#~ msgstr ""
+#~ "Nome de bridge não padrão {interface} enquanto no hypervisor em execução "
+#~ "nenhum nome coincide com a interface física. Por favor configure "
+#~ "manualmente a bridge neste dispostivo com o nome {bridge}"
+
+#~ msgid "Management channel interface {interface} is already a bridge"
+#~ msgstr "Interface do canal de gerenciamento {interface} já é uma bridge"

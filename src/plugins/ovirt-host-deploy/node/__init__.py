@@ -25,12 +25,10 @@ from otopi import util
 
 
 from . import detect
-from . import persist
 
 
 @util.export
 def createPlugins(context):
     detect.Plugin(context=context)
-    persist.Plugin(context=context)
 
 # vim: expandtab tabstop=4 shiftwidth=4

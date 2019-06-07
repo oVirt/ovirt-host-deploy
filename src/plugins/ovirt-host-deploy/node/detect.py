@@ -24,7 +24,6 @@
 import codecs
 import configparser
 import gettext
-import glob
 import io
 import os
 import re
@@ -45,9 +44,8 @@ class Plugin(plugin.PluginBase):
     """ovirt-node detection.
 
     Environment:
-        VdsmEnv.OVIRT_VINTAGE_NODE -- is node.
-        VdsmEnv.NODE_PLUGIN_VDSM_FEATURES -- features of ovirt-node-plugin-vdsm
-
+        VdsmEnv.OVIRT_CONTAINER_NODE -- is container node.
+        VdsmEnv.OVIRT_NODE -- is oVirt Node or derivate
     """
 
     _PLUGIN_VER_FILE_RE = re.compile(
@@ -82,40 +80,11 @@ class Plugin(plugin.PluginBase):
     def __init__(self, context):
         super(Plugin, self).__init__(context=context)
 
-    def _get_node_plugin_features(self, plugin_name):
-        features = []
-        version_file = '/etc/default/version%s' % (
-            '.%s' % plugin_name if plugin_name else ''
-        )
-        if os.path.exists(version_file):
-            content = {}
-            with open(version_file) as f:
-                for line in f.read().splitlines():
-                    m = self._PLUGIN_VER_FILE_RE.match(line)
-                    if m is not None:
-                        content[m.group('key')] = m.group('value')
-            features = content.get('FEATURES', '').split()
-
-        self.logger.debug(
-            "Plugin '%s', features='%s'",
-            plugin_name,
-            features,
-        )
-
-        return features
-
     @plugin.event(
         stage=plugin.Stages.STAGE_INIT,
         priority=plugin.Stages.PRIORITY_FIRST,
     )
     def _init(self):
-        self.environment.setdefault(
-            odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE,
-            (
-                os.path.exists('/etc/rhev-hypervisor-release') or
-                bool(glob.glob('/etc/ovirt-node-*-release'))
-            )
-        )
         self.environment.setdefault(
             odeploycons.VdsmEnv.OVIRT_CONTAINER_NODE,
             (
@@ -131,29 +100,5 @@ class Plugin(plugin.PluginBase):
                              odeploycons.FileLocations.OVIRT_NODE_VARIANT_VAL)
             )
         )
-        self.environment.setdefault(
-            odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_FEATURES,
-            []
-        )
-        self.environment[
-            odeploycons.VdsmEnv.OVIRT_NODE_HAS_OWN_BRIDGES
-        ] = len(glob.glob('/sys/class/net/br*/bridge/bridge_id')) != 0
-        self.environment.setdefault(
-            odeploycons.CoreEnv.OFFLINE_PACKAGER,
-            self.environment[
-                odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
-            ]
-        )
-
-        if self.environment[odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE]:
-            if not self.environment[
-                odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_FEATURES
-            ]:
-                self.environment[
-                    odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_FEATURES
-                ] = self._get_node_plugin_features(
-                    'ovirt-node-plugin-vdsm'
-                )
-
 
 # vim: expandtab tabstop=4 shiftwidth=4

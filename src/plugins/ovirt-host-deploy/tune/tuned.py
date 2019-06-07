@@ -50,11 +50,6 @@ class Plugin(plugin.PluginBase):
 
     @plugin.event(
         stage=plugin.Stages.STAGE_SETUP,
-        condition=lambda self: (
-            not self.environment[
-                odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE
-            ]
-        ),
     )
     def _setup(self):
         self.command.detect('tuned-adm')

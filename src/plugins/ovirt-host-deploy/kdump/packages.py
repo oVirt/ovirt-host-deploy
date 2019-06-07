@@ -141,29 +141,21 @@ class Plugin(plugin.PluginBase):
 
     def _kexec_tools_version_supported(self):
         result = False
-
-        if self.environment[odeploycons.VdsmEnv.OVIRT_VINTAGE_NODE]:
-            # on node check ovirt-node-plugin-vdsm features
-            result = 'kdump' in self.environment[
-                odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_FEATURES
-            ]
-        else:
-            # on standard host use packager
-            min_version = self._get_min_kexec_tools_version()
-            min_hdr = self._create_hdr(*min_version)
-            if min_version is not None:
-                pkgs = self.packager.queryPackages(
-                    patterns=(self._KEXEC_TOOLS_PKG,),
+        min_version = self._get_min_kexec_tools_version()
+        min_hdr = self._create_hdr(*min_version)
+        if min_version is not None:
+            pkgs = self.packager.queryPackages(
+                patterns=(self._KEXEC_TOOLS_PKG,),
+            )
+            for package in pkgs:
+                cur_hdr = self._create_hdr(
+                    0,
+                    package['version'],
+                    package['release']
                 )
-                for package in pkgs:
-                    cur_hdr = self._create_hdr(
-                        0,
-                        package['version'],
-                        package['release']
-                    )
-                    if rpm.versionCompare(cur_hdr, min_hdr) >= 0:
-                        result = True
-                        break
+                if rpm.versionCompare(cur_hdr, min_hdr) >= 0:
+                    result = True
+                    break
 
         return result
 

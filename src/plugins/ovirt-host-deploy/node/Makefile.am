@@ -27,7 +27,6 @@ mydir=$(ovirthostdeployplugindir)/ovirt-host-deploy/node
 dist_my_PYTHON = \
 	__init__.py \
 	detect.py \
-	persist.py \
 	$(NULL)
 
 clean-local: \
