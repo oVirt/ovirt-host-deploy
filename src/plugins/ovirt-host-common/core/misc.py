@@ -21,18 +21,11 @@
 """Misc plugin."""
 
 
-import gettext
-
-
 from otopi import plugin
 from otopi import util
 
 
 from ovirt_host_deploy import constants as odeploycons
-
-
-def _(m):
-    return gettext.dgettext(message=m, domain='ovirt-host-deploy')
 
 
 @util.export
