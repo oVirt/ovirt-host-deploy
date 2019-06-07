@@ -49,10 +49,6 @@ class Plugin(plugin.PluginBase):
             'distro': ('fedora', ),
             'version': '24',
         },
-        {
-            'distro': ('ibm_powerkvm', ),
-            'version': '2.1.0',
-        },
     ]
 
     def __init__(self, context):
