@@ -29,7 +29,6 @@ SUBDIRS = \
 	kdump \
 	kernel \
 	node \
-	openstack \
 	tune \
 	vdsm \
 	vdsmhooks \

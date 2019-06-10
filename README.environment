@@ -167,31 +167,6 @@ GLUSTER/monitoringEnable=bool:'False'
 GLUSTER/monitoringServer=NoneType:'None'
     Server to be allowed to access nrpe agent
 
-OpenStack
----------
-
-OPENSTACK/neutronEnable(bool) [False]
-    Enable Neutron configuration.
-
-
-OPENSTACK_NEUTRON_CONFIG/section/key(str)
-    Set Neutron configuration option.
-
-OPENSTACK/neutronLinuxBridgeEnable(bool) [False]
-    Enable Neutron Linux Bridge agent configuration.
-
-OPENSTACK_NEUTRON_LINUXBRIDGE_CONFIG/section/key(str)
-    Set Neutron Linux Bridge agent configuration option.
-
-OPENSTACK/neutronOpenvswitchEnable(bool) [False]
-    Enable Neutron Open vSwitch agent configuration.
-
-OPENSTACK/neutronOpenvswitchIntegrationBridge(str) [br-int]
-    Name of integration bridge.
-
-OPENSTACK_NEUTRON_OPENVSWITCH_CONFIG/section/key(str)
-    Set Neutron Open vSwitch agent configuration option.
-
 
 oVirt VM Console
 ----------------
