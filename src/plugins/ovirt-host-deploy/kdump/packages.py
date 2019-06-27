@@ -25,6 +25,7 @@ import gettext
 import platform
 import re
 import socket
+import rpm
 
 
 from otopi import constants as otopicons
@@ -87,15 +88,13 @@ class Plugin(plugin.PluginBase):
         (name, version, desc) = platform.linux_distribution(
             full_distribution_name=0
         )
-
         min_version = None
         if name in ('redhat', 'centos'):
             major = version.split('.', 1)[0]
             if major == '7':
-                min_version = None, '2.0.4', '32.1'
-
+                min_version = 0, '2.0.4', '32.1'
         elif name in ('fedora', 'ibm_powerkvm'):
-            min_version = None, '2.0.4', '27'
+            min_version = 0, '2.0.4', '27'
 
         return min_version
 
@@ -131,6 +130,13 @@ class Plugin(plugin.PluginBase):
                 )
             )
 
+    def _create_hdr(self, epoch, version, release):
+        hdr = rpm.hdr()
+        hdr[rpm.RPMTAG_EPOCH] = epoch
+        hdr[rpm.RPMTAG_VERSION] = version
+        hdr[rpm.RPMTAG_RELEASE] = release
+        return hdr
+
     def _kexec_tools_version_supported(self):
         result = False
 
@@ -140,20 +146,20 @@ class Plugin(plugin.PluginBase):
                 odeploycons.VdsmEnv.NODE_PLUGIN_VDSM_FEATURES
             ]
         else:
-            from rpmUtils.miscutils import compareEVR
             # on standard host use packager
             min_version = self._get_min_kexec_tools_version()
+            min_hdr = self._create_hdr(*min_version)
             if min_version is not None:
                 pkgs = self.packager.queryPackages(
                     patterns=(self._KEXEC_TOOLS_PKG,),
                 )
                 for package in pkgs:
-                    cur_version = (
-                        None,
+                    cur_hdr = self._create_hdr(
+                        0,
                         package['version'],
-                        package['release'],
+                        package['release']
                     )
-                    if compareEVR(cur_version, min_version) >= 0:
+                    if rpm.versionCompare(cur_hdr, min_hdr) >= 0:
                         result = True
                         break
 
