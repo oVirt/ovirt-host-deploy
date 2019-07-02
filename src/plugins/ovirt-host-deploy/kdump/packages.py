@@ -93,6 +93,8 @@ class Plugin(plugin.PluginBase):
             major = version.split('.', 1)[0]
             if major == '7':
                 min_version = 0, '2.0.4', '32.1'
+            if major == '8':
+                min_version = 0, '2.0.17', '28'
         elif name in ('fedora', 'ibm_powerkvm'):
             min_version = 0, '2.0.4', '27'
 
