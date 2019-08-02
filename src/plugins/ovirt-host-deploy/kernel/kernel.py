@@ -1,6 +1,6 @@
 #
 # ovirt-host-deploy -- ovirt host deployer
-# Copyright (C) 2016 Red Hat, Inc.
+# Copyright (C) 2016-2019 Red Hat, Inc.
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,7 @@
 
 
 import gettext
+import re
 
 from otopi import constants as otopicons
 from otopi import plugin
@@ -48,6 +49,9 @@ class Plugin(plugin.PluginBase):
     """
 
     _GRUBBY_PKG = 'grubby'
+
+    _RE_FIPS = re.compile(r"""fips\s*=\s*1""")
+    _RE_BOOT = re.compile(r"""boot\s*=""")
 
     class KernelSetupTransaction(transaction.TransactionElement):
 
@@ -98,6 +102,7 @@ class Plugin(plugin.PluginBase):
         )
 
         self.command.detect('grubby')
+        self.command.detect('findmnt')
 
     @plugin.event(stage=plugin.Stages.STAGE_VALIDATION)
     def _validation(self):
@@ -138,11 +143,46 @@ class Plugin(plugin.PluginBase):
                       'missing repo or channel')
                 )
 
+    def _add_disk_uuid_in_fips(self):
+        e_key = odeploycons.KernelEnv.CMDLINE_NEW
+        fips_m = self._RE_FIPS.match(self.environment[e_key])
+        boot_m = self._RE_BOOT.match(self.environment[e_key])
+        if fips_m is not None and boot_m is None:
+            self.logger.info(
+                _('Got fips=1 without boot parameter, trying to detect it')
+            )
+            rc, stdout, stderr = self.execute(
+                (
+                    self.command.get('findmnt'),
+                    '--output=UUID',
+                    '--noheadings',
+                    '--target=/boot',
+                ),
+                raiseOnError=True,
+            )
+            if len(stdout) == 1:
+                boot_a = "boot=UUID={boot_uuid}".format(
+                    boot_uuid=stdout[0],
+                )
+                self.logger.info(
+                    _('Adding: {boot_a}').format(
+                        boot_a=boot_a,
+                    )
+                )
+                self.environment[e_key] = "{boot_a} {args}".format(
+                    boot_a=boot_a,
+                    args=self.environment[e_key],
+                )
+            else:
+                raise RuntimeError(_('Cannot detect /boot partion UUID'))
+
     @plugin.event(
         stage=plugin.Stages.STAGE_MISC,
         condition=lambda self: self._enabled,
     )
     def _misc(self):
+        # fix for: https://bugzilla.redhat.com/1736873
+        self._add_disk_uuid_in_fips()
         self.environment[otopicons.CoreEnv.MAIN_TRANSACTION].append(
             self.KernelSetupTransaction(
                 parent=self,
