@@ -29,6 +29,14 @@ ${PACKAGER} reinstall -y system-release ${PACKAGER}
 ${PACKAGER} install -y ovirt-release43-snapshot
 rm -f /etc/yum/yum.conf
 
+# On EL7 enable Virt SIG testing repos
+if [[ "${DISTVER}" == "el" ]]; then
+${PACKAGER} install -y centos-release-ovirt43
+sed -i "s:enabled=0:enabled=1:" /etc/yum.repos.d/CentOS-oVirt-4.3.repo
+fi
+
+
+
 ${PACKAGER} repolist enabled
 
 ${PACKAGER} install -y $(find "$PWD/exported-artifacts" -iname \*noarch\*.rpm)
