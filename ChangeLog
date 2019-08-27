@@ -1,6 +1,7 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.8.2
+2019-09-03 - Version 1.8.2
+* Fix re.match gets None error
 
 2019-08-27 - Version 1.8.1
  * kernel: fips: add boot parameter if fips=1 is there
