@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-08 09:43+0200\n"
+"POT-Creation-Date: 2019-08-27 10:14+0300\n"
 "PO-Revision-Date: 2016-02-29 20:40-0300\n"
 "Last-Translator:Wesley Morais de Oliveira \n"
 "Language-Team: \n"
@@ -29,7 +29,7 @@ msgstr ""
 #: src/plugins/ovirt-host-deploy/gluster/packages.py:35
 #: src/plugins/ovirt-host-deploy/host/packages.py:38
 #: src/plugins/ovirt-host-deploy/kdump/packages.py:40
-#: src/plugins/ovirt-host-deploy/kernel/kernel.py:35
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:36
 #: src/plugins/ovirt-host-deploy/node/detect.py:40
 #: src/plugins/ovirt-host-deploy/node/persist.py:36
 #: src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py:36
@@ -94,6 +94,7 @@ msgid "Updating hosted-engine configuration"
 msgstr "Atualizando configuração do hosted-engine"
 
 #: src/plugins/ovirt-host-common/hosted-engine/packages.py:71
+#, python-brace-format
 msgid ""
 "Hosted Engine support requested on unsupported machine: {arch}. Disabling"
 msgstr ""
@@ -146,6 +147,7 @@ msgstr ""
 #: src/plugins/ovirt-host-common/vdsm/pki.py:345
 #: src/plugins/ovirt-host-common/vmconsole/pki.py:250
 #: src/plugins/ovirt-host-deploy/tune/iosched.py:72
+#, python-brace-format
 msgid "Cannot remove file '{name}'."
 msgstr "Não posso remover arquivo '{name}'."
 
@@ -203,6 +205,7 @@ msgstr ""
 
 #: src/plugins/ovirt-host-deploy/core/misc.py:112
 #: src/plugins/ovirt-host-mgmt/core/misc.py:77
+#, python-brace-format
 msgid "Version: {package}-{version} ({local_version})"
 msgstr "Versão: {package}-{version} ({local_version})"
 
@@ -235,15 +238,17 @@ msgstr ""
 "Não posso localizar pacotes vdsm, possível causa são os canais incorretos"
 
 #: src/plugins/ovirt-host-deploy/host/packages.py:89
-#, fuzzy
+#, fuzzy, python-brace-format
 msgid "oVirt Host package is too old, need {minimum} found {version}"
 msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
 
 #: src/plugins/ovirt-host-deploy/kdump/packages.py:129
+#, python-brace-format
 msgid "Cannot resolve kdump destination address '{host}'"
 msgstr "Não posso resolver endereços de destinação do kdump '{host}'"
 
 #: src/plugins/ovirt-host-deploy/kdump/packages.py:220
+#, python-brace-format
 msgid "Kdump {result}"
 msgstr "Kdump {result}"
 
@@ -260,17 +265,30 @@ msgstr ""
 "Kdump desabilitado ou corrigir manualmente a configuração do kdump e faça "
 "novo deploy"
 
-#: src/plugins/ovirt-host-deploy/kernel/kernel.py:58
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:62
 #, fuzzy
 msgid "KernelSetup Transaction"
 msgstr "Transação do NetworkSetup"
 
-#: src/plugins/ovirt-host-deploy/kernel/kernel.py:125
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:130
 msgid "RT operation is not available on ovirt node"
 msgstr ""
 
-#: src/plugins/ovirt-host-deploy/kernel/kernel.py:137
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:142
 msgid "RT packages not available - missing repo or channel"
+msgstr ""
+
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:152
+msgid "Got fips=1 without boot parameter, trying to detect it"
+msgstr ""
+
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:168
+#, python-brace-format
+msgid "Adding: {boot_a}"
+msgstr ""
+
+#: src/plugins/ovirt-host-deploy/kernel/kernel.py:177
+msgid "Cannot detect /boot partion UUID"
 msgstr ""
 
 #: src/plugins/ovirt-host-deploy/node/persist.py:74
@@ -280,6 +298,7 @@ msgstr "Não é possível resolver módulo persistente."
 #: src/plugins/ovirt-host-deploy/openstack/neutron_linuxbridge.py:115
 #: src/plugins/ovirt-host-deploy/openstack/neutron_openvswitch.py:147
 #: src/plugins/ovirt-host-deploy/openstack/neutron.py:103
+#, python-brace-format
 msgid "Invalid neutron configuration entry {key}"
 msgstr "Entrada da configuração neutron inválida {key}"
 
@@ -317,6 +336,7 @@ msgstr ""
 "Não posso localizar pacotes vdsm, possível causa são os canais incorretos"
 
 #: src/plugins/ovirt-host-deploy/vdsm/packages.py:97
+#, python-brace-format
 msgid "VDSM package is too old, need {minimum} found {version}"
 msgstr "Pacote VDSM muito antigo, necessita {minimum} encontrado {version}"
 
@@ -330,6 +350,7 @@ msgid "Starting vdsm"
 msgstr "Iniciando vdsm"
 
 #: src/plugins/ovirt-host-deploy/vdsm/software.py:79
+#, python-brace-format
 msgid "Distribution {distribution} version {version} is not supported"
 msgstr "Distribuição {distribution} versão {version} não é suportada"
 

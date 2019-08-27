@@ -1,6 +1,11 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.8.1
+2019-08-27 - Version 1.8.1
+ * kernel: fips: add boot parameter if fips=1 is there
+ * automation: use tested repo
+ * automation: add virt sig test repos
+ * automation: switch to 4.3 repos
+ * build: post ovirt-host-deploy-1.8.0
 
 2019-01-08 - Version 1.8.0
  * gluster: Start gluster services without stop
