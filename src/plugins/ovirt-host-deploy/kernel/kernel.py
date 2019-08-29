@@ -145,36 +145,37 @@ class Plugin(plugin.PluginBase):
 
     def _add_disk_uuid_in_fips(self):
         e_key = odeploycons.KernelEnv.CMDLINE_NEW
-        fips_m = self._RE_FIPS.match(self.environment[e_key])
-        boot_m = self._RE_BOOT.match(self.environment[e_key])
-        if fips_m is not None and boot_m is None:
-            self.logger.info(
-                _('Got fips=1 without boot parameter, trying to detect it')
-            )
-            rc, stdout, stderr = self.execute(
-                (
-                    self.command.get('findmnt'),
-                    '--output=UUID',
-                    '--noheadings',
-                    '--target=/boot',
-                ),
-                raiseOnError=True,
-            )
-            if len(stdout) == 1:
-                boot_a = "boot=UUID={boot_uuid}".format(
-                    boot_uuid=stdout[0],
-                )
+        if self.environment[e_key] is not None:
+            fips_m = self._RE_FIPS.match(self.environment[e_key])
+            boot_m = self._RE_BOOT.match(self.environment[e_key])
+            if fips_m is not None and boot_m is None:
                 self.logger.info(
-                    _('Adding: {boot_a}').format(
-                        boot_a=boot_a,
+                    _('Got fips=1 without boot parameter, trying to detect it')
+                )
+                rc, stdout, stderr = self.execute(
+                    (
+                        self.command.get('findmnt'),
+                        '--output=UUID',
+                        '--noheadings',
+                        '--target=/boot',
+                    ),
+                    raiseOnError=True,
+                )
+                if len(stdout) == 1:
+                    boot_a = "boot=UUID={boot_uuid}".format(
+                        boot_uuid=stdout[0],
                     )
-                )
-                self.environment[e_key] = "{boot_a} {args}".format(
-                    boot_a=boot_a,
-                    args=self.environment[e_key],
-                )
-            else:
-                raise RuntimeError(_('Cannot detect /boot partion UUID'))
+                    self.logger.info(
+                        _('Adding: {boot_a}').format(
+                            boot_a=boot_a,
+                        )
+                    )
+                    self.environment[e_key] = "{boot_a} {args}".format(
+                        boot_a=boot_a,
+                        args=self.environment[e_key],
+                    )
+                else:
+                    raise RuntimeError(_('Cannot detect /boot partition UUID'))
 
     @plugin.event(
         stage=plugin.Stages.STAGE_MISC,
