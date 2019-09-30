@@ -2,5 +2,6 @@ distros:
   - fc30
   - fc29
   - el7
+  - el8
 release_branches:
   master: ovirt-master

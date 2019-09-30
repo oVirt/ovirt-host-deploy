@@ -1,0 +1,12 @@
+autoconf
+automake
+expect
+gettext-devel
+git
+java-devel
+make
+python3-coverage
+python3-pyflakes
+python3-devel
+dnf-utils
+dnf

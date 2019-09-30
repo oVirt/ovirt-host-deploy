@@ -1,8 +1,8 @@
 #!/bin/bash -ex
 
-DISTVER="$(rpm --eval "%dist"|cut -c2-3)"
+DISTVER="$(rpm --eval "%dist"|cut -c2-4)"
 PACKAGER=""
-if [[ "${DISTVER}" == "el" ]]; then
+if [[ "${DISTVER}" == "el7" ]]; then
     PACKAGER=yum
 else
     PACKAGER=dnf
@@ -38,8 +38,8 @@ ${PACKAGER} repolist enabled
 
 ${PACKAGER} install -y $(find "$PWD/exported-artifacts" -iname \*noarch\*.rpm)
 
-if [[ ! "${DISTVER}" == "fc" ]]; then
-# Fedora support is known to be broken, will be re-enabled once fixed
+if [[ "${DISTVER}" == "el7" ]]; then
+# Fedora and EL 8 support is known to be broken, will be re-enabled once fixed
 
 save_logs() {
 mkdir -p exported-artifacts/logs

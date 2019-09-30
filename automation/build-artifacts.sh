@@ -5,9 +5,9 @@
 [[ -d tmp.repos ]] \
 || mkdir -p tmp.repos
 
-DISTVER="$(rpm --eval "%dist"|cut -c2-3)"
+DISTVER="$(rpm --eval "%dist"|cut -c2-4)"
 PACKAGER=""
-if [[ "${DISTVER}" == "el" ]]; then
+if [[ "${DISTVER}" == "el7" ]]; then
     PACKAGER=yum
 else
     PACKAGER=dnf
