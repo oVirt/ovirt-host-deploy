@@ -192,6 +192,12 @@ class Plugin(plugin.PluginBase):
             self.services.state('NetworkManager', False)
             self.services.startup('NetworkManager', False)
 
+        # Restart NetworkManager service before we try to bring up
+        # vdsm and network to make sure that the config is applied
+        elif self.services.exists('NetworkManager'):
+            self.services.state('NetworkManager', False)
+            self.services.state('NetworkManager', True)
+
         #
         # vdsm requires network to be active
         # it cannot depend on this service as
