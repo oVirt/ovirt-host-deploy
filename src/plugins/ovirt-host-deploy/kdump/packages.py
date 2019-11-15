@@ -97,6 +97,17 @@ class Plugin(plugin.PluginBase):
                 min_version = 0, '2.0.17', '28'
         elif name in ('fedora', 'ibm_powerkvm'):
             min_version = 0, '2.0.4', '27'
+        else:
+            raise RuntimeError(
+                _(
+                    "Minimal required version of '{pkg}' package for "
+                    "distribution '{dist}' (version {ver}) is not defined"
+                ).format(
+                    pkg=self._KEXEC_TOOLS_PKG,
+                    dist=name,
+                    ver=version
+                )
+            )
 
         return min_version
 
