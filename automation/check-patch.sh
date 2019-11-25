@@ -31,7 +31,13 @@ rm -f /etc/yum.conf
 ${PACKAGER} reinstall -y system-release ${PACKAGER}
 [[ -d /etc/dnf ]] && [[ -x /usr/bin/dnf ]] && dnf -y reinstall dnf-conf
 [[ -d /etc/dnf ]] && sed -i -re 's#^(reposdir *= *).*$#\1/etc/yum.repos.d#' '/etc/dnf/dnf.conf'
+if [[ "${DISTVER}" == "el7" ]]; then
+# on 4.4 we support deploying el7 hosts bue we are not providing el7 packages for 4.4 hosts.
+# Using 4.3 repos instead.
+${PACKAGER} install -y https://resources.ovirt.org/pub/yum-repo/ovirt-release43-snapshot.rpm
+else
 ${PACKAGER} install -y ovirt-release-master
+fi
 rm -f /etc/yum/yum.conf
 
 ${PACKAGER} repolist enabled
