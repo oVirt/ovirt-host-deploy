@@ -96,8 +96,12 @@ msgstr ""
 "Suporte do Hosted Engine solicitado na máquina sem suporte: {arch}. "
 "Desabilitando"
 
-#: src/plugins/ovirt-host-common/hosted-engine/packages.py:103
+#: src/plugins/ovirt-host-common/hosted-engine/packages.py:109
 msgid "Starting ovirt-ha-agent"
+msgstr ""
+
+#: src/plugins/ovirt-host-common/hosted-engine/packages.py:111
+msgid "Stopping ovirt-ha-agent"
 msgstr ""
 
 #: src/plugins/ovirt-host-common/vdsm/pki.py:148

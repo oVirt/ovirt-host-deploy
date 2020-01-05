@@ -100,26 +100,23 @@ class Plugin(plugin.PluginBase):
         priority=plugin.Stages.PRIORITY_LOW,
     )
     def _closeup(self):
-        self.logger.info(_('Starting ovirt-ha-agent'))
+        deploy_he = (
+            self.environment[
+                odeploycons.HostedEngineEnv.ACTION
+            ] == odeploycons.Const.HOSTED_ENGINE_ACTION_DEPLOY
+        )
+        if deploy_he:
+            self.logger.info(_('Starting ovirt-ha-agent'))
+        else:
+            self.logger.info(_('Stopping ovirt-ha-agent'))
         self.services.startup(
             name='ovirt-ha-agent',
-            state=(
-                self.environment[
-                    odeploycons.HostedEngineEnv.ACTION
-                ] == odeploycons.Const.HOSTED_ENGINE_ACTION_DEPLOY
-            ),
+            state=deploy_he,
         )
         self.services.state(
             name='ovirt-ha-agent',
-            state=False,
+            state=deploy_he,
         )
-        if self.environment[
-            odeploycons.HostedEngineEnv.ACTION
-        ] == odeploycons.Const.HOSTED_ENGINE_ACTION_DEPLOY:
-            self.services.state(
-                name='ovirt-ha-agent',
-                state=True,
-            )
 
 
 # vim: expandtab tabstop=4 shiftwidth=4
