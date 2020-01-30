@@ -1,6 +1,7 @@
 ovirt-host-deploy -- oVirt host deploy
 
-????-??-?? - Version 1.8.5
+2020-01-30 - Version 1.8.5
+ * src: plugins: Fix incorrect log message
 
 2019-11-11 - Version 1.8.4
  * Add el8 to _get_min_kexec_tools_version
